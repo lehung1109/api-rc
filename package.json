@@ -8,19 +8,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
+    "dev": "tsx watch server.ts",
+    "build": "tsup server.ts --format esm,cjs --minify --clean",
+    "start": "node dist/server.js",
     "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "fastify": "^5.8.5",
-    "pino": "^10.3.1",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
@@ -32,7 +23,17 @@
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.8.3",
+    "tsup": "^8.5.1",
     "tsx": "^4.22.3",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vite": "^8.0.14",
+    "vite-tsconfig-paths": "^6.1.1",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "fastify": "^5.8.5",
+    "pino": "^10.3.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "zod": "^4.4.3"
   }
 }
