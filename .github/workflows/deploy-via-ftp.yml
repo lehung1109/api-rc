@@ -25,6 +25,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: 24.x
+
       - name: install npm
         run: npm ci
 
@@ -39,4 +44,4 @@ jobs:
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           localDir: "dist"
-          options: "--delete"
+          args: "--delete"
