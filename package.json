@@ -8,10 +8,17 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"bun --watch run server.ts\" \"vite\"",
-    "build": "tsup server.ts src/react-loader.tsx --format esm --minify --clean",
+    "dev": "concurrently \"bun --watch run server.ts\" \"bun --watch run src/react-loader.tsx\" \"vite\"",
+    "build": "bun run build:server && bun run build:browser",
+    "build:server": "bun build server.ts --production --target node --outdir dist",
+    "build:browser": "bun build src/react-loader.tsx --production --target browser --outdir dist",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
@@ -30,13 +37,10 @@
     "js-yaml": "^4.1.1",
     "pino": "^10.3.1",
     "prettier": "^3.8.3",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
     "tsup": "^8.5.1",
     "tsx": "^4.22.3",
     "typescript": "^6.0.3",
     "vite": "^8.0.14",
-    "vite-tsconfig-paths": "^6.1.1",
-    "zod": "^4.4.3"
+    "vite-tsconfig-paths": "^6.1.1"
   }
 }
