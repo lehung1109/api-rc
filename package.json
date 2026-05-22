@@ -8,7 +8,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch server.ts",
+    "dev": "concurrently \"bun --watch run server.ts\" \"vite\"",
     "build": "tsup server.ts src/react-loader.tsx --format esm --minify --clean",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit"
@@ -21,6 +21,7 @@
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.59.4",
     "@typescript-eslint/parser": "^8.59.4",
+    "concurrently": "^9.2.1",
     "dotenv": "^17.4.2",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
