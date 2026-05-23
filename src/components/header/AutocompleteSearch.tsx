@@ -48,8 +48,8 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
   }, [value]);
 
   return (
-    <div className="flex flex-1 justify-center md:max-w-[420px] relative">
-      <div className="relative w-full max-w-[360px] md:max-w-[420px]">
+    <div className="w-full">
+      <div className="relative">
         <Input
           placeholder={placeholder}
           className="h-9 rounded-full border-0 bg-white pr-10 !text-xs shadow-none placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
