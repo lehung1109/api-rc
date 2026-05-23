@@ -65,7 +65,8 @@ class ConcatPlugin {
       try {
         console.log("Running concat command after webpack build...");
         const { stdout, stderr } = await execAsync(this.command);
-        await execAsync("bun run server.ts");
+        const { stdout: serverStdout, stderr: serverStderr } =
+          await execAsync("bun run server.ts");
 
         if (stdout) {
           console.log(stdout);
@@ -73,11 +74,19 @@ class ConcatPlugin {
         if (stderr) {
           console.error(stderr);
         }
+        if (serverStdout) {
+          console.log(serverStdout);
+        }
+        if (serverStderr) {
+          console.error(serverStderr);
+        }
 
         console.log("Concat command completed successfully");
+        console.log("Server command completed successfully");
         callback();
       } catch (error) {
         console.error("Error running concat command:", error);
+        console.error("Error running server command:", error);
         callback(error);
       }
     });
