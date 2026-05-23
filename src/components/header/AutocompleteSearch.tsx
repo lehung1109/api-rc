@@ -32,9 +32,11 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
     }
 
     timeoutRef.current = setTimeout(async () => {
-      const response = await fetch(`${api_url}?search=${value}&per_page=5`);
+      const response = await fetch(
+        `${api_url}?search=${value}&per_page=5&_embed=wp:featuredmedia&_fields=id,link,title.rendered,_links.wp:featuredmedia,_embedded.wp:featuredmedia`,
+      );
       const data = await response.json();
-      console.log(data);
+      setResults(data);
       setLoading(false);
     }, 500);
 
@@ -46,7 +48,7 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
   }, [value]);
 
   return (
-    <div className="flex flex-1 justify-center md:max-w-[420px]">
+    <div className="flex flex-1 justify-center md:max-w-[420px] relative">
       <div className="relative w-full max-w-[360px] md:max-w-[420px]">
         <Input
           placeholder={placeholder}
@@ -60,9 +62,9 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
         ) : (
           <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
         )}
-      </div>
 
-      {results.length > 0 && <AutocompleteItems results={results} />}
+        {results.length > 0 && <AutocompleteItems results={results} />}
+      </div>
     </div>
   );
 };

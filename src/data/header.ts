@@ -11,7 +11,7 @@ const header: HeaderModel = {
     },
     autocomplete_search: {
       placeholder: "Gõ tìm kiếm...",
-      api_url: "http://noi-that-ichouse.local/wp-json/wp/v2/search",
+      api_url: "http://noi-that-ichouse.local/wp-json/wp/v2/posts",
     },
   },
 };
