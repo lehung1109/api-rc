@@ -15,14 +15,14 @@ const COMPONENT_MAP = {
   },
 };
 
-// create  dist/html folder if not exists
-if (!fs.existsSync('dist/html')) {
-  fs.mkdirSync('dist/html');
+// create  html folder if not exists
+if (!fs.existsSync('html')) {
+  fs.mkdirSync('html');
 }
 
 // loop COMPONENT_MAP
 for (const [key, value] of Object.entries(COMPONENT_MAP)) {
   const raw = renderToString(React.createElement(value.component, value.model));
   const html = await prettier.format(raw, { parser: 'html' });
-  fs.writeFileSync(`dist/html/${key}.html`, html);
+  fs.writeFileSync(`html/${key}.html`, html);
 }
