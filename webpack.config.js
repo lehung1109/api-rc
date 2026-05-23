@@ -38,7 +38,6 @@ class WriteVersionJsonPlugin {
               {
                 version,
                 file: this.bundleFile,
-                builtAt: new Date().toISOString(),
               },
               null,
               2,
@@ -56,50 +55,48 @@ class WriteVersionJsonPlugin {
 }
 
 class ConcatPlugin {
-  constructor(command = "bun run copy.ts") {
-    this.command = command;
+  constructor({
+    copyCommand = "bun run copy.ts",
+    htmlCommand = "bun run server.ts",
+  } = {}) {
+    this.copyCommand = copyCommand;
+    this.htmlCommand = htmlCommand;
   }
 
   apply(compiler) {
-    compiler.hooks.done.tapAsync("ConcatPlugin", async (stats, callback) => {
+    compiler.hooks.done.tapAsync("ConcatPlugin", async (_stats, callback) => {
       try {
-        console.log("Running concat command after webpack build...");
-        const { stdout, stderr } = await execAsync(this.command);
-        const { stdout: serverStdout, stderr: serverStderr } =
-          await execAsync("bun run server.ts");
+        console.log("Running post-build commands...");
+        const [copyResult, htmlResult] = await Promise.all([
+          execAsync(this.copyCommand),
+          execAsync(this.htmlCommand),
+        ]);
 
-        if (stdout) {
-          console.log(stdout);
-        }
-        if (stderr) {
-          console.error(stderr);
-        }
-        if (serverStdout) {
-          console.log(serverStdout);
-        }
-        if (serverStderr) {
-          console.error(serverStderr);
+        for (const { stdout, stderr } of [copyResult, htmlResult]) {
+          if (stdout) console.log(stdout);
+          if (stderr) console.error(stderr);
         }
 
-        console.log("Concat command completed successfully");
-        console.log("Server command completed successfully");
+        console.log("Post-build commands completed successfully");
         callback();
       } catch (error) {
-        console.error("Error running concat command:", error);
-        console.error("Error running server command:", error);
+        console.error("Error running post-build commands:", error);
         callback(error);
       }
     });
   }
 }
 
-export default {
+export default (_env, { watch }) => ({
   mode: "development",
   entry: "./src/react-loader.tsx",
   output: {
     path: path.resolve(process.cwd(), "dist"),
     filename: "react-loader.js",
-    clean: true,
+    clean: !watch,
+  },
+  watchOptions: {
+    ignored: ["**/html/**", "**/node_modules/**"],
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -119,7 +116,16 @@ export default {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: {
+          loader: "ts-loader",
+          options: {
+            onlyCompileBundledFiles: true,
+            compilerOptions: {
+              declaration: false,
+              declarationMap: false,
+            },
+          },
+        },
         exclude: /node_modules/,
       },
       {
@@ -129,4 +135,4 @@ export default {
     ],
   },
   plugins: [new WriteVersionJsonPlugin(), new ConcatPlugin()],
-};
+});
