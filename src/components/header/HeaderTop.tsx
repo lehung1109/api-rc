@@ -27,7 +27,7 @@ const HeaderTop = (model: HeaderTopModel) => {
           </p>
 
           <AutocompleteSearch {...autocomplete_search} />
-          <ReactSection type="header-top" data={autocomplete_search} />
+          <ReactSection type="autocompleteSearch" data={autocomplete_search} />
 
           <Button asChild>
             <a

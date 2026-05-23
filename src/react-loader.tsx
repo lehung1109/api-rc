@@ -1,25 +1,20 @@
-import ReactDOM from 'react-dom/client';
-import YAML from 'js-yaml';
-import './styles.css';
+import ReactDOM from "react-dom/client";
+import YAML from "js-yaml";
+import "./styles.css";
 
-import { clientComponents } from '@components/client-components';
+import { clientComponents } from "@components/client-components";
 
-const blocks: Record<string, React.LazyExoticComponent<React.ComponentType<any>>> = {
+const blocks: Record<
+  string,
+  React.LazyExoticComponent<React.ComponentType<any>>
+> = {
   ...clientComponents,
 };
 
-const SAFE_CONTAINER_TAGS = new Set(['div', 'section']);
-
-const getSafeTagName = (tagName: string | null): string => {
-  const normalizedTag = (tagName ?? '').trim().toLowerCase();
-
-  return SAFE_CONTAINER_TAGS.has(normalizedTag) ? normalizedTag : 'section';
-};
-
 const renderComponent = (scriptSection: HTMLScriptElement) => {
-  const blockType = scriptSection.getAttribute('data-rct');
-  const data = scriptSection.textContent ? scriptSection.textContent : '{}';
-  const type = scriptSection.getAttribute('type');
+  const blockType = scriptSection.dataset.rct;
+  const data = scriptSection.textContent ? scriptSection.textContent : "{}";
+  const type = scriptSection.getAttribute("type");
 
   if (!blockType || !data) {
     return;
@@ -28,16 +23,22 @@ const renderComponent = (scriptSection: HTMLScriptElement) => {
   const Component = blocks[blockType];
 
   if (Component) {
-    scriptSection.textContent = null;
-    const tagName = getSafeTagName(scriptSection.getAttribute('data-tag'));
-    const section = document.createElement(tagName);
+    const domNode = scriptSection.previousElementSibling;
+    if (!domNode) {
+      console.warn(`DOM node not found for block type: ${blockType}`);
+      return;
+    }
 
-    section.className = scriptSection.getAttribute('data-class') ?? '';
-    scriptSection.replaceWith(section);
+    const props =
+      type === "application/json"
+        ? JSON.parse(data)
+        : type === "application/yaml"
+          ? YAML.load(data)
+          : {};
 
-    const props = type === 'application/json' ? JSON.parse(data) : type === 'application/yaml' ? YAML.load(data) : {};
+    scriptSection.remove();
 
-    ReactDOM.createRoot(section).render(<Component {...props} />);
+    ReactDOM.hydrateRoot(domNode, <Component {...props} />);
   } else {
     return <></>;
   }
@@ -45,14 +46,14 @@ const renderComponent = (scriptSection: HTMLScriptElement) => {
 
 const renderComponents = () => {
   // rct stands for 'react component type'
-  const scriptSections = document.querySelectorAll('script[data-rct]');
+  const scriptSections = document.querySelectorAll("script[data-rct]");
 
   [].forEach.call(scriptSections, renderComponent);
 };
 
 window.renderComponents = renderComponents;
 renderComponents();
-window.addEventListener('load', () => renderComponents());
+window.addEventListener("load", () => renderComponents());
 
 // Post a custom event to notify that the renderComponents function is ready to be used
 // Usage:
@@ -63,6 +64,6 @@ window.addEventListener('load', () => renderComponents());
 //     window.renderComponents();
 //   });
 // }
-const event = new CustomEvent('react-loaded');
+const event = new CustomEvent("react-loaded");
 
 window.dispatchEvent(event);
