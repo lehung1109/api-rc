@@ -36,7 +36,7 @@ const HeaderTop = (model: HeaderTopModel) => {
               href={link_phone.url}
               target={link_phone.is_external ? "_blank" : "_self"}
               rel={link_phone.nofollow ? "nofollow" : ""}
-              className="h-10 rounded-full !bg-[#10b981] px-6 text-xs font-bold !text-white hover:!bg-[#78f4cb]"
+              className="h-10 rounded-full !bg-[#10b981] px-6 text-xs font-bold !text-white hover:!bg-[#039565]"
             >
               {phone}
             </a>
