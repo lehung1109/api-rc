@@ -46,6 +46,6 @@
     },
     "moduleResolution": "bundler",
   },
-  "include": ["src", "server.ts", "types"],
+  "include": ["src/**/*", "types"],
   "exclude": ["node_modules", "dist"]
 }

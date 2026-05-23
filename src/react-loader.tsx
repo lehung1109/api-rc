@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import YAML from 'js-yaml';
+import './styles.css';
 
 import { clientComponents } from '@components/client-components';
 

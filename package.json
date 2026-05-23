@@ -9,9 +9,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"bun --watch run server.ts\" \"bun --watch run src/react-loader.tsx\" \"vite\"",
-    "build": "bun run build:server && bun run build:browser",
+    "build": "bun run build:browser && bun run build:server",
     "build:server": "bun build server.ts --production --target node --outdir dist",
-    "build:browser": "bun build src/react-loader.tsx --production --target browser --outdir dist",
+    "build:browser": "webpack --mode production",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit"
   },
@@ -21,6 +21,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
     "@types/express": "^5.0.6",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^25.9.1",
@@ -29,6 +30,7 @@
     "@typescript-eslint/eslint-plugin": "^8.59.4",
     "@typescript-eslint/parser": "^8.59.4",
     "concurrently": "^9.2.1",
+    "css-loader": "^7.1.4",
     "dotenv": "^17.4.2",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
@@ -36,11 +38,19 @@
     "fastify": "^5.8.5",
     "js-yaml": "^4.1.1",
     "pino": "^10.3.1",
+    "postcss": "^8.5.15",
+    "postcss-loader": "^8.2.1",
     "prettier": "^3.8.3",
+    "style-loader": "^4.0.0",
+    "tailwindcss": "^4.3.0",
+    "ts-loader": "^9.5.7",
     "tsup": "^8.5.1",
     "tsx": "^4.22.3",
     "typescript": "^6.0.3",
     "vite": "^8.0.14",
-    "vite-tsconfig-paths": "^6.1.1"
+    "vite-tsconfig-paths": "^6.1.1",
+    "webpack": "^5.107.1",
+    "webpack-cli": "^7.0.2",
+    "webpack-dev-server": "^5.2.4"
   }
 }
