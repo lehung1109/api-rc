@@ -17,7 +17,6 @@ function scanIndexHtml(dir: string, base = dir) {
 
     if (item.isFile() && item.name === "index.html") {
       const relDir = relative(base, dirname(fullPath));
-      console.log(relDir, fullPath);
       entries[relDir] = fullPath;
     }
   }
@@ -26,10 +25,9 @@ function scanIndexHtml(dir: string, base = dir) {
 }
 
 export default defineConfig({
-  root: resolve(__dirname, "pages"),
   build: {
     rollupOptions: {
-      input: scanIndexHtml(resolve(__dirname, "pages")),
+      input: scanIndexHtml(resolve(__dirname, "pages"), resolve(__dirname)),
     },
   },
   plugins: [tsconfigPaths()],
