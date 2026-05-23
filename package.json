@@ -9,8 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"bun --watch run server.ts\" \"bun --watch run src/react-loader.tsx\" \"vite\"",
-    "build": "bun run build:browser && bun run build:server",
-    "build:server": "bun build server.ts --production --target node --outdir dist",
+    "build": "bun run build:browser && bun run build:html",
+    "build:html": "bun run server.ts",
     "build:browser": "webpack --mode production",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit"
