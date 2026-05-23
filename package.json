@@ -11,7 +11,7 @@
     "dev": "vite",
     "build": "bun run build:browser && bun run build:html",
     "build:html": "bun run server.ts",
-    "build:browser": "webpack --mode production",
+    "build:browser": "webpack --mode production && bun run copy.ts",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit"
   },
