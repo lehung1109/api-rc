@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import fs from 'node:fs';
+import prettier from 'prettier';
 
 // Import các React component cần SSR
 import Header from '@components/header/Header';
@@ -21,6 +22,7 @@ if (!fs.existsSync('dist/html')) {
 
 // loop COMPONENT_MAP
 for (const [key, value] of Object.entries(COMPONENT_MAP)) {
-  const html = renderToString(React.createElement(value.component, value.model));
+  const raw = renderToString(React.createElement(value.component, value.model));
+  const html = await prettier.format(raw, { parser: 'html' });
   fs.writeFileSync(`dist/html/${key}.html`, html);
 }
