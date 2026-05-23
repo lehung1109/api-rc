@@ -1,16 +1,16 @@
+import type { HeaderTopModel } from "./HeaderTop";
+import HeaderTop from "./HeaderTop";
+
 export interface HeaderModel {
-  title: string;
-  description: string;
-  image: string;
-  url: string;
-  type: string;
-  siteName: string;
+  headerTop: HeaderTopModel;
 }
 
 const Header = (model: HeaderModel) => {
+  const { headerTop } = model;
+
   return (
     <div>
-      <h1 className="mb-2">Header</h1>
+      <HeaderTop {...headerTop} />
     </div>
   )
 }

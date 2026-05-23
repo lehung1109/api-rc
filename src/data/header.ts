@@ -1,12 +1,11 @@
 import type { HeaderModel } from "@components/header/Header";
 
 const header: HeaderModel = {
-  title: 'Header',
-  description: 'Header',
-  image: 'Header',
-  url: 'Header',
-  type: 'Header',
-  siteName: 'Header',
+  headerTop: {
+    text: 'Chào mừng bạn đến với ABC',
+    phone: '0000000000',
+    placeholder: 'Gõ tìm kiếm...',
+  }
 }
 
 export { header };
