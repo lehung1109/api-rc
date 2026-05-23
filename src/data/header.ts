@@ -1,4 +1,5 @@
 import type { HeaderModel } from "@components/header/Header";
+import { autocompleteSearch } from "./autocomplete-search";
 
 const header: HeaderModel = {
   headerTop: {
@@ -9,10 +10,7 @@ const header: HeaderModel = {
       nofollow: true,
       is_external: true,
     },
-    autocomplete_search: {
-      placeholder: "Gõ tìm kiếm...",
-      api_url: "http://noi-that-ichouse.local/wp-json/wp/v2/posts",
-    },
+    autocomplete_search: autocompleteSearch,
   },
 };
 
