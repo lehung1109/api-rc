@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import AutocompleteSearch, {
   type AutocompleteSearchModel,
 } from "./AutocompleteSearch";
+import ReactSection from "../ReactSection";
 
 export interface HeaderTopModel {
   text: string;
@@ -26,6 +27,7 @@ const HeaderTop = (model: HeaderTopModel) => {
           </p>
 
           <AutocompleteSearch {...autocomplete_search} />
+          <ReactSection type="header-top" data={autocomplete_search} />
 
           <Button asChild>
             <a
