@@ -8,10 +8,11 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite",
-    "build": "bun run build:browser && bun run build:html",
+    "dev": "concurrently \"vite\" \"webpack --mode production --watch\"",
+    "build": "bun run build:browser",
     "build:html": "bun run server.ts",
-    "build:browser": "webpack --mode production && bun run copy.ts",
+    "build:browser": "webpack --mode production",
+    "copy": "bun run copy.ts",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit"
   },
