@@ -37,11 +37,20 @@ jobs:
       - name: build project
         run: bun run build
 
-      - name: Upload FTP
+      - name: Upload FTP to api-rc
         uses: sebastianpopp/ftp-action@v2.0.0
         with:
           host: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          localDir: "dist"
+          args: "--delete"
+
+      - name: Upload FTP to noithat
+        uses: sebastianpopp/ftp-action@v2.0.0
+        with:
+          host: ${{ secrets.FTP_SERVER_NOITHAT }}
+          user: ${{ secrets.FTP_USERNAME_NOITHAT }}
+          password: ${{ secrets.FTP_PASSWORD_NOITHAT }}
           localDir: "dist"
           args: "--delete"
