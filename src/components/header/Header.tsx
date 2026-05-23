@@ -1,4 +1,4 @@
-interface HeaderModel {
+export interface HeaderModel {
   title: string;
   description: string;
   image: string;
