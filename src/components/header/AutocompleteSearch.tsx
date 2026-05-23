@@ -56,7 +56,7 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
         />
 
         {loading ? (
-          <Loader2 className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <Loader2 className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500 animate-spin" />
         ) : (
           <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
         )}
