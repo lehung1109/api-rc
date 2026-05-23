@@ -30,7 +30,7 @@ const AutocompleteItems = (model: AutocompleteItemsModel) => {
         <a
           key={result.id}
           href={result.link}
-          className="flex items-center gap-3 p-2 hover:bg-gray-100 transition-colors"
+          className="flex items-center gap-3 p-2 hover:!bg-gray-100 transition-colors"
         >
           <img
             src={

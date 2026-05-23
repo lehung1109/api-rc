@@ -17,6 +17,7 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
   const [results, setResults] = useState<any[]>([]);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -47,6 +48,14 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
     };
   }, [value]);
 
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
   return (
     <div className="w-full">
       <div className="relative">
@@ -55,6 +64,8 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
           className="h-9 rounded-full border-0 bg-white pr-10 !text-xs shadow-none placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
         />
 
         {loading ? (
@@ -63,7 +74,9 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
           <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
         )}
 
-        {results.length > 0 && <AutocompleteItems results={results} />}
+        {results.length > 0 && isFocused && (
+          <AutocompleteItems results={results} />
+        )}
       </div>
     </div>
   );
