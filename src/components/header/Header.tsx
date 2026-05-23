@@ -10,7 +10,7 @@ interface HeaderModel {
 const Header = (model: HeaderModel) => {
   return (
     <div>
-      <h1>Header</h1>
+      <h1 className="mb-2">Header</h1>
     </div>
   )
 }
