@@ -4,15 +4,13 @@ import AutocompleteSearch, {
 } from "./AutocompleteSearch";
 import ReactSection from "../ReactSection";
 import ClientComponentWrapper from "../ClientComponentWrapper";
+import type { LinkModel } from "../link/Link";
+import Link from "../link/Link";
 
 export interface HeaderTopModel {
   text: string;
   phone: string;
-  link_phone: {
-    url: string;
-    nofollow: boolean;
-    is_external: boolean;
-  };
+  link_phone: LinkModel;
   autocomplete_search: AutocompleteSearchModel;
 }
 
@@ -33,14 +31,12 @@ const HeaderTop = (model: HeaderTopModel) => {
           <ReactSection type="autocompleteSearch" data={autocomplete_search} />
 
           <Button asChild>
-            <a
-              href={link_phone.url}
-              target={link_phone.is_external ? "_blank" : "_self"}
-              rel={link_phone.nofollow ? "nofollow" : ""}
+            <Link
+              {...link_phone}
               className="h-10 rounded-full !bg-[#10b981] px-6 text-xs font-bold !text-white hover:!bg-[#039565]"
             >
               {phone}
-            </a>
+            </Link>
           </Button>
         </div>
       </div>
