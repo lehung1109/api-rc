@@ -3,6 +3,7 @@ import AutocompleteSearch, {
   type AutocompleteSearchModel,
 } from "./AutocompleteSearch";
 import ReactSection from "../ReactSection";
+import ClientComponentWrapper from "../ClientComponentWrapper";
 
 export interface HeaderTopModel {
   text: string;
@@ -26,9 +27,9 @@ const HeaderTop = (model: HeaderTopModel) => {
             {text}
           </p>
 
-          <div className="flex flex-1 justify-center md:max-w-[420px] relative">
+          <ClientComponentWrapper className="flex flex-1 justify-center md:max-w-[420px] relative">
             <AutocompleteSearch {...autocomplete_search} />
-          </div>
+          </ClientComponentWrapper>
           <ReactSection type="autocompleteSearch" data={autocomplete_search} />
 
           <Button asChild>
