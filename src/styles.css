@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
+@import "swiper/css";
+@import "swiper/css/pagination";
 
 @custom-variant dark (&:is(.dark *));
 

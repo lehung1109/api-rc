@@ -4,9 +4,6 @@ import type { MediaModel } from "../media/Media";
 import Media from "../media/Media";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/pagination";
 import CarouselNav from "./CarouselNav";
 
 export interface CarouselSlideModel {
