@@ -26,7 +26,7 @@ const HeaderInner = (model: HeaderInnerModel) => {
             </div>
 
             <div
-              className="text-sm"
+              className="text-sm [&>p]:!mbe-0"
               dangerouslySetInnerHTML={{ __html: info.text }}
             />
           </div>
