@@ -27,8 +27,11 @@ const HeaderTop = (model: HeaderTopModel) => {
 
           <ClientComponentWrapper className="flex flex-1 justify-center md:max-w-[420px] relative">
             <AutocompleteSearch {...autocomplete_search} />
+            <ReactSection
+              type="autocompleteSearch"
+              data={autocomplete_search}
+            />
           </ClientComponentWrapper>
-          <ReactSection type="autocompleteSearch" data={autocomplete_search} />
 
           <Button asChild>
             <Link

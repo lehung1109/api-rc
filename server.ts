@@ -8,9 +8,17 @@ import Header from "@components/header/Header";
 import { header } from "@/data/header";
 import AutocompleteSearch from "@/components/header/AutocompleteSearch";
 import { autocompleteSearch } from "@/data/autocomplete-search";
+import carousel from "@/data/carousel";
+import Carousel from "@/components/carousel/Carousel";
+import App from "@/components/App";
 
 // Map tên component -> component thật
 const COMPONENT_MAP = {
+  App: {
+    component: App,
+    model: {},
+    needFormat: true,
+  },
   Header: {
     component: Header,
     model: header,
@@ -19,6 +27,11 @@ const COMPONENT_MAP = {
   AutocompleteSearch: {
     component: AutocompleteSearch,
     model: autocompleteSearch,
+    needFormat: false,
+  },
+  Carousel: {
+    component: Carousel,
+    model: carousel,
     needFormat: false,
   },
 };

@@ -2,7 +2,7 @@
 
 import type { MediaModel } from "../media/Media";
 import Media from "../media/Media";
-import { Navigation, Pagination } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
