@@ -5,4 +5,5 @@ export const clientComponents: Record<
   React.LazyExoticComponent<React.ComponentType<any>>
 > = {
   autocompleteSearch: lazy(() => import("./header/AutocompleteSearch")),
+  carousel: lazy(() => import("./carousel/Carousel")),
 };
