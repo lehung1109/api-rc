@@ -23,7 +23,7 @@ function hasLevel3(children?: HeaderMenuItemModel[]) {
 const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
   return (
     <nav aria-label="Main navigation" className={`relative ${className}`}>
-      <ul className="flex min-h-[54px] items-stretch justify-center bg-[#1f1f1f]">
+      <ul className="flex min-h-[54px] items-stretch justify-center bg-[#1f1f1f] !mb-0">
         {items.map((item) => {
           const level2 = item.children ?? [];
           const hasDropdown = level2.length > 0;
