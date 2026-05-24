@@ -56,9 +56,12 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
                       <div className="grid auto-cols-fr grid-flow-col gap-5 px-7 py-6 w-max">
                         {level2.map((col) => (
                           <div key={col.label} className="min-w-[270px]">
-                            <div className="mb-3 text-[15px] font-bold uppercase text-[#111]">
+                            <a
+                              href={normalizeHref(col.href)}
+                              className="block mb-3 text-[15px] font-bold uppercase !text-[#111] hover:!text-[#d82a28] hover:pl-2 hover:font-bold transition-all"
+                            >
                               {col.label}
-                            </div>
+                            </a>
 
                             <ul>
                               {(col.children ?? []).map((child) => (
@@ -68,7 +71,7 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
                                 >
                                   <a
                                     href={normalizeHref(child.href)}
-                                    className="block py-3 text-[18px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#f47c20]"
+                                    className="block py-3 text-[18px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111]"
                                   >
                                     {child.label}
                                   </a>
@@ -88,7 +91,7 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
                             >
                               <a
                                 href={normalizeHref(sub.href)}
-                                className="block py-3 text-[18px] leading-[1.35] !text-[#333] transition-colors duration-150 hover:!text-[#f47c20]"
+                                className="block py-3 text-[18px] leading-[1.35] !text-[#333] transition-all duration-150 hover:!text-[#d82a28] hover:pl-2 hover:font-bold"
                               >
                                 {sub.label}
                               </a>
