@@ -1,15 +1,17 @@
 import crypto from "node:crypto";
 import path from "node:path";
 import webpack from "webpack";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
 
 const execAsync = promisify(exec);
 
-/** Ghi dist/version.json với hash nội dung react-loader.js (đổi khi bundle đổi). */
+/** Ghi dist/version.json với hash JS + CSS (đổi khi bundle hoặc style đổi). */
 class WriteVersionJsonPlugin {
   constructor(options = {}) {
     this.bundleFile = options.bundleFile ?? "react-loader.js";
+    this.cssFile = options.cssFile ?? "react-loader.css";
     this.versionFile = options.versionFile ?? "version.json";
   }
 
@@ -23,21 +25,24 @@ class WriteVersionJsonPlugin {
             stage: webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
           },
           (assets) => {
-            const source = assets[this.bundleFile];
-            if (!source) return;
+            const hash = crypto.createHash("sha256");
 
-            const raw = source.source();
-            const buffer = Buffer.isBuffer(raw) ? raw : Buffer.from(raw);
-            const version = crypto
-              .createHash("sha256")
-              .update(buffer)
-              .digest("hex")
-              .slice(0, 12);
+            for (const file of [this.bundleFile, this.cssFile]) {
+              const source = assets[file];
+              if (!source) continue;
+
+              const raw = source.source();
+              const buffer = Buffer.isBuffer(raw) ? raw : Buffer.from(raw);
+              hash.update(buffer);
+            }
+
+            const version = hash.digest("hex").slice(0, 12);
 
             const payload = JSON.stringify(
               {
                 version,
                 file: this.bundleFile,
+                cssFile: this.cssFile,
               },
               null,
               2,
@@ -89,10 +94,13 @@ class ConcatPlugin {
 
 export default (_env, { watch }) => ({
   mode: "development",
-  entry: "./src/react-loader.tsx",
+  entry: {
+    "react-loader": "./src/react-loader.tsx",
+    styles: "./src/styles.css",
+  },
   output: {
     path: path.resolve(process.cwd(), "dist"),
-    filename: "react-loader.js",
+    filename: "[name].js",
     clean: !watch,
   },
   watchOptions: {
@@ -130,9 +138,16 @@ export default (_env, { watch }) => ({
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
     ],
   },
-  plugins: [new WriteVersionJsonPlugin(), new ConcatPlugin()],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: ({ chunk }) =>
+        chunk.name === "styles" ? "react-loader.css" : "[name].css",
+    }),
+    new WriteVersionJsonPlugin(),
+    new ConcatPlugin(),
+  ],
 });
