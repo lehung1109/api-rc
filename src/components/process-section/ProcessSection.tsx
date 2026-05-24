@@ -17,7 +17,7 @@ const ProcessSection = (model: ProcessSectionModel) => {
 
   return (
     <section
-      className={`relative overflow-hidden bg-cover bg-center bg-no-repeat text-white ${className} process-section`}
+      className={`relative overflow-hidden bg-cover bg-center bg-no-repeat text-white ${className} process-section p-8`}
     >
       {backgroundImage && (
         <Media
