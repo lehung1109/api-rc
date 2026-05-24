@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import type { MediaModel } from "../media/Media";
 import Media from "../media/Media";
 
@@ -20,10 +19,6 @@ const ProcessSection = (model: ProcessSectionModel) => {
     <section
       className={`relative overflow-hidden bg-cover bg-center bg-no-repeat text-white ${className} process-section`}
     >
-      <div className="absolute inset-0 bg-black/60" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/30 to-black/55" />
-
-      {/* show background image */}
       {backgroundImage && (
         <Media
           className="absolute inset-0 z-0 object-cover max-w-none w-full h-full"
@@ -31,14 +26,22 @@ const ProcessSection = (model: ProcessSectionModel) => {
         />
       )}
 
+      <div
+        className="pointer-events-none absolute inset-0 z-1 bg-black/65"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 z-1 bg-gradient-to-b from-black/50 via-black/40 to-black/60"
+        aria-hidden="true"
+      />
+
       <div className="relative z-10">
-        <div className="text-center">
+        <div className="process-section-intro mx-auto max-w-3xl text-center">
           <h2 className="uppercase text-[1.6rem] font-bold">
             QUY TRÌNH THI CÔNG CỦA HOÀN MỸ{" "}
             <span className="text-orange-500">DECOR</span>
           </h2>
-
-          <p className="">
+          <p className="mt-4">
             Để Quý khách hàng không mất quá nhiều thời gian trong việc lựa chọn
             đơn vị Tư vấn – Thiết kế nội thất uy tín, Hoàn Mỹ Decor giới thiệu
             tới Quý khách hàng Quy trình Tư vấn – Thiết kế nội thất chuyên
@@ -87,16 +90,14 @@ const ProcessSection = (model: ProcessSectionModel) => {
                     </div>
                   </div>
 
-                  <Card className="w-full border-0 bg-transparent shadow-none ring-0 text-white">
-                    <CardContent className="p-0">
-                      <h3 className="font-bold">
-                        {step.id}. {step.title}
-                      </h3>
-                      <p className="mx-auto mt-3 max-w-[240px] text-sm leading-7 text-white/90 md:text-lg md:leading-8">
-                        {step.description}
-                      </p>
-                    </CardContent>
-                  </Card>
+                  <div className="process-section-step-content w-full text-white">
+                    <h3 className="font-bold">
+                      {step.id}. {step.title}
+                    </h3>
+                    <p className="mx-auto mt-3 max-w-[240px] text-sm leading-7 text-white/90 md:text-lg md:leading-8">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
               );
             })}
