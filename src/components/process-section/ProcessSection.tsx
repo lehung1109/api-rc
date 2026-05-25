@@ -70,7 +70,7 @@ const ProcessSection = (model: ProcessSectionModel) => {
         ) : null}
 
         <div className="relative mt-12">
-          <div className="pointer-events-none absolute left-1/2 top-14 hidden w-screen -translate-x-1/2 md:block">
+          <div className="process-section-line pointer-events-none absolute left-1/2 top-14 hidden w-screen -translate-x-1/2 md:block">
             <svg
               viewBox="0 0 1600 220"
               preserveAspectRatio="none"
