@@ -51,11 +51,12 @@ class ConcatPlugin {
     compiler.hooks.done.tapAsync("ConcatPlugin", async (_stats, callback) => {
       try {
         console.log("Running post-build commands...");
-        const [copyResult, htmlResult, versionResult] = await Promise.all([
+        const [htmlResult, versionResult] = await Promise.all([
           execAsync(this.htmlCommand),
           execAsync(this.versionCommand),
-          execAsync(this.copyCommand),
         ]);
+
+        const copyResult = await execAsync(this.copyCommand);
 
         for (const { stdout, stderr } of [
           copyResult,
