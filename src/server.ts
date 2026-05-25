@@ -1,9 +1,9 @@
-import { createHash } from "node:crypto";
 import express from "express";
 import React from "react";
 import { z } from "zod";
 
 import { buildServerRegistry } from "./generated/server-registry";
+import { sha256Hex } from "./lib/content-hash";
 import { renderComponentHtml } from "./lib/render-component-html";
 
 const PORT = Number(process.env.PORT) || 3000;
@@ -13,10 +13,6 @@ const renderRequestSchema = z.object({
   component: z.string().min(1),
   props: z.record(z.string(), z.unknown()).optional().default({}),
 });
-
-function sha256Hex(content: string): string {
-  return createHash("sha256").update(content, "utf8").digest("hex");
-}
 
 const registry = buildServerRegistry();
 

@@ -1,15 +1,9 @@
-import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-import { discoverRenderComponents } from "./discover-render-components";
-
-const PROJECT_ROOT = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "../..",
-);
-const COMPONENTS_DIR = path.join(PROJECT_ROOT, "src/components");
+import { buildComponentRenderMap } from "./build-component-render-map";
+import { hashContent, sha256Hex } from "./content-hash";
+import { renderComponentSampleHtml } from "./render-component-sample-html";
 
 export const DEFAULT_BUNDLE_JS = "react-loader.js";
 export const DEFAULT_BUNDLE_CSS = "react-loader.css";
@@ -17,6 +11,7 @@ export const DEFAULT_BUNDLE_CSS = "react-loader.css";
 export type ComponentVersionEntry = {
   version: string;
   source: string;
+  data?: string;
 };
 
 export type VersionJson = {
@@ -26,27 +21,18 @@ export type VersionJson = {
   components: Record<string, ComponentVersionEntry>;
 };
 
-export function hashContent(content: Buffer | string): string {
-  const buffer = Buffer.isBuffer(content) ? content : Buffer.from(content);
-  return crypto.createHash("sha256").update(buffer).digest("hex").slice(0, 12);
-}
-
 function hashFiles(distDir: string, filenames: string[]): string {
-  const hash = crypto.createHash("sha256");
+  const parts: Buffer[] = [];
 
   for (const name of filenames) {
     const filePath = path.join(distDir, name);
     if (!fs.existsSync(filePath)) {
       continue;
     }
-    hash.update(fs.readFileSync(filePath));
+    parts.push(fs.readFileSync(filePath));
   }
 
-  return hash.digest("hex").slice(0, 12);
-}
-
-function componentSourcePath(source: string): string {
-  return path.join(COMPONENTS_DIR, `${source}.tsx`);
+  return hashContent(Buffer.concat(parts));
 }
 
 export async function buildVersionJson(
@@ -59,31 +45,16 @@ export async function buildVersionJson(
   const bundleFile = options.bundleFile ?? DEFAULT_BUNDLE_JS;
   const cssFile = options.cssFile ?? DEFAULT_BUNDLE_CSS;
 
-  const files = await discoverRenderComponents();
+  const renderMap = await buildComponentRenderMap();
   const components: Record<string, ComponentVersionEntry> = {};
 
-  for (const file of files) {
-    const sourcePath = componentSourcePath(file.source);
-    const sourceRelative = path
-      .relative(PROJECT_ROOT, sourcePath)
-      .replace(/\\/g, "/");
-
-    if (!fs.existsSync(sourcePath)) {
-      throw new Error(`Component source not found: ${sourceRelative}`);
-    }
-
-    const fileVersion = hashContent(fs.readFileSync(sourcePath));
-    const bindings = [
-      ...(file.defaultExport ? [file.defaultExport] : []),
-      ...file.namedExports,
-    ];
-
-    for (const binding of bindings) {
-      components[binding.registryKey] = {
-        version: fileVersion,
-        source: sourceRelative,
-      };
-    }
+  for (const [name, entry] of Object.entries(renderMap)) {
+    const html = await renderComponentSampleHtml(entry);
+    components[name] = {
+      version: sha256Hex(html),
+      source: entry.source,
+      ...(entry.data ? { data: entry.data } : {}),
+    };
   }
 
   const sortedComponents = Object.fromEntries(
