@@ -1,63 +1,9 @@
-import crypto from "node:crypto";
 import path from "node:path";
-import webpack from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
 
 const execAsync = promisify(exec);
-
-/** Ghi dist/version.json với hash JS + CSS (đổi khi bundle hoặc style đổi). */
-class WriteVersionJsonPlugin {
-  constructor(options = {}) {
-    this.bundleFile = options.bundleFile ?? "react-loader.js";
-    this.cssFile = options.cssFile ?? "react-loader.css";
-    this.versionFile = options.versionFile ?? "version.json";
-  }
-
-  apply(compiler) {
-    compiler.hooks.thisCompilation.tap(
-      "WriteVersionJsonPlugin",
-      (compilation) => {
-        compilation.hooks.processAssets.tap(
-          {
-            name: "WriteVersionJsonPlugin",
-            stage: webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
-          },
-          (assets) => {
-            const hash = crypto.createHash("sha256");
-
-            for (const file of [this.bundleFile, this.cssFile]) {
-              const source = assets[file];
-              if (!source) continue;
-
-              const raw = source.source();
-              const buffer = Buffer.isBuffer(raw) ? raw : Buffer.from(raw);
-              hash.update(buffer);
-            }
-
-            const version = hash.digest("hex").slice(0, 12);
-
-            const payload = JSON.stringify(
-              {
-                version,
-                file: this.bundleFile,
-                cssFile: this.cssFile,
-              },
-              null,
-              2,
-            );
-
-            compilation.emitAsset(
-              this.versionFile,
-              new webpack.sources.RawSource(`${payload}\n`),
-            );
-          },
-        );
-      },
-    );
-  }
-}
 
 /** Sinh src/generated/client-registry.ts trước mỗi lần compile (kể cả watch rebuild). */
 class GenerateClientRegistryPlugin {
@@ -94,21 +40,24 @@ class ConcatPlugin {
   constructor({
     copyCommand = "bun run copy.ts",
     htmlCommand = "bun run scripts/generate-html.ts",
+    versionCommand = "bun run scripts/generate-version-json.ts",
   } = {}) {
     this.copyCommand = copyCommand;
     this.htmlCommand = htmlCommand;
+    this.versionCommand = versionCommand;
   }
 
   apply(compiler) {
     compiler.hooks.done.tapAsync("ConcatPlugin", async (_stats, callback) => {
       try {
         console.log("Running post-build commands...");
-        const [copyResult, htmlResult] = await Promise.all([
+        const [copyResult, htmlResult, versionResult] = await Promise.all([
           execAsync(this.copyCommand),
           execAsync(this.htmlCommand),
+          execAsync(this.versionCommand),
         ]);
 
-        for (const { stdout, stderr } of [copyResult, htmlResult]) {
+        for (const { stdout, stderr } of [copyResult, htmlResult, versionResult]) {
           if (stdout) console.log(stdout);
           if (stderr) console.error(stderr);
         }
@@ -179,7 +128,6 @@ export default (_env, { watch }) => ({
       filename: ({ chunk }) =>
         chunk.name === "styles" ? "react-loader.css" : "[name].css",
     }),
-    new WriteVersionJsonPlugin(),
     new ConcatPlugin(),
   ],
 });

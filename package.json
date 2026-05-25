@@ -14,6 +14,7 @@
     "build:browser": "webpack --mode production",
     "copy": "bun run copy.ts",
     "generate:server-registry": "bun run scripts/generate-server-registry.ts",
+    "generate:version-json": "bun run scripts/generate-version-json.ts",
     "build:server": "bun run generate:server-registry && bun build src/server.ts --target=node --outfile=dist/server.js --packages=bundle",
     "dev:server": "bun run generate:server-registry && bun run src/server.ts",
     "start": "node dist/server.js",
