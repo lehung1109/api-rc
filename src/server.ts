@@ -1,10 +1,10 @@
 import { createHash } from "node:crypto";
 import express from "express";
 import React from "react";
-import { renderToString } from "react-dom/server";
 import { z } from "zod";
 
 import { buildServerRegistry } from "./generated/server-registry";
+import { renderComponentHtml } from "./lib/render-component-html";
 
 const PORT = Number(process.env.PORT) || 3000;
 const JSON_LIMIT = process.env.JSON_LIMIT ?? "1mb";
@@ -50,7 +50,7 @@ app.post("/render", (req, res) => {
   }
 
   try {
-    const html = renderToString(React.createElement(Component, props));
+    const html = renderComponentHtml(React.createElement(Component, props));
     res.status(200).json({
       html,
       hash: sha256Hex(html),

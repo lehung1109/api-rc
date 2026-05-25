@@ -1,9 +1,9 @@
 import React from "react";
-import { renderToString } from "react-dom/server";
 import fs from "node:fs";
 import { pathToFileURL } from "node:url";
 import prettier from "prettier";
 
+import { renderComponentHtml } from "../src/lib/render-component-html";
 import Header from "@components/header/Header";
 import { header } from "@/data/header";
 import App from "@/components/App";
@@ -69,7 +69,7 @@ if (!fs.existsSync("html")) {
 }
 
 for (const [key, value] of Object.entries(COMPONENT_MAP)) {
-  let html = renderToString(
+  let html = renderComponentHtml(
     React.createElement(value.component, value.model),
   );
 
