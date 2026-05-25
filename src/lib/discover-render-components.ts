@@ -75,7 +75,9 @@ export async function discoverRenderComponents(): Promise<
     return [];
   }
 
-  const files = walkTsxFiles(COMPONENTS_DIR).filter((file) => !shouldSkip(file));
+  const files = walkTsxFiles(COMPONENTS_DIR).filter(
+    (file) => !shouldSkip(file),
+  );
 
   const results: RenderComponentFile[] = [];
   const usedKeys = new Map<string, string>();
@@ -108,29 +110,21 @@ export async function discoverRenderComponents(): Promise<
       usedKeys.set(registryKey, source);
     };
 
-    if (mod.default !== undefined && isReactComponent(mod.default)) {
-      registerKey(componentName);
-      fileEntry.defaultExport = {
-        registryKey: componentName,
-        localName: componentName,
-      };
-    }
-
     for (const [exportName, exportValue] of Object.entries(mod)) {
-      if (exportName === "default") {
-        continue;
-      }
-      if (!/^[A-Z]/.test(exportName)) {
-        continue;
-      }
       if (!isReactComponent(exportValue)) {
         continue;
       }
-      registerKey(exportName);
-      fileEntry.namedExports.push({
-        registryKey: exportName,
-        localName: exportName,
-      });
+
+      const registryKey =
+        exportName === "default" ? componentName : exportName;
+      const localName = exportName === "default" ? componentName : exportName;
+
+      registerKey(registryKey);
+      if (exportName === "default") {
+        fileEntry.defaultExport = { registryKey, localName };
+      } else {
+        fileEntry.namedExports.push({ registryKey, localName });
+      }
     }
 
     if (!fileEntry.defaultExport && fileEntry.namedExports.length === 0) {
