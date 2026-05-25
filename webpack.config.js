@@ -59,6 +59,37 @@ class WriteVersionJsonPlugin {
   }
 }
 
+/** Sinh src/generated/client-registry.ts trước mỗi lần compile (kể cả watch rebuild). */
+class GenerateClientRegistryPlugin {
+  constructor({
+    command = "bun run scripts/generate-client-registry.ts",
+  } = {}) {
+    this.command = command;
+    this.pending = null;
+  }
+
+  run() {
+    if (!this.pending) {
+      this.pending = execAsync(this.command)
+        .then(({ stdout, stderr }) => {
+          if (stdout?.trim()) console.log(stdout.trim());
+          if (stderr?.trim()) console.error(stderr.trim());
+        })
+        .finally(() => {
+          this.pending = null;
+        });
+    }
+    return this.pending;
+  }
+
+  apply(compiler) {
+    compiler.hooks.beforeCompile.tapPromise(
+      "GenerateClientRegistryPlugin",
+      () => this.run(),
+    );
+  }
+}
+
 class ConcatPlugin {
   constructor({
     copyCommand = "bun run copy.ts",
@@ -143,6 +174,7 @@ export default (_env, { watch }) => ({
     ],
   },
   plugins: [
+    new GenerateClientRegistryPlugin(),
     new MiniCssExtractPlugin({
       filename: ({ chunk }) =>
         chunk.name === "styles" ? "react-loader.css" : "[name].css",

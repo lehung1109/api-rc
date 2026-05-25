@@ -10,10 +10,11 @@ flowchart TB
     discover[discover-client-components]
     registry[generate-client-registry]
     generateHtml[generate-html.ts renderToString]
-    discover --> registry
+    webpack[webpack: registry then bundle]
     discover --> generateHtml
     generateHtml --> htmlFiles[html/*.html]
-    registry --> webpack[webpack react-loader]
+    discover --> registry
+    registry --> webpack
   end
   subgraph runtime [Trang WordPress / HTML]
     staticHtml[HTML + comment markers]
@@ -122,9 +123,10 @@ bun run build:html
 
 Script sẽ:
 
-1. Quét `"use client"` → sinh `src/generated/client-registry.ts`
-2. Render `html/MyFeature.html` (và các client component khác)
-3. Giữ `html/Header.html`, `html/App.html` từ map tĩnh
+1. Render `html/MyFeature.html` (và các client component khác)
+2. Giữ `html/Header.html`, `html/App.html` từ map tĩnh
+
+Registry (`src/generated/client-registry.ts`) được webpack sinh tự động khi chạy `dev` / `build:browser`.
 
 Không cần sửa `scripts/generate-html.ts` hay `client-components.tsx` cho client component mới.
 
@@ -224,9 +226,10 @@ scripts/
 
 | Lệnh | Mô tả |
 |------|--------|
-| `bun run dev` | Sinh registry + Vite + Webpack watch |
-| `bun run build:html` | Sinh registry + SSR → `html/` |
-| `bun run build:browser` | Bundle `react-loader` + client chunks |
+| `bun run dev` | Vite + Webpack watch (registry tự sinh trước mỗi lần compile) |
+| `bun run build` | `build:html` rồi `build:browser` |
+| `bun run build:html` | SSR → `html/` |
+| `bun run build:browser` | Sinh registry (webpack plugin) + bundle + post-build HTML/copy |
 | `bun run typecheck` | Kiểm tra TypeScript |
 
 ---
@@ -255,12 +258,12 @@ Tham khảo cách gắn client component: [`HeaderTop.tsx`](src/components/heade
 **Hydrate không chạy trên trang**
 
 - `ReactSection` `type` khác key trong registry (phải camelCase, vd. `myFeature`).
-- Chưa chạy `build:html` / `dev` (registry chưa cập nhật).
+- Chưa chạy webpack / `dev` (registry chưa cập nhật).
 - Thiếu `ClientComponentWrapper` (comment markers cho pipeline HTML).
 
 **TypeScript báo lỗi import generated**
 
-- Chạy `bun run scripts/generate-client-registry.ts` trước `typecheck` lần đầu clone repo.
+- Chạy `bun run build:browser` hoặc `bun run scripts/generate-client-registry.ts` trước `typecheck` lần đầu clone repo.
 
 ---
 
