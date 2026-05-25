@@ -9,8 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"vite\" \"webpack --mode production --watch\"",
-    "build": "bun run build:html && bun run build:browser",
-    "build:html": "bun run scripts/generate-html.ts",
+    "build": "bun run build:html && bun run build:browser && bun run build:server",
+    "build:html": "bun run scripts/generate-html.ts ",
     "build:browser": "webpack --mode production",
     "copy": "bun run copy.ts",
     "generate:server-registry": "bun run scripts/generate-server-registry.ts",
