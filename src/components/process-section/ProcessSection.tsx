@@ -64,7 +64,7 @@ const ProcessSection = (model: ProcessSectionModel) => {
       <div className="relative z-10">
         {introContent ? (
           <div
-            className="process-section-intro mx-auto max-w-3xl text-center"
+            className="process-section-intro mx-auto max-w-4xl text-center"
             dangerouslySetInnerHTML={{ __html: introContent }}
           />
         ) : null}
