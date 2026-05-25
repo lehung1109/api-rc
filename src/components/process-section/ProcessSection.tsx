@@ -47,7 +47,7 @@ const ProcessSection = (model: ProcessSectionModel) => {
     >
       {backgroundImage && (
         <Media
-          className="absolute inset-0 z-0 object-cover max-w-none w-full h-full"
+          className="absolute inset-0 z-0 object-cover max-w-none w-full h-full process-section-background-image"
           {...backgroundImage}
         />
       )}
