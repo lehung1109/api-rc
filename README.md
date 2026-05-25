@@ -9,10 +9,10 @@ flowchart TB
   subgraph build [Build]
     discover[discover-client-components]
     registry[generate-client-registry]
-    server[server.ts renderToString]
+    generateHtml[generate-html.ts renderToString]
     discover --> registry
-    discover --> server
-    server --> htmlFiles[html/*.html]
+    discover --> generateHtml
+    generateHtml --> htmlFiles[html/*.html]
     registry --> webpack[webpack react-loader]
   end
   subgraph runtime [Trang WordPress / HTML]
@@ -26,7 +26,7 @@ flowchart TB
   webpack --> hydrate
 ```
 
-| Loại | Directive | SSR (`server.ts`) | Hydrate (browser) |
+| Loại | Directive | SSR (`scripts/generate-html.ts`) | Hydrate (browser) |
 |------|-----------|-------------------|-------------------|
 | Server component | Không có `"use client"` | Khai báo tay trong `STATIC_COMPONENT_MAP` (vd. `Header`, `App`) | Không |
 | Client component | `"use client"` dòng đầu | Tự phát hiện + file data | Tự đăng ký qua `src/generated/client-registry.ts` |
@@ -126,7 +126,7 @@ Script sẽ:
 2. Render `html/MyFeature.html` (và các client component khác)
 3. Giữ `html/Header.html`, `html/App.html` từ map tĩnh
 
-Không cần sửa `server.ts` hay `client-components.tsx` cho client component mới.
+Không cần sửa `scripts/generate-html.ts` hay `client-components.tsx` cho client component mới.
 
 ### Kiểm tra nhanh
 
@@ -161,7 +161,7 @@ export default Section;
 
 ### Bước 3 — Đăng ký SSR (nếu cần file HTML riêng)
 
-Thêm vào `STATIC_COMPONENT_MAP` trong [`server.ts`](server.ts):
+Thêm vào `STATIC_COMPONENT_MAP` trong [`scripts/generate-html.ts`](scripts/generate-html.ts):
 
 ```ts
 import Section from "@/components/section/Section";
@@ -184,7 +184,7 @@ Chạy `bun run build:html` → `html/Section.html`.
 ## 3. Trang tổng hợp (`App`, `Header`)
 
 - [`src/components/App.tsx`](src/components/App.tsx): ghép nhiều section, bọc client components.
-- [`server.ts`](server.ts): `App` và `Header` nằm trong `STATIC_COMPONENT_MAP`.
+- [`scripts/generate-html.ts`](scripts/generate-html.ts): `App` và `Header` nằm trong `STATIC_COMPONENT_MAP`.
 - Data: [`src/data/header.ts`](src/data/header.ts), v.v.
 
 Client component lồng trong `App`/`Header` vẫn cần `ClientComponentWrapper` + `ReactSection` như mục 1.
@@ -215,7 +215,7 @@ html/
   App.html
 scripts/
   generate-client-registry.ts
-server.ts
+  generate-html.ts
 ```
 
 ---

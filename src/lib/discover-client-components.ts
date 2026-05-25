@@ -1,8 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const COMPONENTS_DIR = "src/components";
-const DATA_DIR = "src/data";
+const PROJECT_ROOT = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../..",
+);
+const COMPONENTS_DIR = path.join(PROJECT_ROOT, "src/components");
+const DATA_DIR = path.join(PROJECT_ROOT, "src/data");
 
 const USE_CLIENT_RE = /^["']use client["'];?\s*$/;
 
@@ -66,16 +71,17 @@ function buildEntry(componentFilePath: string): ClientComponentEntry | null {
   const componentName = path.basename(componentFilePath, ".tsx");
   const dataKebab = pascalToKebab(componentName);
   const dataExportName = pascalToCamel(componentName);
-  const dataImportPath = `./${DATA_DIR}/${dataKebab}.ts`;
+  const dataFilePath = path.join(DATA_DIR, `${dataKebab}.ts`);
 
-  if (!fs.existsSync(path.join(DATA_DIR, `${dataKebab}.ts`))) {
+  if (!fs.existsSync(dataFilePath)) {
     console.warn(
-      `[discover-client-components] Skipping ${componentName}: missing ${dataImportPath}`,
+      `[discover-client-components] Skipping ${componentName}: missing ${path.relative(PROJECT_ROOT, dataFilePath)}`,
     );
     return null;
   }
 
-  const componentImportPath = `./${componentFilePath.replace(/\\/g, "/")}`;
+  const componentImportPath = componentFilePath;
+  const dataImportPath = dataFilePath;
   const relativeFromComponents = path
     .relative(COMPONENTS_DIR, componentFilePath)
     .replace(/\\/g, "/")

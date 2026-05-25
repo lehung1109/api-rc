@@ -62,7 +62,7 @@ class WriteVersionJsonPlugin {
 class ConcatPlugin {
   constructor({
     copyCommand = "bun run copy.ts",
-    htmlCommand = "bun run server.ts",
+    htmlCommand = "bun run scripts/generate-html.ts",
   } = {}) {
     this.copyCommand = copyCommand;
     this.htmlCommand = htmlCommand;

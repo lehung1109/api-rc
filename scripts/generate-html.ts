@@ -1,12 +1,13 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
 import fs from "node:fs";
+import { pathToFileURL } from "node:url";
 import prettier from "prettier";
 
 import Header from "@components/header/Header";
 import { header } from "@/data/header";
 import App from "@/components/App";
-import { discoverClientComponents } from "./src/lib/discover-client-components";
+import { discoverClientComponents } from "../src/lib/discover-client-components";
 
 type ComponentMapEntry = {
   component: React.ComponentType<any>;
@@ -34,8 +35,8 @@ const CLIENT_COMPONENT_MAP: Record<string, ComponentMapEntry> =
     await Promise.all(
       clientEntries.map(async (entry) => {
         const [componentMod, dataMod] = await Promise.all([
-          import(entry.componentImportPath),
-          import(entry.dataImportPath),
+          import(pathToFileURL(entry.componentImportPath).href),
+          import(pathToFileURL(entry.dataImportPath).href),
         ]);
 
         const model = dataMod[entry.dataExportName] ?? dataMod.default;
