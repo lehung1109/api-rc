@@ -21,7 +21,7 @@ const HeaderTop = (model: HeaderTopModel) => {
     <div className="w-full bg-[#f36f21] text-xs">
       <div className="container">
         <div className="flex h-[52px] items-center justify-between gap-4">
-          <p className="hidden text-sm font-medium text-white md:block !mbe-0">
+          <p className="header-top-text hidden text-sm font-medium text-white md:block !mbe-0">
             {text}
           </p>
 
