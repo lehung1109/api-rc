@@ -13,11 +13,15 @@
     "build:html": "bun run scripts/generate-html.ts",
     "build:browser": "webpack --mode production",
     "copy": "bun run copy.ts",
+    "generate:server-registry": "bun run scripts/generate-server-registry.ts",
+    "build:server": "bun run generate:server-registry && bun build src/server.ts --target=node --outfile=dist/server.js --packages=bundle",
+    "dev:server": "bun run generate:server-registry && bun run src/server.ts",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.9",
+    "express": "^5.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.16.0",
@@ -44,7 +48,6 @@
     "dotenv": "^17.4.2",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
-    "express": "^5.2.1",
     "fastify": "^5.8.5",
     "js-yaml": "^4.1.1",
     "pino": "^10.3.1",
