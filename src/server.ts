@@ -20,7 +20,7 @@ export const app = express();
 
 app.use(express.json({ limit: JSON_LIMIT }));
 
-app.use("/render", (req, res, next) => {
+app.use("/api/render-rc", (req, res, next) => {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
     return;
@@ -28,7 +28,7 @@ app.use("/render", (req, res, next) => {
   next();
 });
 
-app.post("/render", (req, res) => {
+app.post("/api/render-rc", (req, res) => {
   const parsed = renderRequestSchema.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({
