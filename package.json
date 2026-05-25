@@ -9,10 +9,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"vite\" \"webpack --mode production --watch\"",
-    "build": "bun run build:html && bun run build:browser && bun run build:server",
+    "build": "bun run generate && bun run build:html && bun run build:browser && bun run build:server",
     "build:html": "bun run scripts/generate-html.ts ",
     "build:browser": "webpack --mode production",
     "copy": "bun run copy.ts",
+    "generate": "bun run generate:server-registry && bun run generate:version-json",
     "generate:server-registry": "bun run scripts/generate-server-registry.ts",
     "generate:version-json": "bun run scripts/generate-version-json.ts",
     "build:server": "bun run generate:server-registry && bun build src/server.ts --target=node --outfile=dist/server.js --packages=bundle",
