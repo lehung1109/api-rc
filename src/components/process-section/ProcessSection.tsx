@@ -103,7 +103,7 @@ const ProcessSection = (model: ProcessSectionModel) => {
                       <div className="absolute inset-[6px] rounded-[50%_0_50%_50%] border-[3px] border-emerald-400 md:inset-[8px] md:border-[4px]" />
                       <div className="absolute inset-0 flex -rotate-45 items-center justify-center text-black">
                         <Icon
-                          className="h-9 w-9 md:h-12 md:w-12"
+                          className="h-9 w-9 md:h-12 md:w-12 relative"
                           strokeWidth={2.2}
                         />
                       </div>
