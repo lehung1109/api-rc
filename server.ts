@@ -3,17 +3,18 @@ import { renderToString } from "react-dom/server";
 import fs from "node:fs";
 import prettier from "prettier";
 
-// Import các React component cần SSR
 import Header from "@components/header/Header";
 import { header } from "@/data/header";
-import AutocompleteSearch from "@/components/header/AutocompleteSearch";
-import { autocompleteSearch } from "@/data/autocomplete-search";
-import carousel from "@/data/carousel";
-import Carousel from "@/components/carousel/Carousel";
 import App from "@/components/App";
+import { discoverClientComponents } from "./src/lib/discover-client-components";
 
-// Map tên component -> component thật
-const COMPONENT_MAP = {
+type ComponentMapEntry = {
+  component: React.ComponentType<any>;
+  model: any;
+  needFormat: boolean;
+};
+
+const STATIC_COMPONENT_MAP: Record<string, ComponentMapEntry> = {
   App: {
     component: App,
     model: {},
@@ -24,27 +25,51 @@ const COMPONENT_MAP = {
     model: header,
     needFormat: true,
   },
-  AutocompleteSearch: {
-    component: AutocompleteSearch,
-    model: autocompleteSearch,
-    needFormat: false,
-  },
-  Carousel: {
-    component: Carousel,
-    model: carousel,
-    needFormat: false,
-  },
 };
 
-// create  html folder if not exists
+const clientEntries = await discoverClientComponents();
+
+const CLIENT_COMPONENT_MAP: Record<string, ComponentMapEntry> =
+  Object.fromEntries(
+    await Promise.all(
+      clientEntries.map(async (entry) => {
+        const [componentMod, dataMod] = await Promise.all([
+          import(entry.componentImportPath),
+          import(entry.dataImportPath),
+        ]);
+
+        const model = dataMod[entry.dataExportName] ?? dataMod.default;
+
+        if (model === undefined) {
+          throw new Error(
+            `Export "${entry.dataExportName}" or default not found in ${entry.dataImportPath}`,
+          );
+        }
+
+        return [
+          entry.componentName,
+          {
+            component: componentMod.default,
+            model,
+            needFormat: entry.needFormat,
+          },
+        ] satisfies [string, ComponentMapEntry];
+      }),
+    ),
+  );
+
+const COMPONENT_MAP = {
+  ...STATIC_COMPONENT_MAP,
+  ...CLIENT_COMPONENT_MAP,
+};
+
 if (!fs.existsSync("html")) {
   fs.mkdirSync("html");
 }
 
-// loop COMPONENT_MAP
 for (const [key, value] of Object.entries(COMPONENT_MAP)) {
   let html = renderToString(
-    React.createElement(value.component as any, value.model as any),
+    React.createElement(value.component, value.model),
   );
 
   if (value.needFormat) {
