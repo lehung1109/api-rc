@@ -52,12 +52,16 @@ class ConcatPlugin {
       try {
         console.log("Running post-build commands...");
         const [copyResult, htmlResult, versionResult] = await Promise.all([
-          execAsync(this.copyCommand),
           execAsync(this.htmlCommand),
           execAsync(this.versionCommand),
+          execAsync(this.copyCommand),
         ]);
 
-        for (const { stdout, stderr } of [copyResult, htmlResult, versionResult]) {
+        for (const { stdout, stderr } of [
+          copyResult,
+          htmlResult,
+          versionResult,
+        ]) {
           if (stdout) console.log(stdout);
           if (stderr) console.error(stderr);
         }
