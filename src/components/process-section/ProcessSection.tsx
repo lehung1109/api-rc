@@ -1,19 +1,45 @@
+import {
+  Banknote,
+  Cog,
+  PencilRuler,
+  UserRound,
+  type LucideIcon,
+} from "lucide-react";
 import type { MediaModel } from "../media/Media";
 import Media from "../media/Media";
+
+export type ProcessSectionIconKey =
+  | "user-round"
+  | "pencil-ruler"
+  | "cog"
+  | "banknote";
+
+const PROCESS_SECTION_ICONS: Record<ProcessSectionIconKey, LucideIcon> = {
+  "user-round": UserRound,
+  "pencil-ruler": PencilRuler,
+  cog: Cog,
+  banknote: Banknote,
+};
+
+function resolveProcessSectionIcon(icon: ProcessSectionIconKey): LucideIcon {
+  return PROCESS_SECTION_ICONS[icon] ?? UserRound;
+}
 
 export interface ProcessSectionModel {
   backgroundImage: MediaModel;
   className?: string;
+  /** HTML from Elementor WYSIWYG (h2, p, …). */
+  introContent?: string;
   steps: {
     id: number;
     title: string;
     description: string;
-    icon: React.ElementType;
+    icon: ProcessSectionIconKey;
   }[];
 }
 
 const ProcessSection = (model: ProcessSectionModel) => {
-  const { backgroundImage, className, steps } = model;
+  const { backgroundImage, className, introContent, steps } = model;
 
   return (
     <section
@@ -36,18 +62,12 @@ const ProcessSection = (model: ProcessSectionModel) => {
       />
 
       <div className="relative z-10">
-        <div className="process-section-intro mx-auto max-w-3xl text-center">
-          <h2 className="uppercase text-[1.6rem] font-bold">
-            QUY TRÌNH THI CÔNG CỦA HOÀN MỸ{" "}
-            <span className="text-orange-500">DECOR</span>
-          </h2>
-          <p className="mt-4">
-            Để Quý khách hàng không mất quá nhiều thời gian trong việc lựa chọn
-            đơn vị Tư vấn – Thiết kế nội thất uy tín, Hoàn Mỹ Decor giới thiệu
-            tới Quý khách hàng Quy trình Tư vấn – Thiết kế nội thất chuyên
-            nghiệp, trọn gói.
-          </p>
-        </div>
+        {introContent ? (
+          <div
+            className="process-section-intro mx-auto max-w-3xl text-center"
+            dangerouslySetInnerHTML={{ __html: introContent }}
+          />
+        ) : null}
 
         <div className="relative mt-12">
           <div className="pointer-events-none absolute left-1/2 top-14 hidden w-screen -translate-x-1/2 md:block">
@@ -71,7 +91,7 @@ const ProcessSection = (model: ProcessSectionModel) => {
 
           <div className="relative z-10 flex flex-wrap justify-center gap-x-10 gap-y-12">
             {steps.map((step) => {
-              const Icon = step.icon;
+              const Icon = resolveProcessSectionIcon(step.icon);
 
               return (
                 <div
