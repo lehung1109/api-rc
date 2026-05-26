@@ -1,28 +1,51 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSwiper } from "swiper/react";
 
+import { cn } from "@/lib/utils";
+
+const navSideClass = cn(
+  "feature-cards-carousel-nav-side",
+  "pointer-events-auto flex h-full items-center justify-center self-stretch",
+  "bg-gradient-to-b from-black/45 via-black/30 to-black/45",
+  "px-1.5 sm:px-2",
+  "opacity-0 transition-opacity duration-300",
+  "group-hover:opacity-100",
+  "max-md:opacity-100",
+);
+
+const navButtonClass = cn(
+  "grid h-10 w-10 cursor-pointer place-items-center p-0",
+  "text-white transition-colors duration-300",
+  "hover:bg-[#f47c20] hover:text-white",
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
+);
+
 const FeatureCardsCarouselNav = () => {
   const swiper = useSwiper();
 
   return (
-    <div className="feature-cards-carousel-nav pointer-events-none absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-between px-1 sm:px-2">
-      <button
-        type="button"
-        onClick={() => swiper.slidePrev()}
-        className="feature-cards-carousel-nav-prev pointer-events-auto grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-neutral-300 bg-white/90 text-neutral-700 shadow-sm transition-colors hover:border-[#f47c20] hover:bg-[#f47c20] hover:text-white"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="h-5 w-5" />
-      </button>
+    <div className="feature-cards-carousel-nav pointer-events-none absolute inset-0 z-10 flex justify-between">
+      <div className={cn(navSideClass, "feature-cards-carousel-nav-side-prev")}>
+        <button
+          type="button"
+          onClick={() => swiper.slidePrev()}
+          className={cn(navButtonClass, "feature-cards-carousel-nav-prev")}
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="h-7 w-7" strokeWidth={2.5} />
+        </button>
+      </div>
 
-      <button
-        type="button"
-        onClick={() => swiper.slideNext()}
-        className="feature-cards-carousel-nav-next pointer-events-auto grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-neutral-300 bg-white/90 text-neutral-700 shadow-sm transition-colors hover:border-[#f47c20] hover:bg-[#f47c20] hover:text-white"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="h-5 w-5" />
-      </button>
+      <div className={cn(navSideClass, "feature-cards-carousel-nav-side-next")}>
+        <button
+          type="button"
+          onClick={() => swiper.slideNext()}
+          className={cn(navButtonClass, "feature-cards-carousel-nav-next")}
+          aria-label="Next slide"
+        >
+          <ChevronRight className="h-7 w-7" strokeWidth={2.5} />
+        </button>
+      </div>
     </div>
   );
 };

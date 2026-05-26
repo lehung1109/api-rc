@@ -58,7 +58,7 @@ const FeatureCardsCarousel = (model: FeatureCardsCarouselModel) => {
   return (
     <div
       className={cn(
-        "feature-cards-carousel relative w-full",
+        "feature-cards-carousel group relative w-full",
         className,
       )}
     >

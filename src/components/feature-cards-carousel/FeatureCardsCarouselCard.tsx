@@ -1,6 +1,8 @@
 import { Check } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import type { LinkModel } from "../link/Link";
+import Link from "../link/Link";
 import type { MediaModel } from "../media/Media";
 import Media from "../media/Media";
 
@@ -8,13 +10,14 @@ export interface FeatureCardsCarouselItemModel {
   image: MediaModel;
   title: string;
   description: string;
+  link: LinkModel;
 }
 
 const FeatureCardsCarouselCard = (item: FeatureCardsCarouselItemModel) => {
-  const { image, title, description } = item;
+  const { image, title, description, link } = item;
 
-  return (
-    <article className="feature-cards-carousel-card flex h-full flex-col overflow-hidden">
+  const cardContent = (
+    <>
       <Media
         {...image}
         className={cn(
@@ -38,7 +41,27 @@ const FeatureCardsCarouselCard = (item: FeatureCardsCarouselItemModel) => {
           {description}
         </p>
       </div>
-    </article>
+    </>
+  );
+
+  if (!link.url) {
+    return (
+      <article className="feature-cards-carousel-card flex h-full flex-col overflow-hidden">
+        {cardContent}
+      </article>
+    );
+  }
+
+  return (
+    <Link
+      {...link}
+      className={cn(
+        "feature-cards-carousel-card feature-cards-carousel-card-link flex h-full flex-col overflow-hidden no-underline transition-opacity hover:opacity-95",
+        link.className,
+      )}
+    >
+      {cardContent}
+    </Link>
   );
 };
 
