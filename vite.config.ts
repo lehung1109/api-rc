@@ -30,5 +30,30 @@ export default defineConfig({
       input: scanIndexHtml(resolve(__dirname, "pages"), resolve(__dirname)),
     },
   },
-  plugins: [tsconfigPaths()],
+  plugins: [
+    tsconfigPaths(),
+    {
+      name: "pages-trailing-slash",
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          const url = req.url?.split("?")[0] ?? "";
+
+          if (
+            url.startsWith("/pages/") &&
+            !url.endsWith("/") &&
+            !url.includes(".")
+          ) {
+            const query = req.url?.includes("?")
+              ? req.url.slice(req.url.indexOf("?"))
+              : "";
+            res.writeHead(301, { Location: `${url}/${query}` });
+            res.end();
+            return;
+          }
+
+          next();
+        });
+      },
+    },
+  ],
 });

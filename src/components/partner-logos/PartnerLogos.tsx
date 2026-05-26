@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import Swiper from "swiper";
 import type { Swiper as SwiperType } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 import { cn } from "@/lib/utils";
 import type { MediaModel } from "../media/Media";
@@ -32,19 +32,80 @@ const PartnerLogos = (model: PartnerLogosModel) => {
     className,
   } = model;
 
+  const containerRef = useRef<HTMLDivElement>(null);
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const { canPrev, canNext } = usePartnerLogosNavState(swiper);
+
+  const enableLoop = loop !== false && logos.length > MAX_SLIDES_PER_VIEW;
+  const mobileGap = spaceBetween ?? 24;
+  const desktopGap = spaceBetween ?? 32;
+  const desktopSlidesPerView = Math.min(slidesPerView, logos.length);
+  const maxSlidesPerView = Math.min(MAX_SLIDES_PER_VIEW, logos.length);
+
+  const logosKey = useMemo(
+    () => logos.map((logo) => `${logo.url}:${logo.alt}`).join("|"),
+    [logos],
+  );
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || logos.length === 0) {
+      return;
+    }
+
+    const instance = new Swiper(el, {
+      slidesPerView: Math.min(2, logos.length),
+      spaceBetween: mobileGap,
+      loop: enableLoop,
+      watchOverflow: true,
+      breakpoints: {
+        640: {
+          slidesPerView: Math.min(3, logos.length),
+          spaceBetween: mobileGap,
+        },
+        768: {
+          slidesPerView: desktopSlidesPerView,
+          spaceBetween: desktopGap,
+        },
+        1024: {
+          slidesPerView: maxSlidesPerView,
+          spaceBetween: desktopGap,
+        },
+      },
+    });
+
+    setSwiper(instance);
+
+    return () => {
+      instance.destroy(true, true);
+      setSwiper(null);
+    };
+  }, [
+    logosKey,
+    enableLoop,
+    mobileGap,
+    desktopGap,
+    desktopSlidesPerView,
+    maxSlidesPerView,
+    logos.length,
+  ]);
 
   if (logos.length === 0) {
     return null;
   }
 
-  const enableLoop = loop !== false && logos.length > MAX_SLIDES_PER_VIEW;
-  const mobileGap = spaceBetween ?? 24;
-  const desktopGap = spaceBetween ?? 32;
-
   const logoKey = (logo: MediaModel, index: number) =>
     `${logo.url}-${logo.alt}-${index}`;
+
+  const renderLogo = (logo: MediaModel) => (
+    <Media
+      {...logo}
+      className={cn(
+        "partner-logos-item block h-10 w-auto max-w-full object-contain md:h-12",
+        logo.className,
+      )}
+    />
+  );
 
   return (
     <section
@@ -60,43 +121,23 @@ const PartnerLogos = (model: PartnerLogosModel) => {
       >
         <PartnerLogosNavPrev swiper={swiper} canPrev={canPrev} />
 
-        <Swiper
-          onSwiper={setSwiper}
-          slidesPerView={2}
-          spaceBetween={mobileGap}
-          loop={enableLoop}
-          breakpoints={{
-            640: {
-              slidesPerView: 3,
-              spaceBetween: mobileGap,
-            },
-            768: {
-              slidesPerView: slidesPerView,
-              spaceBetween: desktopGap,
-            },
-            1024: {
-              slidesPerView: MAX_SLIDES_PER_VIEW,
-              spaceBetween: desktopGap,
-            },
-          }}
-          className="partner-logos-swiper min-w-0 flex-1"
-          wrapperClass="partner-logos-swiper-wrapper items-center"
+        <div
+          ref={containerRef}
+          className="partner-logos-swiper swiper min-w-0 flex-1 overflow-hidden"
         >
-          {logos.map((logo, index) => (
-            <SwiperSlide
-              key={logoKey(logo, index)}
-              className="!flex !h-auto items-center justify-center"
-            >
-              <Media
-                {...logo}
-                className={cn(
-                  "partner-logos-item block h-10 w-auto max-w-full object-contain md:h-12",
-                  logo.className,
-                )}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+          <div className="swiper-wrapper items-center">
+            {logos.map((logo, index) => (
+              <div
+                key={logoKey(logo, index)}
+                className="swiper-slide !flex !h-auto items-center justify-center"
+              >
+                <div className="flex w-full items-center justify-center">
+                  {renderLogo(logo)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <PartnerLogosNavNext swiper={swiper} canNext={canNext} />
       </div>

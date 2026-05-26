@@ -69,9 +69,36 @@ import carouselWrapper from "./carousel-wrapper";
 export default carouselWrapper satisfies CarouselModel;
 ```
 
-- One feature per folder (`header/`, `carousel/`, `process-section/`).
+- One feature per folder (`header/`, `carousel/`, `process-section/`, `footer/`).
 - **Do not** add parallel `FooMobile.tsx` / `FooDesktop.tsx` — one tree, responsive Tailwind.
 - **Do not** edit `src/generated/*` — run `bun run generate`.
+
+## Chia nhỏ component (feature lớn)
+
+Khi một section có **nhiều vùng UI** (nhiều cột, hàng, khối lặp lại) hoặc file TSX **sắp vượt ~150–200 dòng**, tách thành **một thư mục feature** với orchestrator mỏng — không nhồn hết markup vào một file.
+
+**Tham chiếu:** [`header/`](../../../src/components/header/) (`Header` compose `HeaderTop`, `HeaderInner`, `HeaderMenu`, …), [`footer/`](../../../src/components/footer/) (khi có: `Footer` → `FooterTop` / `FooterBottom` + leaf).
+
+```
+src/components/<feature>/
+  Feature.tsx           # orchestrator — default export, entry App / API / Elementor
+  FeatureSection.tsx    # vùng layout (vd. FooterTop, FooterBottom)
+  FeaturePart.tsx       # leaf / khối tái sử dụng (vd. FooterLinkColumn)
+```
+
+| Vai trò | Trách nhiệm |
+|---------|-------------|
+| **Orchestrator** (`Feature.tsx`) | Shell semantic (`<footer>`, `<section>`), `className`, compose con; **không** markup dài |
+| **Section** | Một hàng / vùng grid (`FooterTop`, `FooterBottom`) |
+| **Leaf** | Một cột menu, logo strip, embed slot — props tối thiểu |
+
+**Model:** mỗi file con export `PartNameModel`; orchestrator export `FeatureModel` **compose** (`{ top, bottom }` hoặc `{ headerTop, headerMenu, … }`). Data canonical **một file** `src/data/<feature-kebab>.ts` — aggregate toàn bộ, **không** tạo `footer-brand.ts` riêng trừ khi part được mount độc lập từ App/API.
+
+**Mount từ bên ngoài:** chỉ orchestrator (vd. `<Footer />`, `<Header />`). Sub-component **không** gọi trong `App.tsx` / `eai_rc_render_html` trừ khi có widget/data riêng (như `HeaderMenu` có `header-menu.ts`).
+
+**Khi nào chưa tách file:** section đơn giản (một CTA, một carousel qua wrapper) — giữ một `Feature.tsx`. Ưu tiên **hàm render private trong file** trước khi tách file mới.
+
+**Tránh:** tách theo breakpoint (`FooMobile.tsx`); tách file chỉ để 5–10 dòng JSX không lặp.
 
 ## Props & types
 
@@ -157,9 +184,10 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 
 ## Composition patterns
 
-- **Orchestrator** (`Header.tsx`): composes sub-components, owns cross-cutting state (e.g. overlay checkbox).
-- **Leaf** (`Media.tsx`, `Link.tsx`): focused, no sub-folder unless justified.
-- **Render helpers** inside file (`renderMenuDropdownBody`) — private functions, not exported, when logic is file-local.
+- **Orchestrator** (`Header.tsx`, `Footer.tsx`): composes sub-components; owns cross-cutting state (e.g. overlay checkbox). Giữ file **mỏng** — xem [Chia nhỏ component](#chia-nhỏ-component-feature-lớn).
+- **Section / leaf trong feature folder** (`HeaderMenu.tsx`, `FooterLinkColumn.tsx`): một trách nhiệm UI; model riêng; import type từ sibling.
+- **Leaf shared** (`Media.tsx`, `Link.tsx`): `src/components/<name>/` — dùng chéo feature, không sub-folder trừ khi cần.
+- **Render helpers** inside file (`renderMenuDropdownBody`) — private functions, not exported, when logic is file-local và chưa đủ lớn để tách file.
 - **Icon maps**: `Record<IconKey, LucideIcon>` + resolver function (see `ProcessSection`).
 
 ## Avoid
@@ -170,6 +198,8 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 | Mock/CMS data chỉ trong `src/data/<client>.ts` khi có wrapper | Data chính trong `src/data/<wrapper-kebab>.ts`; client data re-export nếu cần registry |
 | `"use client"` on entire layout | Server shell + minimal client island |
 | Duplicate DOM for breakpoints | One node + responsive classes ([css-first skill](../css-first-responsive-ui/SKILL.md)) |
+| Một file TSX >~200 dòng với nhiều vùng UI | Tách folder feature + orchestrator + section/leaf ([Chia nhỏ component](#chia-nhỏ-component-feature-lớn)) |
+| Mount `FooterBrand` / `HeaderMenu` trực tiếp trong App khi chỉ cần cả footer/header | Chỉ mount orchestrator (`Footer`, `Header`) |
 | Inline prop destructuring in signature (inconsistent) | `(model: XxxModel)` unless matching an existing wrapper pattern |
 | New Radix/shadcn for simple toggle | Checkbox + `peer` / `group-hover` |
 | Edit `src/generated/*` | `bun run generate` |
@@ -182,6 +212,7 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 - [ ] Read neighbors in feature folder
 - [ ] Choose server vs client (server default)
 - [ ] Add ComponentName.tsx + export ComponentNameModel
+- [ ] Feature lớn / nhiều vùng UI? → tách orchestrator + section/leaf trong cùng folder (không duplicate mobile/desktop)
 - [ ] Client? → Wrapper + `src/data/<wrapper-kebab>.ts` (+ `src/data/<client-kebab>.ts` re-export nếu cần hydrate)
 - [ ] Server-only? → `src/data/<component-kebab>.ts`
 - [ ] Semantic classes + cn() for className merges
@@ -202,3 +233,8 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 
 Files: `Header`, `HeaderInner`, `HeaderTop`, `HeaderMenu`, `HeaderSearch`, `AutocompleteSearch`.  
 Data: `src/data/header.ts` aggregates sub-data; `autocomplete_search` lives on `HeaderModel`.
+
+## Quick reference — footer stack (feature lớn)
+
+Files: `Footer` (orchestrator) → `FooterTop` / `FooterBottom` → `FooterLinkColumn`, `FooterPaymentMethods`, `FooterSocial`, `FooterBrand`, `FooterContact`, `FooterFanpages`.  
+Data: `src/data/footer.ts` — `{ top, bottom }` aggregate; chỉ `Footer` mount từ App/API.

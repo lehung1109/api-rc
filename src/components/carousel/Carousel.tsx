@@ -31,7 +31,6 @@ const Carousel = ({
     <div className={`${className} group`}>
       <Swiper
         modules={[Pagination]}
-        navigation
         pagination={{ clickable: true }}
         loop={loop && slides.length > 1}
         className="w-full"

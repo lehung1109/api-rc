@@ -13,7 +13,7 @@ const Link = (model: LinkModel) => {
     <a
       href={url}
       target={is_external ? "_blank" : "_self"}
-      rel={nofollow ? "nofollow" : ""}
+      {...(nofollow ? { rel: "nofollow" } : {})}
       className={className}
     >
       {children}

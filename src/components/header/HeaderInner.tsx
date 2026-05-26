@@ -21,8 +21,8 @@ const HeaderInner = (model: HeaderInnerModel) => {
       </div>
 
       <div className="header-inner-info hidden items-center justify-between gap-8 md:flex">
-        {info_list.map((info) => (
-          <div key={info.text} className="flex items-center gap-4">
+        {info_list.map((info, index) => (
+          <div key={`${info.text}-${index}`} className="flex items-center gap-4">
             <div className="leading-0">
               <Media {...info.icon} className="h-auto w-[45px]" />
             </div>

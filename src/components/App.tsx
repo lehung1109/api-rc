@@ -10,6 +10,8 @@ import FeatureCardsCarouselWrapper from "./feature-cards-carousel/FeatureCardsCa
 import featureCardsCarouselWrapper from "@/data/feature-cards-carousel-wrapper";
 import PartnerLogosWrapper from "./partner-logos/PartnerLogosWrapper";
 import partnerLogosWrapper from "@/data/partner-logos-wrapper";
+import Footer from "./footer/Footer";
+import footer from "@/data/footer";
 
 const App = () => {
   return (
@@ -21,6 +23,7 @@ const App = () => {
       <DesignConsultationCta {...designConsultationCta} />
       <FeatureCardsCarouselWrapper {...featureCardsCarouselWrapper} />
       <PartnerLogosWrapper {...partnerLogosWrapper} />
+      <Footer {...footer} />
     </div>
   );
 };
