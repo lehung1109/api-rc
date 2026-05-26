@@ -1,5 +1,4 @@
 import type { HeaderTopModel } from "@/components/header/HeaderTop";
-import { autocompleteSearch } from "./autocomplete-search";
 
 const headerTop: HeaderTopModel = {
   text: "Chào mừng bạn đến với ABC",
@@ -9,7 +8,6 @@ const headerTop: HeaderTopModel = {
     nofollow: true,
     is_external: true,
   },
-  autocomplete_search: autocompleteSearch,
 };
 
 export { headerTop };
