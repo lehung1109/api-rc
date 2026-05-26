@@ -4,6 +4,8 @@ import CarouselWrapper from "./carousel/CarouselWrapper";
 import carousel from "@/data/carousel";
 import ProcessSection from "./process-section/ProcessSection";
 import { processSection } from "@/data/process-section";
+import DesignConsultationCta from "./design-consultation-cta/DesignConsultationCta";
+import { designConsultationCta } from "@/data/design-consultation-cta";
 
 const App = () => {
   return (
@@ -12,6 +14,7 @@ const App = () => {
 
       <CarouselWrapper {...carousel} />
       <ProcessSection {...processSection} />
+      <DesignConsultationCta {...designConsultationCta} />
     </div>
   );
 };
