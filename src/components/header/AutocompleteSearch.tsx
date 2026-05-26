@@ -61,7 +61,7 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
       <div className="relative">
         <Input
           placeholder={placeholder}
-          className="h-9 rounded-full border-0 bg-white pr-10 !text-xs shadow-none placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="h-9 rounded-full md:border-0 bg-white pr-10 !text-xs shadow-none placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 border-1 border-black"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onBlur={handleBlur}

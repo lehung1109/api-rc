@@ -36,7 +36,7 @@ const Header = (model: HeaderModel) => {
       </div>
 
       <div className="header-menu-panel max-md:fixed max-md:inset-0 max-md:z-50 max-md:flex max-md:translate-x-full max-md:flex-col max-md:overflow-y-auto max-md:bg-white max-md:transition-transform max-md:duration-300 max-md:peer-checked/header-menu:translate-x-0 md:contents">
-        <div className="header-overlay-toolbar flex max-md:items-center max-md:gap-2 max-md:bg-[#f36f21] max-md:p-4 md:contents">
+        <div className="header-overlay-toolbar flex max-md:items-center max-md:gap-2 max-md:p-4 md:contents">
           <HeaderSearch
             autocomplete_search={autocomplete_search}
             className="max-md:flex-1 md:pointer-events-auto md:absolute md:top-0 md:left-1/2 md:z-20 md:h-[52px] md:w-full md:max-w-[420px] md:-translate-x-1/2 md:items-center md:px-4"
@@ -44,10 +44,10 @@ const Header = (model: HeaderModel) => {
 
           <label
             htmlFor="header-menu-open"
-            className="header-menu-close flex shrink-0 cursor-pointer items-center justify-center p-2 text-white md:hidden"
+            className="header-menu-close flex shrink-0 cursor-pointer items-center justify-center p-5 md:hidden"
             aria-label="Đóng menu"
           >
-            <X className="h-6 w-6" />
+            <X className="h-8 w-8" />
           </label>
         </div>
 
