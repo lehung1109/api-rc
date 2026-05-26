@@ -134,7 +134,7 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
           return (
             <li
               key={item.label}
-              className="header-menu-item group relative has-[:checked]:[&_.header-menu-chevron]:rotate-180 border-b border-gray-400 md:border-b-0 has-[:checked]:bg-[#f6f6f6] has-[:checked]:md:bg-transparent first:border-t md:hover:bg-[#f47c20]"
+              className="header-menu-item group relative has-[:checked]:[&_.header-menu-chevron]:rotate-180 border-b border-gray-400 md:border-b-0 has-[:checked]:bg-[#f6f6f6] has-[:checked]:md:bg-transparent first:border-t md:hover:bg-[#f47c20] md:static"
             >
               <input
                 type="checkbox"
@@ -166,11 +166,17 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
                 className={cn(
                   "header-menu-dropdown",
                   "max-md:hidden max-md:w-full max-md:peer-checked/sub:block",
-                  "md:invisible md:absolute md:left-1/2 md:top-full md:z-50 md:-translate-x-1/2 md:opacity-0 md:transition-all md:duration-150",
-                  "md:group-hover:visible md:group-hover:opacity-100",
+                  "md:invisible md:absolute  md:top-full md:z-50  md:opacity-0 md:transition-all md:duration-150",
+                  "md:group-hover:visible md:group-hover:opacity-100 l",
+                  useColumns ? "md:left-0 md:right-0 md:translate-x-0" : "",
                 )}
               >
-                <div className="header-menu-dropdown-inner relative border border-[#d9d9d9] shadow-[0_2px_10px_rgba(0,0,0,0.18)] max-md:border-0 max-md:shadow-none md:bg-white">
+                <div
+                  className={cn(
+                    "header-menu-dropdown-inner relative border border-[#d9d9d9] shadow-[0_2px_10px_rgba(0,0,0,0.18)] max-md:border-0 max-md:shadow-none md:bg-white",
+                    useColumns ? "flex justify-center" : "",
+                  )}
+                >
                   <div
                     className="header-menu-dropdown-arrow absolute left-1/2 top-0 hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent border-b-[#f6f6f6] md:block"
                     aria-hidden
