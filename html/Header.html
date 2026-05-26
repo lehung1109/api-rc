@@ -1,4 +1,6 @@
-<header class="header relative">
+<header
+  class="header sticky top-0 z-50 left-0 right-0 bg-white shadow-md md:contents md:static"
+>
   <input
     id="header-menu-open"
     type="checkbox"
@@ -173,16 +175,19 @@
           <path d="m6 6 12 12"></path></svg
       ></label>
     </div>
-    <nav aria-label="Main navigation" class="header-menu relative">
+    <nav
+      aria-label="Main navigation"
+      class="header-menu relative md:sticky md:top-0 md:z-50 md:left-0"
+    >
       <ul
-        class="header-menu-list flex min-h-[54px] flex-col mb-0 md:bg-[#1f1f1f] md:flex-row md:items-stretch md:justify-center"
+        class="header-menu-list flex min-h-[54px] flex-col mb-0 md:bg-[#1f1f1f] md:flex-row md:items-stretch md:justify-center max-md:uppercase pb-20 md:pb-0"
       >
         <li
           class="header-menu-item relative border-b border-gray-400 md:border-b-0 first:border-t"
         >
           <a
             href="/"
-            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-black md:text-white peer-checked/sub:text-red md:bg-[#f47c20] h-[54px] px-6"
+            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-black md:text-white md:bg-[#f47c20] h-[54px] px-6"
             ><span>Trang chủ</span></a
           >
         </li>
@@ -191,12 +196,12 @@
         >
           <a
             href="/nha-may-san-xuat"
-            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-black md:text-white peer-checked/sub:text-red hover:bg-[#f47c20] h-[54px] px-6"
+            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-black md:text-white md:hover:bg-[#f47c20] h-[54px] px-6"
             ><span>Nhà máy sản xuất</span></a
           >
         </li>
         <li
-          class="header-menu-item group relative has-[:checked]:[&amp;_.header-menu-chevron]:rotate-180 border-b border-gray-400 md:border-b-0 has-[:checked]:bg-[#f6f6f6] has-[:checked]:md:bg-transparent first:border-t"
+          class="header-menu-item group relative has-[:checked]:[&amp;_.header-menu-chevron]:rotate-180 border-b border-gray-400 md:border-b-0 has-[:checked]:bg-[#f6f6f6] has-[:checked]:md:bg-transparent first:border-t md:hover:bg-[#f47c20]"
         >
           <input
             type="checkbox"
@@ -204,11 +209,11 @@
             class="peer/sub sr-only"
           />
           <div
-            class="header-menu-link-row flex h-[54px] items-stretch transition-colors md:hover:bg-[#f47c20]"
+            class="header-menu-link-row flex h-[54px] items-stretch transition-colors peer-checked/sub:[&amp;_.header-menu-link]:text-[#f47c20]"
           >
             <a
               href="/thiet-ke-noi-that"
-              class="header-menu-link flex items-center text-[17px] font-medium duration-150 text-black md:text-white peer-checked/sub:text-red flex-1 pl-6 transition-none bg-transparent hover:bg-transparent"
+              class="header-menu-link flex items-center text-[17px] font-medium duration-150 text-black md:text-white md:hover:bg-[#f47c20] flex-1 pl-6 transition-none bg-transparent hover:bg-transparent"
               ><span>Thiết kế nội thất</span></a
             ><label
               for="header-menu-item-2"
@@ -271,7 +276,7 @@
           </div>
         </li>
         <li
-          class="header-menu-item group relative has-[:checked]:[&amp;_.header-menu-chevron]:rotate-180 border-b border-gray-400 md:border-b-0 has-[:checked]:bg-[#f6f6f6] has-[:checked]:md:bg-transparent first:border-t"
+          class="header-menu-item group relative has-[:checked]:[&amp;_.header-menu-chevron]:rotate-180 border-b border-gray-400 md:border-b-0 has-[:checked]:bg-[#f6f6f6] has-[:checked]:md:bg-transparent first:border-t md:hover:bg-[#f47c20]"
         >
           <input
             type="checkbox"
@@ -279,11 +284,11 @@
             class="peer/sub sr-only"
           />
           <div
-            class="header-menu-link-row flex h-[54px] items-stretch transition-colors md:hover:bg-[#f47c20]"
+            class="header-menu-link-row flex h-[54px] items-stretch transition-colors peer-checked/sub:[&amp;_.header-menu-link]:text-[#f47c20]"
           >
             <a
               href="/thi-cong-noi-that"
-              class="header-menu-link flex items-center text-[17px] font-medium duration-150 text-black md:text-white peer-checked/sub:text-red flex-1 pl-6 transition-none bg-transparent hover:bg-transparent"
+              class="header-menu-link flex items-center text-[17px] font-medium duration-150 text-black md:text-white md:hover:bg-[#f47c20] flex-1 pl-6 transition-none bg-transparent hover:bg-transparent"
               ><span>Thi công nội thất</span></a
             ><label
               for="header-menu-item-3"
@@ -339,7 +344,7 @@
           </div>
         </li>
         <li
-          class="header-menu-item group relative has-[:checked]:[&amp;_.header-menu-chevron]:rotate-180 border-b border-gray-400 md:border-b-0 has-[:checked]:bg-[#f6f6f6] has-[:checked]:md:bg-transparent first:border-t"
+          class="header-menu-item group relative has-[:checked]:[&amp;_.header-menu-chevron]:rotate-180 border-b border-gray-400 md:border-b-0 has-[:checked]:bg-[#f6f6f6] has-[:checked]:md:bg-transparent first:border-t md:hover:bg-[#f47c20]"
         >
           <input
             type="checkbox"
@@ -347,11 +352,11 @@
             class="peer/sub sr-only"
           />
           <div
-            class="header-menu-link-row flex h-[54px] items-stretch transition-colors md:hover:bg-[#f47c20]"
+            class="header-menu-link-row flex h-[54px] items-stretch transition-colors peer-checked/sub:[&amp;_.header-menu-link]:text-[#f47c20]"
           >
             <a
               href="/tin-tuc"
-              class="header-menu-link flex items-center text-[17px] font-medium duration-150 text-black md:text-white peer-checked/sub:text-red flex-1 pl-6 transition-none bg-transparent hover:bg-transparent"
+              class="header-menu-link flex items-center text-[17px] font-medium duration-150 text-black md:text-white md:hover:bg-[#f47c20] flex-1 pl-6 transition-none bg-transparent hover:bg-transparent"
               ><span>Tin Tức</span></a
             ><label
               for="header-menu-item-4"
@@ -392,7 +397,7 @@
                   >
                     Thiết kế nội thất
                   </p>
-                  <ul class="mb-0 px-4">
+                  <ul class="mb-0 px-4 md:px-0">
                     <li class="">
                       <a
                         href="/tt/biet-thu"
@@ -429,7 +434,7 @@
                   >
                     Thi công nội thất
                   </p>
-                  <ul class="mb-0 px-4">
+                  <ul class="mb-0 px-4 md:px-0">
                     <li class="">
                       <a
                         href="/tt/tc-chung-cu"
@@ -452,7 +457,7 @@
                   >
                     Kiến thức nội thất
                   </p>
-                  <ul class="mb-0 px-4">
+                  <ul class="mb-0 px-4 md:px-0">
                     <li class="">
                       <a
                         href="/tt/phong-cach"
@@ -492,7 +497,7 @@
         >
           <a
             href="/bao-gia"
-            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-black md:text-white peer-checked/sub:text-red hover:bg-[#f47c20] h-[54px] px-6"
+            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-black md:text-white md:hover:bg-[#f47c20] h-[54px] px-6"
             ><span>Báo giá</span></a
           >
         </li>
@@ -501,7 +506,7 @@
         >
           <a
             href="/lien-he"
-            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-black md:text-white peer-checked/sub:text-red hover:bg-[#f47c20] h-[54px] px-6"
+            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-black md:text-white md:hover:bg-[#f47c20] h-[54px] px-6"
             ><span>Liên hệ</span></a
           >
         </li>

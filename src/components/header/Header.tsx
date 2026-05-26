@@ -20,7 +20,7 @@ const Header = (model: HeaderModel) => {
   const { headerTop, headerInner, headerMenu, autocomplete_search } = model;
 
   return (
-    <header className="header relative">
+    <header className="header sticky top-0 z-50 left-0 right-0 bg-white shadow-md md:contents md:static">
       <input
         id="header-menu-open"
         type="checkbox"
