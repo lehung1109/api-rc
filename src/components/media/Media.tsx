@@ -10,10 +10,13 @@ export interface MediaModel {
   };
   link?: LinkModel;
   className?: string;
+  srcSet?: string;
+  sizes?: string;
 }
 
 const Media = (model: MediaModel) => {
-  const { url, alt, display_dimensions, link, className } = model;
+  const { url, alt, display_dimensions, link, className, srcSet, sizes } =
+    model;
 
   return (
     <>
@@ -25,6 +28,8 @@ const Media = (model: MediaModel) => {
             width={display_dimensions.width}
             height={display_dimensions.height}
             className={className}
+            srcSet={srcSet}
+            sizes={sizes}
           />
         </Link>
       ) : (
@@ -34,6 +39,8 @@ const Media = (model: MediaModel) => {
           width={display_dimensions.width}
           height={display_dimensions.height}
           className={className}
+          srcSet={srcSet}
+          sizes={sizes}
         />
       )}
     </>
