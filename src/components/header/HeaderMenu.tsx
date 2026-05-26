@@ -142,7 +142,12 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
                 className="peer/sub sr-only"
               />
 
-              <div className="header-menu-link-row flex h-[54px] items-stretch transition-colors  peer-checked/sub:[&_.header-menu-link]:text-[#f47c20]">
+              <div className="header-menu-link-row flex h-[54px] items-stretch transition-colors  peer-checked/sub:[&_.header-menu-link]:text-[#f47c20] md:relative md:z-60">
+                <div
+                  className="header-menu-dropdown-arrow absolute left-1/2 top-[calc(100%+2px)] hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent border-b-white md:group-hover:block"
+                  aria-hidden
+                />
+
                 <a
                   href={normalizeHref(item.href)}
                   className={cn(
@@ -177,11 +182,6 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
                     useColumns ? "flex justify-center" : "",
                   )}
                 >
-                  <div
-                    className="header-menu-dropdown-arrow absolute left-1/2 top-0 hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent border-b-[#f6f6f6] md:block"
-                    aria-hidden
-                  />
-
                   {renderMenuDropdownBody(level2, useColumns)}
                 </div>
               </div>
