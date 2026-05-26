@@ -1,0 +1,115 @@
+import type { ProjectShowcaseModel } from "@/lib/project-showcase/types";
+
+const projectImage = (seed: number) => ({
+  url: `https://placehold.co/600x400/png?text=Project+${seed}`,
+  alt: `Dự án ${seed}`,
+  display_dimensions: { width: 600, height: 400 },
+});
+
+export const projectShowcase: ProjectShowcaseModel = {
+  filterEndpoint: "/api/projects/filter",
+  filters: {
+    area: "50-100",
+    beds: "2",
+    style: "modern",
+  },
+  filterOptions: {
+    areas: [
+      { value: "50-100", label: "50-100m²" },
+      { value: "100-200", label: "100-200m²" },
+      { value: "200-plus", label: ">200m²" },
+    ],
+    bedrooms: [
+      { value: "2", label: "2 phòng" },
+      { value: "4", label: "4 phòng" },
+    ],
+    styles: [
+      { value: "modern", label: "Hiện đại" },
+      { value: "neoclassical", label: "Tân cổ điển" },
+      { value: "indochine", label: "Indochine" },
+    ],
+  },
+  projects: [
+    {
+      id: "hm18",
+      title: "Thiết kế nội thất chung cư tone đen trắng - HM18",
+      image: projectImage(18),
+      bedrooms: 2,
+      area: "50-100",
+      areaLabel: "50-100m²",
+      style: "modern",
+      styleLabel: "Hiện đại",
+    },
+    {
+      id: "hm48",
+      title:
+        "Thiết kế nội thất biệt thự Vinhomes Riverside (Anh Ngọc Anh) – HM48",
+      image: projectImage(48),
+      bedrooms: 2,
+      area: "100-200",
+      areaLabel: "100-200m²",
+      style: "neoclassical",
+      styleLabel: "Tân cổ điển",
+    },
+    {
+      id: "hm19",
+      title: "Thiết kế nội thất biệt thự tone đen tại Hà Nội – HM19",
+      image: projectImage(19),
+      bedrooms: 2,
+      area: "50-100",
+      areaLabel: "50-100m²",
+      style: "modern",
+      styleLabel: "Hiện đại",
+    },
+    {
+      id: "hm14",
+      title: "Thiết kế nội thất biệt thự An Quý Villa Dương Nội – HM14",
+      image: projectImage(14),
+      bedrooms: 4,
+      area: "200-plus",
+      areaLabel: ">200m²",
+      style: "indochine",
+      styleLabel: "Indochine",
+    },
+    {
+      id: "hm22",
+      title: "Thiết kế nội thất căn hộ Masteri Thảo Điền – HM22",
+      image: projectImage(22),
+      bedrooms: 2,
+      area: "50-100",
+      areaLabel: "50-100m²",
+      style: "modern",
+      styleLabel: "Hiện đại",
+    },
+    {
+      id: "hm31",
+      title: "Thiết kế nội thất penthouse Landmark 81 – HM31",
+      image: projectImage(31),
+      bedrooms: 4,
+      area: "200-plus",
+      areaLabel: ">200m²",
+      style: "modern",
+      styleLabel: "Hiện đại",
+    },
+    {
+      id: "hm27",
+      title: "Thiết kế nội thất biệt thự Ecopark tone kem – HM27",
+      image: projectImage(27),
+      bedrooms: 4,
+      area: "100-200",
+      areaLabel: "100-200m²",
+      style: "neoclassical",
+      styleLabel: "Tân cổ điển",
+    },
+    {
+      id: "hm35",
+      title: "Thiết kế nội thất shophouse Indochine Quận 2 – HM35",
+      image: projectImage(35),
+      bedrooms: 2,
+      area: "100-200",
+      areaLabel: "100-200m²",
+      style: "indochine",
+      styleLabel: "Indochine",
+    },
+  ],
+};
