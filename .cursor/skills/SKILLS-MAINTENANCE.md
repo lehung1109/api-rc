@@ -46,6 +46,6 @@ Skill mới: tạo thư mục `skill-name/SKILL.md`, thêm một dòng vào bả
 
 ## Ví dụ
 
-- Thêm component client mới với wrapper khác `CarouselWrapper` → cập nhật mục Client component trong `react-components`.
+- Thêm component client mới → cập nhật `react-components` (wrapper bắt buộc, data `*-wrapper.ts`, `eai-rc-elementor-widget` nếu có widget WP).
 - Đổi breakpoint chính từ `md` sang `lg` → cập nhật `css-first-responsive-ui` + `HEADER.md` + mọi skill ghi `md`.
 - User: "menu 3 cấp mobile chỉ 2 UI level" → đã có trong header doc; nếu áp dụng feature khác, copy pattern vào `css-first-responsive-ui`.
