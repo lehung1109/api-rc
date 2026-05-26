@@ -65,7 +65,10 @@ function renderMenuDropdownBody(
 
             <ul className="mb-0 px-4 md:px-0">
               {(col.children ?? []).map((child) => (
-                <li key={child.label} className="">
+                <li
+                  key={child.label}
+                  className="md:border-t md:border-gray-300"
+                >
                   <a
                     href={normalizeHref(child.href)}
                     className="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
@@ -85,7 +88,10 @@ function renderMenuDropdownBody(
     <div className="header-menu-dropdown-body min-w-0 px-8 py-4 md:min-w-[320px] md:px-6">
       <ul className="mb-0">
         {level2.map((sub) => (
-          <li key={sub.label} className="">
+          <li
+            key={sub.label}
+            className="md:border-b-1 md:border-gray-300 last:border-b-0"
+          >
             <a
               href={normalizeHref(sub.href)}
               className="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#333] transition-all duration-150 hover:text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
