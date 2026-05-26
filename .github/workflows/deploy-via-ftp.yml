@@ -38,13 +38,12 @@ jobs:
         run: bun run build
 
       - name: Upload FTP to api-rc
-        uses: sebastianpopp/ftp-action@v2.0.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          host: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "dist"
-          args: "--delete"
+          localDir: "dist/"
 
       - name: Upload FTP to noithat
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
@@ -52,4 +51,4 @@ jobs:
           server: ${{ secrets.FTP_SERVER_NOITHAT }}
           username: ${{ secrets.FTP_USERNAME_NOITHAT }}
           password: ${{ secrets.FTP_PASSWORD_NOITHAT }}
-          local-dir: "dist"
+          local-dir: "dist/"
