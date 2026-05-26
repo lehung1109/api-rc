@@ -7,7 +7,6 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"vite\" \"webpack --mode production --watch\"",
     "build": "bun run generate && bun run build:html && bun run build:browser && bun run build:server",
     "build:html": "bun run scripts/generate-html.ts ",
@@ -23,9 +22,9 @@
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.9",
-    "express": "^5.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "express": "^5.2.1",
     "lucide-react": "^1.16.0",
     "radix-ui": "^1.4.3",
     "react": "^19.2.6",
@@ -37,6 +36,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4.3.0",
     "@types/express": "^5.0.6",
     "@types/js-yaml": "^4.0.9",

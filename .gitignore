@@ -144,3 +144,10 @@ vite.config.ts.timestamp-*
 
 # Generated files
 src/generated/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
