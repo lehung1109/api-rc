@@ -89,7 +89,7 @@ export default (_env, { watch }) => ({
     clean: !watch,
   },
   watchOptions: {
-    ignored: ["**/html/**", "**/node_modules/**"],
+    ignored: ["**/html/**", "**/node_modules/**", "**/src/generated/**"],
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
