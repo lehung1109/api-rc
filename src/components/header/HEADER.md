@@ -2,6 +2,8 @@
 
 Tài liệu này ghi lại các quyết định đã thống nhất khi làm mobile header. **Đọc file này trước khi sửa** `Header.tsx`, `HeaderInner.tsx`, `HeaderTop.tsx`, `HeaderMenu.tsx`, `HeaderSearch.tsx` hoặc data liên quan.
 
+Nguyên tắc tổng quát (CSS-first, checkbox, không duplicate markup): agent skill `.cursor/skills/css-first-responsive-ui/SKILL.md`.
+
 ## Mục tiêu
 
 - Mobile: thanh gọn (logo + hamburger), overlay full màn hình khi mở menu, search + menu dọc bên trong.
