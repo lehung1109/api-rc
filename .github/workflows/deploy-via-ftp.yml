@@ -43,7 +43,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "dist/"
+          local-dir: "dist/"
 
       - name: Upload FTP to noithat
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
