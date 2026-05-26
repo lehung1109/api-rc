@@ -47,10 +47,9 @@ jobs:
           args: "--delete"
 
       - name: Upload FTP to noithat
-        uses: sebastianpopp/ftp-action@v2.0.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          host: ${{ secrets.FTP_SERVER_NOITHAT }}
-          user: ${{ secrets.FTP_USERNAME_NOITHAT }}
+          server: ${{ secrets.FTP_SERVER_NOITHAT }}
+          username: ${{ secrets.FTP_USERNAME_NOITHAT }}
           password: ${{ secrets.FTP_PASSWORD_NOITHAT }}
-          localDir: "dist"
-          args: "--delete"
+          local-dir: "dist"
