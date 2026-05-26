@@ -2,7 +2,7 @@
 
 Tài liệu này ghi lại các quyết định đã thống nhất khi làm mobile header. **Đọc file này trước khi sửa** `Header.tsx`, `HeaderInner.tsx`, `HeaderTop.tsx`, `HeaderMenu.tsx`, `HeaderSearch.tsx` hoặc data liên quan.
 
-Nguyên tắc tổng quát (CSS-first, checkbox, không duplicate markup): agent skill `.cursor/skills/css-first-responsive-ui/SKILL.md`.
+Nguyên tắc tổng quát (CSS-first, checkbox, không duplicate markup): agent skill `.cursor/skills/css-first-responsive-ui/SKILL.md`. React components: `.cursor/skills/react-components/SKILL.md`. **Khi thống nhất quy tắc mới**, agent cập nhật skill + file này trong cùng task — xem `.cursor/skills/SKILLS-MAINTENANCE.md`.
 
 ## Mục tiêu
 

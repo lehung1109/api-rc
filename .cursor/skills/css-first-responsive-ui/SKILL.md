@@ -5,10 +5,15 @@ description: >-
   checkbox/peer/group-hover CSS instead of duplicate mobile components or Radix
   toggles. Use when implementing mobile/desktop layouts, nav menus, overlays,
   drawers, accordions, or when the user asks for CSS-first, no duplicate markup,
-  checkbox control, or references HEADER conventions in api-rc.
+  checkbox control, or references HEADER conventions in api-rc. Updates this
+  skill when new responsive or toggle patterns are agreed in api-rc.
 ---
 
 # CSS-first responsive UI
+
+## Keep this skill current
+
+When a session establishes a **new responsive/toggle pattern** for api-rc, append or fix this skill in the same task. Full rules: [SKILLS-MAINTENANCE.md](../SKILLS-MAINTENANCE.md). Header specifics: keep [HEADER.md](../../../src/components/header/HEADER.md) in sync.
 
 ## Core principles (apply in order)
 
@@ -103,3 +108,4 @@ Files: `Header.tsx`, `HeaderInner.tsx`, `HeaderTop.tsx`, `HeaderMenu.tsx`, `Head
 - [ ] Desktop: hover/ layout unchanged; chevron non-interactive if using split tap
 - [ ] Semantic `*-` classes added for new nodes
 - [ ] `bun run typecheck` passes
+- [ ] New pattern or user rule? → update this skill (+ HEADER.md / react-components if needed)
