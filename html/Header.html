@@ -25,7 +25,7 @@
       </div>
     </div>
   </div>
-  <div class="header-bar container py-4 md:py-0">
+  <div class="header-bar container py-4">
     <div class="header-inner flex items-center justify-between gap-4 md:gap-16">
       <div class="header-inner-logo leading-0 max-w-[200px]">
         <a href="https://www.google.com" target="_blank" rel="nofollow"
@@ -175,19 +175,19 @@
     </div>
     <nav aria-label="Main navigation" class="header-menu relative">
       <ul
-        class="header-menu-list flex min-h-[54px] flex-col !mb-0 bg-[#1f1f1f] md:flex-row md:items-stretch md:justify-center"
+        class="header-menu-list flex min-h-[54px] flex-col mb-0 bg-[#1f1f1f] md:flex-row md:items-stretch md:justify-center"
       >
         <li class="header-menu-item relative">
           <a
             href="/"
-            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white !bg-[#f47c20] h-[54px] px-6"
+            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white bg-[#f47c20] h-[54px] px-6"
             ><span>Trang chủ</span></a
           >
         </li>
         <li class="header-menu-item relative">
           <a
             href="/nha-may-san-xuat"
-            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white !bg-[#1f1f1f] hover:!bg-[#f47c20] h-[54px] px-6"
+            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white hover:bg-[#f47c20] h-[54px] px-6"
             ><span>Nhà máy sản xuất</span></a
           >
         </li>
@@ -199,14 +199,16 @@
             id="header-menu-item-2"
             class="peer/sub sr-only"
           />
-          <div class="header-menu-link-row flex h-[54px] items-stretch">
+          <div
+            class="header-menu-link-row flex h-[54px] items-stretch hover:bg-[#f47c20] transition-colors"
+          >
             <a
               href="/thiet-ke-noi-that"
-              class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white !bg-[#1f1f1f] hover:!bg-[#f47c20] flex-1 px-6"
+              class="header-menu-link flex items-center text-[17px] font-medium duration-150 text-white flex-1 pl-6 transition-none bg-transparent hover:bg-transparent"
               ><span>Thiết kế nội thất</span></a
             ><label
               for="header-menu-item-2"
-              class="header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center px-3 md:pointer-events-none md:cursor-default"
+              class="header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center pr-6 pl-18 md:pl-1 md:pr-4 md:pointer-events-none md:cursor-default text-white"
               aria-label="Mở menu Thiết kế nội thất"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -218,44 +220,44 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-chevron-down header-menu-chevron h-3.5 w-3.5 opacity-80 transition-transform"
+                class="lucide lucide-chevron-down header-menu-chevron h-7 w-7 transition-transform"
                 aria-hidden="true"
               >
                 <path d="m6 9 6 6 6-6"></path></svg
             ></label>
           </div>
           <div
-            class="header-menu-dropdown max-md:hidden max-md:w-full max-md:peer-checked/sub:block md:invisible md:absolute md:left-1/2 md:top-full md:z-50 md:-translate-x-1/2 md:opacity-0 md:transition-all md:duration-150 md:group-hover:visible md:group-hover:!opacity-100"
+            class="header-menu-dropdown max-md:hidden max-md:w-full max-md:peer-checked/sub:block md:invisible md:absolute md:left-1/2 md:top-full md:z-50 md:-translate-x-1/2 md:opacity-0 md:transition-all md:duration-150 md:group-hover:visible md:group-hover:opacity-100"
           >
             <div
-              class="header-menu-dropdown-inner relative !border !border-[#d9d9d9] !bg-[#f6f6f6] shadow-[0_2px_10px_rgba(0,0,0,0.18)] max-md:border-0 max-md:shadow-none"
+              class="header-menu-dropdown-inner relative border border-[#d9d9d9] bg-[#f6f6f6] shadow-[0_2px_10px_rgba(0,0,0,0.18)] max-md:border-0 max-md:shadow-none"
             >
               <div
-                class="header-menu-dropdown-arrow absolute left-1/2 top-0 hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent !border-b-[#f6f6f6] md:block"
+                class="header-menu-dropdown-arrow absolute left-1/2 top-0 hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent border-b-[#f6f6f6] md:block"
                 aria-hidden="true"
               ></div>
               <div
                 class="header-menu-dropdown-body min-w-0 px-4 py-4 md:min-w-[320px] md:px-6"
               >
-                <ul class="!mb-0">
-                  <li class="border-t !border-[#e1e1e1] first:border-t-0">
+                <ul class="mb-0">
+                  <li class="border-t border-[#e1e1e1] first:border-t-0">
                     <a
                       href="/tk/chung-cu"
-                      class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#333] transition-all duration-150 hover:!text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
+                      class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#333] transition-all duration-150 hover:text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
                       >Thiết kế nội thất chung cư</a
                     >
                   </li>
-                  <li class="border-t !border-[#e1e1e1] first:border-t-0">
+                  <li class="border-t border-[#e1e1e1] first:border-t-0">
                     <a
                       href="/tk/biet-thu"
-                      class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#333] transition-all duration-150 hover:!text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
+                      class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#333] transition-all duration-150 hover:text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
                       >Thiết kế nội thất biệt thự</a
                     >
                   </li>
-                  <li class="border-t !border-[#e1e1e1] first:border-t-0">
+                  <li class="border-t border-[#e1e1e1] first:border-t-0">
                     <a
                       href="/tk/nha-pho"
-                      class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#333] transition-all duration-150 hover:!text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
+                      class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#333] transition-all duration-150 hover:text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
                       >Thiết kế nội thất nhà phố</a
                     >
                   </li>
@@ -272,14 +274,16 @@
             id="header-menu-item-3"
             class="peer/sub sr-only"
           />
-          <div class="header-menu-link-row flex h-[54px] items-stretch">
+          <div
+            class="header-menu-link-row flex h-[54px] items-stretch hover:bg-[#f47c20] transition-colors"
+          >
             <a
               href="/thi-cong-noi-that"
-              class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white !bg-[#1f1f1f] hover:!bg-[#f47c20] flex-1 px-6"
+              class="header-menu-link flex items-center text-[17px] font-medium duration-150 text-white flex-1 pl-6 transition-none bg-transparent hover:bg-transparent"
               ><span>Thi công nội thất</span></a
             ><label
               for="header-menu-item-3"
-              class="header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center px-3 md:pointer-events-none md:cursor-default"
+              class="header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center pr-6 pl-18 md:pl-1 md:pr-4 md:pointer-events-none md:cursor-default text-white"
               aria-label="Mở menu Thi công nội thất"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -291,37 +295,37 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-chevron-down header-menu-chevron h-3.5 w-3.5 opacity-80 transition-transform"
+                class="lucide lucide-chevron-down header-menu-chevron h-7 w-7 transition-transform"
                 aria-hidden="true"
               >
                 <path d="m6 9 6 6 6-6"></path></svg
             ></label>
           </div>
           <div
-            class="header-menu-dropdown max-md:hidden max-md:w-full max-md:peer-checked/sub:block md:invisible md:absolute md:left-1/2 md:top-full md:z-50 md:-translate-x-1/2 md:opacity-0 md:transition-all md:duration-150 md:group-hover:visible md:group-hover:!opacity-100"
+            class="header-menu-dropdown max-md:hidden max-md:w-full max-md:peer-checked/sub:block md:invisible md:absolute md:left-1/2 md:top-full md:z-50 md:-translate-x-1/2 md:opacity-0 md:transition-all md:duration-150 md:group-hover:visible md:group-hover:opacity-100"
           >
             <div
-              class="header-menu-dropdown-inner relative !border !border-[#d9d9d9] !bg-[#f6f6f6] shadow-[0_2px_10px_rgba(0,0,0,0.18)] max-md:border-0 max-md:shadow-none"
+              class="header-menu-dropdown-inner relative border border-[#d9d9d9] bg-[#f6f6f6] shadow-[0_2px_10px_rgba(0,0,0,0.18)] max-md:border-0 max-md:shadow-none"
             >
               <div
-                class="header-menu-dropdown-arrow absolute left-1/2 top-0 hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent !border-b-[#f6f6f6] md:block"
+                class="header-menu-dropdown-arrow absolute left-1/2 top-0 hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent border-b-[#f6f6f6] md:block"
                 aria-hidden="true"
               ></div>
               <div
                 class="header-menu-dropdown-body min-w-0 px-4 py-4 md:min-w-[320px] md:px-6"
               >
-                <ul class="!mb-0">
-                  <li class="border-t !border-[#e1e1e1] first:border-t-0">
+                <ul class="mb-0">
+                  <li class="border-t border-[#e1e1e1] first:border-t-0">
                     <a
                       href="/tc/chung-cu"
-                      class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#333] transition-all duration-150 hover:!text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
+                      class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#333] transition-all duration-150 hover:text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
                       >Thi công nội thất chung cư</a
                     >
                   </li>
-                  <li class="border-t !border-[#e1e1e1] first:border-t-0">
+                  <li class="border-t border-[#e1e1e1] first:border-t-0">
                     <a
                       href="/tc/biet-thu"
-                      class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#333] transition-all duration-150 hover:!text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
+                      class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#333] transition-all duration-150 hover:text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
                       >Thi công nội thất biệt thự</a
                     >
                   </li>
@@ -338,14 +342,16 @@
             id="header-menu-item-4"
             class="peer/sub sr-only"
           />
-          <div class="header-menu-link-row flex h-[54px] items-stretch">
+          <div
+            class="header-menu-link-row flex h-[54px] items-stretch hover:bg-[#f47c20] transition-colors"
+          >
             <a
               href="/tin-tuc"
-              class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white !bg-[#1f1f1f] hover:!bg-[#f47c20] flex-1 px-6"
+              class="header-menu-link flex items-center text-[17px] font-medium duration-150 text-white flex-1 pl-6 transition-none bg-transparent hover:bg-transparent"
               ><span>Tin Tức</span></a
             ><label
               for="header-menu-item-4"
-              class="header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center px-3 md:pointer-events-none md:cursor-default"
+              class="header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center pr-6 pl-18 md:pl-1 md:pr-4 md:pointer-events-none md:cursor-default text-white"
               aria-label="Mở menu Tin Tức"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -357,20 +363,20 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-chevron-down header-menu-chevron h-3.5 w-3.5 opacity-80 transition-transform"
+                class="lucide lucide-chevron-down header-menu-chevron h-7 w-7 transition-transform"
                 aria-hidden="true"
               >
                 <path d="m6 9 6 6 6-6"></path></svg
             ></label>
           </div>
           <div
-            class="header-menu-dropdown max-md:hidden max-md:w-full max-md:peer-checked/sub:block md:invisible md:absolute md:left-1/2 md:top-full md:z-50 md:-translate-x-1/2 md:opacity-0 md:transition-all md:duration-150 md:group-hover:visible md:group-hover:!opacity-100"
+            class="header-menu-dropdown max-md:hidden max-md:w-full max-md:peer-checked/sub:block md:invisible md:absolute md:left-1/2 md:top-full md:z-50 md:-translate-x-1/2 md:opacity-0 md:transition-all md:duration-150 md:group-hover:visible md:group-hover:opacity-100"
           >
             <div
-              class="header-menu-dropdown-inner relative !border !border-[#d9d9d9] !bg-[#f6f6f6] shadow-[0_2px_10px_rgba(0,0,0,0.18)] max-md:border-0 max-md:shadow-none"
+              class="header-menu-dropdown-inner relative border border-[#d9d9d9] bg-[#f6f6f6] shadow-[0_2px_10px_rgba(0,0,0,0.18)] max-md:border-0 max-md:shadow-none"
             >
               <div
-                class="header-menu-dropdown-arrow absolute left-1/2 top-0 hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent !border-b-[#f6f6f6] md:block"
+                class="header-menu-dropdown-arrow absolute left-1/2 top-0 hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent border-b-[#f6f6f6] md:block"
                 aria-hidden="true"
               ></div>
               <div
@@ -378,44 +384,44 @@
               >
                 <div class="header-menu-section min-w-0 md:min-w-[270px]">
                   <p
-                    class="header-menu-section-title mb-2 text-[15px] font-bold uppercase !text-[#111] md:mb-3"
+                    class="header-menu-section-title mb-2 text-[15px] font-bold uppercase text-[#111] md:mb-3"
                   >
                     Thiết kế nội thất
                   </p>
-                  <ul class="!mb-0">
+                  <ul class="mb-0">
                     <li
-                      class="border-t !border-[#e1e1e1] first:border-t-0 md:first:border-t"
+                      class="border-t border-[#e1e1e1] first:border-t-0 md:first:border-t"
                     >
                       <a
                         href="/tt/biet-thu"
-                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111] md:text-[18px]"
+                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
                         >Thiết kế nội thất biệt thự</a
                       >
                     </li>
                     <li
-                      class="border-t !border-[#e1e1e1] first:border-t-0 md:first:border-t"
+                      class="border-t border-[#e1e1e1] first:border-t-0 md:first:border-t"
                     >
                       <a
                         href="/tt/chung-cu"
-                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111] md:text-[18px]"
+                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
                         >Thiết kế nội thất chung cư</a
                       >
                     </li>
                     <li
-                      class="border-t !border-[#e1e1e1] first:border-t-0 md:first:border-t"
+                      class="border-t border-[#e1e1e1] first:border-t-0 md:first:border-t"
                     >
                       <a
                         href="/tt/nha-pho"
-                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111] md:text-[18px]"
+                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
                         >Thiết kế nội thất nhà phố</a
                       >
                     </li>
                     <li
-                      class="border-t !border-[#e1e1e1] first:border-t-0 md:first:border-t"
+                      class="border-t border-[#e1e1e1] first:border-t-0 md:first:border-t"
                     >
                       <a
                         href="/tt/van-phong"
-                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111] md:text-[18px]"
+                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
                         >Thiết kế nội thất văn phòng</a
                       >
                     </li>
@@ -423,26 +429,26 @@
                 </div>
                 <div class="header-menu-section min-w-0 md:min-w-[270px]">
                   <p
-                    class="header-menu-section-title mb-2 text-[15px] font-bold uppercase !text-[#111] md:mb-3"
+                    class="header-menu-section-title mb-2 text-[15px] font-bold uppercase text-[#111] md:mb-3"
                   >
                     Thi công nội thất
                   </p>
-                  <ul class="!mb-0">
+                  <ul class="mb-0">
                     <li
-                      class="border-t !border-[#e1e1e1] first:border-t-0 md:first:border-t"
+                      class="border-t border-[#e1e1e1] first:border-t-0 md:first:border-t"
                     >
                       <a
                         href="/tt/tc-chung-cu"
-                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111] md:text-[18px]"
+                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
                         >Thi công nội thất chung cư</a
                       >
                     </li>
                     <li
-                      class="border-t !border-[#e1e1e1] first:border-t-0 md:first:border-t"
+                      class="border-t border-[#e1e1e1] first:border-t-0 md:first:border-t"
                     >
                       <a
                         href="/tt/tc-biet-thu"
-                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111] md:text-[18px]"
+                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
                         >Thi công nội thất biệt thự</a
                       >
                     </li>
@@ -450,44 +456,44 @@
                 </div>
                 <div class="header-menu-section min-w-0 md:min-w-[270px]">
                   <p
-                    class="header-menu-section-title mb-2 text-[15px] font-bold uppercase !text-[#111] md:mb-3"
+                    class="header-menu-section-title mb-2 text-[15px] font-bold uppercase text-[#111] md:mb-3"
                   >
                     Kiến thức nội thất
                   </p>
-                  <ul class="!mb-0">
+                  <ul class="mb-0">
                     <li
-                      class="border-t !border-[#e1e1e1] first:border-t-0 md:first:border-t"
+                      class="border-t border-[#e1e1e1] first:border-t-0 md:first:border-t"
                     >
                       <a
                         href="/tt/phong-cach"
-                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111] md:text-[18px]"
+                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
                         >Phong cách nội thất</a
                       >
                     </li>
                     <li
-                      class="border-t !border-[#e1e1e1] first:border-t-0 md:first:border-t"
+                      class="border-t border-[#e1e1e1] first:border-t-0 md:first:border-t"
                     >
                       <a
                         href="/tt/tu-bep"
-                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111] md:text-[18px]"
+                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
                         >Tủ bếp</a
                       >
                     </li>
                     <li
-                      class="border-t !border-[#e1e1e1] first:border-t-0 md:first:border-t"
+                      class="border-t border-[#e1e1e1] first:border-t-0 md:first:border-t"
                     >
                       <a
                         href="/tt/tu-quan-ao"
-                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111] md:text-[18px]"
+                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
                         >Tủ quần áo</a
                       >
                     </li>
                     <li
-                      class="border-t !border-[#e1e1e1] first:border-t-0 md:first:border-t"
+                      class="border-t border-[#e1e1e1] first:border-t-0 md:first:border-t"
                     >
                       <a
                         href="/tt/giuong-ngu"
-                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111] md:text-[18px]"
+                        class="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
                         >Giường ngủ</a
                       >
                     </li>
@@ -500,14 +506,14 @@
         <li class="header-menu-item relative">
           <a
             href="/bao-gia"
-            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white !bg-[#1f1f1f] hover:!bg-[#f47c20] h-[54px] px-6"
+            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white hover:bg-[#f47c20] h-[54px] px-6"
             ><span>Báo giá</span></a
           >
         </li>
         <li class="header-menu-item relative">
           <a
             href="/lien-he"
-            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white !bg-[#1f1f1f] hover:!bg-[#f47c20] h-[54px] px-6"
+            class="header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white hover:bg-[#f47c20] h-[54px] px-6"
             ><span>Liên hệ</span></a
           >
         </li>

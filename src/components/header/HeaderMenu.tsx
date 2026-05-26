@@ -26,10 +26,7 @@ const linkBaseClass =
   "header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-white";
 
 function getLinkClass(active?: boolean) {
-  return cn(
-    linkBaseClass,
-    active ? "!bg-[#f47c20]" : "!bg-[#1f1f1f] hover:!bg-[#f47c20]",
-  );
+  return cn(linkBaseClass, active ? "bg-[#f47c20]" : "hover:bg-[#f47c20]");
 }
 
 function renderMenuDropdownBody(
@@ -46,29 +43,32 @@ function renderMenuDropdownBody(
         )}
       >
         {level2.map((col) => (
-          <div key={col.label} className="header-menu-section min-w-0 md:min-w-[270px]">
+          <div
+            key={col.label}
+            className="header-menu-section min-w-0 md:min-w-[270px]"
+          >
             {col.href ? (
               <a
                 href={normalizeHref(col.href)}
-                className="header-menu-section-title block text-[15px] font-bold uppercase !text-[#111] hover:!text-[#d82a28] md:mb-3 md:hover:pl-2 md:transition-all"
+                className="header-menu-section-title block text-[15px] font-bold uppercase text-[#111] hover:text-[#d82a28] md:mb-3 md:hover:pl-2 md:transition-all"
               >
                 {col.label}
               </a>
             ) : (
-              <p className="header-menu-section-title mb-2 text-[15px] font-bold uppercase !text-[#111] md:mb-3">
+              <p className="header-menu-section-title mb-2 text-[15px] font-bold uppercase text-[#111] md:mb-3">
                 {col.label}
               </p>
             )}
 
-            <ul className="!mb-0">
+            <ul className="mb-0">
               {(col.children ?? []).map((child) => (
                 <li
                   key={child.label}
-                  className="border-t !border-[#e1e1e1] first:border-t-0 md:first:border-t"
+                  className="border-t border-[#e1e1e1] first:border-t-0 md:first:border-t"
                 >
                   <a
                     href={normalizeHref(child.href)}
-                    className="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#777] transition-colors duration-150 hover:!text-[#111] md:text-[18px]"
+                    className="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
                   >
                     {child.label}
                   </a>
@@ -83,15 +83,15 @@ function renderMenuDropdownBody(
 
   return (
     <div className="header-menu-dropdown-body min-w-0 px-4 py-4 md:min-w-[320px] md:px-6">
-      <ul className="!mb-0">
+      <ul className="mb-0">
         {level2.map((sub) => (
           <li
             key={sub.label}
-            className="border-t !border-[#e1e1e1] first:border-t-0"
+            className="border-t border-[#e1e1e1] first:border-t-0"
           >
             <a
               href={normalizeHref(sub.href)}
-              className="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] !text-[#333] transition-all duration-150 hover:!text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
+              className="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#333] transition-all duration-150 hover:text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
             >
               {sub.label}
             </a>
@@ -108,7 +108,7 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
       aria-label="Main navigation"
       className={cn("header-menu relative", className)}
     >
-      <ul className="header-menu-list flex min-h-[54px] flex-col !mb-0 bg-[#1f1f1f] md:flex-row md:items-stretch md:justify-center">
+      <ul className="header-menu-list flex min-h-[54px] flex-col mb-0 bg-[#1f1f1f] md:flex-row md:items-stretch md:justify-center">
         {items.map((item, index) => {
           const level2 = item.children ?? [];
           const hasDropdown = level2.length > 0;
@@ -139,12 +139,12 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
                 className="peer/sub sr-only"
               />
 
-              <div className="header-menu-link-row flex h-[54px] items-stretch">
+              <div className="header-menu-link-row flex h-[54px] items-stretch hover:bg-[#f47c20] transition-colors">
                 <a
                   href={normalizeHref(item.href)}
                   className={cn(
                     getLinkClass(item.active),
-                    "flex-1 px-6",
+                    "flex-1 pl-6 transition-none bg-transparent hover:bg-transparent",
                   )}
                 >
                   <span>{item.label}</span>
@@ -152,10 +152,10 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
 
                 <label
                   htmlFor={itemCheckboxId}
-                  className="header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center px-3 md:pointer-events-none md:cursor-default"
+                  className="header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center pr-6 pl-18 md:pl-1 md:pr-4 md:pointer-events-none md:cursor-default text-white"
                   aria-label={`Mở menu ${item.label}`}
                 >
-                  <ChevronDownIcon className="header-menu-chevron h-3.5 w-3.5 opacity-80 transition-transform" />
+                  <ChevronDownIcon className="header-menu-chevron h-7 w-7 transition-transform" />
                 </label>
               </div>
 
@@ -164,12 +164,12 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
                   "header-menu-dropdown",
                   "max-md:hidden max-md:w-full max-md:peer-checked/sub:block",
                   "md:invisible md:absolute md:left-1/2 md:top-full md:z-50 md:-translate-x-1/2 md:opacity-0 md:transition-all md:duration-150",
-                  "md:group-hover:visible md:group-hover:!opacity-100",
+                  "md:group-hover:visible md:group-hover:opacity-100",
                 )}
               >
-                <div className="header-menu-dropdown-inner relative !border !border-[#d9d9d9] !bg-[#f6f6f6] shadow-[0_2px_10px_rgba(0,0,0,0.18)] max-md:border-0 max-md:shadow-none">
+                <div className="header-menu-dropdown-inner relative border border-[#d9d9d9] bg-[#f6f6f6] shadow-[0_2px_10px_rgba(0,0,0,0.18)] max-md:border-0 max-md:shadow-none">
                   <div
-                    className="header-menu-dropdown-arrow absolute left-1/2 top-0 hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent !border-b-[#f6f6f6] md:block"
+                    className="header-menu-dropdown-arrow absolute left-1/2 top-0 hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent border-b-[#f6f6f6] md:block"
                     aria-hidden
                   />
 

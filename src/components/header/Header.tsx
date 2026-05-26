@@ -31,13 +31,11 @@ const Header = (model: HeaderModel) => {
         <HeaderTop {...headerTop} />
       </div>
 
-      <div className="header-bar container py-4 md:py-0">
+      <div className="header-bar container py-4">
         <HeaderInner {...headerInner} />
       </div>
 
-      <div
-        className="header-menu-panel max-md:fixed max-md:inset-0 max-md:z-50 max-md:flex max-md:translate-x-full max-md:flex-col max-md:overflow-y-auto max-md:bg-white max-md:transition-transform max-md:duration-300 max-md:peer-checked/header-menu:translate-x-0 md:contents"
-      >
+      <div className="header-menu-panel max-md:fixed max-md:inset-0 max-md:z-50 max-md:flex max-md:translate-x-full max-md:flex-col max-md:overflow-y-auto max-md:bg-white max-md:transition-transform max-md:duration-300 max-md:peer-checked/header-menu:translate-x-0 md:contents">
         <div className="header-overlay-toolbar flex max-md:items-center max-md:gap-2 max-md:bg-[#f36f21] max-md:p-4 md:contents">
           <HeaderSearch
             autocomplete_search={autocomplete_search}
