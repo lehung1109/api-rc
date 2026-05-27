@@ -79,7 +79,7 @@ const ProjectShowcaseFilters = ({
   return (
     <div className="project-showcase-filters">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {taxonomies.map((t) => (
+        {taxonomies?.map((t) => (
           <Select
             key={t.key}
             value={toSelectValue(filters[t.key])}
