@@ -24,7 +24,7 @@ const renderComponent = (scriptSection: HTMLScriptElement) => {
   if (Component) {
     const domNode = scriptSection.previousElementSibling;
     if (!domNode) {
-      console.warn(`DOM node not found for block type: ${blockType}`);
+      console.warn(`DOM node not found for block type: ${blockType} in}`);
       return;
     }
 
