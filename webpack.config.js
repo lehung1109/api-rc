@@ -2,6 +2,9 @@ import path from "node:path";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
+import dotenv from "dotenv";
+
+dotenv.config({ path: ".env.local" });
 
 const execAsync = promisify(exec);
 
@@ -98,7 +101,7 @@ export default (_env, { watch }) => ({
       "@components": path.resolve(process.cwd(), "src", "components"),
     },
   },
-  devtool: "source-map",
+  devtool: process.env.mode === "development" ? "source-map" : false,
   devServer: {
     static: path.resolve(process.cwd(), "dist"),
     port: 3000,
