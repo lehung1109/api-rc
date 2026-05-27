@@ -5,14 +5,9 @@ export function filterProjects(
   filters: ProjectShowcaseFilters,
 ): ProjectItem[] {
   return projects.filter((project) => {
-    if (filters.area && project.area !== filters.area) {
-      return false;
-    }
-    if (filters.beds && String(project.bedrooms) !== filters.beds) {
-      return false;
-    }
-    if (filters.style && project.style !== filters.style) {
-      return false;
+    for (const [key, value] of Object.entries(filters)) {
+      if (!value) continue;
+      if ((project.terms[key]?.value ?? "") !== value) return false;
     }
     return true;
   });

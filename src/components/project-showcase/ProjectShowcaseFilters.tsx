@@ -34,6 +34,7 @@ function fromSelectValue(value: string): string | undefined {
 
 const ProjectShowcaseFilters = ({
   filterEndpoint,
+  taxonomies,
   filters: initialFilters,
   filterOptions,
   projects,
@@ -67,7 +68,7 @@ const ProjectShowcaseFilters = ({
     [filterEndpoint, projects],
   );
 
-  const updateFilter = (key: keyof Filters, value: string) => {
+  const updateFilter = (key: string, value: string) => {
     const nextFilters: Filters = {
       ...filters,
       [key]: fromSelectValue(value),
@@ -77,60 +78,27 @@ const ProjectShowcaseFilters = ({
 
   return (
     <div className="project-showcase-filters">
-      <div className="flex flex-col gap-4 sm:flex-row">
-        <Select
-          value={toSelectValue(filters.area)}
-          onValueChange={(value) => updateFilter("area", value)}
-          disabled={isLoading}
-        >
-          <SelectTrigger className="w-full bg-white sm:flex-1" size="default">
-            <SelectValue placeholder="Chọn diện tích" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value={ALL_VALUE}>Tất cả</SelectItem>
-            {filterOptions.areas.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        <Select
-          value={toSelectValue(filters.beds)}
-          onValueChange={(value) => updateFilter("beds", value)}
-          disabled={isLoading}
-        >
-          <SelectTrigger className="w-full bg-white sm:flex-1" size="default">
-            <SelectValue placeholder="Chọn số phòng ngủ" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value={ALL_VALUE}>Tất cả</SelectItem>
-            {filterOptions.bedrooms.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        <Select
-          value={toSelectValue(filters.style)}
-          onValueChange={(value) => updateFilter("style", value)}
-          disabled={isLoading}
-        >
-          <SelectTrigger className="w-full bg-white sm:flex-1" size="default">
-            <SelectValue placeholder="Chọn phong cách thiết kế" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value={ALL_VALUE}>Tất cả</SelectItem>
-            {filterOptions.styles.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {taxonomies.map((t) => (
+          <Select
+            key={t.key}
+            value={toSelectValue(filters[t.key])}
+            onValueChange={(value) => updateFilter(t.key, value)}
+            disabled={isLoading}
+          >
+            <SelectTrigger className="w-full bg-white" size="default">
+              <SelectValue placeholder={`Chọn ${t.label}`} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value={ALL_VALUE}>Tất cả</SelectItem>
+              {(filterOptions[t.key] ?? []).map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        ))}
       </div>
 
       <div

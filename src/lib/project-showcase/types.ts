@@ -1,20 +1,17 @@
 import type { MediaModel } from "@/components/media/Media";
 
-export type ProjectShowcaseFilters = {
-  area?: string;
-  beds?: string;
-  style?: string;
+export type ProjectShowcaseFilters = Record<string, string | undefined>;
+
+export type ProjectShowcaseTaxonomy = {
+  key: string;
+  label: string;
 };
 
 export type ProjectItem = {
   id: string;
   title: string;
   image: MediaModel;
-  bedrooms: number;
-  area: string;
-  areaLabel: string;
-  style: string;
-  styleLabel: string;
+  terms: Record<string, { value: string; label: string }>;
 };
 
 export type FilterOption = {
@@ -28,12 +25,9 @@ export type FilterEndpointResponse = {
 
 export interface ProjectShowcaseFiltersModel {
   filterEndpoint: string;
+  taxonomies: ProjectShowcaseTaxonomy[];
   filters: ProjectShowcaseFilters;
-  filterOptions: {
-    areas: FilterOption[];
-    bedrooms: FilterOption[];
-    styles: FilterOption[];
-  };
+  filterOptions: Record<string, FilterOption[]>;
   projects: ProjectItem[];
 }
 
