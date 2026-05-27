@@ -98,7 +98,7 @@ export default (_env, { watch }) => ({
       "@components": path.resolve(process.cwd(), "src", "components"),
     },
   },
-  devtool: false,
+  devtool: "source-map",
   devServer: {
     static: path.resolve(process.cwd(), "dist"),
     port: 3000,
