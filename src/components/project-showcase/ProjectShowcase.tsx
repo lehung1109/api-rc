@@ -5,8 +5,14 @@ import ReactSection from "../ReactSection";
 import ProjectShowcaseFilters from "./ProjectShowcaseFilters";
 
 const ProjectShowcase = (model: ProjectShowcaseModel) => {
-  const { className, filterEndpoint, taxonomies, filters, filterOptions, projects } =
-    model;
+  const {
+    className,
+    filterEndpoint,
+    taxonomies,
+    filters,
+    filterOptions,
+    projects,
+  } = model;
 
   const hydrateData = {
     filterEndpoint,

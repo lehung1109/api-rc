@@ -90,7 +90,7 @@ const ProjectShowcaseFilters = ({
               <SelectValue placeholder={`Chọn ${t.label}`} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={ALL_VALUE}>Tất cả</SelectItem>
+              <SelectItem value={ALL_VALUE}>{`Chọn ${t.label}`}</SelectItem>
               {(filterOptions[t.key] ?? []).map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
