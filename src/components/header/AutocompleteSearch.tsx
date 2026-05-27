@@ -18,9 +18,11 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [loading, setLoading] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     setLoading(true);
+    setMessage("");
 
     if (!value || value.length < 3) {
       setResults([]);
@@ -33,11 +35,23 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
     }
 
     timeoutRef.current = setTimeout(async () => {
-      const response = await fetch(
-        `${api_url}?search=${value}&per_page=5&_embed=wp:featuredmedia&_fields=id,link,title.rendered,_links.wp:featuredmedia,_embedded.wp:featuredmedia`,
-      );
-      const data = await response.json();
-      setResults(data);
+      // add a try catch block to handle the error
+      try {
+        const response = await fetch(
+          `${api_url}?search=${value}&per_page=5&_embed=wp:featuredmedia&_fields=id,link,title.rendered,_links.wp:featuredmedia,_embedded.wp:featuredmedia`,
+        );
+        const data = await response.json();
+
+        if (data.length > 0) {
+          setResults(data);
+        } else {
+          setMessage("No results found");
+        }
+      } catch (error) {
+        console.error(error);
+        setMessage("No results found");
+      }
+
       setLoading(false);
     }, 500);
 
@@ -76,6 +90,14 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
 
         {results.length > 0 && isFocused && (
           <AutocompleteItems results={results} />
+        )}
+
+        {message && (
+          <div className="absolute left-0 top-full z-50 w-full bg-white shadow-lg max-h-[300px] overflow-y-auto p-2">
+            <div className="text-xs font-medium text-gray-800 line-clamp-2">
+              {message}
+            </div>
+          </div>
         )}
       </div>
     </div>
