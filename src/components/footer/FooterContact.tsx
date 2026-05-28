@@ -23,15 +23,12 @@ const FooterContact = (model: FooterContactModel) => {
       {blocks.map((block) => (
         <div key={block.title} className="footer-contact-block">
           <h3
-            className={cn(
-              "footer-contact-block-title",
-              footerColumnTitleClass,
-            )}
+            className={cn("footer-contact-block-title", footerColumnTitleClass)}
           >
             {block.title}
           </h3>
           <div
-            className="footer-contact-block-content mt-2 text-sm leading-relaxed text-white/90 [&_a]:text-white/90 [&_a]:underline [&_a]:hover:text-[#f47c20] [&>p]:!mbe-0"
+            className="footer-contact-block-content mt-2 leading-relaxed text-white/90 [&_a]:text-white/90 [&_a]:underline [&_a]:hover:text-[#f47c20] [&>p]:!mbe-0"
             dangerouslySetInnerHTML={{ __html: block.contentHtml }}
           />
         </div>

@@ -114,7 +114,7 @@ const ProcessSection = (model: ProcessSectionModel) => {
                     <h3 className="font-bold">
                       {step.id}. {step.title}
                     </h3>
-                    <p className="mx-auto mt-3 max-w-[240px] text-sm leading-7 text-white/90 md:text-lg md:leading-8">
+                    <p className="mx-auto mt-3 max-w-[240px] leading-7 text-white/90 md:text-lg md:leading-8">
                       {step.description}
                     </p>
                   </div>

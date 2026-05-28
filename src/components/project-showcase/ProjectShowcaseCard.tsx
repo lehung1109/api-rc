@@ -21,7 +21,7 @@ const ProjectShowcaseCard = (project: ProjectItem) => {
           <span className="relative z-10">{title}</span>
         </Link>
       </h3>
-      <ul className="pointer-events-none mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+      <ul className="pointer-events-none mt-2 flex flex-wrap items-center gap-2 text-muted-foreground">
         {Object.entries(terms)
           .filter(([, v]) => Boolean(v?.label))
           .map(([key, v]) => (

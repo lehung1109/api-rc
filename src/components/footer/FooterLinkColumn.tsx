@@ -2,8 +2,7 @@ import { cn } from "@/lib/utils";
 import type { LinkModel } from "../link/Link";
 import Link from "../link/Link";
 
-export const footerColumnTitleClass =
-  "text-sm font-bold uppercase text-[#f36f21]";
+export const footerColumnTitleClass = "font-bold uppercase text-[#f36f21]";
 
 export interface FooterLinkColumnModel {
   title: string;
@@ -29,7 +28,7 @@ const FooterLinkColumn = (model: FooterLinkColumnModel) => {
             <Link
               {...item.link}
               className={cn(
-                "footer-menu-link block py-1 text-sm text-white/90 transition-colors hover:text-[#f47c20]",
+                "footer-menu-link block py-1 text-white/90 transition-colors hover:text-[#f47c20]",
                 item.link.className,
               )}
             >

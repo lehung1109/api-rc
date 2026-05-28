@@ -33,7 +33,7 @@ const FooterBrand = (model: FooterBrandModel) => {
 
       {descriptionHtml ? (
         <div
-          className="footer-brand-description mt-4 text-sm leading-relaxed text-white/90 [&>p]:!mbe-0"
+          className="footer-brand-description mt-4 leading-relaxed text-white/90 [&>p]:!mbe-0"
           dangerouslySetInnerHTML={{ __html: descriptionHtml }}
         />
       ) : null}
@@ -52,7 +52,7 @@ const FooterBrand = (model: FooterBrandModel) => {
 
       <div className="footer-brand-hotline mt-6">
         {hotlineLabel ? (
-          <p className="mb-1 text-xs uppercase tracking-wide text-white/70">
+          <p className="mb-1 uppercase tracking-wide text-white/70">
             {hotlineLabel}
           </p>
         ) : null}
