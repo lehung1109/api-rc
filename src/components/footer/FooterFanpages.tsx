@@ -24,13 +24,11 @@ const FooterFanpages = (model: FooterFanpagesModel) => {
     <div className={cn("footer-fanpages min-w-0 space-y-6", className)}>
       {factories.contentHtml ? (
         <div className="footer-factories">
-          <h3
-            className={cn("footer-factories-title", footerColumnTitleClass)}
-          >
+          <h3 className={cn("footer-factories-title", footerColumnTitleClass)}>
             {factories.title}
           </h3>
           <div
-            className="footer-factories-content mt-2 text-sm leading-relaxed text-white/90 [&>p]:!mbe-0"
+            className="footer-factories-content mt-2 leading-relaxed text-white/90 [&>p]:!mbe-0"
             dangerouslySetInnerHTML={{ __html: factories.contentHtml }}
           />
         </div>
@@ -39,7 +37,10 @@ const FooterFanpages = (model: FooterFanpagesModel) => {
       {embeds.length > 0 ? (
         <div className="footer-fanpage-widgets">
           <h3
-            className={cn("footer-fanpage-widgets-title", footerColumnTitleClass)}
+            className={cn(
+              "footer-fanpage-widgets-title",
+              footerColumnTitleClass,
+            )}
           >
             {fanpageTitle}
           </h3>
