@@ -1,3 +1,4 @@
+import type { LinkModel } from "@/components/link/Link";
 import type { MediaModel } from "@/components/media/Media";
 
 export type ProjectShowcaseFilters = Record<string, string | undefined>;
@@ -12,6 +13,7 @@ export type ProjectItem = {
   title: string;
   image: MediaModel;
   terms: Record<string, { value: string; label: string }>;
+  url: LinkModel;
 };
 
 export type FilterOption = {
