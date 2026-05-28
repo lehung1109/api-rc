@@ -95,9 +95,11 @@ const ProjectShowcaseFilters = ({
             <SelectContent>
               <SelectItem value={ALL_VALUE}>{`Chọn ${t.label}`}</SelectItem>
               {(filterOptions[t.key] ?? []).map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
+                <SelectItem
+                  key={option.value}
+                  value={option.value}
+                  dangerouslySetInnerHTML={{ __html: option.label }}
+                ></SelectItem>
               ))}
             </SelectContent>
           </Select>

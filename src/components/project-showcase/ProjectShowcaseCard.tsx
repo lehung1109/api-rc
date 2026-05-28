@@ -28,9 +28,8 @@ const ProjectShowcaseCard = (project: ProjectItem) => {
             <li
               key={key}
               className="rounded-md bg-muted px-2 py-1 text-muted-foreground"
-            >
-              {v.label}
-            </li>
+              dangerouslySetInnerHTML={{ __html: v.label }}
+            ></li>
           ))}
       </ul>
     </article>
