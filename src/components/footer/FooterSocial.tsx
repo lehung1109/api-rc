@@ -27,7 +27,12 @@ const FooterSocial = (model: FooterSocialModel) => {
 
   return (
     <div className={cn("footer-social min-w-0", className)}>
-      <h3 className={cn("footer-social-title", footerColumnTitleClass)}>
+      <h3
+        className={cn(
+          "footer-social-title md:text-base",
+          footerColumnTitleClass,
+        )}
+      >
         {title}
       </h3>
       <div className="footer-social-links mt-3 flex flex-wrap gap-2">

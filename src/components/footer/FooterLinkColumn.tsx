@@ -19,7 +19,12 @@ const FooterLinkColumn = (model: FooterLinkColumnModel) => {
 
   return (
     <div className={cn("footer-link-column min-w-0", className)}>
-      <h3 className={cn("footer-link-column-title", footerColumnTitleClass)}>
+      <h3
+        className={cn(
+          "footer-link-column-title md:text-base",
+          footerColumnTitleClass,
+        )}
+      >
         {title}
       </h3>
       <ul className="footer-link-column-list mt-3 space-y-1">

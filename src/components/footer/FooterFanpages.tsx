@@ -24,7 +24,12 @@ const FooterFanpages = (model: FooterFanpagesModel) => {
     <div className={cn("footer-fanpages min-w-0 space-y-6", className)}>
       {factories.contentHtml ? (
         <div className="footer-factories">
-          <h3 className={cn("footer-factories-title", footerColumnTitleClass)}>
+          <h3
+            className={cn(
+              "footer-factories-title md:text-base",
+              footerColumnTitleClass,
+            )}
+          >
             {factories.title}
           </h3>
           <div
@@ -38,7 +43,7 @@ const FooterFanpages = (model: FooterFanpagesModel) => {
         <div className="footer-fanpage-widgets">
           <h3
             className={cn(
-              "footer-fanpage-widgets-title",
+              "footer-fanpage-widgets-title md:text-base",
               footerColumnTitleClass,
             )}
           >

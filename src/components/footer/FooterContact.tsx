@@ -23,7 +23,10 @@ const FooterContact = (model: FooterContactModel) => {
       {blocks.map((block) => (
         <div key={block.title} className="footer-contact-block">
           <h3
-            className={cn("footer-contact-block-title", footerColumnTitleClass)}
+            className={cn(
+              "footer-contact-block-title md:text-base",
+              footerColumnTitleClass,
+            )}
           >
             {block.title}
           </h3>

@@ -19,7 +19,10 @@ const FooterPaymentMethods = (model: FooterPaymentMethodsModel) => {
   return (
     <div className={cn("footer-payment-methods min-w-0", className)}>
       <h3
-        className={cn("footer-payment-methods-title", footerColumnTitleClass)}
+        className={cn(
+          "footer-payment-methods-title md:text-base",
+          footerColumnTitleClass,
+        )}
       >
         {title}
       </h3>
