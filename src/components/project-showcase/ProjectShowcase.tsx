@@ -1,7 +1,6 @@
 import type { ProjectShowcaseModel } from "@/lib/project-showcase/types";
 
 import ClientComponentWrapper from "../ClientComponentWrapper";
-import ReactSection from "../ReactSection";
 import ProjectShowcaseFilters from "./ProjectShowcaseFilters";
 
 const ProjectShowcase = (model: ProjectShowcaseModel) => {

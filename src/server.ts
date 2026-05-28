@@ -7,6 +7,7 @@ import { buildServerRegistry } from "./generated/server-registry";
 import { sha256Hex } from "./lib/content-hash";
 import { filterProjects } from "./lib/project-showcase/filter-projects";
 import type { ProjectShowcaseFilters } from "./lib/project-showcase/types";
+import { fillClientIslands } from "./lib/fill-client-islands";
 import { renderComponentHtml } from "./lib/render-component-html";
 
 const PORT = Number(process.env.PORT) || 3000;
@@ -61,11 +62,19 @@ app.post("/api/render-rc", async (req, res) => {
       identifierPrefix: rcid,
     });
 
-    // Make `rcid` available for the client loader to re-use as `identifierPrefix`
-    // during hydrateRoot (stabilizes React.useId / Radix ids across SSR + hydrate).
-    const htmlWithRcid = html.replace(
+    // Replace client-island placeholders with island-root SSR, and attach per-island rcid.
+    // This prevents `useId`/Radix id mismatches caused by hydrating islands from a different root.
+    const htmlWithIslands = await fillClientIslands(html);
+
+    // Backward-compat: any remaining islands without rcid get the root rcid.
+    const htmlWithRcid = htmlWithIslands.replace(
       /<script(\s+[^>]*\bdata-rct=(?:"[^"]+"|'[^']+')[^>]*)>/g,
-      `<script$1 data-rcid="${rcid}">`,
+      (full, attrs) => {
+        if (/\bdata-rcid=(?:"[^"]+"|'[^']+')/.test(attrs)) {
+          return full;
+        }
+        return `<script${attrs} data-rcid="${rcid}">`;
+      },
     );
 
     res.status(200).json({

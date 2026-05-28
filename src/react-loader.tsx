@@ -13,6 +13,7 @@ const blocks: Record<
 const renderComponent = (scriptSection: HTMLScriptElement) => {
   const blockType = scriptSection.dataset.rct;
   const rcid = scriptSection.dataset.rcid;
+  const targetId = scriptSection.dataset.rcTarget;
   const data = scriptSection.textContent ? scriptSection.textContent : "{}";
   const type = scriptSection.getAttribute("type");
 
@@ -23,26 +24,26 @@ const renderComponent = (scriptSection: HTMLScriptElement) => {
   const Component = blocks[blockType];
 
   if (Component) {
-    const domNode = scriptSection.previousElementSibling;
+    const domNode = targetId
+      ? document.getElementById(targetId)
+      : scriptSection.previousElementSibling;
     if (!domNode) {
       console.warn(`DOM node not found for block type: ${blockType} in}`);
       return;
     }
 
-    const props =
-      type === "application/json"
-        ? JSON.parse(data)
-        : type === "application/yaml"
-          ? YAML.load(data)
-          : {};
+    let props: any = {};
+    if (type === "application/json") {
+      props = JSON.parse(data);
+    } else if (type === "application/yaml") {
+      props = YAML.load(data);
+    }
 
     scriptSection.remove();
 
-    ReactDOM.hydrateRoot(
-      domNode,
-      <Component {...props} />,
-      rcid ? { identifierPrefix: rcid } : undefined,
-    );
+    const hydrateOptions = rcid ? { identifierPrefix: rcid } : undefined;
+
+    ReactDOM.hydrateRoot(domNode, <Component {...props} />, hydrateOptions);
   } else {
     return <></>;
   }
@@ -52,12 +53,12 @@ const renderComponents = () => {
   // rct stands for 'react component type'
   const scriptSections = document.querySelectorAll("script[data-rct]");
 
-  [].forEach.call(scriptSections, renderComponent);
+  scriptSections.forEach((el) => renderComponent(el as HTMLScriptElement));
 };
 
-window.renderComponents = renderComponents;
+(globalThis as any).renderComponents = renderComponents;
 renderComponents();
-window.addEventListener("load", () => renderComponents());
+globalThis.addEventListener("load", () => renderComponents());
 
 // Post a custom event to notify that the renderComponents function is ready to be used
 // Usage:
@@ -70,4 +71,4 @@ window.addEventListener("load", () => renderComponents());
 // }
 const event = new CustomEvent("react-loaded");
 
-window.dispatchEvent(event);
+globalThis.dispatchEvent(event);
