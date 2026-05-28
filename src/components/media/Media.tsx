@@ -27,6 +27,8 @@ const Media = (model: MediaModel) => {
             alt={alt}
             width={display_dimensions.width}
             height={display_dimensions.height}
+            loading="lazy"
+            decoding="async"
             className={className}
             srcSet={srcSet}
             sizes={sizes}
@@ -38,6 +40,8 @@ const Media = (model: MediaModel) => {
           alt={alt}
           width={display_dimensions.width}
           height={display_dimensions.height}
+          loading="lazy"
+          decoding="async"
           className={className}
           srcSet={srcSet}
           sizes={sizes}
