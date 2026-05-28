@@ -12,6 +12,7 @@ const blocks: Record<
 
 const renderComponent = (scriptSection: HTMLScriptElement) => {
   const blockType = scriptSection.dataset.rct;
+  const rcid = scriptSection.dataset.rcid;
   const data = scriptSection.textContent ? scriptSection.textContent : "{}";
   const type = scriptSection.getAttribute("type");
 
@@ -37,7 +38,11 @@ const renderComponent = (scriptSection: HTMLScriptElement) => {
 
     scriptSection.remove();
 
-    ReactDOM.hydrateRoot(domNode, <Component {...props} />);
+    ReactDOM.hydrateRoot(
+      domNode,
+      <Component {...props} />,
+      rcid ? { identifierPrefix: rcid } : undefined,
+    );
   } else {
     return <></>;
   }

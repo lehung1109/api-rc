@@ -7,7 +7,7 @@ import { renderComponentHtml } from "./render-component-html";
 export async function renderComponentSampleHtml(
   entry: ComponentRenderEntry,
 ): Promise<string> {
-  let html = renderComponentHtml(
+  let html = await renderComponentHtml(
     React.createElement(entry.component, entry.model),
   );
 

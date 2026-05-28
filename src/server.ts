@@ -37,7 +37,7 @@ app.use("/api/render-rc", (req, res, next) => {
   next();
 });
 
-app.post("/api/render-rc", (req, res) => {
+app.post("/api/render-rc", async (req, res) => {
   const parsed = renderRequestSchema.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({
@@ -55,10 +55,22 @@ app.post("/api/render-rc", (req, res) => {
   }
 
   try {
-    const html = renderComponentHtml(React.createElement(Component, props));
+    const rcid = sha256Hex(JSON.stringify({ component, props }));
+
+    const html = await renderComponentHtml(React.createElement(Component, props), {
+      identifierPrefix: rcid,
+    });
+
+    // Make `rcid` available for the client loader to re-use as `identifierPrefix`
+    // during hydrateRoot (stabilizes React.useId / Radix ids across SSR + hydrate).
+    const htmlWithRcid = html.replace(
+      /<script(\s+[^>]*\bdata-rct=(?:"[^"]+"|'[^']+')[^>]*)>/g,
+      `<script$1 data-rcid="${rcid}">`,
+    );
+
     res.status(200).json({
-      html,
-      hash: sha256Hex(html),
+      html: htmlWithRcid,
+      hash: sha256Hex(htmlWithRcid),
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Render failed";
