@@ -45,7 +45,7 @@ const FooterSocial = (model: FooterSocialModel) => {
               alt={item.icon.alt}
               width={item.icon.display_dimensions.width}
               height={item.icon.display_dimensions.height}
-              className="h-5 w-5 object-contain"
+              className="h-10 w-10 object-contain md:w-5 md:h-5"
             />
           </Link>
         ))}
