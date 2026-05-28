@@ -23,7 +23,7 @@ const ProjectShowcase = (model: ProjectShowcaseModel) => {
   };
 
   return (
-    <section className={`project-showcase py-12 ${className ?? ""}`}>
+    <section className={`project-showcase ${className ?? ""}`}>
       <div className="container">
         <ClientComponentWrapper>
           <ProjectShowcaseFilters {...hydrateData} />
