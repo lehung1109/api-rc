@@ -14,9 +14,12 @@ const PartnerLogosWrapper = (model: PartnerLogosModel) => {
   }
 
   return (
-    <ClientComponentWrapper className={cn("partner-logos-root", className)}>
+    <ClientComponentWrapper
+      className={cn("partner-logos-root", className)}
+      type="partnerLogos"
+      hydrateData={model}
+    >
       <PartnerLogos {...partnerLogosModel} />
-      <ReactSection type="partnerLogos" data={model} />
     </ClientComponentWrapper>
   );
 };

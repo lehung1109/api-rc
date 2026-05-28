@@ -13,9 +13,8 @@ const CarouselWrapper = (model: CarouselModel) => {
   }
 
   return (
-    <ClientComponentWrapper>
+    <ClientComponentWrapper type="carousel" hydrateData={model}>
       <Carousel {...model} />
-      <ReactSection type="carousel" data={model} />
     </ClientComponentWrapper>
   );
 };

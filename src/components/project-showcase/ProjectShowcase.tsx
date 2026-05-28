@@ -25,9 +25,11 @@ const ProjectShowcase = (model: ProjectShowcaseModel) => {
   return (
     <section className={`project-showcase ${className ?? ""}`}>
       <div className="container">
-        <ClientComponentWrapper>
+        <ClientComponentWrapper
+          type="projectShowcaseFilters"
+          hydrateData={hydrateData}
+        >
           <ProjectShowcaseFilters {...hydrateData} />
-          <ReactSection type="projectShowcaseFilters" data={hydrateData} />
         </ClientComponentWrapper>
       </div>
     </section>

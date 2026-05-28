@@ -81,7 +81,7 @@ class ConcatPlugin {
 }
 
 export default (_env, { watch }) => ({
-  mode: "development",
+  mode: process.env.mode === "development" ? "development" : "production",
   entry: {
     "react-loader": "./src/react-loader.tsx",
     styles: "./src/styles.css",

@@ -19,9 +19,10 @@ const FeatureCardsCarouselWrapper = (model: FeatureCardsCarouselModel) => {
   return (
     <ClientComponentWrapper
       className={cn("feature-cards-carousel-root", className)}
+      type="featureCardsCarousel"
+      hydrateData={model}
     >
       <FeatureCardsCarousel {...carouselModel} />
-      <ReactSection type="featureCardsCarousel" data={model} />
     </ClientComponentWrapper>
   );
 };

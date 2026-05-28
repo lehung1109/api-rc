@@ -16,13 +16,14 @@ const HeaderSearch = ({
 }: HeaderSearchProps) => {
   return (
     <ClientComponentWrapper
+      type="autocompleteSearch"
+      hydrateData={autocomplete_search}
       className={cn(
         "header-overlay-search relative flex flex-1 justify-center",
         className,
       )}
     >
       <AutocompleteSearch {...autocomplete_search} />
-      <ReactSection type="autocompleteSearch" data={autocomplete_search} />
     </ClientComponentWrapper>
   );
 };
