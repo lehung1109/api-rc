@@ -57,16 +57,21 @@ const FeatureCardsCarousel = (model: FeatureCardsCarouselModel) => {
 
   return (
     <div
-      className={cn(
-        "feature-cards-carousel group relative w-full",
-        className,
-      )}
+      className={cn("feature-cards-carousel group relative w-full", className)}
     >
       <Swiper
-        slidesPerView={perView}
+        slidesPerView={1}
         spaceBetween={spaceBetween}
         loop={enableLoop}
         className="feature-cards-carousel-swiper w-full"
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: perView,
+          },
+        }}
       >
         <FeatureCardsCarouselNav />
 
