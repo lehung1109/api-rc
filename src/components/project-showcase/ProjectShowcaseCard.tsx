@@ -16,7 +16,7 @@ const ProjectShowcaseCard = (project: ProjectItem) => {
       <h3 className="mt-3 line-clamp-2 text-base font-semibold text-foreground">
         <Link
           {...url}
-          className="project-showcase-card__link before:absolute before:inset-0 before:content-[''] before:cursor-pointer"
+          className="project-showcase-card__link before:absolute before:inset-0 before:content-[''] before:cursor-pointer text-xl"
         >
           <span className="relative z-10">{title}</span>
         </Link>
