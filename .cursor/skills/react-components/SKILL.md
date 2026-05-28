@@ -60,6 +60,11 @@ src/data/<client-kebab>.ts      # chỉ khi có client: re-export props cho clie
 
 - Server-only component → `src/data/<component-kebab>.ts` (vd. `design-consultation-cta.ts` ↔ `DesignConsultationCta`).
 - Cặp **client + wrapper** → **file data chính đặt theo tên wrapper**: `carousel-wrapper.ts`, `feature-cards-carousel-wrapper.ts` (↔ `CarouselWrapper`, `FeatureCardsCarouselWrapper`). **Không** đặt mock/CMS chính trong file trùng tên client nếu chỉ wrapper được gọi từ bên ngoài.
+- **Quy tắc “data chính” (bắt buộc):** khi tạo data mới hoặc sửa data cho feature có wrapper/client, **luôn** cập nhật ở `src/data/<wrapper-kebab>.ts` trước. `src/data/<client-kebab>.ts` chỉ dùng cho hydrate discovery và phải **re-export** từ data chính (không tự tạo dữ liệu riêng).
+- **Wrapper không tự “thêm data”:** `*Wrapper.tsx` chỉ là server entry để bọc `ClientComponentWrapper` + render client + `ReactSection`. Wrapper **không được**:
+  - tạo “wrapper-only fields” không nằm trong model mà client component export/expect
+  - normalize/merge “ngầm” làm thay đổi shape so với data chính, trừ khi đó là logic render thuần (className, early return, compose JSX)
+
 - Client registry (`discover-client-components.ts`) vẫn cần `src/data/<client-kebab>.ts` (vd. `carousel.ts` ↔ `Carousel.tsx`). File này có thể **chỉ re-export** từ wrapper data:
 
 ```ts
@@ -162,6 +167,8 @@ const FeatureWrapper = (model: FeatureModel) => (
   </ClientComponentWrapper>
 );
 ```
+
+Wrapper rule: `model` truyền vào `Feature` và `ReactSection` phải là **data chính** (canonical) — không tạo object khác với field “lạ”. Nếu cần reshape/derive, hãy đưa vào **model/type** của client component và cập nhật **data chính** tương ứng.
 
 5. `ReactSection` `type` = camelCase **client** file (`Feature.tsx` → `feature`), khớp `rctKey` trong `client-registry.ts` — **không** dùng tên wrapper.
 6. Regenerate: `bun run generate:server-registry`, `scripts/generate-client-registry.ts`, `generate:version-json` (qua `bun run build` / copy).

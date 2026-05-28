@@ -2,12 +2,17 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import dotenv from "dotenv";
 
-const output_dir = process.env.output_dir;
+dotenv.config({ path: ".env.local" });
+
+const output_dir = process.env.output_dir?.trim();
 
 if (!output_dir) {
   process.exit(0);
 }
+
+const destRoot = path.resolve(output_dir);
 
 function copyDir(srcDir, destDir) {
   if (!fs.existsSync(destDir)) {
@@ -26,4 +31,4 @@ function copyDir(srcDir, destDir) {
   }
 }
 
-copyDir("dist", output_dir);
+copyDir("dist", destRoot);
