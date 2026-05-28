@@ -10,11 +10,17 @@ export async function fetchFilteredProjects(
   filters: ProjectShowcaseFilters,
   fallbackProjects: ProjectItem[],
 ): Promise<ProjectItem[]> {
+  const controller = new AbortController();
+  const timeoutMs = 8000;
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
   const response = await fetch(filterEndpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(filters),
+    signal: controller.signal,
   });
+  clearTimeout(timeoutId);
 
   if (!response.ok) {
     throw new Error(`Filter request failed: ${response.status}`);
@@ -23,7 +29,7 @@ export async function fetchFilteredProjects(
   const data = (await response.json()) as FilterEndpointResponse;
 
   if (!Array.isArray(data.items)) {
-    throw new Error("Invalid filter response: missing items array");
+    throw new TypeError("Invalid filter response: missing items array");
   }
 
   return data.items;
