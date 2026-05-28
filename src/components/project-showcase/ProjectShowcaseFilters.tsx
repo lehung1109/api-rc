@@ -86,7 +86,10 @@ const ProjectShowcaseFilters = ({
             onValueChange={(value) => updateFilter(t.key, value)}
             disabled={isLoading}
           >
-            <SelectTrigger className="w-full bg-white" size="default">
+            <SelectTrigger
+              className="w-full bg-white text-base !h-auto p-[7px_15px] leading-1.2"
+              size="default"
+            >
               <SelectValue placeholder={`Chọn ${t.label}`} />
             </SelectTrigger>
             <SelectContent>
