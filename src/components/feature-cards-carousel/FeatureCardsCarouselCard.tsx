@@ -37,7 +37,7 @@ const FeatureCardsCarouselCard = (item: FeatureCardsCarouselItemModel) => {
           </span>
         </h3>
 
-        <p className="feature-cards-carousel-card-description mt-2 text-sm leading-relaxed text-[#c47a3a] line-clamp-3">
+        <p className="feature-cards-carousel-card-description mt-2 text-sm leading-relaxed line-clamp-3">
           {description}
         </p>
       </div>

@@ -25,22 +25,38 @@ const FeatureCardsCarouselNav = () => {
 
   return (
     <div className="feature-cards-carousel-nav pointer-events-none absolute inset-0 z-10 flex justify-between">
-      <div className={cn(navSideClass, "feature-cards-carousel-nav-side-prev")}>
+      <div
+        className={cn(
+          navSideClass,
+          "feature-cards-carousel-nav-side-prev bg-white/50 hover:bg-white group/nav p-0 sm:p-0",
+        )}
+      >
         <button
           type="button"
           onClick={() => swiper.slidePrev()}
-          className={cn(navButtonClass, "feature-cards-carousel-nav-prev")}
+          className={cn(
+            navButtonClass,
+            "feature-cards-carousel-nav-prev h-full text-black group-hover/nav:text-[#f47c20] hover:text-[#f47c20] hover:bg-transparent",
+          )}
           aria-label="Previous slide"
         >
           <ChevronLeft className="h-7 w-7" strokeWidth={2.5} />
         </button>
       </div>
 
-      <div className={cn(navSideClass, "feature-cards-carousel-nav-side-next")}>
+      <div
+        className={cn(
+          navSideClass,
+          "feature-cards-carousel-nav-side-next bg-white/50 hover:bg-white group/nav p-0 sm:p-0",
+        )}
+      >
         <button
           type="button"
           onClick={() => swiper.slideNext()}
-          className={cn(navButtonClass, "feature-cards-carousel-nav-next")}
+          className={cn(
+            navButtonClass,
+            "feature-cards-carousel-nav-next h-full text-black group-hover/nav:text-[#f47c20] hover:text-[#f47c20] hover:bg-transparent",
+          )}
           aria-label="Next slide"
         >
           <ChevronRight className="h-7 w-7" strokeWidth={2.5} />
