@@ -27,7 +27,7 @@ const FeatureCardsCarouselCard = (item: FeatureCardsCarouselItemModel) => {
       />
 
       <div className="feature-cards-carousel-card-body flex flex-1 flex-col bg-neutral-100 px-4 py-5 text-center">
-        <h3 className="feature-cards-carousel-card-title flex items-center justify-center gap-1.5 text-base font-bold text-[#f36f21]">
+        <h3 className="text-xl feature-cards-carousel-card-title flex items-center justify-center gap-1.5 font-bold text-[#f36f21]">
           <span>{title}</span>
         </h3>
 
