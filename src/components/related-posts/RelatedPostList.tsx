@@ -23,7 +23,7 @@ const RelatedPostList = (model: RelatedPostListModel) => {
         className={cn("related-post-list space-y-1 list-disc mb-5", className)}
       >
         {links.map((item) => (
-          <li key={item.link.url}>
+          <li key={item.link.url} className="ml-5">
             <Link className="text-[#f36f21]" {...item.link}>
               {item.label}
             </Link>
