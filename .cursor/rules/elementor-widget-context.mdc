@@ -1,0 +1,22 @@
+---
+description: Props từ WordPress — query PHP vs render React
+globs: src/components/**/*.tsx
+alwaysApply: false
+---
+
+# WordPress-driven props
+
+## Hai kiểu widget
+
+1. **Settings-only** — Elementor controls → map props → api-rc (Footer, Carousel, …).
+2. **Context + settings** — PHP resolve theo post/URL/menu hiện tại → props đã enrich (Related posts, Header menu `get_queried_object_id()`).
+
+Query `WP_Query` / `wp_get_post_terms` **không** đặt trong api-rc khi phụ thuộc singular post.
+
+## Convention
+
+- Props type: `*Model`, một object `model`.
+- PHP JSON keys: camelCase (`postId`, `links`).
+- Không markup HTML trong template PHP plugin — chỉ `echo $html` từ SSR.
+
+Plugin rules: workspace WordPress `/.cursor/rules/eai-*.mdc`.

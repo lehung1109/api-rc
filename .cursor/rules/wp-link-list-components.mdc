@@ -1,0 +1,32 @@
+---
+description: Component danh sách link cho WordPress / Elementor (LinkModel + ul)
+globs: src/components/**/*{Link,Related,Footer,Autocomplete}*.tsx
+alwaysApply: false
+---
+
+# Link lists (SSR cho WP)
+
+## Model chuẩn
+
+```ts
+links: { label: string; link: LinkModel }[];
+// LinkModel: { url, is_external, nofollow, className? }
+```
+
+- Dùng `Link` từ `src/components/link/Link.tsx`.
+- Empty: `return null` (WordPress có thể skip API trước đó).
+
+## Tham chiếu
+
+| Component | Dùng khi |
+|-----------|----------|
+| `FooterLinkColumn` | Cột có title + `<ul>` |
+| `RelatedPostList` | Chỉ `<ul>` link, không title (bài liên quan) |
+| `AutocompleteItems` | Data từ WP REST search |
+
+## Registry
+
+- Server: default export → tên file PascalCase (`RelatedPostList`).
+- Client: cần `"use client"` + `src/data/{kebab}.ts` + `*Wrapper` — related posts **không** cần client.
+
+Sau thêm component: `bun run generate` → build → copy `dist/version.json` + bundle vào `wp-content/plugins/rc-files/`.
