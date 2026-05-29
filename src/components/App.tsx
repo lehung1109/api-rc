@@ -14,6 +14,8 @@ import PartnerLogosWrapper from "./partner-logos/PartnerLogosWrapper";
 import partnerLogosWrapper from "@/data/partner-logos-wrapper";
 import Footer from "./footer/Footer";
 import footer from "@/data/footer";
+import { relatedPostList } from "@/data/related-post-list";
+import RelatedPostList from "./related-posts/RelatedPostList";
 
 const App = () => {
   return (
@@ -26,6 +28,7 @@ const App = () => {
       <DesignConsultationCta {...designConsultationCta} />
       <FeatureCardsCarouselWrapper {...featureCardsCarouselWrapper} />
       <PartnerLogosWrapper {...partnerLogosWrapper} />
+      <RelatedPostList {...relatedPostList} />
       <Footer {...footer} />
     </div>
   );
