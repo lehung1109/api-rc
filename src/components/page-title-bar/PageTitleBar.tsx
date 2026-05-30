@@ -21,7 +21,9 @@ const PageTitleBar = (model: PageTitleBarModel) => {
   const { className, title, breadcrumbLevels } = model;
 
   const hasTitle = title.trim().length > 0;
-  const hasBreadcrumb = breadcrumbLevels.some((level) => level.items.length > 0);
+  const hasBreadcrumb = breadcrumbLevels.some(
+    (level) => level.items.length > 0,
+  );
 
   if (!hasTitle && !hasBreadcrumb) {
     return null;
@@ -30,7 +32,7 @@ const PageTitleBar = (model: PageTitleBarModel) => {
   return (
     <section
       className={cn(
-        "page-title-bar w-full border-b border-[#eeeeee] bg-[#f7f7f7]",
+        "page-title-bar w-full border-b border-[#eeeeee]",
         className,
       )}
     >

@@ -14,7 +14,7 @@ alwaysApply: false
 **Cùng nhóm (trang dự án / singular):**
 
 - `PageTitleBar` — `title` từ post hiện tại, `breadcrumbLevels` từ Home + taxonomy/ancestor terms (map `{ label, link }` theo cấp; item cùng cấp trong một `level.items`). Separator chỉ do React render (`/` giữa cấp, `-` trong cấp), không gửi HTML separator từ PHP.
-- `ProjectMetaBar` — **settings-only hoặc ACF** → `columns` tối đa 4 (`title`, `content`, `icon` Lucide key). Không link, không query trong api-rc. Thường đặt dưới `PageTitleBar`; model/UI: skill `react-components` → *Project meta bar*.
+- `ProjectMetaBar` — **context post** (WordPress): panel repeater ≤4 chọn taxonomy + icon; PHP gửi `columns[]` với `title` (taxonomy label), `content` (term names, `, `), `icon`. Không link, không `wp_get_post_terms` trong api-rc. Thường dưới `PageTitleBar`. Plugin rule: `eai-project-meta-bar.mdc`; model/UI: skill `react-components` → *Project meta bar*.
 
 Query `WP_Query` / `wp_get_post_terms` **không** đặt trong api-rc khi phụ thuộc singular post.
 
