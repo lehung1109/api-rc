@@ -22,6 +22,8 @@ import Footer from "./footer/Footer";
 import footer from "@/data/footer";
 import { relatedPostList } from "@/data/related-post-list";
 import RelatedPostList from "./related-posts/RelatedPostList";
+import inlineList from "@/data/inline-list";
+import InlineList from "./inline-list/InlineList";
 
 const App = () => {
   return (
@@ -38,6 +40,7 @@ const App = () => {
       <ProductGalleryWrapper {...productGalleryWrapper} />
       <PartnerLogosWrapper {...partnerLogosWrapper} />
       <RelatedPostList {...relatedPostList} />
+      <InlineList {...inlineList} />
       <Footer {...footer} />
     </div>
   );
