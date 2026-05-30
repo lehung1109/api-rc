@@ -326,4 +326,4 @@ export interface ProjectMetaBarModel {
 
 **Semantic classes:** `project-meta-bar`, `project-meta-bar-column`, `project-meta-bar-title`, `project-meta-bar-content`.
 
-**WordPress:** widget `EAI-project-meta-bar` *(sắp có)* — context post; repeater chọn taxonomy + icon; PHP map `title` / `content` từ term bài hiện tại (tối đa 4 cột). Không `LinkModel`, không query trong component. Plugin: rule `eai-project-meta-bar.mdc`; skill `eai-rc-elementor-widget`.
+**WordPress:** widget `EAI-project-meta-bar` — context post; repeater taxonomy + icon; panel taxonomy theo **`post`** (`eai_project_meta_bar_get_post_type_for_controls()`), render validate theo post type bài. PHP map `title` / `content` (≤4 cột). Không `LinkModel`, không query trong component. Plugin: `eai-project-meta-bar.mdc`; skill `eai-rc-elementor-widget`.
