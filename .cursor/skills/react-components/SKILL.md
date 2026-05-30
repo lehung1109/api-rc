@@ -4,9 +4,9 @@ description: >-
   Creates and edits React components in api-rc following model props, server-first
   rendering, ClientComponentWrapper hydration, Tailwind + semantic classes, and
   auto-generated registries. Use when adding, refactoring, or fixing TSX in
-  src/components/, wiring client islands, or when the user asks about component
-  conventions in api-rc. Keeps this skill and related docs updated when new
-  project conventions emerge.
+  src/components/, wiring client islands, page title bar, layered breadcrumb,
+  or when the user asks about component conventions in api-rc. Keeps this skill
+  and related docs updated when new project conventions emerge.
 ---
 
 # React components (api-rc)
@@ -245,3 +245,43 @@ Data: `src/data/header.ts` aggregates sub-data; `autocomplete_search` lives on `
 
 Files: `Footer` (orchestrator) → `FooterTop` / `FooterBottom` → `FooterLinkColumn`, `FooterPaymentMethods`, `FooterSocial`, `FooterBrand`, `FooterContact`, `FooterFanpages`.  
 Data: `src/data/footer.ts` — `{ top, bottom }` aggregate; chỉ `Footer` mount từ App/API.
+
+## Quick reference — page title bar (server)
+
+Thanh tiêu đề trang: title trái, breadcrumb phải, nền xám nhạt, `border-b`. **Server-only** — không Wrapper/client.
+
+| File | Vai trò |
+|------|---------|
+| `PageTitleBar.tsx` | Orchestrator: `<section>`, flex title + breadcrumb |
+| `PageTitleBarBreadcrumb.tsx` | Leaf: levels, separators, `Link` |
+| `src/data/page-title-bar.ts` | Mock / CMS (`PageTitleBar` registry) |
+
+**Model:**
+
+```ts
+export interface PageTitleBarBreadcrumbItemModel {
+  label: string;
+  link: LinkModel; // cùng pattern RelatedPostList / FooterLinkColumn
+}
+
+/** Một cấp breadcrumb — nhiều item cùng cấp nối bằng " - " */
+export interface PageTitleBarBreadcrumbLevelModel {
+  items: PageTitleBarBreadcrumbItemModel[];
+}
+
+export interface PageTitleBarModel {
+  className?: string;
+  title: string;
+  breadcrumbLevels: PageTitleBarBreadcrumbLevelModel[];
+}
+```
+
+**Separator (chỉ text, `aria-hidden`, không link):**
+
+- Giữa **cấp** (`breadcrumbLevels`): ` / `
+- Giữa **item trong cùng cấp**: ` - `
+- Ví dụ: `Home / Chung cư - Thi công chung cư - Thiết kế chung cư`
+
+**UI:** title `text-[#f36f21] font-bold uppercase`; breadcrumb `text-sm text-[#888888]`; bar `bg-[#f7f7f7] border-b border-[#eeeeee]`. Layout một cây: `flex-col gap-2` mobile, `md:flex-row md:justify-between md:items-center` desktop. `<h1>` title; `<nav aria-label="Breadcrumb">`.
+
+**WordPress (sau):** `title` + `breadcrumbLevels` build trong PHP (post + taxonomy/ancestors), không query trong api-rc — xem [elementor-widget-context](../../rules/elementor-widget-context.mdc).

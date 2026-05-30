@@ -1,12 +1,12 @@
 ---
-description: Component danh sách link cho WordPress / Elementor (LinkModel + ul)
-globs: src/components/**/*{Link,Related,Footer,Autocomplete}*.tsx
+description: Component link cho WP — danh sách ul hoặc breadcrumb phân cấp (LinkModel)
+globs: src/components/**/*{Link,Related,Footer,Autocomplete,PageTitleBar}*.tsx
 alwaysApply: false
 ---
 
-# Link lists (SSR cho WP)
+# Link-bearing components (SSR cho WP)
 
-## Model chuẩn
+## Model chuẩn — danh sách phẳng
 
 ```ts
 links: { label: string; link: LinkModel }[];
@@ -16,12 +16,32 @@ links: { label: string; link: LinkModel }[];
 - Dùng `Link` từ `src/components/link/Link.tsx`.
 - Empty: `return null` (WordPress có thể skip API trước đó).
 
+## Model chuẩn — breadcrumb phân cấp (`PageTitleBar`)
+
+Mỗi mục breadcrumb **đều clickable** (`Link`). Hai loại separator (không phải link):
+
+| Separator | Giữa | Ví dụ |
+|-----------|------|--------|
+| ` / ` | các **cấp** (`breadcrumbLevels`) | `Home / …` |
+| ` - ` | các **item cùng cấp** (`level.items`) | `Chung cư - Thi công chung cư - Thiết kế chung cư` |
+
+```ts
+breadcrumbLevels: {
+  items: { label: string; link: LinkModel }[];
+}[];
+title: string;
+```
+
+- Bỏ qua level có `items.length === 0`; không separator thừa đầu/cuối.
+- Chi tiết UI/layout: skill `react-components` → *Page title bar*.
+
 ## Tham chiếu
 
 | Component | Dùng khi |
 |-----------|----------|
 | `FooterLinkColumn` | Cột có title + `<ul>` |
 | `RelatedPostList` | Chỉ `<ul>` link, không title (bài liên quan) |
+| `PageTitleBar` | Title + breadcrumb phân cấp (bar full-width, border-bottom) |
 | `AutocompleteItems` | Data từ WP REST search |
 
 ## Registry

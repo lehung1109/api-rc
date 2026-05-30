@@ -85,6 +85,17 @@ Need show/hide or open/close?
 - Mobile-first toggles: `max-md:…` for overlay/submenu; `md:…` for desktop hover/row layout.
 - Split interaction, not markup: e.g. `md:pointer-events-none` on chevron label, not a second chevron element.
 
+### Split bar (title | breadcrumb) — `PageTitleBar`
+
+Một cây DOM; đổi hướng flex, không file mobile riêng:
+
+```tsx
+<div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between md:gap-4">
+  <h1 className="…">…</h1>
+  <nav className="md:text-right">…</nav>
+</div>
+```
+
 ## Avoid
 
 | Do not | Do instead |

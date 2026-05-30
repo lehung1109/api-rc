@@ -50,3 +50,4 @@ Skill mới: tạo thư mục `skill-name/SKILL.md`, thêm một dòng vào bả
 - Đổi breakpoint chính từ `md` sang `lg` → cập nhật `css-first-responsive-ui` + `HEADER.md` + mọi skill ghi `md`.
 - User: "menu 3 cấp mobile chỉ 2 UI level" → đã có trong header doc; nếu áp dụng feature khác, copy pattern vào `css-first-responsive-ui`.
 - Feature UI lớn (footer, header) → tách orchestrator + section/leaf trong cùng folder; một file data aggregate — xem `react-components` mục *Chia nhỏ component*.
+- Breadcrumb phân cấp (`/` giữa cấp, `-` trong cấp) → `react-components` *Page title bar* + rule `wp-link-list-components.mdc`.
