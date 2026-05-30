@@ -11,7 +11,10 @@ alwaysApply: false
 1. **Settings-only** — Elementor controls → map props → api-rc (Footer, Carousel, …).
 2. **Context + settings** — PHP resolve theo post/URL/menu hiện tại → props đã enrich (Related posts, Header menu `get_queried_object_id()`).
 
-**Sắp tới / cùng nhóm:** `PageTitleBar` — `title` từ post hiện tại, `breadcrumbLevels` từ Home + taxonomy/ancestor terms (map `{ label, link }` theo cấp; item cùng cấp trong một `level.items`). Separator chỉ do React render (`/` giữa cấp, `-` trong cấp), không gửi HTML separator từ PHP.
+**Cùng nhóm (trang dự án / singular):**
+
+- `PageTitleBar` — `title` từ post hiện tại, `breadcrumbLevels` từ Home + taxonomy/ancestor terms (map `{ label, link }` theo cấp; item cùng cấp trong một `level.items`). Separator chỉ do React render (`/` giữa cấp, `-` trong cấp), không gửi HTML separator từ PHP.
+- `ProjectMetaBar` — **settings-only hoặc ACF** → `columns` tối đa 4 (`title`, `content`, `icon` Lucide key). Không link, không query trong api-rc. Thường đặt dưới `PageTitleBar`; model/UI: skill `react-components` → *Project meta bar*.
 
 Query `WP_Query` / `wp_get_post_terms` **không** đặt trong api-rc khi phụ thuộc singular post.
 

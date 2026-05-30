@@ -22,7 +22,7 @@ const PageTitleBarBreadcrumb = ({
   return (
     <nav
       className={cn(
-        "page-title-bar-breadcrumb text-sm break-words text-[#888888] md:text-right",
+        "page-title-bar-breadcrumb break-words text-[#888888] md:text-right",
         className,
       )}
       aria-label="Breadcrumb"

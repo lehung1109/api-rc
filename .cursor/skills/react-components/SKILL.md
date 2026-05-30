@@ -4,8 +4,8 @@ description: >-
   Creates and edits React components in api-rc following model props, server-first
   rendering, ClientComponentWrapper hydration, Tailwind + semantic classes, and
   auto-generated registries. Use when adding, refactoring, or fixing TSX in
-  src/components/, wiring client islands, page title bar, layered breadcrumb,
-  or when the user asks about component conventions in api-rc. Keeps this skill
+  src/components/, wiring client islands, page title bar, project meta bar,
+  layered breadcrumb, or when the user asks about component conventions in api-rc. Keeps this skill
   and related docs updated when new project conventions emerge.
 ---
 
@@ -195,7 +195,7 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 - **Section / leaf trong feature folder** (`HeaderMenu.tsx`, `FooterLinkColumn.tsx`): một trách nhiệm UI; model riêng; import type từ sibling.
 - **Leaf shared** (`Media.tsx`, `Link.tsx`): `src/components/<name>/` — dùng chéo feature, không sub-folder trừ khi cần.
 - **Render helpers** inside file (`renderMenuDropdownBody`) — private functions, not exported, when logic is file-local và chưa đủ lớn để tách file.
-- **Icon maps**: `Record<IconKey, LucideIcon>` + resolver function (see `ProcessSection`).
+- **Icon maps**: `Record<IconKey, LucideIcon>` + resolver function (see `ProcessSection`, `ProjectMetaBar`).
 
 ## Avoid
 
@@ -285,3 +285,45 @@ export interface PageTitleBarModel {
 **UI:** title `text-[#f36f21] font-bold uppercase`; breadcrumb `text-sm text-[#888888]`; bar `bg-[#f7f7f7] border-b border-[#eeeeee]`. Layout một cây: `flex-col gap-2` mobile, `md:flex-row md:justify-between md:items-center` desktop. `<h1>` title; `<nav aria-label="Breadcrumb">`.
 
 **WordPress (sau):** `title` + `breadcrumbLevels` build trong PHP (post + taxonomy/ancestors), không query trong api-rc — xem [elementor-widget-context](../../rules/elementor-widget-context.mdc).
+
+## Quick reference — project meta bar (server)
+
+Thanh meta dự án: tối đa **4 cột**, mỗi cột **icon Lucide + title** (trên) và **content** (dưới); nền xám cùng họ với `PageTitleBar`. **Server-only** — không Wrapper/client. Thường mount ngay dưới `PageTitleBar` trên trang chi tiết dự án.
+
+| File | Vai trò |
+|------|---------|
+| `ProjectMetaBar.tsx` | `<section>` + grid + `<dl>`/`<dt>`/`<dd>` |
+| `src/data/project-meta-bar.ts` | Mock / CMS (`ProjectMetaBar` registry) |
+
+**Model:**
+
+```ts
+export type ProjectMetaBarIconKey =
+  | "user-round"
+  | "bed-double"
+  | "palette"
+  | "ruler"; // mở rộng khi cần; fallback UserRound nếu key lạ
+
+export interface ProjectMetaBarColumnModel {
+  title: string;
+  content: string;
+  icon: ProjectMetaBarIconKey;
+}
+
+export interface ProjectMetaBarModel {
+  className?: string;
+  columns: ProjectMetaBarColumnModel[];
+}
+```
+
+**Render guards:**
+
+- `columns.slice(0, 4)` — không nhận quá 4 cột hiển thị.
+- Bỏ cột mà cả `title` và `content` trống (trim); mảng rỗng sau lọc → `return null`.
+- Icon: map Lucide giống `ProcessSection` (`Record<ProjectMetaBarIconKey, LucideIcon>`).
+
+**UI:** bar `bg-[#f7f7f7]` (có thể `border-b border-[#eeeeee]` khi nối `PageTitleBar`); icon `text-[#f36f21]` ~`h-4 w-4`; title `font-bold`; content `text-sm`. Inner `max-w-7xl` + padding giống `PageTitleBar`. Grid một cây: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`.
+
+**Semantic classes:** `project-meta-bar`, `project-meta-bar-column`, `project-meta-bar-title`, `project-meta-bar-content`.
+
+**WordPress (sau):** settings-only hoặc ACF → `columns[]` tối đa 4 (`title`, `content`, `icon` key); không `LinkModel`. Chi tiết widget: skill `eai-rc-elementor-widget` + rule `eai-elementor-widgets.mdc`.

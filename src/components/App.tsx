@@ -2,6 +2,8 @@ import { header } from "@/data/header";
 import Header from "./header/Header";
 import PageTitleBar from "./page-title-bar/PageTitleBar";
 import { pageTitleBar } from "@/data/page-title-bar";
+import ProjectMetaBar from "./project-meta-bar/ProjectMetaBar";
+import { projectMetaBar } from "@/data/project-meta-bar";
 import CarouselWrapper from "./carousel/CarouselWrapper";
 import carouselWrapper from "@/data/carousel-wrapper";
 import ProcessSection from "./process-section/ProcessSection";
@@ -26,6 +28,7 @@ const App = () => {
     <div>
       <Header {...header} />
       <PageTitleBar {...pageTitleBar} />
+      <ProjectMetaBar {...projectMetaBar} />
 
       <CarouselWrapper {...carouselWrapper} />
       <ProcessSection {...processSection} />
