@@ -90,6 +90,7 @@ export default (_env, { watch }) => ({
     path: path.resolve(process.cwd(), "dist"),
     filename: "[name].js",
     clean: !watch,
+    chunkFilename: "[name].[contenthash].js",
   },
   watchOptions: {
     ignored: ["**/html/**", "**/node_modules/**", "**/src/generated/**"],
