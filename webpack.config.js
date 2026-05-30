@@ -44,19 +44,22 @@ class ConcatPlugin {
     copyCommand = "bun run copy.ts",
     htmlCommand = "bun run scripts/generate-html.ts",
     versionCommand = "bun run scripts/generate-version-json.ts",
+    restartCommand = "bun run scripts/generate-restart-txt.ts",
   } = {}) {
     this.copyCommand = copyCommand;
     this.htmlCommand = htmlCommand;
     this.versionCommand = versionCommand;
+    this.restartCommand = restartCommand;
   }
 
   apply(compiler) {
     compiler.hooks.done.tapAsync("ConcatPlugin", async (_stats, callback) => {
       try {
         console.log("Running post-build commands...");
-        const [htmlResult, versionResult] = await Promise.all([
+        const [htmlResult, versionResult, restartResult] = await Promise.all([
           execAsync(this.htmlCommand),
           execAsync(this.versionCommand),
+          execAsync(this.restartCommand),
         ]);
 
         const copyResult = await execAsync(this.copyCommand);
@@ -65,6 +68,7 @@ class ConcatPlugin {
           copyResult,
           htmlResult,
           versionResult,
+          restartResult,
         ]) {
           if (stdout) console.log(stdout);
           if (stderr) console.error(stderr);
