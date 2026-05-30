@@ -91,6 +91,7 @@ const ProductGallery = (model: ProductGalleryModel) => {
             swiper:
               thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
           }}
+          className="product-gallery-main"
         >
           {items.map((item, index) => {
             const { image } = item;
@@ -125,7 +126,7 @@ const ProductGallery = (model: ProductGalleryModel) => {
         watchSlidesProgress
         slidesPerView={3}
         spaceBetween={8}
-        className="mt-3"
+        className="mt-3 product-gallery-thumbs"
         breakpoints={{
           768: {
             slidesPerView: 5,
