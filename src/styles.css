@@ -4,6 +4,8 @@
 @import "@fontsource-variable/geist";
 @import "swiper/css";
 @import "swiper/css/pagination";
+@import "swiper/css/navigation";
+@import "photoswipe/style.css";
 
 @custom-variant dark (&:is(.dark *));
 

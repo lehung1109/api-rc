@@ -27,6 +27,7 @@
     "clsx": "^2.1.1",
     "express": "^5.2.1",
     "lucide-react": "^1.16.0",
+    "photoswipe": "^5.4.4",
     "radix-ui": "^1.4.3",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",

@@ -12,6 +12,8 @@ import FeatureCardsCarouselWrapper from "./feature-cards-carousel/FeatureCardsCa
 import featureCardsCarouselWrapper from "@/data/feature-cards-carousel-wrapper";
 import PartnerLogosWrapper from "./partner-logos/PartnerLogosWrapper";
 import partnerLogosWrapper from "@/data/partner-logos-wrapper";
+import ProductGalleryWrapper from "./product-gallery/ProductGalleryWrapper";
+import productGalleryWrapper from "@/data/product-gallery-wrapper";
 import Footer from "./footer/Footer";
 import footer from "@/data/footer";
 import { relatedPostList } from "@/data/related-post-list";
@@ -27,6 +29,7 @@ const App = () => {
       <ProjectShowcase {...projectShowcase} />
       <DesignConsultationCta {...designConsultationCta} />
       <FeatureCardsCarouselWrapper {...featureCardsCarouselWrapper} />
+      <ProductGalleryWrapper {...productGalleryWrapper} />
       <PartnerLogosWrapper {...partnerLogosWrapper} />
       <RelatedPostList {...relatedPostList} />
       <Footer {...footer} />
