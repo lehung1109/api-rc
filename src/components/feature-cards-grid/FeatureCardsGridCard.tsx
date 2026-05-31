@@ -23,17 +23,17 @@ const FeatureCardsGridCard = (item: FeatureCardsGridItemModel) => {
         link.className,
       )}
     >
-      <div className="feature-cards-grid-card-media overflow-hidden">
+      <div className="feature-cards-grid-card-media aspect-[255/144] overflow-hidden">
         <Media
           {...image}
           className={cn(
-            "feature-cards-grid-card-image block h-auto w-full transition-transform duration-200 ease-out group-hover:scale-105",
+            "feature-cards-grid-card-image block h-full w-full object-cover transition-transform duration-200 ease-out group-hover:scale-105",
             image.className,
           )}
         />
       </div>
 
-      <div className="feature-cards-grid-card-body flex flex-1 flex-col bg-neutral-100 px-4 py-5 text-center">
+      <div className="feature-cards-grid-card-body flex flex-1 flex-col bg-neutral-100 p-[10px] text-center">
         <h3 className="feature-cards-grid-card-title text-xl font-bold text-[#f36f21]">
           {title}
         </h3>
