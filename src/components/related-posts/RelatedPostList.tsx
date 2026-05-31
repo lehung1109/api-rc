@@ -16,21 +16,30 @@ const RelatedPostList = (model: RelatedPostListModel) => {
   }
 
   return (
-    <>
-      <div dangerouslySetInnerHTML={{ __html: title ?? "" }} />
+    <div className={cn("related-post-list", className)}>
+      {title ? (
+        <div
+          className="related-post-list-title"
+          dangerouslySetInnerHTML={{ __html: title }}
+        />
+      ) : null}
 
-      <ul
-        className={cn("related-post-list space-y-1 list-disc mb-5", className)}
-      >
+      <ul className="related-post-list-list space-y-1 list-disc mb-5">
         {links.map((item) => (
-          <li key={item.link.url} className="ml-5">
-            <Link className="text-[#f36f21]" {...item.link}>
+          <li key={item.link.url} className="related-post-list-item ml-5">
+            <Link
+              {...item.link}
+              className={cn(
+                "related-post-list-link text-[#f36f21]",
+                item.link.className,
+              )}
+            >
               {item.label}
             </Link>
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 
