@@ -92,7 +92,7 @@ const TableOfContents = (model: TableOfContentsModel) => {
     let rafId: number | null = null;
 
     const updateActive = () => {
-      let active = ids[0];
+      let active: string | undefined = undefined;
       for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;

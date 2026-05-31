@@ -358,7 +358,7 @@ export interface TableOfContentsModel {
 
 **States:** `listOpen` (chevron), `isPast` (sentinel observer), `stickyExpanded` (click title khi compact), `activeTargetId` (scroll-spy). `showList = !isPast || stickyExpanded`; chevron ẩn khi sticky compact chưa mở.
 
-**Scroll-spy:** `flattenTargetIds()` DFS theo thứ tự DOM; listener `scroll` + `resize` (RAF-throttle). Heading active khi `getBoundingClientRect().top <= scrollOffset` (default **60px** — khớp anchor click). Truyền `activeTargetId` xuống list; link active nhận `aria-current="location"`.
+**Scroll-spy:** `flattenTargetIds()` DFS theo thứ tự DOM; listener `scroll` + `resize` (RAF-throttle). Heading active khi `getBoundingClientRect().top <= scrollOffset` (default **60px** — khớp anchor click). Không mặc định mục đầu: `activeTargetId` là `undefined` cho đến khi ít nhất một heading vượt offset. Truyền `activeTargetId` xuống list; link active nhận `aria-current="location"`.
 
 **Heights:** inline mở → `ol` `max-h-[500px]`; sticky expanded → `max-h-[100dvh]`. Scroll anchor: `scrollOffset ?? 60`; `prefers-reduced-motion` → `behavior: "auto"`.
 
