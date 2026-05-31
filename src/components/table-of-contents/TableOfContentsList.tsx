@@ -77,7 +77,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                   className="table-of-contents-branch-input peer/branch sr-only"
                   defaultChecked
                 />
-                <div className="flex min-w-0 flex-1 items-start gap-1">
+                <div className="flex min-w-0 flex-1 items-start gap-1 table-of-contents-link-wrap">
                   <label
                     htmlFor={branchId}
                     className="table-of-contents-branch-toggle shrink-0 p-0.5 absolute top-1/2 -translate-y-1/2 left-2.5"
@@ -108,7 +108,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                 />
               </>
             ) : (
-              <div className="flex flex-1 items-start gap-1">
+              <div className="table-of-contents-link-wrap flex flex-1 items-start gap-1">
                 <a
                   href={`#${item.targetId}`}
                   className={cn(
