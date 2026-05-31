@@ -4,11 +4,13 @@ import { ChevronDownIcon, ListTree } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
+import TableOfContentsList from "./TableOfContentsList";
 
 export interface TableOfContentsItemModel {
   label: string;
   /** DOM target id without # */
   targetId: string;
+  items?: TableOfContentsItemModel[];
 }
 
 export interface TableOfContentsModel {
@@ -165,25 +167,12 @@ const TableOfContents = (model: TableOfContentsModel) => {
         </div>
 
         {listOpen && showList && (
-          <ol
-            id={listId}
-            className={cn(
-              "table-of-contents-list mt-3 list-decimal overflow-y-auto pl-5 text-sm",
-              listHeightClass,
-            )}
-          >
-            {validItems.map((item) => (
-              <li key={item.targetId} className="table-of-contents-item py-1">
-                <a
-                  href={`#${item.targetId}`}
-                  className="table-of-contents-link text-[#333333] hover:text-[#f36f21]"
-                  onClick={onAnchorClick}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ol>
+          <TableOfContentsList
+            listId={listId}
+            listHeightClass={listHeightClass}
+            items={validItems}
+            onAnchorClick={onAnchorClick}
+          />
         )}
       </div>
     </nav>
