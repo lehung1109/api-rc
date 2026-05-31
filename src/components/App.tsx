@@ -14,6 +14,8 @@ import DesignConsultationCta from "./design-consultation-cta/DesignConsultationC
 import { designConsultationCta } from "@/data/design-consultation-cta";
 import FeatureCardsCarouselWrapper from "./feature-cards-carousel/FeatureCardsCarouselWrapper";
 import featureCardsCarouselWrapper from "@/data/feature-cards-carousel-wrapper";
+import FeatureCardsGrid from "./feature-cards-grid/FeatureCardsGrid";
+import featureCardsGrid from "@/data/feature-cards-grid";
 import PartnerLogosWrapper from "./partner-logos/PartnerLogosWrapper";
 import partnerLogosWrapper from "@/data/partner-logos-wrapper";
 import ProductGalleryWrapper from "./product-gallery/ProductGalleryWrapper";
@@ -50,6 +52,9 @@ const App = () => {
         <DesignConsultationCta {...designConsultationCta} />
       </div>
       <FeatureCardsCarouselWrapper {...featureCardsCarouselWrapper} />
+      <div className="mx-auto max-w-7xl px-4 py-8">
+        <FeatureCardsGrid {...featureCardsGrid} />
+      </div>
       <ProductGalleryWrapper {...productGalleryWrapper} />
       <PartnerLogosWrapper {...partnerLogosWrapper} />
       <RelatedPostList {...relatedPostList} />

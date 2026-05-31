@@ -368,6 +368,49 @@ export interface RelatedPostListModel {
 
 **WordPress:** widget `EAI-related-posts` — query taxonomy trong PHP (`eai_related_posts_get_rc_props`), không query trong component. Chi tiết model link: rule `wp-link-list-components.mdc`.
 
+## Quick reference — feature cards grid (server)
+
+Grid card giống `FeatureCardsCarouselCard` nhưng đơn giản hơn: luôn `Link`, `description` optional, hover zoom ảnh. **Server-only** — không Wrapper/client.
+
+| File | Vai trò |
+|------|---------|
+| `FeatureCardsGrid.tsx` | Orchestrator: `<section>` + responsive grid |
+| `FeatureCardsGridCard.tsx` | Leaf: ảnh + title + description (khi có) |
+| `src/data/feature-cards-grid.ts` | Mock / CMS (`FeatureCardsGrid` registry) |
+
+**Model:**
+
+```ts
+export interface FeatureCardsGridItemModel {
+  image: MediaModel;
+  title: string;
+  description?: string;
+  link: LinkModel;
+}
+
+export interface FeatureCardsGridModel {
+  className?: string;
+  items: FeatureCardsGridItemModel[];
+  columnsTablet?: number;  // default 2 — md breakpoint
+  columnsDesktop?: number; // default 3 — lg breakpoint
+  gap?: number;            // default 16 (px)
+}
+```
+
+**Render guards:**
+
+- `items.length === 0` → `return null`.
+- Description: chỉ render khi `description?.trim()` truthy.
+- Card luôn bọc `Link` — không fallback `<article>`.
+
+**Responsive columns:** mobile luôn 1 cột; tablet `md:` (`columnsTablet`); desktop `lg:` (`columnsDesktop`). Dùng lookup map full class string (`md:grid-cols-2`, `lg:grid-cols-3`, …) clamp 1–6 — không template dynamic Tailwind.
+
+**UI:** body `bg-neutral-100`, title `text-[#f36f21] font-bold`; ảnh `group-hover:scale-105` trong wrapper `overflow-hidden`.
+
+**Semantic classes:** `feature-cards-grid`, `feature-cards-grid-card`, `feature-cards-grid-card-media`, `feature-cards-grid-card-image`, `feature-cards-grid-card-body`, `feature-cards-grid-card-title`, `feature-cards-grid-card-description`, `feature-cards-grid-card-link`.
+
+**WordPress (sau):** tái dùng `eai_rc_map_feature_card_from_post` cho `items`; widget riêng nếu cần.
+
 ## Quick reference — table of contents (client + wrapper)
 
 Mục lục anchor với toggle danh sách, scroll offset, và sticky compact bên phải khi scroll qua khối TOC. **Client + wrapper** — mount qua `TableOfContentsWrapper`, không mount `TableOfContents` trực tiếp.
