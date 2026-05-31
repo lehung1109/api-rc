@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDownIcon, ListTree } from "lucide-react";
+import { ChevronDownIcon, ListOrdered } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -144,7 +144,7 @@ const TableOfContents = (model: TableOfContentsModel) => {
               }}
             >
               <div className="flex items-center gap-2">
-                <ListTree
+                <ListOrdered
                   className="h-5 w-5 shrink-0 text-[#f36f21]"
                   aria-hidden
                 />
