@@ -61,7 +61,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
           <li
             key={item.targetId}
             className={cn(
-              "table-of-contents-item py-1 pl-5 align-center",
+              "table-of-contents-item py-1 pl-5 items-center",
               hasChildren &&
                 "table-of-contents-item--has-children group/branch",
               hasChildren &&
@@ -80,11 +80,11 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                 <div className="flex min-w-0 flex-1 items-start gap-1">
                   <label
                     htmlFor={branchId}
-                    className="table-of-contents-branch-toggle shrink-0 p-0.5"
+                    className="table-of-contents-branch-toggle shrink-0 p-0.5 absolute top-1/2 -translate-y-1/2 left-2.5"
                     aria-label={`Thu gọn hoặc mở rộng ${item.label}`}
                   >
                     <ChevronRight
-                      className="table-of-contents-branch-chevron h-4 w-4 transition-transform"
+                      className="table-of-contents-branch-chevron h-auto w-6 transition-transform"
                       aria-hidden
                     />
                   </label>
