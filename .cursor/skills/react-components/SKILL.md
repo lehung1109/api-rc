@@ -329,6 +329,45 @@ export interface ProjectMetaBarModel {
 
 **WordPress:** widget `EAI-project-meta-bar` — context post; repeater taxonomy + icon; panel taxonomy theo **`post`** (`eai_project_meta_bar_get_post_type_for_controls()`), render validate theo post type bài. PHP map `title` / `content` (≤4 cột). Không `LinkModel`, không query trong component. Plugin: `eai-project-meta-bar.mdc`; skill `eai-rc-elementor-widget`.
 
+## Quick reference — related post list (server)
+
+Danh sách bài viết liên quan: title CMS HTML (optional) + `<ul>` link. **Server-only** — không Wrapper/client. Mount qua widget `EAI-related-posts` hoặc `RelatedPostList` trực tiếp.
+
+| File | Vai trò |
+|------|---------|
+| `RelatedPostList.tsx` | Root wrapper + title + `<ul>` link |
+| `src/data/related-post-list.ts` | Mock / CMS (`RelatedPostList` registry) |
+
+**Model:**
+
+```ts
+export interface RelatedPostListModel {
+  title?: string; // CMS HTML — render khi có nội dung
+  links: { label: string; link: LinkModel }[];
+  className?: string; // merge trên root `.related-post-list`
+}
+```
+
+**Render guards:**
+
+- `links.length === 0` → `return null`.
+- Title: chỉ render khi `title` truthy; wrapper `related-post-list-title` + `dangerouslySetInnerHTML`.
+- Link: merge `item.link.className` sau class semantic (cho override từ PHP/WP).
+
+**UI:** list `space-y-1 list-disc mb-5`; item `ml-5`; link mặc định `text-[#f36f21]`.
+
+**Semantic classes** (3rd-party CSS — cùng pattern `footer-link-column-*`):
+
+| Node | Class |
+|------|-------|
+| Root | `related-post-list` |
+| Title (CMS HTML) | `related-post-list-title` |
+| `<ul>` | `related-post-list-list` |
+| `<li>` | `related-post-list-item` |
+| `<a>` | `related-post-list-link` |
+
+**WordPress:** widget `EAI-related-posts` — query taxonomy trong PHP (`eai_related_posts_get_rc_props`), không query trong component. Chi tiết model link: rule `wp-link-list-components.mdc`.
+
 ## Quick reference — table of contents (client + wrapper)
 
 Mục lục anchor với toggle danh sách, scroll offset, và sticky compact bên phải khi scroll qua khối TOC. **Client + wrapper** — mount qua `TableOfContentsWrapper`, không mount `TableOfContents` trực tiếp.
