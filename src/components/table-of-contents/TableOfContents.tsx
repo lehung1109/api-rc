@@ -132,7 +132,7 @@ const TableOfContents = (model: TableOfContentsModel) => {
     "table-of-contents-panel",
     isPast
       ? "fixed right-4 md:right-6 top-1/2 z-40 -translate-y-1/2 rounded-lg border border-[#eeeeee] bg-white p-0 shadow-md"
-      : "relative max-w-xs",
+      : "relative",
     isStickyCompact && "table-of-contents--sticky-compact",
     isStickyExpanded &&
       "table-of-contents--sticky-expanded p-4 w-[250px] h-[100dvh] z-1000",

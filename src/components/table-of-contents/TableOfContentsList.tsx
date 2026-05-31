@@ -22,8 +22,7 @@ function hasActiveDescendant(
   return items.some(
     (item) =>
       item.targetId === activeTargetId ||
-      (item.items?.length &&
-        hasActiveDescendant(item.items, activeTargetId)),
+      (item.items?.length && hasActiveDescendant(item.items, activeTargetId)),
   );
 }
 
@@ -42,7 +41,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
     <ol
       id={listId}
       className={cn(
-        "table-of-contents-list text-sm",
+        "table-of-contents-list",
         nested
           ? "table-of-contents-list--nested hidden w-full peer-checked/branch:block"
           : cn("mt-3 overflow-y-auto", listHeightClass),
@@ -63,7 +62,8 @@ const TableOfContentsList = (model: TableOfContentsList) => {
             key={item.targetId}
             className={cn(
               "table-of-contents-item py-1",
-              hasChildren && "table-of-contents-item--has-children group/branch",
+              hasChildren &&
+                "table-of-contents-item--has-children group/branch",
               hasChildren &&
                 "has-[:checked]:[&_.table-of-contents-branch-chevron]:rotate-90",
               isItemActive && "table-of-contents-item--active",
