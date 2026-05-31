@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDownIcon, ListOrdered } from "lucide-react";
+import { ChevronDownIcon, ListOrdered, X } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -114,7 +114,8 @@ const TableOfContents = (model: TableOfContentsModel) => {
 
   const titleGroupClassName =
     "table-of-contents-title-group flex min-w-0 flex-1 items-center gap-2 text-left" +
-    (isStickyCompact ? " p-4" : "");
+    (isStickyCompact ? " p-4" : "") +
+    (isStickyExpanded ? " justify-between" : "");
 
   return (
     <nav
@@ -155,13 +156,17 @@ const TableOfContents = (model: TableOfContentsModel) => {
                 </span>
               </div>
 
-              <ChevronDownIcon
-                className={cn(
-                  "h-5 w-5 transition-transform",
-                  listOpen && "rotate-180",
-                  isStickyCompact && "hidden",
-                )}
-              />
+              {isStickyExpanded ? (
+                <X className="h-5 w-5 transition-transform" />
+              ) : (
+                <ChevronDownIcon
+                  className={cn(
+                    "h-5 w-5 transition-transform",
+                    listOpen && "rotate-180",
+                    isStickyCompact && "hidden",
+                  )}
+                />
+              )}
             </button>
           }
         </div>
