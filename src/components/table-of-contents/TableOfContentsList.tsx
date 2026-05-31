@@ -61,7 +61,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
           <li
             key={item.targetId}
             className={cn(
-              "table-of-contents-item py-1 pl-5 items-center",
+              "table-of-contents-item py-1 pl-5",
               hasChildren &&
                 "table-of-contents-item--has-children group/branch",
               hasChildren &&
