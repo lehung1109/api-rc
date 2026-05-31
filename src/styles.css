@@ -151,3 +151,65 @@ html body[data-scroll-locked] {
   overflow: visible !important;
   margin-right: 0 !important;
 }
+
+/* Table of contents — baseline styles (3rd-party override via semantic classes) */
+.table-of-contents-list {
+  counter-reset: List;
+  list-style: none;
+  padding-left: 0;
+}
+
+.table-of-contents-list .table-of-contents-list {
+  padding-left: 1rem;
+}
+
+.table-of-contents-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  counter-increment: List;
+}
+
+.table-of-contents-item::before {
+  content: counters(List, ".") ". ";
+  text-indent: 0;
+  margin-right: 0.25rem;
+  flex-shrink: 0;
+  color: #888888;
+}
+
+.table-of-contents-link {
+  display: block;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  text-indent: 0;
+  color: #333333;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+
+.table-of-contents-link:hover {
+  color: #f36f21;
+}
+
+.table-of-contents-link--active {
+  background-color: #f36f21;
+  color: #ffffff;
+}
+
+.table-of-contents-link--active:hover {
+  color: #ffffff;
+}
+
+.table-of-contents-item--has-children:has(
+    .table-of-contents-branch-input:checked
+  ) {
+  /* branch open — hook for 3rd-party */
+}
+
+.table-of-contents-item--has-children:not(
+    :has(.table-of-contents-branch-input:checked)
+  ) {
+  /* branch closed — hook for 3rd-party */
+}

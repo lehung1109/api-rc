@@ -1,10 +1,19 @@
 "use client";
 
 import { ChevronDownIcon, ListOrdered, X } from "lucide-react";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import TableOfContentsList from "./TableOfContentsList";
+
+function flattenTargetIds(items: TableOfContentsItemModel[]): string[] {
+  const ids: string[] = [];
+  for (const item of items) {
+    if (item.targetId.trim()) ids.push(item.targetId);
+    if (item.items?.length) ids.push(...flattenTargetIds(item.items));
+  }
+  return ids;
+}
 
 export interface TableOfContentsItemModel {
   label: string;
@@ -26,8 +35,9 @@ export interface TableOfContentsModel {
 const TableOfContents = (model: TableOfContentsModel) => {
   const { title, items, scrollOffset, className, maxHeight = 500 } = model;
 
-  const validItems = items.filter(
-    (item) => item.label.trim() && item.targetId.trim(),
+  const validItems = useMemo(
+    () => items.filter((item) => item.label.trim() && item.targetId.trim()),
+    [items],
   );
 
   const sentinelRef = useRef<HTMLDivElement>(null);
@@ -35,6 +45,7 @@ const TableOfContents = (model: TableOfContentsModel) => {
   const [listOpen, setListOpen] = useState(true);
   const [isPast, setIsPast] = useState(false);
   const [stickyExpanded, setStickyExpanded] = useState(false);
+  const [activeTargetId, setActiveTargetId] = useState<string>();
   const listId = useId();
 
   useEffect(() => {
@@ -72,6 +83,42 @@ const TableOfContents = (model: TableOfContentsModel) => {
     observer.observe(sentinel);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const ids = flattenTargetIds(validItems);
+    if (ids.length === 0) return;
+
+    const offset = scrollOffset ?? 60;
+    let rafId: number | null = null;
+
+    const updateActive = () => {
+      let active = ids[0];
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= offset) active = id;
+        else break;
+      }
+      setActiveTargetId(active);
+    };
+
+    const onScrollOrResize = () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        updateActive();
+      });
+    };
+
+    updateActive();
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize);
+    return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
+    };
+  }, [validItems, scrollOffset]);
 
   if (validItems.length === 0) {
     return null;
@@ -176,6 +223,7 @@ const TableOfContents = (model: TableOfContentsModel) => {
             listId={listId}
             listHeightClass={listHeightClass}
             items={validItems}
+            activeTargetId={activeTargetId}
             onAnchorClick={onAnchorClick}
           />
         )}

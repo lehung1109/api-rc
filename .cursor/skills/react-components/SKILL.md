@@ -356,10 +356,26 @@ export interface TableOfContentsModel {
 }
 ```
 
-**States:** `listOpen` (chevron), `isPast` (sentinel observer), `stickyExpanded` (click title khi compact). `showList = !isPast || stickyExpanded`; chevron ẩn khi sticky compact chưa mở.
+**States:** `listOpen` (chevron), `isPast` (sentinel observer), `stickyExpanded` (click title khi compact), `activeTargetId` (scroll-spy). `showList = !isPast || stickyExpanded`; chevron ẩn khi sticky compact chưa mở.
+
+**Scroll-spy:** `flattenTargetIds()` DFS theo thứ tự DOM; listener `scroll` + `resize` (RAF-throttle). Heading active khi `getBoundingClientRect().top <= scrollOffset` (default **60px** — khớp anchor click). Truyền `activeTargetId` xuống list; link active nhận `aria-current="location"`.
 
 **Heights:** inline mở → `ol` `max-h-[500px]`; sticky expanded → `max-h-[100dvh]`. Scroll anchor: `scrollOffset ?? 60`; `prefers-reduced-motion` → `behavior: "auto"`.
 
-**Semantic classes:** `table-of-contents`, `table-of-contents-header`, `table-of-contents-title`, `table-of-contents-toggle`, `table-of-contents-list`, `table-of-contents-link`, `table-of-contents--sticky-compact`, `table-of-contents--sticky-expanded`.
+**CSS counters:** `counter-reset: List` trên root `.table-of-contents-list`; nested `ol` không reset — `counters(List, ".")` trên `li::before` cho số lồng (`1.`, `2.1.`, …). Bỏ `list-decimal`.
 
-**v1 không có:** scroll-spy active item (`aria-current` trên link) — có thể phase 2.
+**Branch toggle (css-first):** item có `items` → checkbox `table-of-contents-branch-input` (sr-only, `defaultChecked`) + label chevron trái `table-of-contents-branch-toggle`; nested `ol` `peer-checked/branch:block`. Leaf dùng `pl-5` spacer căn lề. Không auto-mở nhánh khi scroll tới heading con.
+
+**State classes (TSX chỉ gắn modifier; màu active trong `styles.css`):**
+
+| Node | Base | Modifier |
+|------|------|----------|
+| `nav` | `table-of-contents` | `--sticky-compact`, `--sticky-expanded` |
+| `li` | `table-of-contents-item` | `--active`, `--has-children`; open/closed qua `:has(.table-of-contents-branch-input:checked)` |
+| `a` | `table-of-contents-link` | `--active` |
+| chevron label | `table-of-contents-branch-toggle` | — |
+| nested `ol` | `table-of-contents-list` | — |
+
+**Semantic classes:** `table-of-contents`, `table-of-contents-header`, `table-of-contents-title`, `table-of-contents-list`, `table-of-contents-item`, `table-of-contents-link`, `table-of-contents-branch-input`, `table-of-contents-branch-toggle`, `table-of-contents-branch-chevron`, `table-of-contents--sticky-compact`, `table-of-contents--sticky-expanded`.
+
+**Model:** giữ nguyên nested `items`; không thêm field mới.
