@@ -24,6 +24,8 @@ import { relatedPostList } from "@/data/related-post-list";
 import RelatedPostList from "./related-posts/RelatedPostList";
 import inlineList from "@/data/inline-list";
 import InlineList from "./inline-list/InlineList";
+import TableOfContentsWrapper from "./table-of-contents/TableOfContentsWrapper";
+import tableOfContentsWrapper from "@/data/table-of-contents-wrapper";
 
 const App = () => {
   return (
@@ -33,9 +35,20 @@ const App = () => {
       <ProjectMetaBar {...projectMetaBar} />
 
       <CarouselWrapper {...carouselWrapper} />
-      <ProcessSection {...processSection} />
-      <ProjectShowcase {...projectShowcase} />
-      <DesignConsultationCta {...designConsultationCta} />
+
+      <div className="mx-auto max-w-7xl px-4 py-8">
+        <TableOfContentsWrapper {...tableOfContentsWrapper} />
+      </div>
+
+      <div id="section-process">
+        <ProcessSection {...processSection} />
+      </div>
+      <div id="section-showcase">
+        <ProjectShowcase {...projectShowcase} />
+      </div>
+      <div id="section-consultation">
+        <DesignConsultationCta {...designConsultationCta} />
+      </div>
       <FeatureCardsCarouselWrapper {...featureCardsCarouselWrapper} />
       <ProductGalleryWrapper {...productGalleryWrapper} />
       <PartnerLogosWrapper {...partnerLogosWrapper} />

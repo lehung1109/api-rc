@@ -235,6 +235,7 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 |--------|---------------------|-------------------------------|-------------------------|
 | `Carousel` | `CarouselWrapper` | `carousel-wrapper.ts` | `carousel.ts` (re-export) |
 | `FeatureCardsCarousel` | `FeatureCardsCarouselWrapper` | `feature-cards-carousel-wrapper.ts` | `feature-cards-carousel.ts` (re-export) |
+| `TableOfContents` | `TableOfContentsWrapper` | `table-of-contents-wrapper.ts` | `table-of-contents.ts` (re-export) |
 
 ## Quick reference — header stack
 
@@ -327,3 +328,38 @@ export interface ProjectMetaBarModel {
 **Semantic classes:** `project-meta-bar`, `project-meta-bar-column`, `project-meta-bar-title`, `project-meta-bar-content`.
 
 **WordPress:** widget `EAI-project-meta-bar` — context post; repeater taxonomy + icon; panel taxonomy theo **`post`** (`eai_project_meta_bar_get_post_type_for_controls()`), render validate theo post type bài. PHP map `title` / `content` (≤4 cột). Không `LinkModel`, không query trong component. Plugin: `eai-project-meta-bar.mdc`; skill `eai-rc-elementor-widget`.
+
+## Quick reference — table of contents (client + wrapper)
+
+Mục lục anchor với toggle danh sách, scroll offset, và sticky compact bên phải khi scroll qua khối TOC. **Client + wrapper** — mount qua `TableOfContentsWrapper`, không mount `TableOfContents` trực tiếp.
+
+| File | Vai trò |
+|------|---------|
+| `TableOfContents.tsx` | `"use client"` — UI, IntersectionObserver, scroll anchor |
+| `TableOfContentsWrapper.tsx` | Server entry: `ClientComponentWrapper` + `type="tableOfContents"` |
+| `src/data/table-of-contents-wrapper.ts` | Mock / CMS canonical (`TableOfContentsWrapper` registry) |
+| `src/data/table-of-contents.ts` | Re-export cho client registry |
+
+**Model:**
+
+```ts
+export interface TableOfContentsItemModel {
+  label: string;
+  targetId: string; // DOM id, no #
+}
+
+export interface TableOfContentsModel {
+  className?: string;
+  title: string;
+  items: TableOfContentsItemModel[];
+  scrollOffset?: number; // default 60
+}
+```
+
+**States:** `listOpen` (chevron), `isPast` (sentinel observer), `stickyExpanded` (click title khi compact). `showList = !isPast || stickyExpanded`; chevron ẩn khi sticky compact chưa mở.
+
+**Heights:** inline mở → `ol` `max-h-[500px]`; sticky expanded → `max-h-[100dvh]`. Scroll anchor: `scrollOffset ?? 60`; `prefers-reduced-motion` → `behavior: "auto"`.
+
+**Semantic classes:** `table-of-contents`, `table-of-contents-header`, `table-of-contents-title`, `table-of-contents-toggle`, `table-of-contents-list`, `table-of-contents-link`, `table-of-contents--sticky-compact`, `table-of-contents--sticky-expanded`.
+
+**v1 không có:** scroll-spy active item (`aria-current` trên link) — có thể phase 2.
