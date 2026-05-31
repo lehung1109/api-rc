@@ -61,7 +61,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
           <li
             key={item.targetId}
             className={cn(
-              "table-of-contents-item py-1",
+              "table-of-contents-item py-1 pl-5 align-center",
               hasChildren &&
                 "table-of-contents-item--has-children group/branch",
               hasChildren &&
@@ -108,7 +108,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                 />
               </>
             ) : (
-              <div className="flex flex-1 items-start gap-1 pl-5">
+              <div className="flex flex-1 items-start gap-1">
                 <a
                   href={`#${item.targetId}`}
                   className={cn(
