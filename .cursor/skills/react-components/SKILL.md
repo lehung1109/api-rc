@@ -380,6 +380,38 @@ export interface RelatedPostListModel {
 
 **WordPress:** widget `EAI-related-posts` — query taxonomy trong PHP (`eai_related_posts_get_rc_props`), không query trong component. Chi tiết model link: rule `wp-link-list-components.mdc`.
 
+## Quick reference — html content (server)
+
+Khối HTML tùy ý từ CMS / WYSIWYG (Elementor, post content, …). **Server-only** — không Wrapper/client.
+
+| File | Vai trò |
+|------|---------|
+| `HtmlContent.tsx` | Wrapper semantic + `dangerouslySetInnerHTML` |
+| `src/data/html-content.ts` | Mock / CMS (`HtmlContent` registry) |
+
+**Model:**
+
+```ts
+export interface HtmlContentModel {
+  html: string;
+  className?: string;
+  as?: "article" | "div" | "section"; // default "article"
+}
+```
+
+**Render guards:**
+
+- `html.trim() === ""` → `return null`.
+- Không sanitize trong React — tin nguồn CMS/Elementor đã lọc phía WP (`wp_kses_post`, …).
+
+**UI:** wrapper `html-content entry-content`; merge `className` qua `cn()`.
+
+**Semantic classes:** `html-content`, `entry-content` (typography theme).
+
+**Heading:** không ép cấp — trách nhiệm editor/CMS (tránh `h1` trong widget section; xem react-seo-markup).
+
+**WordPress (sau):** widget `EAI-html-content` — control WYSIWYG map `html` (+ optional `className`, `as`).
+
 ## Quick reference — breadcrumb (server)
 
 Breadcrumb inline: tối đa **3 cấp** (2 link + 1 current), separator `»`. Khác `PageTitleBarBreadcrumb` (mọi mục link, ` / ` + ` - `, bar xám). **Server-only** — không Wrapper/client.
