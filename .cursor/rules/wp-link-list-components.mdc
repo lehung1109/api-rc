@@ -35,6 +35,18 @@ title: string;
 - Bỏ qua level có `items.length === 0`; không separator thừa đầu/cuối.
 - Chi tiết UI/layout: skill `react-components` → *Page title bar*.
 
+## Model chuẩn — breadcrumb inline (`Breadcrumb`)
+
+Tối đa **3 cấp**: **2 link** (`linkLevels`, max 2) + **1 current** (`currentLabel`, không `Link`). Separator giữa mọi mục: `»` (`aria-hidden`).
+
+```ts
+linkLevels: { label: string; link: LinkModel; verified?: boolean }[];
+currentLabel?: string;
+```
+
+- Lọc item link thiếu `label`/`url`; cấp hiện tại: `aria-current="location"`.
+- Chi tiết UI: skill `react-components` → *breadcrumb*.
+
 ## Tham chiếu
 
 | Component | Dùng khi |
@@ -42,6 +54,7 @@ title: string;
 | `FooterLinkColumn` | Cột có title + `<ul>` |
 | `RelatedPostList` | Chỉ `<ul>` link, không title (bài liên quan) |
 | `PageTitleBar` | Title + breadcrumb phân cấp (bar full-width, border-bottom) |
+| `Breadcrumb` | Breadcrumb inline: 2 link + current, separator `»` |
 | `AutocompleteItems` | Data từ WP REST search |
 
 ## Registry

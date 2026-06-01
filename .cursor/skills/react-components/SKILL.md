@@ -380,6 +380,43 @@ export interface RelatedPostListModel {
 
 **WordPress:** widget `EAI-related-posts` — query taxonomy trong PHP (`eai_related_posts_get_rc_props`), không query trong component. Chi tiết model link: rule `wp-link-list-components.mdc`.
 
+## Quick reference — breadcrumb (server)
+
+Breadcrumb inline: tối đa **3 cấp** (2 link + 1 current), separator `»`. Khác `PageTitleBarBreadcrumb` (mọi mục link, ` / ` + ` - `, bar xám). **Server-only** — không Wrapper/client.
+
+| File | Vai trò |
+|------|---------|
+| `Breadcrumb.tsx` | `<nav>` + link cấp 1–2 + current span |
+| `src/data/breadcrumb.ts` | Mock / CMS (`Breadcrumb` registry) |
+
+**Model:**
+
+```ts
+export interface BreadcrumbLinkLevelModel {
+  label: string;
+  link: LinkModel;
+  verified?: boolean; // BadgeCheck xanh inline trước label
+}
+
+export interface BreadcrumbModel {
+  className?: string;
+  linkLevels: BreadcrumbLinkLevelModel[]; // max 2
+  currentLabel?: string; // cấp 3 — không link
+}
+```
+
+**Render guards:**
+
+- Lọc `linkLevels` có `label` + `url` trim; `slice(0, 2)`.
+- Tổng mục = `linkLevels` hợp lệ + (`currentLabel?.trim()` ? 1 : 0); **0** → `return null`.
+- Separator `»` (`breadcrumb-sep`, `aria-hidden`) giữa mọi mục; không thừa đầu/cuối.
+
+**UI:** nav `text-base`; link `text-[#e04622]` `no-underline hover:underline`; current `text-foreground` + `aria-current="location"`. Verified: `BadgeCheck` `text-green-600` trong link.
+
+**Semantic classes:** `breadcrumb`, `breadcrumb-link`, `breadcrumb-current`, `breadcrumb-sep`, `breadcrumb-verified-icon`.
+
+**WordPress (sau):** PHP build `linkLevels` + `currentLabel` từ post/taxonomy; không query trong component.
+
 ## Quick reference — feature cards grid (server)
 
 Grid card giống `FeatureCardsCarouselCard` nhưng đơn giản hơn: luôn `Link`, `description` optional, hover zoom ảnh. **Server-only** — không Wrapper/client.

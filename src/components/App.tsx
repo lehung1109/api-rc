@@ -24,6 +24,8 @@ import Footer from "./footer/Footer";
 import footer from "@/data/footer";
 import { relatedPostList } from "@/data/related-post-list";
 import RelatedPostList from "./related-posts/RelatedPostList";
+import breadcrumb from "@/data/breadcrumb";
+import Breadcrumb from "./breadcrumb/Breadcrumb";
 import inlineList from "@/data/inline-list";
 import InlineList from "./inline-list/InlineList";
 import TableOfContentsWrapper from "./table-of-contents/TableOfContentsWrapper";
@@ -57,6 +59,9 @@ const App = () => {
       </div>
       <ProductGalleryWrapper {...productGalleryWrapper} />
       <PartnerLogosWrapper {...partnerLogosWrapper} />
+      <div className="mx-auto max-w-7xl px-4 py-4">
+        <Breadcrumb {...breadcrumb} />
+      </div>
       <RelatedPostList {...relatedPostList} />
       <InlineList {...inlineList} />
       <Footer {...footer} />
