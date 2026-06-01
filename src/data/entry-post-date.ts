@@ -15,6 +15,7 @@ const entryPostDate: EntryPostDateModel = {
       nofollow: false,
     },
   },
+  termPrefix: " by KTS. ",
 };
 
 export default entryPostDate;

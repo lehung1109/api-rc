@@ -6,6 +6,7 @@ export interface EntryPostDateModel {
   dateLabel: string;
   dateLink: LinkModel;
   term: { text: string; link: LinkModel };
+  termPrefix?: string;
   className?: string;
   as?: HtmlContentModel["as"];
 }
@@ -40,8 +41,10 @@ function formatAnchor(link: LinkModel, children: string): string {
 export function buildEntryPostDateHtml(model: EntryPostDateModel): string {
   const dateAnchor = formatAnchor(model.dateLink, model.dateLabel);
   const termAnchor = formatAnchor(model.term.link, model.term.text);
+  const prefix = (model.termPrefix ?? "").trim();
+  const prefixHtml = prefix !== "" ? escapeHtml(prefix) : "";
 
-  return `<p>Bài viết được đăng ngày ${dateAnchor} by ${termAnchor}</p>`;
+  return `<p>Bài viết được đăng ngày ${dateAnchor}${prefixHtml}${termAnchor}</p>`;
 }
 
 const EntryPostDate = (model: EntryPostDateModel) => {
