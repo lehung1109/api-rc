@@ -492,9 +492,9 @@ export interface FeatureCardsGridModel {
 **Card layout (`layout` per item):**
 
 - **`stack`** (default): media trên, body dưới — mọi breakpoint.
-- **`media-left`**: mobile giống `stack`; từ **`md:`** → `flex-row`, media trái ~38%, body phải `text-left`.
+- **`media-left`**: mobile giống `stack`; từ **`md:`** → `flex-row`, media trái ~38%, ảnh `object-contain` + `object-center` (không crop), media wrapper `bg-neutral-100` khi letterbox; body `p-[5px]`, `text-[15px]`, `text-left`, title `font-normal` (không bold).
 
-**UI:** body `bg-neutral-100`, title `text-[#f36f21] font-bold`; ảnh `group-hover:scale-105` trong wrapper `overflow-hidden`.
+**UI:** `stack` — body `p-[10px]`, `text-center`, title `text-lg font-bold`; ảnh `object-cover`, `group-hover:scale-105` trong wrapper `overflow-hidden`. Chung: body `bg-neutral-100`, title `text-[#f36f21]`.
 
 **Semantic classes:** `feature-cards-grid`, `feature-cards-grid-card`, `feature-cards-grid-card--media-left`, `feature-cards-grid-card-media`, `feature-cards-grid-card-image`, `feature-cards-grid-card-body`, `feature-cards-grid-card-title`, `feature-cards-grid-card-description`, `feature-cards-grid-card-link`.
 
