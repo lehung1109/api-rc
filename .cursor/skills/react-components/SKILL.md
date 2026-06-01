@@ -381,11 +381,14 @@ Grid card giống `FeatureCardsCarouselCard` nhưng đơn giản hơn: luôn `Li
 **Model:**
 
 ```ts
+export type FeatureCardsGridCardLayout = "stack" | "media-left";
+
 export interface FeatureCardsGridItemModel {
   image: MediaModel;
   title: string;
   description?: string;
   link: LinkModel;
+  layout?: FeatureCardsGridCardLayout; // default "stack"
 }
 
 export interface FeatureCardsGridModel {
@@ -405,9 +408,14 @@ export interface FeatureCardsGridModel {
 
 **Responsive columns:** mobile luôn 1 cột; tablet `md:` (`columnsTablet`); desktop `lg:` (`columnsDesktop`). Dùng lookup map full class string (`md:grid-cols-2`, `lg:grid-cols-3`, …) clamp 1–6 — không template dynamic Tailwind.
 
+**Card layout (`layout` per item):**
+
+- **`stack`** (default): media trên, body dưới — mọi breakpoint.
+- **`media-left`**: mobile giống `stack`; từ **`md:`** → `flex-row`, media trái ~38%, body phải `text-left`.
+
 **UI:** body `bg-neutral-100`, title `text-[#f36f21] font-bold`; ảnh `group-hover:scale-105` trong wrapper `overflow-hidden`.
 
-**Semantic classes:** `feature-cards-grid`, `feature-cards-grid-card`, `feature-cards-grid-card-media`, `feature-cards-grid-card-image`, `feature-cards-grid-card-body`, `feature-cards-grid-card-title`, `feature-cards-grid-card-description`, `feature-cards-grid-card-link`.
+**Semantic classes:** `feature-cards-grid`, `feature-cards-grid-card`, `feature-cards-grid-card--media-left`, `feature-cards-grid-card-media`, `feature-cards-grid-card-image`, `feature-cards-grid-card-body`, `feature-cards-grid-card-title`, `feature-cards-grid-card-description`, `feature-cards-grid-card-link`.
 
 **WordPress (sau):** tái dùng `eai_rc_map_feature_card_from_post` cho `items`; widget riêng nếu cần.
 

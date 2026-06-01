@@ -25,6 +25,7 @@ const featureCardsGrid: FeatureCardsGridModel = {
       title: "Thi công trọn gói",
       description:
         "Đội ngũ thi công chuyên nghiệp, đảm bảo tiến độ và chất lượng theo bản vẽ thiết kế.",
+      layout: "media-left",
       link: { url: "#", is_external: false, nofollow: false },
     },
     {
@@ -45,6 +46,7 @@ const featureCardsGrid: FeatureCardsGridModel = {
       title: "Bảo trì & hậu mãi",
       description:
         "Hỗ trợ bảo trì, nâng cấp không gian sau bàn giao với chính sách rõ ràng.",
+      layout: "media-left",
       link: { url: "#", is_external: false, nofollow: false },
     },
     {
