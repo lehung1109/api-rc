@@ -53,7 +53,7 @@ const FeatureCardsGridCard = (item: FeatureCardsGridItemModel) => {
           isMediaLeft && "md:justify-center md:text-left",
         )}
       >
-        <h3 className="feature-cards-grid-card-title text-xl font-bold text-[#f36f21]">
+        <h3 className="feature-cards-grid-card-title text-lg font-bold text-[#f36f21] mb-0">
           {title}
         </h3>
 
