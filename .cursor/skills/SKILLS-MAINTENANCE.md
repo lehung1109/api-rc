@@ -21,6 +21,7 @@ Trong **cùng phiên** (hoặc trước khi kết thúc task), cập nhật skil
 | Nội dung | File |
 |----------|------|
 | React, props, server/client, registry, data | [react-components/SKILL.md](react-components/SKILL.md) |
+| Markup SEO component (landmark, heading, Media/Link) | [react-seo-markup.mdc](../rules/react-seo-markup.mdc) + đồng bộ `react-components` |
 | Responsive, checkbox, một DOM, overlay/menu | [css-first-responsive-ui/SKILL.md](css-first-responsive-ui/SKILL.md) |
 | Header chi tiết | [src/components/header/HEADER.md](../../src/components/header/HEADER.md) — giữ đồng bộ với hai skill trên |
 | Quy tắc chung / index | File này |
@@ -52,3 +53,4 @@ Skill mới: tạo thư mục `skill-name/SKILL.md`, thêm một dòng vào bả
 - Feature UI lớn (footer, header) → tách orchestrator + section/leaf trong cùng folder; một file data aggregate — xem `react-components` mục *Chia nhỏ component*.
 - Breadcrumb phân cấp (`/` giữa cấp, `-` trong cấp) → `react-components` *Page title bar* + rule `wp-link-list-components.mdc`.
 - Thanh meta 4 cột (icon Lucide + title/content, `bg-[#f7f7f7]`) → `react-components` *Project meta bar* + `elementor-widget-context.mdc` (settings/ACF, không LinkModel).
+- User: luôn markup chuẩn SEO khi tạo component → rule `react-seo-markup.mdc` + mục *SEO markup* trong `react-components`.

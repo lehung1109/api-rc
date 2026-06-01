@@ -2,10 +2,11 @@
 name: react-components
 description: >-
   Creates and edits React components in api-rc following model props, server-first
-  rendering, ClientComponentWrapper hydration, Tailwind + semantic classes, and
-  auto-generated registries. Use when adding, refactoring, or fixing TSX in
-  src/components/, wiring client islands, page title bar, project meta bar,
-  layered breadcrumb, or when the user asks about component conventions in api-rc. Keeps this skill
+  rendering, ClientComponentWrapper hydration, Tailwind + semantic classes, SEO
+  markup (semantic HTML, heading hierarchy), and auto-generated registries. Use when
+  adding, refactoring, or fixing TSX in src/components/, wiring client islands,
+  page title bar, project meta bar, layered breadcrumb, or when the user asks about
+  component conventions, semantic HTML, or heading levels in api-rc. Keeps this skill
   and related docs updated when new project conventions emerge.
 ---
 
@@ -20,7 +21,8 @@ Skills are living docs. When you learn or agree on a **new api-rc convention** (
 1. Read sibling files in the same feature folder — match naming, props shape, and styling.
 2. For responsive UI (mobile/desktop, overlays, toggles): also read [css-first-responsive-ui](../css-first-responsive-ui/SKILL.md).
 3. For header files: read [src/components/header/HEADER.md](../../../src/components/header/HEADER.md).
-4. Run `bun run typecheck` after changes. Run `bun run generate` when adding/removing renderable or client components.
+4. When creating or editing component markup: follow [react-seo-markup.mdc](../../rules/react-seo-markup.mdc) (landmarks, `h1`–`h3`, `Link`/`Media`, `nav` + `aria-label`).
+5. Run `bun run typecheck` after changes. Run `bun run generate` when adding/removing renderable or client components.
 
 ## Architecture
 
@@ -141,6 +143,15 @@ Rules:
 - shadcn (`Button`, `Input`, …): reuse existing `components/ui/*`; do not add Sheet/Collapsible/Radix toggles for simple show/hide (use checkbox + CSS per css-first skill).
 - CMS HTML fields (`introContent`, WYSIWYG text): `dangerouslySetInnerHTML={{ __html: … }}` on a semantic wrapper with a stable class.
 
+## SEO markup
+
+Widget SSR = HTML cho crawler. Chi tiết: [react-seo-markup.mdc](../../rules/react-seo-markup.mdc).
+
+- **Landmark:** orchestrator dùng `<header>`, `<footer>`, `<section>`, `<nav>`, `<article>` khi khớp vai trò — không bọc cả widget chỉ bằng `div`.
+- **Heading:** một `<h1>` trên trang → `PageTitleBar` only; section widget → `<h2>`; card/cột → `<h3>`; không nhảy cấp.
+- **Link / ảnh / list:** `Link` + `LinkModel`; `Media` + `alt`; nhóm link → `ul`/`ol` + `li`.
+- **Nav:** `<nav aria-label="…">`; icon trang trí `aria-hidden`; nút icon-only `aria-label`.
+
 ## Shared building blocks
 
 | Component | Use for |
@@ -223,6 +234,7 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 - [ ] Client? → Wrapper + `src/data/<wrapper-kebab>.ts` (+ `src/data/<client-kebab>.ts` re-export nếu cần hydrate)
 - [ ] Server-only? → `src/data/<component-kebab>.ts`
 - [ ] Semantic classes + cn() for className merges
+- [ ] Landmark + heading level + Media/Link/nav theo react-seo-markup.mdc
 - [ ] Wire into App.tsx or parent orchestrator if needed
 - [ ] bun run generate (if new export or client component)
 - [ ] bun run typecheck

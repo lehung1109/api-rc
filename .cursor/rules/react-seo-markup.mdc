@@ -1,0 +1,89 @@
+---
+description: Markup HTML semantic & SEO khi tạo/sửa React component SSR
+globs: src/components/**/*.tsx
+alwaysApply: false
+---
+
+# Markup SEO (React components — api-rc)
+
+Widget SSR từ api-rc là HTML thật cho crawler. Ưu tiên **phần tử semantic** + **thứ bậc heading** + building blocks dự án (`Link`, `Media`).
+
+## Landmark gốc (orchestrator)
+
+| Vai trò widget | Phần tử gốc |
+|----------------|-------------|
+| Site header | `<header>` |
+| Site footer | `<footer>` |
+| Khối nội dung trang (CTA, showcase, process, …) | `<section>` |
+| Menu / breadcrumb / TOC | `<nav>` |
+| Card / entry độc lập | `<article>` (tùy chọn, khi là đơn vị nội dung) |
+| Sidebar phụ | `<aside>` |
+
+**Do:** orchestrator (`Feature.tsx`) bọc bằng landmark khớp vai trò — xem `Footer`, `Header`, `DesignConsultationCta`.
+
+**Avoid:** bọc cả khối nội dung widget chỉ bằng `<div>` khi đã có landmark phù hợp. `div`/`span` chỉ cho layout/spacing bên trong.
+
+## Thứ bậc heading (api-rc)
+
+| Cấp | Dùng khi | Ví dụ |
+|-----|----------|--------|
+| `<h1>` | **Một lần trên view trang** | `PageTitleBar` (`title` prop) |
+| `<h2>` | Tiêu đề section widget | `DesignConsultationCta` (`heading`) |
+| `<h3>` | Tiêu đề cột / card / bước con | `FooterLinkColumn`, `FeatureCardsGridCard`, `ProcessSection` |
+
+**Do:** text tiêu đề từ props (`title`, `heading`, `label`) — không để heading rỗng.
+
+**Avoid:** thêm `<h1>` trong widget section; nhảy cấp (`h1` → `h3`); “giả heading” bằng `<p>`/`<div>` + `font-bold` khi text là tiêu đề có nghĩa.
+
+## Liên kết & điều hướng
+
+- Link có URL: `Link` + `LinkModel` từ `src/components/link/Link.tsx`.
+- Text link = `label` có nghĩa từ props (tránh “click here” / “xem thêm” chung nếu props có tên cụ thể).
+- Menu, breadcrumb, TOC: `<nav>` + `aria-label` mô tả (vd. `"Breadcrumb"`, title TOC).
+- Breadcrumb phân cấp: rule [`wp-link-list-components.mdc`](wp-link-list-components.mdc).
+- Điều hướng thật → `<a>` / `Link`; hành động UI (carousel, toggle) → `<button type="button">`.
+- Link ngoài (`is_external`): khuyến nghị `rel` gồm `noopener noreferrer` (cùng `nofollow` nếu model bật).
+
+## Ảnh
+
+- Dùng `Media` + `MediaModel` (`src/components/media/Media.tsx`).
+- `alt` bắt buộc trong model; trang trí: `alt=""`.
+- Giữ `width` / `height` từ `display_dimensions`; mặc định `loading="lazy"`, `decoding="async"`.
+- Slide/hero đầu có thể `loading="eager"` (pattern `ProductGallery`).
+
+**Avoid:** `<img>` thô khi đã có `MediaModel`; ảnh thiếu `alt`.
+
+## Danh sách & nội dung
+
+- Nhóm link: `<ul>` hoặc `<ol>` + `<li>` (vd. `FooterLinkColumn`).
+- Mô tả: `<p>`; CMS HTML: `dangerouslySetInnerHTML` trên wrapper semantic + class ổn định.
+
+## Accessibility (hỗ trợ crawler & screen reader)
+
+- Icon trang trí: `aria-hidden`.
+- Nút chỉ icon: `aria-label`.
+- Mục active trong nav: `aria-current="location"` (TOC, breadcrumb current khi có).
+- Separator breadcrumb: `aria-hidden` (không phải link).
+
+## Tránh (tóm tắt)
+
+| Avoid | Do thay thế |
+|-------|----------------|
+| Nhiều `<h1>` | Chỉ `PageTitleBar` (hoặc page-hero được document) |
+| `div` soup cho cấu trúc | `<section>`, `<nav>`, `<article>`, … |
+| `href="#"` / URL rỗng | Bỏ link hoặc `return null` khi không có data |
+| Heading trống | Lấy text từ props |
+| Bọc section trong `<span>` | Landmark + heading đúng cấp |
+
+**Ngoài scope component:** `<title>`, meta description, JSON-LD — do theme/WP, không trong widget TSX.
+
+## Checklist — component mới / refactor markup
+
+```
+- [ ] Orchestrator có landmark gốc đúng vai trò
+- [ ] Heading: không h1 widget; h2 section / h3 card-cột; không nhảy cấp
+- [ ] Link qua LinkModel; nav có aria-label khi cần
+- [ ] Ảnh qua Media; alt có nghĩa hoặc alt="" trang trí
+- [ ] Danh sách link dùng ul/ol + li
+- [ ] Icon/button: aria-hidden hoặc aria-label
+```
