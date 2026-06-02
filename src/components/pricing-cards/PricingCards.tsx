@@ -23,7 +23,7 @@ const PricingCards = (model: PricingCardsModel) => {
 
   return (
     <section className={cn("pricing-cards w-full", className)}>
-      <div className="pricing-cards-grid grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="pricing-cards-grid grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 items-start">
         {items.map((item, index) => {
           const titleText = item.title.trim();
           const priceText = item.price.trim();
@@ -37,36 +37,41 @@ const PricingCards = (model: PricingCardsModel) => {
             <article
               key={`${titleText || "pricing"}-${index}`}
               className={cn(
-                "pricing-cards-card group relative flex h-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-xl",
+                "pricing-cards-card group relative overflow-hidden rounded-xl border border-black bg-white shadow-[2px_2px_10px_#00000040] transition-shadow duration-200 hover:shadow-[0_10px_20px_rgba(0,0,0,0.19),0_6px_6px_rgba(0,0,0,0.22)]",
                 isActive &&
-                  "pricing-cards-card--active z-10 -translate-y-2 border-[#f36f21]/40 shadow-xl ring-2 ring-[#f36f21]/70",
+                  "pricing-cards-card--active border-2 border-[#f39a36] -top-3.5",
               )}
             >
               <div
                 className={cn(
-                  "pricing-cards-title bg-neutral-900 px-4 py-3 text-center text-base font-semibold text-white",
-                  isActive && "bg-[#f36f21]",
+                  "pricing-cards-title bg-black px-[10px] py-[20px] text-center text-[20px] font-semibold text-white",
+                  isActive && "bg-[#f39a36]",
                 )}
               >
                 {titleText}
               </div>
 
-              <div className="pricing-cards-content flex flex-1 flex-col px-4 py-4">
-                <div className="pricing-cards-price text-center text-2xl font-bold text-[#d6a34e]">
+              <div className="pricing-cards-content">
+                <div
+                  className={cn(
+                    "pricing-cards-price text-center text-2xl font-bold text-[#f3c669] px-2.5 py-3 bg-[#292929]",
+                    isActive && "bg-[#f3c669] text-[#e10000]",
+                  )}
+                >
                   {priceText}
                 </div>
 
                 <div
-                  className="pricing-cards-body mt-4 border-b border-neutral-200 pb-4 text-sm leading-6 text-neutral-600"
+                  className="pricing-cards-body mt-4 border-b border-[#ececec] p-4 leading-6 text-neutral-600"
                   dangerouslySetInnerHTML={{ __html: htmlTextContent }}
                 />
 
                 {hasButton ? (
-                  <div className="pricing-cards-button-wrapper mt-5 flex justify-center">
+                  <div className="pricing-cards-button-wrapper mt-5 justify-center text-center mb-4">
                     <Link
                       {...item.buttonLink}
                       className={cn(
-                        "pricing-cards-button inline-flex items-center justify-center rounded-full bg-[#f36f21] px-6 py-2 text-sm font-semibold text-white shadow no-underline transition-colors hover:bg-[#ff7f2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f36f21]/60",
+                        "pricing-cards-button inline-flex items-center justify-center rounded-full bg-[#f36f21] px-6 py-2 font-semibold text-white shadow no-underline transition-colors hover:bg-[#ff7f2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f36f21]/60",
                         item.buttonLink.className,
                       )}
                     >
