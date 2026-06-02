@@ -2,6 +2,8 @@ import { header } from "@/data/header";
 import Header from "./header/Header";
 import HeroSection from "./hero-section/HeroSection";
 import { heroSection } from "@/data/hero-section";
+import PricingCards from "./pricing-cards/PricingCards";
+import pricingCards from "@/data/pricing-cards";
 import ProjectMetaBar from "./project-meta-bar/ProjectMetaBar";
 import { projectMetaBar } from "@/data/project-meta-bar";
 import CarouselWrapper from "./carousel/CarouselWrapper";
@@ -38,6 +40,10 @@ const App = () => {
     <div>
       <Header {...header} />
       <HeroSection {...heroSection} />
+
+      <div className="mx-auto max-w-7xl px-4 py-8">
+        <PricingCards {...pricingCards} />
+      </div>
 
       <SectionTitle {...sectionTitle} />
 

@@ -266,7 +266,8 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 - [ ] Server-only? → `src/data/<component-kebab>.ts`
 - [ ] Semantic classes + cn() for className merges
 - [ ] Landmark + heading level + Media/Link/nav theo react-seo-markup.mdc
-- [ ] Wire into App.tsx or parent orchestrator if needed
+- [ ] Wire vào `src/components/App.tsx` (khi có data demo trong `src/data/`) hoặc parent orchestrator nếu phù hợp
+  - Mặc định: section mới mount trong `App.tsx` **ngay sau `HeroSection`** (trừ khi component chỉ dùng qua API/Elementor hoặc thuộc flow khác)
 - [ ] bun run generate (if new export or client component)
 - [ ] bun run typecheck
 - [ ] New convention? → update this skill (and css-first / HEADER.md if relevant)
