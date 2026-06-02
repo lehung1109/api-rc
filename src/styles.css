@@ -213,3 +213,30 @@ html body[data-scroll-locked] {
   ) {
   /* branch closed — hook for 3rd-party */
 }
+
+@keyframes hero-section-stretch {
+  0% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.animate-hero-section-stretch {
+  animation-name: hero-section-stretch;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-direction: reverse;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}

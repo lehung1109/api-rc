@@ -33,7 +33,9 @@ Widget SSR từ api-rc là HTML thật cho crawler. Ưu tiên **phần tử sema
 
 **Do:** text tiêu đề từ props (`title`, `heading`, `label`) — không để heading rỗng.
 
-**Avoid:** thêm `<h1>` trong widget section; nhảy cấp (`h1` → `h3`); “giả heading” bằng `<p>`/`<div>` + `font-bold` khi text là tiêu đề có nghĩa.
+**Exception (Page Hero):** một “hero” dùng làm **tiêu đề chính của trang** có thể dùng `<h1>` **khi không dùng `PageTitleBar`** trên cùng view. Nếu trang vẫn có `PageTitleBar`, hero nên dùng `<h2>` như một section.
+
+**Avoid:** thêm `<h1>` trong widget section (trừ ngoại lệ Page Hero ở trên); nhảy cấp (`h1` → `h3`); “giả heading” bằng `<p>`/`<div>` + `font-bold` khi text là tiêu đề có nghĩa.
 
 ## Liên kết & điều hướng
 

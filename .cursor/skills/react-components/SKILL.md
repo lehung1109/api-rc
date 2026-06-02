@@ -142,6 +142,37 @@ Rules:
 - Icons: **lucide-react** (`Menu`, `ChevronDownIcon`, …).
 - shadcn (`Button`, `Input`, …): reuse existing `components/ui/*`; do not add Sheet/Collapsible/Radix toggles for simple show/hide (use checkbox + CSS per css-first skill).
 - CMS HTML fields (`introContent`, WYSIWYG text): `dangerouslySetInnerHTML={{ __html: … }}` on a semantic wrapper with a stable class.
+- Custom CSS (keyframes, semantic overrides): put in `src/styles.css` (project-wide). Prefer namespaced animation names + a stable utility class, and disable motion for accessibility via `motion-reduce:animate-none`.
+
+**Verbatim snippet (user-provided):**
+
+```css
+animation-name: stretch;
+animation-duration: 1s;
+animation-timing-function: ease-in-out;
+animation-direction: reverse;
+animation-iteration-count: infinite;
+animation-play-state: running;
+
+@keyframes
+0% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    /* transform: scale(1); */
+}
+50% {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+100% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+```
+
+**Recommended shape in api-rc:** define `@keyframes <component>-stretch` + `.animate-<component>-stretch` in `src/styles.css`, then apply it on the CTA link/button (plus `motion-reduce:animate-none`).
 
 ## SEO markup
 

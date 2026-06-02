@@ -1,7 +1,7 @@
 import { header } from "@/data/header";
 import Header from "./header/Header";
-import PageTitleBar from "./page-title-bar/PageTitleBar";
-import { pageTitleBar } from "@/data/page-title-bar";
+import HeroSection from "./hero-section/HeroSection";
+import heroSection from "@/data/hero-section";
 import ProjectMetaBar from "./project-meta-bar/ProjectMetaBar";
 import { projectMetaBar } from "@/data/project-meta-bar";
 import CarouselWrapper from "./carousel/CarouselWrapper";
@@ -35,7 +35,7 @@ const App = () => {
   return (
     <div>
       <Header {...header} />
-      <PageTitleBar {...pageTitleBar} />
+      <HeroSection {...heroSection} />
       <ProjectMetaBar {...projectMetaBar} />
 
       <CarouselWrapper {...carouselWrapper} />
