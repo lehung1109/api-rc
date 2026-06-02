@@ -14,5 +14,4 @@ const heroSection = {
   buttonLink: { url: "#tu-van", is_external: false, nofollow: false },
 } satisfies HeroSectionModel;
 
-export default heroSection;
-
+export { heroSection };

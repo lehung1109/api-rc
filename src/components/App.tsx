@@ -1,7 +1,7 @@
 import { header } from "@/data/header";
 import Header from "./header/Header";
 import HeroSection from "./hero-section/HeroSection";
-import heroSection from "@/data/hero-section";
+import { heroSection } from "@/data/hero-section";
 import ProjectMetaBar from "./project-meta-bar/ProjectMetaBar";
 import { projectMetaBar } from "@/data/project-meta-bar";
 import CarouselWrapper from "./carousel/CarouselWrapper";
