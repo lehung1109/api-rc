@@ -30,12 +30,17 @@ import inlineList from "@/data/inline-list";
 import InlineList from "./inline-list/InlineList";
 import TableOfContentsWrapper from "./table-of-contents/TableOfContentsWrapper";
 import tableOfContentsWrapper from "@/data/table-of-contents-wrapper";
+import { sectionTitle } from "@/data/section-title";
+import SectionTitle from "./section-title/SectionTitle";
 
 const App = () => {
   return (
     <div>
       <Header {...header} />
       <HeroSection {...heroSection} />
+
+      <SectionTitle {...sectionTitle} />
+
       <ProjectMetaBar {...projectMetaBar} />
 
       <CarouselWrapper {...carouselWrapper} />
