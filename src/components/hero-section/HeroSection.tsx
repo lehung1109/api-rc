@@ -16,6 +16,7 @@ export interface HeroSectionModel {
   buttonLink: LinkModel;
   titleHeading?: HeroSectionTitleHeading;
   contentCentered?: boolean;
+  contentFullWidth?: boolean;
 }
 
 const HeroSection = (model: HeroSectionModel) => {
@@ -29,6 +30,7 @@ const HeroSection = (model: HeroSectionModel) => {
     buttonLink,
     titleHeading = "h1",
     contentCentered = false,
+    contentFullWidth = false,
   } = model;
 
   const subtitleText = subtitle.trim();
@@ -61,7 +63,9 @@ const HeroSection = (model: HeroSectionModel) => {
         >
           <div
             className={cn(
-              "hero-section-content max-w-xl",
+              "hero-section-content",
+              !contentFullWidth && "max-w-xl",
+              contentFullWidth && "hero-section-content--full-width w-full",
               contentCentered && "mx-auto text-center",
             )}
           >

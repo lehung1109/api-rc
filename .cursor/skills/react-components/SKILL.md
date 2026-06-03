@@ -342,14 +342,17 @@ export interface HeroSectionModel {
   // ...backgroundImage, subtitle, title, htmlText?, buttonLabel, buttonLink
   titleHeading?: HeroSectionTitleHeading; // default "h1"
   contentCentered?: boolean;              // default false — text-center + flex justify
+  contentFullWidth?: boolean;             // default false — bỏ max-w-xl, w-full
 }
 ```
+
+**Layout:** mặc định `.hero-section-content` có `max-w-xl`; `contentFullWidth` → `w-full` + `hero-section-content--full-width` (không `max-w-xl`). Inner vẫn `max-w-7xl` (container trang).
 
 **SEO:** `h1` khi hero là tiêu đề chính trang (không `PageTitleBar`); `h2` khi trang có Page Title Bar — xem `react-seo-markup.mdc` (Page Hero exception).
 
 **Typography:** subtitle / htmlText / button dùng `text-base` — không `text-sm`.
 
-**WordPress:** widget `EAI-hero-section` — `title_heading` (select), `content_centered` (switcher) → `titleHeading`, `contentCentered`.
+**WordPress:** widget `EAI-hero-section` — `title_heading`, `content_centered`, `content_full_width` → `titleHeading`, `contentCentered`, `contentFullWidth`.
 
 ## Quick reference — page title bar (server)
 
