@@ -324,6 +324,33 @@ Files: `Footer` (orchestrator) → `FooterTop` / `FooterBottom` → `FooterLinkC
 Data: `src/data/footer.ts` — `{ top, bottom }` aggregate; chỉ `Footer` mount từ App/API.  
 Màu: code cũ dùng `bg-black` + accent cam — code mới theo [Brand colors](#brand-colors-ichouse) (`bg-brand-navy`, `text-brand-gold`, …).
 
+## Quick reference — hero section (server)
+
+Banner hero: nền ảnh + overlay, subtitle, title, HTML tùy chọn, CTA. **Server-only** — không Wrapper/client.
+
+| File | Vai trò |
+|------|---------|
+| `HeroSection.tsx` | `<section>` + stage + content |
+| `src/data/hero-section.ts` | Mock / CMS (`HeroSection` registry) |
+
+**Model (bổ sung layout):**
+
+```ts
+export type HeroSectionTitleHeading = "h1" | "h2";
+
+export interface HeroSectionModel {
+  // ...backgroundImage, subtitle, title, htmlText?, buttonLabel, buttonLink
+  titleHeading?: HeroSectionTitleHeading; // default "h1"
+  contentCentered?: boolean;              // default false — text-center + flex justify
+}
+```
+
+**SEO:** `h1` khi hero là tiêu đề chính trang (không `PageTitleBar`); `h2` khi trang có Page Title Bar — xem `react-seo-markup.mdc` (Page Hero exception).
+
+**Typography:** subtitle / htmlText / button dùng `text-base` — không `text-sm`.
+
+**WordPress:** widget `EAI-hero-section` — `title_heading` (select), `content_centered` (switcher) → `titleHeading`, `contentCentered`.
+
 ## Quick reference — page title bar (server)
 
 Thanh tiêu đề trang: title trái, breadcrumb phải, nền xám nhạt, `border-b`. **Server-only** — không Wrapper/client.

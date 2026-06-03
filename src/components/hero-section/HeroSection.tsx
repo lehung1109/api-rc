@@ -4,6 +4,8 @@ import Link from "../link/Link";
 import type { MediaModel } from "../media/Media";
 import Media from "../media/Media";
 
+export type HeroSectionTitleHeading = "h1" | "h2";
+
 export interface HeroSectionModel {
   className?: string;
   backgroundImage: MediaModel;
@@ -12,6 +14,8 @@ export interface HeroSectionModel {
   htmlText?: string;
   buttonLabel: string;
   buttonLink: LinkModel;
+  titleHeading?: HeroSectionTitleHeading;
+  contentCentered?: boolean;
 }
 
 const HeroSection = (model: HeroSectionModel) => {
@@ -23,12 +27,15 @@ const HeroSection = (model: HeroSectionModel) => {
     htmlText,
     buttonLabel,
     buttonLink,
+    titleHeading = "h1",
+    contentCentered = false,
   } = model;
 
   const subtitleText = subtitle.trim();
   const titleText = title.trim();
   const htmlTextContent = htmlText?.trim();
   const hasButton = buttonLabel.trim().length > 0 && buttonLink.url.trim().length > 0;
+  const TitleTag = titleHeading === "h2" ? "h2" : "h1";
 
   if (!backgroundImage.url.trim() && !subtitleText && !titleText && !htmlTextContent) {
     return null;
@@ -46,33 +53,48 @@ const HeroSection = (model: HeroSectionModel) => {
         />
         <div className="hero-section-overlay absolute inset-0 bg-black/60" />
 
-        <div className="hero-section-inner relative z-10 mx-auto flex min-h-[240px] max-w-7xl items-center px-4 py-10 md:min-h-[360px] md:px-6 md:py-14 lg:py-16">
-          <div className="hero-section-content max-w-xl">
+        <div
+          className={cn(
+            "hero-section-inner relative z-10 mx-auto flex min-h-[240px] max-w-7xl items-center px-4 py-10 md:min-h-[360px] md:px-6 md:py-14 lg:py-16",
+            contentCentered && "justify-center",
+          )}
+        >
+          <div
+            className={cn(
+              "hero-section-content max-w-xl",
+              contentCentered && "mx-auto text-center",
+            )}
+          >
             {subtitleText ? (
-              <p className="hero-section-subtitle text-sm text-[#f7f7f7] md:text-base">
+              <p className="hero-section-subtitle text-base text-[#f7f7f7]">
                 {subtitleText}
               </p>
             ) : null}
 
             {titleText ? (
-              <h1 className="hero-section-title mt-2 text-2xl font-bold leading-tight text-white md:text-4xl lg:text-5xl">
+              <TitleTag className="hero-section-title mt-2 text-2xl font-bold leading-tight text-white md:text-4xl lg:text-5xl">
                 {titleText}
-              </h1>
+              </TitleTag>
             ) : null}
 
             {htmlTextContent ? (
               <div
-                className="hero-section-text mt-3 text-sm leading-relaxed text-[#f7f7f7] md:text-base"
+                className="hero-section-text mt-3 text-base leading-relaxed text-[#f7f7f7]"
                 dangerouslySetInnerHTML={{ __html: htmlTextContent }}
               />
             ) : null}
 
             {hasButton ? (
-              <div className="hero-section-button-wrapper mt-5 md:mt-7">
+              <div
+                className={cn(
+                  "hero-section-button-wrapper mt-5 md:mt-7",
+                  contentCentered && "flex justify-center",
+                )}
+              >
                 <Link
                   {...buttonLink}
                   className={cn(
-                    "hero-section-button animate-hero-section-stretch motion-reduce:animate-none inline-flex items-center justify-center rounded-full bg-[#f36f21] px-6 py-2 text-sm font-semibold uppercase text-white shadow no-underline transition-colors hover:bg-[#ff7f2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 md:px-7 md:py-2.5 md:text-base",
+                    "hero-section-button animate-hero-section-stretch motion-reduce:animate-none inline-flex items-center justify-center rounded-full bg-[#f36f21] px-6 py-2 text-base font-semibold uppercase text-white shadow no-underline transition-colors hover:bg-[#ff7f2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 md:px-7 md:py-2.5",
                     buttonLink.className,
                   )}
                 >
