@@ -337,14 +337,18 @@ Banner hero: nền ảnh + overlay, subtitle, title, HTML tùy chọn, CTA. **Se
 
 ```ts
 export type HeroSectionTitleHeading = "h1" | "h2";
+export type HeroSectionButtonVariant = "default" | "yellow";
 
 export interface HeroSectionModel {
   // ...backgroundImage, subtitle, title, htmlText?, buttonLabel, buttonLink
   titleHeading?: HeroSectionTitleHeading; // default "h1"
   contentCentered?: boolean;              // default false — text-center + flex justify
   contentFullWidth?: boolean;             // default false — bỏ max-w-xl, w-full
+  buttonVariant?: HeroSectionButtonVariant; // default "default" — cam legacy; "yellow" → #fcce0a
 }
 ```
+
+**Button variant:** `default` — `bg-[#f36f21]` / `hover:bg-[#ff7f2a]`; `yellow` — `bg-[#fcce0a]` / `hover:bg-[#e8bc09]`, class `hero-section-button--yellow`, chữ trắng.
 
 **Layout:** mặc định `.hero-section-content` có `max-w-xl`; `contentFullWidth` → `w-full` + `hero-section-content--full-width` (không `max-w-xl`). Inner vẫn `max-w-7xl` (container trang).
 
@@ -352,7 +356,7 @@ export interface HeroSectionModel {
 
 **Typography:** subtitle / htmlText / button dùng `text-base` — không `text-sm`.
 
-**WordPress:** widget `EAI-hero-section` — `title_heading`, `content_centered`, `content_full_width` → `titleHeading`, `contentCentered`, `contentFullWidth`.
+**WordPress:** widget `EAI-hero-section` — `title_heading`, `content_centered`, `content_full_width`, `button_variant` → `titleHeading`, `contentCentered`, `contentFullWidth`, `buttonVariant`.
 
 ## Quick reference — page title bar (server)
 

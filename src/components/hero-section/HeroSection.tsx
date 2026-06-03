@@ -6,6 +6,13 @@ import Media from "../media/Media";
 
 export type HeroSectionTitleHeading = "h1" | "h2";
 
+export type HeroSectionButtonVariant = "default" | "yellow";
+
+const HERO_SECTION_BUTTON_VARIANT_CLASSES: Record<HeroSectionButtonVariant, string> = {
+  default: "bg-[#f36f21] text-white hover:bg-[#ff7f2a]",
+  yellow: "hero-section-button--yellow bg-[#fcce0a] text-white hover:bg-[#e8bc09]",
+};
+
 export interface HeroSectionModel {
   className?: string;
   backgroundImage: MediaModel;
@@ -17,6 +24,7 @@ export interface HeroSectionModel {
   titleHeading?: HeroSectionTitleHeading;
   contentCentered?: boolean;
   contentFullWidth?: boolean;
+  buttonVariant?: HeroSectionButtonVariant;
 }
 
 const HeroSection = (model: HeroSectionModel) => {
@@ -31,6 +39,7 @@ const HeroSection = (model: HeroSectionModel) => {
     titleHeading = "h1",
     contentCentered = false,
     contentFullWidth = false,
+    buttonVariant = "default",
   } = model;
 
   const subtitleText = subtitle.trim();
@@ -98,7 +107,8 @@ const HeroSection = (model: HeroSectionModel) => {
                 <Link
                   {...buttonLink}
                   className={cn(
-                    "hero-section-button animate-hero-section-stretch motion-reduce:animate-none inline-flex items-center justify-center rounded-full bg-[#f36f21] px-6 py-2 text-base font-semibold uppercase text-white shadow no-underline transition-colors hover:bg-[#ff7f2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 md:px-7 md:py-2.5",
+                    "hero-section-button animate-hero-section-stretch motion-reduce:animate-none inline-flex items-center justify-center rounded-full px-6 py-2 text-base font-semibold uppercase shadow no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 md:px-7 md:py-2.5",
+                    HERO_SECTION_BUTTON_VARIANT_CLASSES[buttonVariant],
                     buttonLink.className,
                   )}
                 >
