@@ -36,12 +36,15 @@ import TableOfContentsWrapper from "./table-of-contents/TableOfContentsWrapper";
 import tableOfContentsWrapper from "@/data/table-of-contents-wrapper";
 import { sectionTitle } from "@/data/section-title";
 import SectionTitle from "./section-title/SectionTitle";
+import CustomerTestimonialsWrapper from "./customer-testimonials/CustomerTestimonialsWrapper";
+import customerTestimonialsWrapper from "@/data/customer-testimonials-wrapper";
 
 const App = () => {
   return (
     <div>
       <Header {...header} />
       <HeroSection {...heroSection} />
+      <CustomerTestimonialsWrapper {...customerTestimonialsWrapper} />
       <NumberIconGrid {...numberIconGrid} />
 
       <div className="mx-auto max-w-7xl px-4 py-8">

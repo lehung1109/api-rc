@@ -97,6 +97,19 @@ export default carouselWrapper satisfies CarouselModel;
 - **Do not** add parallel `FooMobile.tsx` / `FooDesktop.tsx` — one tree, responsive Tailwind.
 - **Do not** edit `src/generated/*` — run `bun run generate`.
 
+## Một component mỗi file TSX
+
+**Bắt buộc:** mỗi file `*.tsx` trong `src/components/` (trừ `ui/`) chỉ chứa **một** React component (default export). Không đặt component con (`FooCard`, `FooModal`, …) trong cùng file với orchestrator/grid.
+
+| Được phép trong file | Không được (phải tách file `.tsx` riêng) |
+|----------------------|------------------------------------------|
+| Hàm helper / `renderXxx()` **không** phải component | Component React thứ hai (`const Bar = () => …`) |
+| Map icon, guard, `cn()`, type-only | Sub-component JSX tái sử dụng (`FeatureCard`, `FeatureModal`, …) |
+
+**Do:** `FeatureGrid.tsx` + `FeatureGridCard.tsx` (vd. [`customer-testimonials/`](../../../src/components/customer-testimonials/): `CustomerTestimonialsGrid` + `CustomerTestimonialsCard`).
+
+**Avoid:** `CustomerTestimonialsGrid.tsx` vừa export grid vừa khai báo `CustomerTestimonialsCard` trong cùng file — tách `CustomerTestimonialsCard.tsx`.
+
 ## Chia nhỏ component (feature lớn)
 
 Khi một section có **nhiều vùng UI** (nhiều cột, hàng, khối lặp lại) hoặc file TSX **sắp vượt ~150–200 dòng**, tách thành **một thư mục feature** với orchestrator mỏng — không nhồn hết markup vào một file.
@@ -120,9 +133,9 @@ src/components/<feature>/
 
 **Mount từ bên ngoài:** chỉ orchestrator (vd. `<Footer />`, `<Header />`). Sub-component **không** gọi trong `App.tsx` / `eai_rc_render_html` trừ khi có widget/data riêng (như `HeaderMenu` có `header-menu.ts`).
 
-**Khi nào chưa tách file:** section đơn giản (một CTA, một carousel qua wrapper) — giữ một `Feature.tsx`. Ưu tiên **hàm render private trong file** trước khi tách file mới.
+**Khi nào một file đủ:** section đơn giản, **một** component duy nhất (một CTA, một carousel qua wrapper). Helper thuần (không phải component) có thể ở cùng file.
 
-**Tránh:** tách theo breakpoint (`FooMobile.tsx`); tách file chỉ để 5–10 dòng JSX không lặp.
+**Tránh:** tách theo breakpoint (`FooMobile.tsx`); gom nhiều component vào một file (vi phạm [Một component mỗi file TSX](#một-component-mỗi-file-tsx)).
 
 ## Props & types
 
@@ -264,6 +277,7 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 | Mock/CMS data chỉ trong `src/data/<client>.ts` khi có wrapper | Data chính trong `src/data/<wrapper-kebab>.ts`; client data re-export nếu cần registry |
 | `"use client"` on entire layout | Server shell + minimal client island |
 | Duplicate DOM for breakpoints | One node + responsive classes ([css-first skill](../css-first-responsive-ui/SKILL.md)) |
+| Nhiều component React trong một file TSX | Một file một component ([Một component mỗi file TSX](#một-component-mỗi-file-tsx)) |
 | Một file TSX >~200 dòng với nhiều vùng UI | Tách folder feature + orchestrator + section/leaf ([Chia nhỏ component](#chia-nhỏ-component-feature-lớn)) |
 | Mount `FooterBrand` / `HeaderMenu` trực tiếp trong App khi chỉ cần cả footer/header | Chỉ mount orchestrator (`Footer`, `Header`) |
 | Inline prop destructuring in signature (inconsistent) | `(model: XxxModel)` unless matching an existing wrapper pattern |
@@ -277,7 +291,7 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 ```
 - [ ] Read neighbors in feature folder
 - [ ] Choose server vs client (server default)
-- [ ] Add ComponentName.tsx + export ComponentNameModel
+- [ ] Add ComponentName.tsx + export ComponentNameModel — **một component mỗi file**; leaf (card, modal, …) → file `.tsx` riêng
 - [ ] Feature lớn / nhiều vùng UI? → tách orchestrator + section/leaf trong cùng folder (không duplicate mobile/desktop)
 - [ ] Client? → Wrapper + `src/data/<wrapper-kebab>.ts` (+ `src/data/<client-kebab>.ts` re-export nếu cần hydrate)
 - [ ] Server-only? → `src/data/<component-kebab>.ts`
@@ -297,6 +311,7 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 | `Carousel` | `CarouselWrapper` | `carousel-wrapper.ts` | `carousel.ts` (re-export) |
 | `FeatureCardsCarousel` | `FeatureCardsCarouselWrapper` | `feature-cards-carousel-wrapper.ts` | `feature-cards-carousel.ts` (re-export) |
 | `TableOfContents` | `TableOfContentsWrapper` | `table-of-contents-wrapper.ts` | `table-of-contents.ts` (re-export) |
+| `CustomerTestimonialsGrid` | `CustomerTestimonialsWrapper` | `customer-testimonials-wrapper.ts` | `customer-testimonials-grid.ts` (re-export) |
 
 ## Quick reference — header stack
 
@@ -549,6 +564,46 @@ export interface FeatureCardsGridModel {
 **Semantic classes:** `feature-cards-grid`, `feature-cards-grid-card`, `feature-cards-grid-card--media-left`, `feature-cards-grid-card-media`, `feature-cards-grid-card-image`, `feature-cards-grid-card-body`, `feature-cards-grid-card-title`, `feature-cards-grid-card-description`, `feature-cards-grid-card-link`.
 
 **WordPress (sau):** tái dùng `eai_rc_map_feature_card_from_post` cho `items`; widget riêng nếu cần.
+
+## Quick reference — customer testimonials (client + wrapper)
+
+Grid thumbnail YouTube + modal iframe khi click. **Client + wrapper** — mount qua `CustomerTestimonialsWrapper`, không mount `CustomerTestimonialsGrid` trực tiếp.
+
+| File | Vai trò |
+|------|---------|
+| `CustomerTestimonialsGrid.tsx` | `"use client"` — grid + modal state |
+| `CustomerTestimonialsCard.tsx` | `"use client"` — thumbnail + nút play (một card) |
+| `CustomerTestimonialsWrapper.tsx` | Server entry: `<section>` + `<h2>`/`<p>` + `ClientComponentWrapper` + `type="customerTestimonialsGrid"` |
+| `src/data/customer-testimonials-wrapper.ts` | Mock / CMS canonical (`CustomerTestimonialsWrapper` registry) |
+| `src/data/customer-testimonials-grid.ts` | Re-export cho client registry |
+
+**Model:**
+
+```ts
+export interface CustomerTestimonialsItemModel {
+  image: MediaModel;
+  youtubeVideoId: string;
+}
+
+export interface CustomerTestimonialsModel {
+  className?: string;
+  title: string;
+  description: string;
+  items: CustomerTestimonialsItemModel[];
+}
+```
+
+**Render guards:** lọc item thiếu `youtubeVideoId` hoặc `image.url` trim; `validItems.length === 0` → `return null` (wrapper + grid).
+
+**Grid:** `grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4` (cố định). Card: `button type="button"`, `aspect-video`, `Media` cover, nút play đỏ giữa (`#e62117`), `group-hover:shadow-lg` card + `group-hover:scale-110` nút play.
+
+**Modal:** `activeVideoId` state; iframe `https://www.youtube.com/embed/{id}?autoplay=1` chỉ khi mở; backdrop `bg-black/50` click đóng; nút `X`; `Escape`; `body` scroll lock.
+
+**Header (SSR trong wrapper):** `<h2>` `text-brand-gold`; `<p>` description `text-neutral-600`; container `max-w-7xl px-4 py-8`.
+
+**Semantic classes:** `customer-testimonials`, `customer-testimonials-header`, `customer-testimonials-title`, `customer-testimonials-description`, `customer-testimonials-grid`, `customer-testimonials-card`, `customer-testimonials-card-media`, `customer-testimonials-card-play`, `customer-testimonials-modal`, `customer-testimonials-modal-backdrop`, `customer-testimonials-modal-dialog`, `customer-testimonials-modal-close`, `customer-testimonials-modal-iframe`.
+
+**WordPress (sau):** widget repeater `image` + YouTube id/URL → map `CustomerTestimonialsModel`.
 
 ## Quick reference — table of contents (client + wrapper)
 

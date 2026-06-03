@@ -51,7 +51,7 @@ Skill mới: tạo thư mục `skill-name/SKILL.md`, thêm một dòng vào bả
 - Thêm component client mới → cập nhật `react-components` (wrapper bắt buộc, data `*-wrapper.ts`, `eai-rc-elementor-widget` nếu có widget WP).
 - Đổi breakpoint chính từ `md` sang `lg` → cập nhật `css-first-responsive-ui` + `HEADER.md` + mọi skill ghi `md`.
 - User: "menu 3 cấp mobile chỉ 2 UI level" → đã có trong header doc; nếu áp dụng feature khác, copy pattern vào `css-first-responsive-ui`.
-- Feature UI lớn (footer, header) → tách orchestrator + section/leaf trong cùng folder; một file data aggregate — xem `react-components` mục *Chia nhỏ component*.
+- Feature UI lớn (footer, header) → tách orchestrator + section/leaf trong cùng folder; **một component mỗi file `.tsx`** — xem `react-components` mục *Một component mỗi file TSX* và *Chia nhỏ component*.
 - Breadcrumb phân cấp (`/` giữa cấp, `-` trong cấp) → `react-components` *Page title bar* + rule `wp-link-list-components.mdc`.
 - Thanh meta 4 cột (icon Lucide + title/content, `bg-[#f7f7f7]`) → `react-components` *Project meta bar* + `elementor-widget-context.mdc` (settings/ACF, không LinkModel).
 - User: luôn markup chuẩn SEO khi tạo component → rule `react-seo-markup.mdc` + mục *SEO markup* trong `react-components`.

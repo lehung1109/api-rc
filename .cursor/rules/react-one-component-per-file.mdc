@@ -1,0 +1,28 @@
+---
+description: Mỗi file TSX trong src/components chỉ một React component; component con phải file riêng.
+globs: src/components/**/*.tsx
+alwaysApply: false
+---
+
+# Một component mỗi file TSX
+
+## Quy tắc
+
+- Mỗi `src/components/**/*.tsx` (trừ `ui/`) có **đúng một** React component (thường `export default`).
+- Component con tái sử dụng (`FooCard`, `FooModal`, `FooNav`, …) → file sibling `FooCard.tsx`, không khai báo trong `Foo.tsx` / `FooGrid.tsx`.
+
+## Được phép cùng file
+
+- Hàm helper, guard, map icon — **không** render JSX như component.
+- `export interface XxxModel` (types) cùng file với component chính của file đó.
+
+## Ví dụ
+
+```
+customer-testimonials/
+  CustomerTestimonialsWrapper.tsx   # 1 component — server entry
+  CustomerTestimonialsGrid.tsx      # 1 component — grid + modal
+  CustomerTestimonialsCard.tsx      # 1 component — card
+```
+
+Chi tiết: skill `react-components` → mục *Một component mỗi file TSX*.
