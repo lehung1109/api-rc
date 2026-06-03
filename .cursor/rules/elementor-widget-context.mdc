@@ -23,5 +23,6 @@ Query `WP_Query` / `wp_get_post_terms` **không** đặt trong api-rc khi phụ 
 - Props type: `*Model`, một object `model`.
 - PHP JSON keys: camelCase (`postId`, `links`).
 - Không markup HTML trong template PHP plugin — chỉ `echo $html` từ SSR.
+- Màu UI do api-rc quyết định — plugin PHP không set màu widget; xem [ichouse-brand-colors.mdc](ichouse-brand-colors.mdc).
 
 Plugin rules: workspace WordPress `/.cursor/rules/eai-*.mdc`.

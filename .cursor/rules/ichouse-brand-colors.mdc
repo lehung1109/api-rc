@@ -1,0 +1,49 @@
+---
+description: Màu nhận diện ICHouse — Navy / Gold / White; token Tailwind brand-*
+globs: src/**/*.{tsx,css}
+alwaysApply: false
+---
+
+# Màu nhận diện ICHouse
+
+**Màu nhận diện hiện tại:**
+
+| Tên | Hex |
+|-----|-----|
+| Xanh Navy | `#022B63` |
+| Vàng Gold | `#D9A441` |
+| Trắng | `#FFFFFF` |
+
+Giá trị hex canonical: [`src/styles.css`](../../src/styles.css) (`--color-brand-navy`, `--color-brand-gold`, `--color-brand-white`).
+
+## Token Tailwind (code mới)
+
+| Token | Utility ví dụ |
+|-------|-----------------|
+| `brand-navy` | `bg-brand-navy`, `text-brand-navy` |
+| `brand-gold` | `text-brand-gold`, `bg-brand-gold`, `border-brand-gold`, `hover:text-brand-gold/90` |
+| `brand-white` | `text-brand-white`, `bg-brand-white` |
+
+**Do:** dùng `brand-*` cho accent và nền thương hiệu.
+
+**Avoid:** hard-code hex brand ngoài `styles.css`; thêm accent hex tự ý; copy palette cam legacy vào component mới.
+
+## Vai trò semantic
+
+| Màu | Dùng khi |
+|-----|----------|
+| Navy | Nền tối (footer, header bar), khối brand |
+| Gold | Accent: tiêu đề cột, link hover, CTA, icon highlight, active state |
+| White | Chữ/icon trên nền Navy; nền sáng khi thiết kế yêu cầu |
+
+Màu trung tính UI (`#f7f7f7`, `#eeeeee`, `#888888`, `neutral-*`, overlay `black/60`) vẫn được phép cho layout và khả năng đọc — **không** thay thế accent thương hiệu.
+
+## Legacy (code cũ)
+
+Các hex cam vẫn còn trong component hiện có — **không** dùng cho code mới:
+
+- `#f36f21` (accent cũ)
+- `#f47c20` (hover cũ)
+- `#ff7f2a` (hover nút cũ)
+
+Khi sửa file legacy, ưu tiên chuyển sang `brand-*` nếu task có scope đổi màu.

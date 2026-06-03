@@ -6,8 +6,8 @@ description: >-
   markup (semantic HTML, heading hierarchy), and auto-generated registries. Use when
   adding, refactoring, or fixing TSX in src/components/, wiring client islands,
   page title bar, project meta bar, layered breadcrumb, or when the user asks about
-  component conventions, semantic HTML, or heading levels in api-rc. Keeps this skill
-  and related docs updated when new project conventions emerge.
+  component conventions, semantic HTML, heading levels, brand colors, or palette in
+  api-rc. Keeps this skill and related docs updated when new project conventions emerge.
 ---
 
 # React components (api-rc)
@@ -22,7 +22,24 @@ Skills are living docs. When you learn or agree on a **new api-rc convention** (
 2. For responsive UI (mobile/desktop, overlays, toggles): also read [css-first-responsive-ui](../css-first-responsive-ui/SKILL.md).
 3. For header files: read [src/components/header/HEADER.md](../../../src/components/header/HEADER.md).
 4. When creating or editing component markup: follow [react-seo-markup.mdc](../../rules/react-seo-markup.mdc) (landmarks, `h1`–`h3`, `Link`/`Media`, `nav` + `aria-label`).
-5. Run `bun run typecheck` after changes. Run `bun run generate` when adding/removing renderable or client components.
+5. When styling with brand/accent colors: follow [ichouse-brand-colors.mdc](../../rules/ichouse-brand-colors.mdc) — dùng token `brand-navy` / `brand-gold` / `brand-white`, không thêm hex cam legacy.
+6. Run `bun run typecheck` after changes. Run `bun run generate` when adding/removing renderable or client components.
+
+## Brand colors (ICHouse)
+
+**Màu nhận diện:** Xanh Navy `#022B63`, Vàng Gold `#D9A441`, Trắng `#FFFFFF` — định nghĩa trong [`src/styles.css`](../../../src/styles.css).
+
+| Token Tailwind | Vai trò |
+|----------------|---------|
+| `brand-navy` | Nền tối (footer, header bar), khối brand |
+| `brand-gold` | Accent: tiêu đề, link hover, CTA, icon, active |
+| `brand-white` | Chữ/icon trên Navy; nền sáng khi cần |
+
+**Code mới:** `text-brand-gold`, `bg-brand-navy`, `hover:text-brand-gold/90`, … — chi tiết trong rule `ichouse-brand-colors.mdc`.
+
+**Legacy trong code cũ:** `#f36f21`, `#f47c20`, `#ff7f2a` — không copy sang component mới; khi sửa có scope đổi màu thì chuyển sang `brand-*`.
+
+Màu trung tính (`#f7f7f7`, `#eeeeee`, `#888888`, `neutral-*`) vẫn OK cho layout; không thay accent thương hiệu.
 
 ## Architecture
 
@@ -289,7 +306,8 @@ Data: `src/data/header.ts` aggregates sub-data; `autocomplete_search` lives on `
 ## Quick reference — footer stack (feature lớn)
 
 Files: `Footer` (orchestrator) → `FooterTop` / `FooterBottom` → `FooterLinkColumn`, `FooterPaymentMethods`, `FooterSocial`, `FooterBrand`, `FooterContact`, `FooterFanpages`.  
-Data: `src/data/footer.ts` — `{ top, bottom }` aggregate; chỉ `Footer` mount từ App/API.
+Data: `src/data/footer.ts` — `{ top, bottom }` aggregate; chỉ `Footer` mount từ App/API.  
+Màu: code cũ dùng `bg-black` + accent cam — code mới theo [Brand colors](#brand-colors-ichouse) (`bg-brand-navy`, `text-brand-gold`, …).
 
 ## Quick reference — page title bar (server)
 
@@ -327,7 +345,7 @@ export interface PageTitleBarModel {
 - Giữa **item trong cùng cấp**: ` - `
 - Ví dụ: `Home / Chung cư - Thi công chung cư - Thiết kế chung cư`
 
-**UI:** title `text-[#f36f21] font-bold uppercase`; breadcrumb `text-sm text-[#888888]`; bar `bg-[#f7f7f7] border-b border-[#eeeeee]`. Layout một cây: `flex-col gap-2` mobile, `md:flex-row md:justify-between md:items-center` desktop. `<h1>` title; `<nav aria-label="Breadcrumb">`.
+**UI:** title `text-[#f36f21] font-bold uppercase` *(legacy — code mới: `text-brand-gold`)*; breadcrumb `text-sm text-[#888888]`; bar `bg-[#f7f7f7] border-b border-[#eeeeee]`. Layout một cây: `flex-col gap-2` mobile, `md:flex-row md:justify-between md:items-center` desktop. `<h1>` title; `<nav aria-label="Breadcrumb">`.
 
 **WordPress (sau):** `title` + `breadcrumbLevels` build trong PHP (post + taxonomy/ancestors), không query trong api-rc — xem [elementor-widget-context](../../rules/elementor-widget-context.mdc).
 
@@ -367,7 +385,7 @@ export interface ProjectMetaBarModel {
 - Bỏ cột mà cả `title` và `content` trống (trim); mảng rỗng sau lọc → `return null`.
 - Icon: map Lucide giống `ProcessSection` (`Record<ProjectMetaBarIconKey, LucideIcon>`).
 
-**UI:** bar `bg-[#f7f7f7]` (có thể `border-b border-[#eeeeee]` khi nối `PageTitleBar`); icon `text-[#f36f21]` ~`h-4 w-4`; title `font-bold`; content `text-sm`. Inner `max-w-7xl` + padding giống `PageTitleBar`. Grid một cây: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`.
+**UI:** bar `bg-[#f7f7f7]` (có thể `border-b border-[#eeeeee]` khi nối `PageTitleBar`); icon `text-[#f36f21]` *(legacy — `text-brand-gold`)* ~`h-4 w-4`; title `font-bold`; content `text-sm`. Inner `max-w-7xl` + padding giống `PageTitleBar`. Grid một cây: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`.
 
 **Semantic classes:** `project-meta-bar`, `project-meta-bar-column`, `project-meta-bar-title`, `project-meta-bar-content`.
 
@@ -398,7 +416,7 @@ export interface RelatedPostListModel {
 - Title: chỉ render khi `title` truthy; wrapper `related-post-list-title` + `dangerouslySetInnerHTML`.
 - Link: merge `item.link.className` sau class semantic (cho override từ PHP/WP).
 
-**UI:** list `space-y-1 list-disc mb-5`; item `ml-5`; link mặc định `text-[#f36f21]`.
+**UI:** list `space-y-1 list-disc mb-5`; item `ml-5`; link mặc định `text-[#f36f21]` *(legacy — `text-brand-gold`)*.
 
 **Semantic classes** (3rd-party CSS — cùng pattern `footer-link-column-*`):
 
@@ -526,7 +544,7 @@ export interface FeatureCardsGridModel {
 - **`stack`** (default): media trên, body dưới — mọi breakpoint.
 - **`media-left`**: mobile giống `stack`; từ **`md:`** → `flex-row`, media trái ~38%, ảnh `object-contain` + `object-center` (không crop), media wrapper `bg-neutral-100` khi letterbox; body `p-[5px]`, `text-[15px]`, `text-left`, title `font-normal` (không bold).
 
-**UI:** `stack` — body `p-[10px]`, `text-center`, title `text-lg font-bold`; ảnh `object-cover`, `group-hover:scale-105` trong wrapper `overflow-hidden`. Chung: body `bg-neutral-100`, title `text-[#f36f21]`.
+**UI:** `stack` — body `p-[10px]`, `text-center`, title `text-lg font-bold`; ảnh `object-cover`, `group-hover:scale-105` trong wrapper `overflow-hidden`. Chung: body `bg-neutral-100`, title `text-[#f36f21]` *(legacy — `text-brand-gold`)*.
 
 **Semantic classes:** `feature-cards-grid`, `feature-cards-grid-card`, `feature-cards-grid-card--media-left`, `feature-cards-grid-card-media`, `feature-cards-grid-card-image`, `feature-cards-grid-card-body`, `feature-cards-grid-card-title`, `feature-cards-grid-card-description`, `feature-cards-grid-card-link`.
 
