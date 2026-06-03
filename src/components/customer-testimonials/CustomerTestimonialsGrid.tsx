@@ -12,8 +12,6 @@ export type { CustomerTestimonialsItemModel };
 
 export interface CustomerTestimonialsModel {
   className?: string;
-  title: string;
-  description: string;
   items: CustomerTestimonialsItemModel[];
 }
 

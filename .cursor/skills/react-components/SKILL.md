@@ -603,7 +603,7 @@ Grid thumbnail YouTube + modal iframe khi click. **Client + wrapper** — mount 
 |------|---------|
 | `CustomerTestimonialsGrid.tsx` | `"use client"` — grid + modal state |
 | `CustomerTestimonialsCard.tsx` | `"use client"` — thumbnail + nút play (một card) |
-| `CustomerTestimonialsWrapper.tsx` | Server entry: `<section>` + `<h2>`/`<p>` + `ClientComponentWrapper` + `type="customerTestimonialsGrid"` |
+| `CustomerTestimonialsWrapper.tsx` | Server entry: `<section>` (không header/padding) + `ClientComponentWrapper` + `type="customerTestimonialsGrid"` |
 | `src/data/customer-testimonials-wrapper.ts` | Mock / CMS canonical (`CustomerTestimonialsWrapper` registry) |
 | `src/data/customer-testimonials-grid.ts` | Re-export cho client registry |
 
@@ -617,8 +617,6 @@ export interface CustomerTestimonialsItemModel {
 
 export interface CustomerTestimonialsModel {
   className?: string;
-  title: string;
-  description: string;
   items: CustomerTestimonialsItemModel[];
 }
 ```
@@ -629,11 +627,11 @@ export interface CustomerTestimonialsModel {
 
 **Modal:** `activeVideoId` state; iframe `https://www.youtube.com/embed/{id}?autoplay=1` chỉ khi mở; backdrop `bg-black/50` click đóng; nút `X`; `Escape`; `body` scroll lock.
 
-**Header (SSR trong wrapper):** `<h2>` `text-brand-gold`; `<p>` description `text-neutral-600`; container `max-w-7xl px-4 py-8`.
+**Wrapper shell:** `<section class="customer-testimonials mx-auto w-full max-w-7xl">` — không `px-4 py-8`, không title/description SSR (tiêu đề section qua widget khác nếu cần).
 
-**Semantic classes:** `customer-testimonials`, `customer-testimonials-header`, `customer-testimonials-title`, `customer-testimonials-description`, `customer-testimonials-grid`, `customer-testimonials-card`, `customer-testimonials-card-media`, `customer-testimonials-card-play`, `customer-testimonials-modal`, `customer-testimonials-modal-backdrop`, `customer-testimonials-modal-dialog`, `customer-testimonials-modal-close`, `customer-testimonials-modal-iframe`.
+**Semantic classes:** `customer-testimonials`, `customer-testimonials-grid`, `customer-testimonials-card`, `customer-testimonials-card-media`, `customer-testimonials-card-play`, `customer-testimonials-modal`, `customer-testimonials-modal-backdrop`, `customer-testimonials-modal-dialog`, `customer-testimonials-modal-close`, `customer-testimonials-modal-iframe`.
 
-**WordPress (sau):** widget repeater `image` + YouTube id/URL → map `CustomerTestimonialsModel`.
+**WordPress:** widget `EAI-customer-testimonials` — repeater `image` + YouTube id/URL, `class_name` → map `CustomerTestimonialsModel` (không `title`/`description`).
 
 ## Quick reference — table of contents (client + wrapper)
 

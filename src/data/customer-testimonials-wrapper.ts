@@ -1,9 +1,6 @@
 import type { CustomerTestimonialsModel } from "@/components/customer-testimonials/CustomerTestimonialsWrapper";
 
 const customerTestimonialsWrapper: CustomerTestimonialsModel = {
-  title: "Cảm nhận của khách hàng",
-  description:
-    "Mời bạn tham khảo cảm nhận của các khách hàng đã dùng dịch vụ thiết kế – thi công tại Hoàn Mỹ Decor",
   items: [
     {
       image: {

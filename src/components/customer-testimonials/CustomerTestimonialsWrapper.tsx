@@ -12,7 +12,7 @@ const hasValidItem = (item: CustomerTestimonialsItemModel): boolean =>
   Boolean(item.youtubeVideoId.trim() && item.image.url.trim());
 
 const CustomerTestimonialsWrapper = (model: CustomerTestimonialsModel) => {
-  const { className, title, description, items } = model;
+  const { className, items } = model;
 
   const validItems = items.filter(hasValidItem);
 
@@ -28,21 +28,10 @@ const CustomerTestimonialsWrapper = (model: CustomerTestimonialsModel) => {
   return (
     <section
       className={cn(
-        "customer-testimonials mx-auto w-full max-w-7xl px-4 py-8",
+        "customer-testimonials mx-auto w-full max-w-7xl",
         className,
       )}
     >
-      <header className="customer-testimonials-header mb-8">
-        <h2 className="customer-testimonials-title text-center text-2xl font-bold text-brand-gold">
-          {title}
-        </h2>
-        {description.trim() ? (
-          <p className="customer-testimonials-description mx-auto mt-2 max-w-3xl text-center text-sm text-neutral-600">
-            {description}
-          </p>
-        ) : null}
-      </header>
-
       <ClientComponentWrapper
         className="customer-testimonials-grid-root"
         type="customerTestimonialsGrid"
