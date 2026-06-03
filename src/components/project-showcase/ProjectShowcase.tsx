@@ -1,4 +1,7 @@
-import type { ProjectShowcaseModel } from "@/lib/project-showcase/types";
+import type {
+  ProjectShowcaseFiltersModel,
+  ProjectShowcaseModel,
+} from "@/lib/project-showcase/types";
 
 import ClientComponentWrapper from "../ClientComponentWrapper";
 import ProjectShowcaseFilters from "./ProjectShowcaseFilters";
@@ -11,14 +14,18 @@ const ProjectShowcase = (model: ProjectShowcaseModel) => {
     filters,
     filterOptions,
     projects,
+    filterColumnsDesktop,
   } = model;
 
-  const hydrateData = {
+  const hydrateData: ProjectShowcaseFiltersModel = {
     filterEndpoint,
     taxonomies,
     filters,
     filterOptions,
     projects,
+    ...(filterColumnsDesktop !== undefined
+      ? { filterColumnsDesktop }
+      : {}),
   };
 
   return (

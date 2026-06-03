@@ -599,6 +599,36 @@ export interface FeatureCardsGridModel {
 
 **WordPress (sau):** tái dùng `eai_rc_map_feature_card_from_post` cho `items`; widget riêng nếu cần.
 
+## Quick reference — project showcase (server + client filter island)
+
+Lưới dự án + filter taxonomy. Server `ProjectShowcase` bọc client `ProjectShowcaseFilters` qua `ClientComponentWrapper` + `hydrateData`.
+
+| File | Vai trò |
+|------|---------|
+| `ProjectShowcase.tsx` | `<section>` + truyền `hydrateData` (gồm `filterColumnsDesktop`) |
+| `ProjectShowcaseFilters.tsx` | `"use client"` — grid filter + fetch + grid cards |
+| `ProjectShowcaseCard.tsx` | Leaf card dự án |
+| `src/lib/project-showcase/types.ts` | Model chung |
+| `src/data/project-showcase-filters.ts` | Mock hydrate (`ProjectShowcaseFilters` registry) |
+| `src/data/project-showcase.ts` | Re-export → `ProjectShowcase` registry |
+
+**Model (layout filter):**
+
+```ts
+export type ProjectShowcaseFilterColumnsDesktop = 3 | 4;
+
+export interface ProjectShowcaseFiltersModel {
+  // filterEndpoint, taxonomies, filters, filterOptions, projects
+  filterColumnsDesktop?: ProjectShowcaseFilterColumnsDesktop; // default 3
+}
+```
+
+**Lưới filter (Select):** mobile 1 cột; tablet `md:grid-cols-2` (cố định); desktop `lg:grid-cols-3` | `lg:grid-cols-4` từ `filterColumnsDesktop`. Lookup map full class — không template động Tailwind.
+
+**Lưới cards dự án:** tách khỏi filter — `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4` (không đổi theo `filterColumnsDesktop`).
+
+**WordPress:** widget `EAI-project-showcase` — control `filter_columns_desktop` (3|4) → `filterColumnsDesktop` trong `get_rc_props()`; helper `eai_project_showcase_filter_columns_desktop()`.
+
 ## Quick reference — customer testimonials (client + wrapper)
 
 Grid thumbnail YouTube + modal iframe khi click. **Client + wrapper** — mount qua `CustomerTestimonialsWrapper`, không mount `CustomerTestimonialsGrid` trực tiếp.

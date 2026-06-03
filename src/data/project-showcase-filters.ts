@@ -13,6 +13,7 @@ const projectUrl = (id: string) => ({
 });
 
 export const projectShowcaseFilters: ProjectShowcaseFiltersModel = {
+  filterColumnsDesktop: 3,
   filterEndpoint: "/api/projects/filter",
   taxonomies: [
     { key: "area", label: "Diện tích" },

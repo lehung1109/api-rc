@@ -25,12 +25,15 @@ export type FilterEndpointResponse = {
   items: ProjectItem[];
 };
 
+export type ProjectShowcaseFilterColumnsDesktop = 3 | 4;
+
 export interface ProjectShowcaseFiltersModel {
   filterEndpoint: string;
   taxonomies: ProjectShowcaseTaxonomy[];
   filters: ProjectShowcaseFilters;
   filterOptions: Record<string, FilterOption[]>;
   projects: ProjectItem[];
+  filterColumnsDesktop?: ProjectShowcaseFilterColumnsDesktop;
 }
 
 export interface ProjectShowcaseModel extends ProjectShowcaseFiltersModel {

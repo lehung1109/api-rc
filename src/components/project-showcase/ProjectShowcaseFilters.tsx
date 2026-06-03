@@ -14,8 +14,10 @@ import {
   getFallbackDisplayedProjects,
   getInitialDisplayedProjects,
 } from "@/lib/project-showcase/fetch-filtered-projects";
+import { cn } from "@/lib/utils";
 import type {
   ProjectItem,
+  ProjectShowcaseFilterColumnsDesktop,
   ProjectShowcaseFilters as Filters,
   ProjectShowcaseFiltersModel,
 } from "@/lib/project-showcase/types";
@@ -32,13 +34,27 @@ function fromSelectValue(value: string): string | undefined {
   return value === ALL_VALUE ? undefined : value;
 }
 
+const FILTER_DESKTOP_COLS: Record<ProjectShowcaseFilterColumnsDesktop, string> =
+  {
+    3: "lg:grid-cols-3",
+    4: "lg:grid-cols-4",
+  };
+
+const resolveFilterColumnsDesktop = (
+  value?: ProjectShowcaseFilterColumnsDesktop,
+): ProjectShowcaseFilterColumnsDesktop => (value === 4 ? 4 : 3);
+
 const ProjectShowcaseFilters = ({
   filterEndpoint,
   taxonomies,
   filters: initialFilters,
   filterOptions,
   projects,
+  filterColumnsDesktop: filterColumnsDesktopProp,
 }: ProjectShowcaseFiltersModel) => {
+  const filterColumnsDesktop = resolveFilterColumnsDesktop(
+    filterColumnsDesktopProp,
+  );
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [displayedItems, setDisplayedItems] = useState<ProjectItem[]>(() =>
     getInitialDisplayedProjects(projects, initialFilters),
@@ -78,7 +94,12 @@ const ProjectShowcaseFilters = ({
 
   return (
     <div className="project-showcase-filters">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div
+        className={cn(
+          "grid grid-cols-1 gap-4 md:grid-cols-2",
+          FILTER_DESKTOP_COLS[filterColumnsDesktop],
+        )}
+      >
         {taxonomies?.map((t) => (
           <Select
             key={t.key}
