@@ -30,7 +30,7 @@ const RelatedPostList = (model: RelatedPostListModel) => {
             <Link
               {...item.link}
               className={cn(
-                "related-post-list-link text-[#f36f21]",
+                "related-post-list-link text-brand-gold",
                 item.link.className,
               )}
             >

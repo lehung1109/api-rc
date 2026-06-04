@@ -22,24 +22,24 @@ Skills are living docs. When you learn or agree on a **new api-rc convention** (
 2. For responsive UI (mobile/desktop, overlays, toggles): also read [css-first-responsive-ui](../css-first-responsive-ui/SKILL.md).
 3. For header files: read [src/components/header/HEADER.md](../../../src/components/header/HEADER.md).
 4. When creating or editing component markup: follow [react-seo-markup.mdc](../../rules/react-seo-markup.mdc) (landmarks, `h1`–`h3`, `Link`/`Media`, `nav` + `aria-label`).
-5. When styling with brand/accent colors: follow [ichouse-brand-colors.mdc](../../rules/ichouse-brand-colors.mdc) — dùng token `brand-navy` / `brand-gold` / `brand-white`, không thêm hex cam legacy.
+5. When styling with brand/accent colors: follow [ichouse-brand-colors.mdc](../../rules/ichouse-brand-colors.mdc) — **chỉ** token `brand-*` (+ hover); không hex, không `neutral-*`/`gray-*`/`black`.
 6. Run `bun run typecheck` after changes. Run `bun run generate` when adding/removing renderable or client components.
 
 ## Brand colors (ICHouse)
 
-**Màu nhận diện:** Xanh Navy `#022B63`, Vàng Gold `#D9A441`, Trắng `#FFFFFF` — định nghĩa trong [`src/styles.css`](../../../src/styles.css).
+**Palette strict (6 màu):** Navy / Gold / White + hover — canonical `--e-global-color-*` trong [`src/styles.css`](../../../src/styles.css) `:root`; Tailwind `brand-navy`, `brand-gold`, `brand-white`, `brand-navy-hover`, `brand-gold-hover`, `brand-white-hover`.
 
-| Token Tailwind | Vai trò |
-|----------------|---------|
-| `brand-navy` | Nền tối (footer, header bar), khối brand |
-| `brand-gold` | Accent: tiêu đề, link hover, CTA, icon, active |
-| `brand-white` | Chữ/icon trên Navy; nền sáng khi cần |
+| Token | Vai trò |
+|-------|---------|
+| `brand-navy` | Nền tối, overlay, chữ chính |
+| `brand-gold` | Accent, CTA, link, active |
+| `brand-white` | Chữ/nền sáng trên navy |
+| `brand-*-hover` | Hover/active |
+| `text-brand-navy/70` | Chữ phụ (thay xám) |
 
-**Code mới:** `text-brand-gold`, `bg-brand-navy`, `hover:text-brand-gold/90`, … — chi tiết trong rule `ichouse-brand-colors.mdc`.
+**Ví dụ:** `bg-brand-navy`, `text-brand-gold`, `hover:bg-brand-gold-hover`, `border-brand-white-hover`.
 
-**Legacy trong code cũ:** `#f36f21`, `#f47c20`, `#ff7f2a` — không copy sang component mới; khi sửa có scope đổi màu thì chuyển sang `brand-*`.
-
-Màu trung tính (`#f7f7f7`, `#eeeeee`, `#888888`, `neutral-*`) vẫn OK cho layout; không thay accent thương hiệu.
+**Cấm:** hex trong TSX, `neutral-*`, `gray-*`, `bg-black`, palette cam cũ. Chi tiết: [ichouse-brand-colors.mdc](../../rules/ichouse-brand-colors.mdc).
 
 ## Architecture
 
@@ -322,7 +322,7 @@ Data: `src/data/header.ts` aggregates sub-data; `autocomplete_search` lives on `
 
 Files: `Footer` (orchestrator) → `FooterTop` / `FooterBottom` → `FooterLinkColumn`, `FooterPaymentMethods`, `FooterSocial`, `FooterBrand`, `FooterContact`, `FooterFanpages`.  
 Data: `src/data/footer.ts` — `{ top, bottom }` aggregate; chỉ `Footer` mount từ App/API.  
-Màu: code cũ dùng `bg-black` + accent cam — code mới theo [Brand colors](#brand-colors-ichouse) (`bg-brand-navy`, `text-brand-gold`, …).
+Màu: theo [Brand colors](#brand-colors-ichouse) — `bg-brand-navy`, `text-brand-gold`, `hover:text-brand-gold-hover`, v.v.
 
 ## Quick reference — hero section (server)
 
@@ -344,11 +344,11 @@ export interface HeroSectionModel {
   titleHeading?: HeroSectionTitleHeading; // default "h1"
   contentCentered?: boolean;              // default false — text-center + flex justify
   contentFullWidth?: boolean;             // default false — bỏ max-w-xl, w-full
-  buttonVariant?: HeroSectionButtonVariant; // default "default" — cam legacy; "yellow" → #fcce0a
+  buttonVariant?: HeroSectionButtonVariant; // default | yellow — cùng brand-gold / brand-gold-hover
 }
 ```
 
-**Button variant:** `default` — `bg-[#f36f21]` / `hover:bg-[#ff7f2a]`; `yellow` — `bg-[#fcce0a]` / `hover:bg-[#e8bc09]`, class `hero-section-button--yellow`, chữ trắng.
+**Button variant:** `default` và `yellow` — `bg-brand-gold` / `hover:bg-brand-gold-hover`, chữ `text-brand-white`; class `hero-section-button--yellow` giữ hook CSS.
 
 **Layout:** mặc định `.hero-section-content` có `max-w-xl`; `contentFullWidth` → `w-full` + `hero-section-content--full-width` (không `max-w-xl`). Inner vẫn `max-w-7xl` (container trang).
 
@@ -394,7 +394,7 @@ export interface PageTitleBarModel {
 - Giữa **item trong cùng cấp**: ` - `
 - Ví dụ: `Home / Chung cư - Thi công chung cư - Thiết kế chung cư`
 
-**UI:** title `text-[#f36f21] font-bold uppercase` *(legacy — code mới: `text-brand-gold`)*; breadcrumb `text-sm text-[#888888]`; bar `bg-[#f7f7f7] border-b border-[#eeeeee]`. Layout một cây: `flex-col gap-2` mobile, `md:flex-row md:justify-between md:items-center` desktop. `<h1>` title; `<nav aria-label="Breadcrumb">`.
+**UI:** title `text-brand-gold font-bold uppercase`; breadcrumb `text-brand-navy/70`; bar `border-b border-brand-white-hover`. Layout một cây: `flex-col gap-2` mobile, `md:flex-row md:justify-between md:items-center` desktop. `<h1>` title; `<nav aria-label="Breadcrumb">`.
 
 **WordPress (sau):** `title` + `breadcrumbLevels` build trong PHP (post + taxonomy/ancestors), không query trong api-rc — xem [elementor-widget-context](../../rules/elementor-widget-context.mdc).
 
@@ -434,7 +434,7 @@ export interface ProjectMetaBarModel {
 - Bỏ cột mà cả `title` và `content` trống (trim); mảng rỗng sau lọc → `return null`.
 - Icon: map Lucide giống `ProcessSection` (`Record<ProjectMetaBarIconKey, LucideIcon>`).
 
-**UI:** bar `bg-[#f7f7f7]` (có thể `border-b border-[#eeeeee]` khi nối `PageTitleBar`); icon `text-[#f36f21]` *(legacy — `text-brand-gold`)* ~`h-4 w-4`; title `font-bold`; content `text-sm`. Inner `max-w-7xl` + padding giống `PageTitleBar`. Grid một cây: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`.
+**UI:** bar `bg-brand-white-hover/95` (có thể `border-b border-brand-white-hover` khi nối `PageTitleBar`); icon `text-brand-gold` ~`h-4 w-4`; title `font-bold`; content `text-brand-navy`. Inner `max-w-7xl` + padding giống `PageTitleBar`. Grid một cây: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`.
 
 **Semantic classes:** `project-meta-bar`, `project-meta-bar-column`, `project-meta-bar-title`, `project-meta-bar-content`.
 
@@ -465,7 +465,7 @@ export interface RelatedPostListModel {
 - Title: chỉ render khi `title` truthy; wrapper `related-post-list-title` + `dangerouslySetInnerHTML`.
 - Link: merge `item.link.className` sau class semantic (cho override từ PHP/WP).
 
-**UI:** list `space-y-1 list-disc mb-5`; item `ml-5`; link mặc định `text-[#f36f21]` *(legacy — `text-brand-gold`)*.
+**UI:** list `space-y-1 list-disc mb-5`; item `ml-5`; link `text-brand-gold`.
 
 **Semantic classes** (3rd-party CSS — cùng pattern `footer-link-column-*`):
 
@@ -629,7 +629,7 @@ export interface FeatureCardsGridModel {
 - **`stack`** (default): media trên, body dưới — mọi breakpoint.
 - **`media-left`**: mobile giống `stack`; từ **`md:`** → `flex-row`, media trái ~38%, ảnh `object-contain` + `object-center` (không crop), media wrapper `bg-neutral-100` khi letterbox; body `p-[5px]`, `text-[15px]`, `text-left`, title `font-normal` (không bold).
 
-**UI:** `stack` — body `p-[10px]`, `text-center`, title `text-lg font-bold`; ảnh `object-cover`, `group-hover:scale-105` trong wrapper `overflow-hidden`. Chung: body `bg-neutral-100`, title `text-[#f36f21]` *(legacy — `text-brand-gold`)*.
+**UI:** `stack` — body `p-[10px]`, `text-center`, title `text-lg font-bold`; ảnh `object-cover`, `group-hover:scale-105` trong wrapper `overflow-hidden`. Chung: body `bg-brand-white-hover`, title `text-brand-gold`.
 
 **Semantic classes:** `feature-cards-grid`, `feature-cards-grid-card`, `feature-cards-grid-card--media-left`, `feature-cards-grid-card-media`, `feature-cards-grid-card-image`, `feature-cards-grid-card-body`, `feature-cards-grid-card-title`, `feature-cards-grid-card-description`, `feature-cards-grid-card-link`.
 
@@ -695,7 +695,7 @@ export interface CustomerTestimonialsModel {
 
 **Grid:** `grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4` (cố định). Card: `button type="button"`, `aspect-video`, `Media` cover, nút play đỏ giữa (`#e62117`), `group-hover:shadow-lg` card + `group-hover:scale-110` nút play.
 
-**Modal:** `activeVideoId` state; iframe `https://www.youtube.com/embed/{id}?autoplay=1` chỉ khi mở; backdrop `bg-black/50` click đóng; nút `X`; `Escape`; `body` scroll lock.
+**Modal:** `activeVideoId` state; iframe `https://www.youtube.com/embed/{id}?autoplay=1` chỉ khi mở; backdrop `bg-brand-navy/50` click đóng; nút `X`; `Escape`; `body` scroll lock.
 
 **Wrapper shell:** `<section class="customer-testimonials mx-auto w-full max-w-7xl">` — không `px-4 py-8`, không title/description SSR (tiêu đề section qua widget khác nếu cần).
 

@@ -31,7 +31,7 @@ const FooterContact = (model: FooterContactModel) => {
             {block.title}
           </h3>
           <div
-            className="footer-contact-block-content mt-2 leading-relaxed text-white/90 [&_a]:text-white/90 [&_a]:underline [&_a]:hover:text-[#f47c20] [&>p]:!mbe-0"
+            className="footer-contact-block-content mt-2 leading-relaxed text-brand-white/90 [&_a]:text-brand-white/90 [&_a]:underline [&_a]:hover:text-brand-gold-hover [&>p]:!mbe-0"
             dangerouslySetInnerHTML={{ __html: block.contentHtml }}
           />
         </div>

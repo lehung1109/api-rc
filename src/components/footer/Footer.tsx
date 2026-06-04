@@ -12,7 +12,7 @@ const Footer = (model: FooterModel) => {
   const { className, top, bottom } = model;
 
   return (
-    <footer className={cn("footer bg-black text-white", className)}>
+    <footer className={cn("footer bg-brand-navy text-brand-white", className)}>
       <FooterTop {...top} />
       <FooterBottom {...bottom} />
     </footer>

@@ -30,7 +30,7 @@ const ImageOverlayCardsGridCard = (item: ImageOverlayCardsGridItemModel) => {
       </div>
 
       <span
-        className="image-overlay-cards-grid-card-overlay pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent"
+        className="image-overlay-cards-grid-card-overlay pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-brand-navy/25 to-transparent"
         aria-hidden="true"
       />
 

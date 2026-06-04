@@ -41,7 +41,7 @@ const FooterSocial = (model: FooterSocialModel) => {
             key={item.link.url}
             {...item.link}
             className={cn(
-              "footer-social-link inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white/10 transition-colors hover:bg-[#f36f21]/30",
+              "footer-social-link inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-brand-white/10 transition-colors hover:bg-brand-gold/30",
               item.link.className,
             )}
           >

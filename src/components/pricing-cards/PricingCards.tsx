@@ -37,15 +37,15 @@ const PricingCards = (model: PricingCardsModel) => {
             <article
               key={`${titleText || "pricing"}-${index}`}
               className={cn(
-                "pricing-cards-card group relative overflow-hidden rounded-xl border border-black bg-white shadow-[2px_2px_10px_#00000040] transition-shadow duration-200 hover:shadow-[0_10px_20px_rgba(0,0,0,0.19),0_6px_6px_rgba(0,0,0,0.22)]",
+                "pricing-cards-card group relative overflow-hidden rounded-xl border border-brand-navy bg-brand-white shadow-md shadow-brand-navy/25 transition-shadow duration-200 hover:shadow-lg hover:shadow-brand-navy/30",
                 isActive &&
-                  "pricing-cards-card--active border-2 border-[#f39a36] -top-3.5",
+                  "pricing-cards-card--active border-2 border-brand-gold -top-3.5",
               )}
             >
               <div
                 className={cn(
-                  "pricing-cards-title bg-black px-[10px] py-[20px] text-center text-[20px] font-semibold text-white",
-                  isActive && "bg-[#f39a36]",
+                  "pricing-cards-title bg-brand-navy px-[10px] py-[20px] text-center text-[20px] font-semibold text-brand-white",
+                  isActive && "bg-brand-gold",
                 )}
               >
                 {titleText}
@@ -54,15 +54,15 @@ const PricingCards = (model: PricingCardsModel) => {
               <div className="pricing-cards-content">
                 <div
                   className={cn(
-                    "pricing-cards-price text-center text-2xl font-bold text-[#f3c669] px-2.5 py-3 bg-[#292929]",
-                    isActive && "bg-[#f3c669] text-[#e10000]",
+                    "pricing-cards-price text-center text-2xl font-bold text-brand-gold px-2.5 py-3 bg-brand-navy",
+                    isActive && "bg-brand-gold text-brand-gold-hover",
                   )}
                 >
                   {priceText}
                 </div>
 
                 <div
-                  className="pricing-cards-body mt-4 border-b border-[#ececec] p-4 leading-6 text-neutral-600"
+                  className="pricing-cards-body mt-4 border-b border-brand-white-hover p-4 leading-6 text-brand-navy/70"
                   dangerouslySetInnerHTML={{ __html: htmlTextContent }}
                 />
 
@@ -71,7 +71,7 @@ const PricingCards = (model: PricingCardsModel) => {
                     <Link
                       {...item.buttonLink}
                       className={cn(
-                        "pricing-cards-button inline-flex items-center justify-center rounded-full bg-[#f36f21] px-6 py-2 font-semibold text-white shadow no-underline transition-colors hover:bg-[#ff7f2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f36f21]/60",
+                        "pricing-cards-button inline-flex items-center justify-center rounded-full bg-brand-gold px-6 py-2 font-semibold text-brand-white shadow no-underline transition-colors hover:bg-brand-gold-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60",
                         item.buttonLink.className,
                       )}
                     >

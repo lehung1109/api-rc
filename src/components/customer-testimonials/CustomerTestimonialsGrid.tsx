@@ -86,7 +86,7 @@ const CustomerTestimonialsGrid = (model: CustomerTestimonialsModel) => {
 
       {activeVideoId ? (
         <div
-          className="customer-testimonials-modal customer-testimonials-modal-backdrop fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          className="customer-testimonials-modal customer-testimonials-modal-backdrop fixed inset-0 z-50 flex items-center justify-center bg-brand-navy/50 p-4"
           role="dialog"
           aria-modal="true"
           aria-label={iframeTitle}
@@ -98,14 +98,14 @@ const CustomerTestimonialsGrid = (model: CustomerTestimonialsModel) => {
           >
             <button
               type="button"
-              className="customer-testimonials-modal-close absolute -top-10 right-0 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-white transition-opacity hover:opacity-80 md:-right-10"
+              className="customer-testimonials-modal-close absolute -top-10 right-0 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-brand-white transition-opacity hover:opacity-80 md:-right-10"
               onClick={handleClose}
               aria-label="Đóng video"
             >
               <X className="h-8 w-8" aria-hidden="true" />
             </button>
 
-            <div className="aspect-video w-full overflow-hidden rounded-lg bg-black">
+            <div className="aspect-video w-full overflow-hidden rounded-lg bg-brand-navy">
               <iframe
                 className="customer-testimonials-modal-iframe h-full w-full"
                 src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=1`}

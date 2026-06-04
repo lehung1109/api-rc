@@ -32,13 +32,13 @@ const PageTitleBar = (model: PageTitleBarModel) => {
   return (
     <section
       className={cn(
-        "page-title-bar w-full border-b border-[#eeeeee]",
+        "page-title-bar w-full border-b border-brand-white-hover",
         className,
       )}
     >
       <div className="page-title-bar-inner mx-auto flex max-w-7xl flex-col gap-2 px-4 py-3 md:flex-row md:items-center md:justify-between md:gap-4 md:px-6 md:py-4">
         {hasTitle ? (
-          <h1 className="page-title-bar-title text-[#f36f21] font-bold uppercase leading-snug">
+          <h1 className="page-title-bar-title text-brand-gold font-bold uppercase leading-snug">
             {title}
           </h1>
         ) : null}

@@ -43,7 +43,7 @@ const ProcessSection = (model: ProcessSectionModel) => {
 
   return (
     <section
-      className={`relative overflow-hidden bg-cover bg-center bg-no-repeat text-white ${className} process-section p-8`}
+      className={`relative overflow-hidden bg-cover bg-center bg-no-repeat text-brand-white ${className} process-section p-8`}
     >
       {backgroundImage && (
         <Media
@@ -53,11 +53,11 @@ const ProcessSection = (model: ProcessSectionModel) => {
       )}
 
       <div
-        className="pointer-events-none absolute inset-0 z-1 bg-black/65"
+        className="pointer-events-none absolute inset-0 z-1 bg-brand-navy/65"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute inset-0 z-1 bg-gradient-to-b from-black/50 via-black/40 to-black/60"
+        className="pointer-events-none absolute inset-0 z-1 bg-gradient-to-b from-brand-navy/50 via-brand-navy/40 to-brand-navy/60"
         aria-hidden="true"
       />
 
@@ -80,7 +80,7 @@ const ProcessSection = (model: ProcessSectionModel) => {
               <path
                 d="M0,110 C140,165 250,55 400,95 C560,140 660,182 810,120 C950,65 1040,48 1200,98 C1360,145 1480,150 1600,110"
                 fill="none"
-                stroke="rgba(255,255,255,0.9)"
+                stroke="color-mix(in srgb, var(--e-global-color-tertiary) 90%, transparent)"
                 strokeWidth="3"
                 strokeDasharray="10 12"
                 strokeLinecap="round"
@@ -99,9 +99,9 @@ const ProcessSection = (model: ProcessSectionModel) => {
                   className="flex w-[240px] flex-col items-center text-center"
                 >
                   <div className="relative mb-5 md:mb-6">
-                    <div className="relative h-24 w-24 rotate-45 rounded-[50%_0_50%_50%] border-[4px] border-white bg-white shadow-[0_10px_30px_rgba(0,0,0,0.28)] md:h-32 md:w-32 md:-translate-y-3">
-                      <div className="absolute inset-[6px] rounded-[50%_0_50%_50%] border-[3px] border-emerald-400 md:inset-[8px] md:border-[4px]" />
-                      <div className="absolute inset-0 flex -rotate-45 items-center justify-center text-black">
+                    <div className="relative h-24 w-24 rotate-45 rounded-[50%_0_50%_50%] border-[4px] border-brand-white bg-brand-white shadow-lg shadow-brand-navy/30 md:h-32 md:w-32 md:-translate-y-3">
+                      <div className="absolute inset-[6px] rounded-[50%_0_50%_50%] border-[3px] border-brand-gold md:inset-[8px] md:border-[4px]" />
+                      <div className="absolute inset-0 flex -rotate-45 items-center justify-center text-brand-navy">
                         <Icon
                           className="h-9 w-9 md:h-12 md:w-12 relative"
                           strokeWidth={2.2}
@@ -110,11 +110,11 @@ const ProcessSection = (model: ProcessSectionModel) => {
                     </div>
                   </div>
 
-                  <div className="process-section-step-content w-full text-white">
+                  <div className="process-section-step-content w-full text-brand-white">
                     <h3 className="font-bold">
                       {step.id}. {step.title}
                     </h3>
-                    <p className="mx-auto mt-3 max-w-[240px] leading-7 text-white/90 md:text-lg md:leading-8">
+                    <p className="mx-auto mt-3 max-w-[240px] leading-7 text-brand-white/90 md:text-lg md:leading-8">
                       {step.description}
                     </p>
                   </div>

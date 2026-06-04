@@ -75,7 +75,7 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
       <div className="relative">
         <Input
           placeholder={placeholder}
-          className="h-9 rounded-full md:border-0 bg-white pr-10 shadow-none placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 border-1 border-black"
+          className="h-9 rounded-full md:border-0 bg-brand-white pr-10 shadow-none placeholder:text-brand-navy/50 focus-visible:ring-0 focus-visible:ring-offset-0 border-1 border-brand-navy"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onBlur={handleBlur}
@@ -83,9 +83,9 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
         />
 
         {loading ? (
-          <Loader2 className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500 animate-spin" />
+          <Loader2 className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-navy/70 animate-spin" />
         ) : (
-          <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-navy/70" />
         )}
 
         {results.length > 0 && isFocused && (
@@ -93,8 +93,8 @@ const AutocompleteSearch = (model: AutocompleteSearchModel) => {
         )}
 
         {message && (
-          <div className="absolute left-0 top-full z-50 w-full bg-white shadow-lg max-h-[300px] overflow-y-auto p-2">
-            <div className="text-xs font-medium text-gray-800 line-clamp-2">
+          <div className="absolute left-0 top-full z-50 w-full bg-brand-white shadow-lg max-h-[300px] overflow-y-auto p-2">
+            <div className="text-xs font-medium text-brand-navy line-clamp-2">
               {message}
             </div>
           </div>

@@ -7,7 +7,7 @@ const numberIconGrid: NumberIconGridModel = {
     {
       number: 1,
       image: {
-        url: "https://placehold.co/80x80/f36f21/ffffff/png?text=1",
+        url: "https://placehold.co/80x80/D9A441/ffffff/png?text=1",
         alt: "Khảo sát và tư vấn",
         display_dimensions: iconDimensions,
       },
@@ -16,7 +16,7 @@ const numberIconGrid: NumberIconGridModel = {
     {
       number: 2,
       image: {
-        url: "https://placehold.co/80x80/f36f21/ffffff/png?text=2",
+        url: "https://placehold.co/80x80/D9A441/ffffff/png?text=2",
         alt: "Báo giá thiết kế và thi công",
         display_dimensions: iconDimensions,
       },
@@ -25,7 +25,7 @@ const numberIconGrid: NumberIconGridModel = {
     {
       number: 3,
       image: {
-        url: "https://placehold.co/80x80/f36f21/ffffff/png?text=3",
+        url: "https://placehold.co/80x80/D9A441/ffffff/png?text=3",
         alt: "Thảo luận và ký hợp đồng",
         display_dimensions: iconDimensions,
       },
@@ -34,7 +34,7 @@ const numberIconGrid: NumberIconGridModel = {
     {
       number: 4,
       image: {
-        url: "https://placehold.co/80x80/f36f21/ffffff/png?text=4",
+        url: "https://placehold.co/80x80/D9A441/ffffff/png?text=4",
         alt: "Triển khai thi công dự án",
         display_dimensions: iconDimensions,
       },
@@ -43,7 +43,7 @@ const numberIconGrid: NumberIconGridModel = {
     {
       number: 5,
       image: {
-        url: "https://placehold.co/80x80/f36f21/ffffff/png?text=5",
+        url: "https://placehold.co/80x80/D9A441/ffffff/png?text=5",
         alt: "Nghiệm thu và bàn giao",
         display_dimensions: iconDimensions,
       },
@@ -52,7 +52,7 @@ const numberIconGrid: NumberIconGridModel = {
     {
       number: 6,
       image: {
-        url: "https://placehold.co/80x80/f36f21/ffffff/png?text=6",
+        url: "https://placehold.co/80x80/D9A441/ffffff/png?text=6",
         alt: "Bảo hành sản phẩm",
         display_dimensions: iconDimensions,
       },

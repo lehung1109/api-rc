@@ -22,7 +22,7 @@ const PageTitleBarBreadcrumb = ({
   return (
     <nav
       className={cn(
-        "page-title-bar-breadcrumb break-words text-[#888888] md:text-right",
+        "page-title-bar-breadcrumb break-words text-brand-navy/70 md:text-right",
         className,
       )}
       aria-label="Breadcrumb"
@@ -44,7 +44,7 @@ const PageTitleBarBreadcrumb = ({
               <Link
                 {...item.link}
                 className={cn(
-                  "page-title-bar-breadcrumb-link hover:text-[#666666] hover:underline",
+                  "page-title-bar-breadcrumb-link hover:text-brand-navy hover:underline",
                   item.link.className,
                 )}
               >

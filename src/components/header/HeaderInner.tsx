@@ -40,7 +40,7 @@ const HeaderInner = (model: HeaderInnerModel) => {
 
       <label
         htmlFor="header-menu-open"
-        className="header-menu-open-trigger flex cursor-pointer items-center justify-center p-5 text-[#1f1f1f] md:hidden"
+        className="header-menu-open-trigger flex cursor-pointer items-center justify-center p-5 text-brand-navy md:hidden"
         aria-label="Mở menu"
       >
         <Menu className="h-8 w-8" />

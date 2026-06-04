@@ -33,7 +33,7 @@ const FooterFanpages = (model: FooterFanpagesModel) => {
             {factories.title}
           </h3>
           <div
-            className="footer-factories-content mt-2 leading-relaxed text-white/90 [&>p]:!mbe-0"
+            className="footer-factories-content mt-2 leading-relaxed text-brand-white/90 [&>p]:!mbe-0"
             dangerouslySetInnerHTML={{ __html: factories.contentHtml }}
           />
         </div>
@@ -53,7 +53,7 @@ const FooterFanpages = (model: FooterFanpagesModel) => {
             {embeds.map((embed, index) => (
               <div
                 key={index}
-                className="footer-fanpage-embed max-w-full overflow-hidden rounded bg-white/5"
+                className="footer-fanpage-embed max-w-full overflow-hidden rounded bg-brand-white/5"
                 dangerouslySetInnerHTML={{ __html: embed.embedHtml }}
               />
             ))}

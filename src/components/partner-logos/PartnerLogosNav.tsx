@@ -9,10 +9,10 @@ import { cn } from "@/lib/utils";
 const navButtonClass = cn(
   "partner-logos-nav-button",
   "grid h-10 w-10 shrink-0 cursor-pointer place-items-center p-0",
-  "text-neutral-600 transition-colors duration-200",
-  "hover:text-neutral-900",
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-600",
-  "disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:text-neutral-600",
+  "text-brand-navy/70 transition-colors duration-200",
+  "hover:text-brand-navy",
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-navy/70",
+  "disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:text-brand-navy/70",
 );
 
 export const usePartnerLogosNavState = (swiper: SwiperType | null) => {

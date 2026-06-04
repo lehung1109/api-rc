@@ -13,9 +13,9 @@ const NumberIconGridCard = (item: NumberIconGridItemModel) => {
   const titleText = title.trim();
 
   return (
-    <article className="number-icon-grid-card group relative w-full min-w-0 bg-white pt-[60px] px-[10px] pb-[25px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-shadow duration-200 rounded-xl">
+    <article className="number-icon-grid-card group relative w-full min-w-0 bg-brand-white pt-[60px] px-[10px] pb-[25px] shadow-md shadow-brand-navy/10 transition-shadow duration-200 rounded-xl">
       <span
-        className="number-icon-grid-card-number absolute top-0 left-0 z-10 block bg-[#e5e5e5] p-0 text-[70px] leading-none font-bold text-white transition-[transform,background-color,translate] duration-200 group-hover:-translate-x-[10px] group-hover:-translate-y-[10px] group-hover:bg-[#fec10d]"
+        className="number-icon-grid-card-number absolute top-0 left-0 z-10 block bg-brand-white-hover p-0 text-[70px] leading-none font-bold text-brand-white transition-[transform,background-color,translate] duration-200 group-hover:-translate-x-[10px] group-hover:-translate-y-[10px] group-hover:bg-brand-gold"
         aria-hidden="true"
       >
         {number}
@@ -32,7 +32,7 @@ const NumberIconGridCard = (item: NumberIconGridItemModel) => {
       </div>
 
       {titleText ? (
-        <h3 className="number-icon-grid-card-title text-center text-base text-[#f36f21] transition-colors duration-200 group-hover:text-[#d82a28] font-bold">
+        <h3 className="number-icon-grid-card-title text-center text-base text-brand-gold transition-colors duration-200 group-hover:text-brand-gold-hover font-bold">
           {titleText}
         </h3>
       ) : null}

@@ -53,7 +53,7 @@ header/
 ## Search (một instance)
 
 - Component: `HeaderSearch` bọc `ClientComponentWrapper` + `ReactSection type="autocompleteSearch"`.
-- Mobile: nằm trong `.header-overlay-toolbar` đầu panel (nền cam `#f36f21`).
+- Mobile: nằm trong `.header-overlay-toolbar` đầu panel (nền `bg-brand-navy` trên `HeaderTop`, accent `brand-gold`).
 - Desktop: cùng node DOM, đặt `md:absolute md:top-0 md:left-1/2` trong vùng thanh top (căn giữa ~420px).
 - **Không** thêm search vào `HeaderTop`.
 

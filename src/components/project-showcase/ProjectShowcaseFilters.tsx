@@ -108,7 +108,7 @@ const ProjectShowcaseFilters = ({
             disabled={isLoading}
           >
             <SelectTrigger
-              className="w-full bg-white text-base !h-auto p-[7px_15px] leading-1.2"
+              className="w-full bg-brand-white text-base !h-auto p-[7px_15px] leading-1.2"
               size="default"
             >
               <SelectValue placeholder={`Chọn ${t.label}`} />

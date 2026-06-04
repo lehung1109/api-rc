@@ -34,7 +34,7 @@ const FeatureCardsGridCard = (item: FeatureCardsGridItemModel) => {
         className={cn(
           "feature-cards-grid-card-media aspect-[255/144] overflow-hidden",
           isMediaLeft &&
-            "md:aspect-auto md:w-[38%] md:shrink-0 md:self-stretch md:bg-neutral-100",
+            "md:aspect-auto md:w-[38%] md:shrink-0 md:self-stretch md:bg-brand-white-hover",
         )}
       >
         <Media
@@ -50,14 +50,14 @@ const FeatureCardsGridCard = (item: FeatureCardsGridItemModel) => {
 
       <div
         className={cn(
-          "feature-cards-grid-card-body flex flex-1 flex-col bg-neutral-100 p-[10px] text-center",
+          "feature-cards-grid-card-body flex flex-1 flex-col bg-brand-white-hover p-[10px] text-center",
           isMediaLeft &&
             "md:justify-center md:p-[5px] md:text-left md:text-[15px]",
         )}
       >
         <h3
           className={cn(
-            "feature-cards-grid-card-title mb-0 text-lg font-bold text-[#f36f21]",
+            "feature-cards-grid-card-title mb-0 text-lg font-bold text-brand-gold",
             isMediaLeft && "md:text-[15px] md:font-normal",
           )}
         >

@@ -24,7 +24,7 @@ Trong **cùng phiên** (hoặc trước khi kết thúc task), cập nhật skil
 | Markup SEO component (landmark, heading, Media/Link) | [react-seo-markup.mdc](../rules/react-seo-markup.mdc) + đồng bộ `react-components` |
 | Responsive, checkbox, một DOM, overlay/menu | [css-first-responsive-ui/SKILL.md](css-first-responsive-ui/SKILL.md) |
 | Header chi tiết | [src/components/header/HEADER.md](../../src/components/header/HEADER.md) — giữ đồng bộ với hai skill trên |
-| Màu nhận diện ICHouse (Navy / Gold / White) | [ichouse-brand-colors.mdc](../rules/ichouse-brand-colors.mdc) + mục *Brand colors* trong `react-components` |
+| Màu nhận diện ICHouse (strict: 6 màu, `--e-global-color-*`, `brand-*`) | [ichouse-brand-colors.mdc](../rules/ichouse-brand-colors.mdc) + mục *Brand colors* trong `react-components` |
 | Quy tắc chung / index | File này |
 
 Skill mới: tạo thư mục `skill-name/SKILL.md`, thêm một dòng vào bảng trên.
@@ -53,6 +53,6 @@ Skill mới: tạo thư mục `skill-name/SKILL.md`, thêm một dòng vào bả
 - User: "menu 3 cấp mobile chỉ 2 UI level" → đã có trong header doc; nếu áp dụng feature khác, copy pattern vào `css-first-responsive-ui`.
 - Feature UI lớn (footer, header) → tách orchestrator + section/leaf trong cùng folder; **một component mỗi file `.tsx`** — xem `react-components` mục *Một component mỗi file TSX* và *Chia nhỏ component*.
 - Breadcrumb phân cấp (`/` giữa cấp, `-` trong cấp) → `react-components` *Page title bar* + rule `wp-link-list-components.mdc`.
-- Thanh meta 4 cột (icon Lucide + title/content, `bg-[#f7f7f7]`) → `react-components` *Project meta bar* + `elementor-widget-context.mdc` (settings/ACF, không LinkModel).
+- Thanh meta 4 cột (icon Lucide + title/content, `bg-brand-white-hover`) → `react-components` *Project meta bar* + `elementor-widget-context.mdc` (settings/ACF, không LinkModel).
 - User: luôn markup chuẩn SEO khi tạo component → rule `react-seo-markup.mdc` + mục *SEO markup* trong `react-components`.
-- User: màu nhận diện Navy / Gold / White → rule `ichouse-brand-colors.mdc` + token `brand-*` trong `styles.css` + mục *Brand colors* trong `react-components`.
+- User: màu nhận diện Navy / Gold / White (+ hover) → rule `ichouse-brand-colors.mdc` (strict, không hex trong TSX) + `--e-global-color-*` / `brand-*` trong `styles.css` + mục *Brand colors* trong `react-components`.

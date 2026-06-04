@@ -20,7 +20,7 @@ const Header = (model: HeaderModel) => {
   const { headerTop, headerInner, headerMenu, autocomplete_search } = model;
 
   return (
-    <header className="header sticky top-0 z-50 left-0 right-0 bg-white shadow-md md:contents md:static">
+    <header className="header sticky top-0 z-50 left-0 right-0 bg-brand-white shadow-md md:contents md:static">
       <input
         id="header-menu-open"
         type="checkbox"
@@ -35,7 +35,7 @@ const Header = (model: HeaderModel) => {
         <HeaderInner {...headerInner} />
       </div>
 
-      <div className="header-menu-panel max-md:fixed max-md:inset-0 max-md:z-50 max-md:flex max-md:translate-x-full max-md:flex-col max-md:overflow-y-auto max-md:bg-white max-md:transition-transform max-md:duration-300 max-md:peer-checked/header-menu:translate-x-0 md:contents">
+      <div className="header-menu-panel max-md:fixed max-md:inset-0 max-md:z-50 max-md:flex max-md:translate-x-full max-md:flex-col max-md:overflow-y-auto max-md:bg-brand-white max-md:transition-transform max-md:duration-300 max-md:peer-checked/header-menu:translate-x-0 md:contents">
         <div className="header-overlay-toolbar flex max-md:items-center max-md:gap-2 max-md:p-4 md:contents">
           <HeaderSearch
             autocomplete_search={autocomplete_search}

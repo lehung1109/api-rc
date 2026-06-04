@@ -9,8 +9,8 @@ export type HeroSectionTitleHeading = "h1" | "h2";
 export type HeroSectionButtonVariant = "default" | "yellow";
 
 const HERO_SECTION_BUTTON_VARIANT_CLASSES: Record<HeroSectionButtonVariant, string> = {
-  default: "bg-[#f36f21] text-white hover:bg-[#ff7f2a]",
-  yellow: "hero-section-button--yellow bg-[#fcce0a] text-white hover:bg-[#e8bc09]",
+  default: "bg-brand-gold text-brand-white hover:bg-brand-gold-hover",
+  yellow: "hero-section-button--yellow bg-brand-gold text-brand-white hover:bg-brand-gold-hover",
 };
 
 export interface HeroSectionModel {
@@ -53,7 +53,7 @@ const HeroSection = (model: HeroSectionModel) => {
   }
 
   return (
-    <section className={cn("hero-section relative w-full text-white", className)}>
+    <section className={cn("hero-section relative w-full text-brand-white", className)}>
       <div className="hero-section-stage relative overflow-hidden">
         <Media
           {...backgroundImage}
@@ -62,7 +62,7 @@ const HeroSection = (model: HeroSectionModel) => {
             backgroundImage.className,
           )}
         />
-        <div className="hero-section-overlay absolute inset-0 bg-black/60" />
+        <div className="hero-section-overlay absolute inset-0 bg-brand-navy/60" />
 
         <div
           className={cn(
@@ -79,20 +79,20 @@ const HeroSection = (model: HeroSectionModel) => {
             )}
           >
             {subtitleText ? (
-              <p className="hero-section-subtitle text-base text-[#f7f7f7]">
+              <p className="hero-section-subtitle text-base text-brand-white-hover">
                 {subtitleText}
               </p>
             ) : null}
 
             {titleText ? (
-              <TitleTag className="hero-section-title mt-2 text-2xl font-bold leading-tight text-white md:text-4xl lg:text-5xl">
+              <TitleTag className="hero-section-title mt-2 text-2xl font-bold leading-tight text-brand-white md:text-4xl lg:text-5xl">
                 {titleText}
               </TitleTag>
             ) : null}
 
             {htmlTextContent ? (
               <div
-                className="hero-section-text mt-3 text-base leading-relaxed text-[#f7f7f7]"
+                className="hero-section-text mt-3 text-base leading-relaxed text-brand-white-hover"
                 dangerouslySetInnerHTML={{ __html: htmlTextContent }}
               />
             ) : null}
@@ -107,7 +107,7 @@ const HeroSection = (model: HeroSectionModel) => {
                 <Link
                   {...buttonLink}
                   className={cn(
-                    "hero-section-button animate-hero-section-stretch motion-reduce:animate-none inline-flex items-center justify-center rounded-full px-6 py-2 text-base font-semibold uppercase shadow no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 md:px-7 md:py-2.5",
+                    "hero-section-button animate-hero-section-stretch motion-reduce:animate-none inline-flex items-center justify-center rounded-full px-6 py-2 text-base font-semibold uppercase shadow no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-white/70 md:px-7 md:py-2.5",
                     HERO_SECTION_BUTTON_VARIANT_CLASSES[buttonVariant],
                     buttonLink.className,
                   )}

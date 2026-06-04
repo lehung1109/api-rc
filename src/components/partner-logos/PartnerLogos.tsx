@@ -110,7 +110,7 @@ const PartnerLogos = (model: PartnerLogosModel) => {
   return (
     <section
       className={cn(
-        "partner-logos w-full bg-neutral-100 py-4 md:py-5",
+        "partner-logos w-full bg-brand-white-hover py-4 md:py-5",
         className,
       )}
     >

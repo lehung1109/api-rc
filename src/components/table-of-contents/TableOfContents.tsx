@@ -131,7 +131,7 @@ const TableOfContents = (model: TableOfContentsModel) => {
   const panelClasses = cn(
     "table-of-contents-panel",
     isPast
-      ? "fixed right-4 md:right-6 top-1/2 z-40 -translate-y-1/2 rounded-lg border border-[#eeeeee] bg-white p-0 shadow-md"
+      ? "fixed right-4 md:right-6 top-1/2 z-40 -translate-y-1/2 rounded-lg border border-brand-white-hover bg-brand-white p-0 shadow-md"
       : "relative",
     isStickyCompact && "table-of-contents--sticky-compact",
     isStickyExpanded &&
@@ -193,7 +193,7 @@ const TableOfContents = (model: TableOfContentsModel) => {
             >
               <div className="flex items-center gap-2">
                 <ListOrdered
-                  className="h-5 w-5 shrink-0 text-[#f36f21]"
+                  className="h-5 w-5 shrink-0 text-brand-gold"
                   aria-hidden
                 />
                 <span

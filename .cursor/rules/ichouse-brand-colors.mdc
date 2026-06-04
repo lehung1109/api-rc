@@ -1,49 +1,53 @@
 ---
-description: Màu nhận diện ICHouse — Navy / Gold / White; token Tailwind brand-*
+description: Màu nhận diện ICHouse — strict palette Navy/Gold/White + hover; token brand-* và --e-global-color-*
 globs: src/**/*.{tsx,css}
 alwaysApply: false
 ---
 
-# Màu nhận diện ICHouse
+# Màu nhận diện ICHouse (strict)
 
-**Màu nhận diện hiện tại:**
+**Chỉ dùng 6 màu sau** (hex canonical duy nhất trong [`src/styles.css`](../../src/styles.css) `:root`):
 
-| Tên | Hex |
-|-----|-----|
-| Xanh Navy | `#022B63` |
-| Vàng Gold | `#D9A441` |
-| Trắng | `#FFFFFF` |
+| Elementor / CSS var | Tên | Hex |
+|---------------------|-----|-----|
+| `--e-global-color-primary` | Xanh Navy | `#022B63` |
+| `--e-global-color-secondary` | Vàng Gold | `#D9A441` |
+| `--e-global-color-tertiary` | Trắng | `#FFFFFF` |
+| `--e-global-color-primary_hover` | Navy hover | `#03367C` |
+| `--e-global-color-secondary_hover` | Gold hover | `#B78222` |
+| `--e-global-color-tertiary_hover` | Trắng hover | `#F5F5F5` |
 
-Giá trị hex canonical: [`src/styles.css`](../../src/styles.css) (`--color-brand-navy`, `--color-brand-gold`, `--color-brand-white`).
+Tailwind `@theme` map: `--color-brand-navy` → `var(--e-global-color-primary)`, tương tự `brand-gold`, `brand-white`, `brand-*-hover`.
 
-## Token Tailwind (code mới)
+## Token Tailwind (bắt buộc trong TSX)
 
 | Token | Utility ví dụ |
 |-------|-----------------|
-| `brand-navy` | `bg-brand-navy`, `text-brand-navy` |
-| `brand-gold` | `text-brand-gold`, `bg-brand-gold`, `border-brand-gold`, `hover:text-brand-gold/90` |
+| `brand-navy` | `bg-brand-navy`, `text-brand-navy`, `bg-brand-navy/60` |
+| `brand-gold` | `text-brand-gold`, `bg-brand-gold`, `border-brand-gold` |
 | `brand-white` | `text-brand-white`, `bg-brand-white` |
+| `brand-navy-hover` | `hover:bg-brand-navy-hover` |
+| `brand-gold-hover` | `hover:text-brand-gold-hover`, `hover:bg-brand-gold-hover` |
+| `brand-white-hover` | `bg-brand-white-hover`, `border-brand-white-hover` |
 
-**Do:** dùng `brand-*` cho accent và nền thương hiệu.
-
-**Avoid:** hard-code hex brand ngoài `styles.css`; thêm accent hex tự ý; copy palette cam legacy vào component mới.
+CSS thuần / Swiper inline: `var(--e-global-color-secondary)` — không hex trong component.
 
 ## Vai trò semantic
 
 | Màu | Dùng khi |
 |-----|----------|
-| Navy | Nền tối (footer, header bar), khối brand |
-| Gold | Accent: tiêu đề cột, link hover, CTA, icon highlight, active state |
-| White | Chữ/icon trên nền Navy; nền sáng khi thiết kế yêu cầu |
+| Navy | Nền tối (footer, header menu bar, overlay), chữ chính |
+| Gold | Accent: tiêu đề, link, CTA, icon, active, pagination |
+| White | Chữ/icon trên Navy; nền sáng |
+| *-hover | Trạng thái hover/active tương ứng |
+| Navy opacity (`text-brand-navy/70`) | Chữ phụ — **thay** xám hex |
 
-Màu trung tính UI (`#f7f7f7`, `#eeeeee`, `#888888`, `neutral-*`, overlay `black/60`) vẫn được phép cho layout và khả năng đọc — **không** thay thế accent thương hiệu.
+## Do / Avoid
 
-## Legacy (code cũ)
+**Do:** `brand-*` và opacity từ `brand-navy` cho muted text.
 
-Các hex cam vẫn còn trong component hiện có — **không** dùng cho code mới:
+**Avoid:**
 
-- `#f36f21` (accent cũ)
-- `#f47c20` (hover cũ)
-- `#ff7f2a` (hover nút cũ)
-
-Khi sửa file legacy, ưu tiên chuyển sang `brand-*` nếu task có scope đổi màu.
+- arbitrary hex trong className (ví dụ bracket hex), hex bất kỳ trong `src/components/**`
+- `neutral-*`, `gray-*`, `bg-black`, `text-black`, palette cam legacy
+- Thêm màu accent ngoài 6 biến trên

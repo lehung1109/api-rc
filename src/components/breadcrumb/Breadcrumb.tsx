@@ -48,7 +48,7 @@ const Breadcrumb = (model: BreadcrumbModel) => {
           <Link
             {...item.link}
             className={cn(
-              "breadcrumb-link text-[#e04622]",
+              "breadcrumb-link text-brand-gold",
               item.link.className,
             )}
           >

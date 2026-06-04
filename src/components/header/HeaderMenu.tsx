@@ -23,12 +23,12 @@ function hasLevel3(children?: HeaderMenuItemModel[]) {
 }
 
 const linkBaseClass =
-  "header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-black md:text-white";
+  "header-menu-link flex items-center text-[17px] font-medium transition-colors duration-150 text-brand-navy md:text-brand-white";
 
 function getLinkClass(active?: boolean) {
   return cn(
     linkBaseClass,
-    active ? "md:bg-[#f47c20]" : "md:hover:bg-[#f47c20]",
+    active ? "md:bg-brand-gold-hover" : "md:hover:bg-brand-gold-hover",
   );
 }
 
@@ -53,12 +53,12 @@ function renderMenuDropdownBody(
             {col.href ? (
               <a
                 href={normalizeHref(col.href)}
-                className="header-menu-section-title block text-[15px] font-bold uppercase text-[#111] hover:text-[#d82a28] md:mb-3 md:hover:pl-2 md:transition-all"
+                className="header-menu-section-title block text-[15px] font-bold uppercase text-brand-navy hover:text-brand-gold-hover md:mb-3 md:hover:pl-2 md:transition-all"
               >
                 {col.label}
               </a>
             ) : (
-              <p className="header-menu-section-title mb-2 text-[15px] font-bold uppercase text-[#111] md:mb-3">
+              <p className="header-menu-section-title mb-2 text-[15px] font-bold uppercase text-brand-navy md:mb-3">
                 {col.label}
               </p>
             )}
@@ -67,11 +67,11 @@ function renderMenuDropdownBody(
               {(col.children ?? []).map((child) => (
                 <li
                   key={child.label}
-                  className="md:border-t md:border-gray-300"
+                  className="md:border-t md:border-brand-navy/20"
                 >
                   <a
                     href={normalizeHref(child.href)}
-                    className="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#777] transition-colors duration-150 hover:text-[#111] md:text-[18px]"
+                    className="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-brand-navy/70 transition-colors duration-150 hover:text-brand-navy md:text-[18px]"
                   >
                     {child.label}
                   </a>
@@ -90,11 +90,11 @@ function renderMenuDropdownBody(
         {level2.map((sub) => (
           <li
             key={sub.label}
-            className="md:border-b-1 md:border-gray-300 last:border-b-0"
+            className="md:border-b-1 md:border-brand-navy/20 last:border-b-0"
           >
             <a
               href={normalizeHref(sub.href)}
-              className="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-[#333] transition-all duration-150 hover:text-[#d82a28] hover:pl-2 hover:font-bold md:text-[18px]"
+              className="header-menu-submenu-link block py-3 text-[16px] leading-[1.35] text-brand-navy transition-all duration-150 hover:text-brand-gold-hover hover:pl-2 hover:font-bold md:text-[18px]"
             >
               {sub.label}
             </a>
@@ -114,7 +114,7 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
         className,
       )}
     >
-      <ul className="header-menu-list flex min-h-[54px] flex-col mb-0 md:bg-[#1f1f1f] md:flex-row md:items-stretch md:justify-center max-md:uppercase pb-20 md:pb-0">
+      <ul className="header-menu-list flex min-h-[54px] flex-col mb-0 md:bg-brand-navy md:flex-row md:items-stretch md:justify-center max-md:uppercase pb-20 md:pb-0">
         {items.map((item, index) => {
           const level2 = item.children ?? [];
           const hasDropdown = level2.length > 0;
@@ -125,7 +125,7 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
             return (
               <li
                 key={item.label}
-                className="header-menu-item relative border-b border-gray-400 md:border-b-0 first:border-t"
+                className="header-menu-item relative border-b border-brand-navy/30 md:border-b-0 first:border-t"
               >
                 <a
                   href={normalizeHref(item.href)}
@@ -140,7 +140,7 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
           return (
             <li
               key={item.label}
-              className="header-menu-item group relative has-[:checked]:[&_.header-menu-chevron]:rotate-180 border-b border-gray-400 md:border-b-0 has-[:checked]:bg-[#f6f6f6] has-[:checked]:md:bg-transparent first:border-t md:hover:bg-[#f47c20] md:static"
+              className="header-menu-item group relative has-[:checked]:[&_.header-menu-chevron]:rotate-180 border-b border-brand-navy/30 md:border-b-0 has-[:checked]:bg-brand-white-hover has-[:checked]:md:bg-transparent first:border-t md:hover:bg-brand-gold-hover md:static"
             >
               <input
                 type="checkbox"
@@ -148,9 +148,9 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
                 className="peer/sub sr-only"
               />
 
-              <div className="header-menu-link-row flex h-[54px] items-stretch transition-colors  peer-checked/sub:[&_.header-menu-link]:text-[#f47c20] md:relative md:z-60">
+              <div className="header-menu-link-row flex h-[54px] items-stretch transition-colors  peer-checked/sub:[&_.header-menu-link]:text-brand-gold-hover md:relative md:z-60">
                 <div
-                  className="header-menu-dropdown-arrow absolute left-1/2 top-[calc(100%+2px)] hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent border-b-white md:group-hover:block"
+                  className="header-menu-dropdown-arrow absolute left-1/2 top-[calc(100%+2px)] hidden h-0 w-0 -translate-x-1/2 -translate-y-full border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent border-b-brand-white md:group-hover:block"
                   aria-hidden
                 />
 
@@ -166,7 +166,7 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
 
                 <label
                   htmlFor={itemCheckboxId}
-                  className="header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center pr-6 pl-18 md:pl-1 md:pr-4 md:pointer-events-none md:cursor-default text-black md:text-white"
+                  className="header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center pr-6 pl-18 md:pl-1 md:pr-4 md:pointer-events-none md:cursor-default text-brand-navy md:text-brand-white"
                   aria-label={`Mở menu ${item.label}`}
                 >
                   <ChevronDownIcon className="header-menu-chevron h-7 w-7 transition-transform" />
@@ -184,7 +184,7 @@ const HeaderMenu = ({ items, className = "" }: HeaderMenuModel) => {
               >
                 <div
                   className={cn(
-                    "header-menu-dropdown-inner relative border border-[#d9d9d9] shadow-[0_2px_10px_rgba(0,0,0,0.18)] max-md:border-0 max-md:shadow-none md:bg-white",
+                    "header-menu-dropdown-inner relative border border-brand-navy/15 shadow-md shadow-brand-navy/20 max-md:border-0 max-md:shadow-none md:bg-brand-white",
                     useColumns ? "flex justify-center" : "",
                   )}
                 >

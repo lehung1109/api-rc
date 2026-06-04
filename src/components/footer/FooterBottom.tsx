@@ -16,7 +16,7 @@ const FooterBottom = (model: FooterBottomModel) => {
   return (
     <div
       className={cn(
-        "footer-bottom border-t border-white/10",
+        "footer-bottom border-t border-brand-white/10",
         className,
       )}
     >

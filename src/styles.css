@@ -43,9 +43,12 @@
     --color-card: var(--card);
     --color-foreground: var(--foreground);
     --color-background: var(--background);
-    --color-brand-navy: #022B63;
-    --color-brand-gold: #D9A441;
-    --color-brand-white: #FFFFFF;
+    --color-brand-navy: var(--e-global-color-primary);
+    --color-brand-gold: var(--e-global-color-secondary);
+    --color-brand-white: var(--e-global-color-tertiary);
+    --color-brand-navy-hover: var(--e-global-color-primary_hover);
+    --color-brand-gold-hover: var(--e-global-color-secondary_hover);
+    --color-brand-white-hover: var(--e-global-color-tertiary_hover);
     --radius-sm: calc(var(--radius) * 0.6);
     --radius-md: calc(var(--radius) * 0.8);
     --radius-lg: var(--radius);
@@ -56,6 +59,12 @@
 }
 
 :root {
+    --e-global-color-primary: #022B63;
+    --e-global-color-secondary: #D9A441;
+    --e-global-color-tertiary: #FFFFFF;
+    --e-global-color-primary_hover: #03367C;
+    --e-global-color-secondary_hover: #B78222;
+    --e-global-color-tertiary_hover: #F5F5F5;
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
@@ -178,7 +187,7 @@ html body[data-scroll-locked] {
   text-indent: 0;
   margin-right: 0.25rem;
   flex-shrink: 0;
-  color: #888888;
+  color: color-mix(in srgb, var(--e-global-color-primary) 70%, transparent);
 }
 
 .table-of-contents-link {
@@ -186,23 +195,23 @@ html body[data-scroll-locked] {
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;
   text-indent: 0;
-  color: #333333;
+  color: var(--e-global-color-primary);
   transition:
     background-color 0.15s,
     color 0.15s;
 }
 
 .table-of-contents-link:hover {
-  color: #f36f21;
+  color: var(--e-global-color-secondary);
 }
 
 .table-of-contents-link--active {
-  background-color: #f36f21;
-  color: #ffffff;
+  background-color: var(--e-global-color-secondary);
+  color: var(--e-global-color-tertiary);
 }
 
 .table-of-contents-link--active:hover {
-  color: #ffffff;
+  color: var(--e-global-color-tertiary);
 }
 
 .table-of-contents-item--has-children:has(

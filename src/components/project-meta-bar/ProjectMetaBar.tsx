@@ -51,7 +51,7 @@ const ProjectMetaBar = (model: ProjectMetaBarModel) => {
   return (
     <section
       className={cn(
-        "project-meta-bar w-full border-b border-[#eeeeee] bg-[#e5e5e5f2]",
+        "project-meta-bar w-full border-b border-brand-white-hover bg-brand-white-hover/95",
         className,
       )}
     >
@@ -69,7 +69,7 @@ const ProjectMetaBar = (model: ProjectMetaBarModel) => {
               >
                 <dt className="project-meta-bar-title flex items-center gap-2">
                   <Icon
-                    className="h-4 w-4 shrink-0 text-[#f36f21]"
+                    className="h-4 w-4 shrink-0 text-brand-gold"
                     aria-hidden
                   />
                   {hasTitle ? (
@@ -81,7 +81,7 @@ const ProjectMetaBar = (model: ProjectMetaBarModel) => {
                 {hasContent ? (
                   <dd
                     className={cn(
-                      "project-meta-bar-content text-[#333]",
+                      "project-meta-bar-content text-brand-navy",
                       hasTitle && "mt-1",
                     )}
                   >

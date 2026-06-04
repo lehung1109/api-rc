@@ -39,9 +39,9 @@ const Carousel = ({
             "--swiper-pagination-bullet-width": "40px",
             "--swiper-pagination-bullet-height": "6px",
             "--swiper-pagination-bullet-border-radius": "0",
-            "--swiper-pagination-bullet-inactive-color": "#ed1b24",
+            "--swiper-pagination-bullet-inactive-color": "var(--e-global-color-secondary)",
             "--swiper-pagination-bullet-inactive-opacity": "0.4",
-            "--swiper-pagination-color": "#ed1b24",
+            "--swiper-pagination-color": "var(--e-global-color-secondary)",
             "--swiper-pagination-bullet-horizontal-gap": "8px",
           } as React.CSSProperties
         }
