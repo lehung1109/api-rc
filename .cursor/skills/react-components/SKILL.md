@@ -548,6 +548,42 @@ export interface BreadcrumbModel {
 
 **WordPress (sau):** PHP build `linkLevels` + `currentLabel` từ post/taxonomy; không query trong component.
 
+## Quick reference — image overlay cards grid (server)
+
+Grid card ảnh phủ vuông 1:1, gradient tối đáy, title trắng trên ảnh; flex 2 cột mobile / 3 cột tablet, `justify-center` cho hàng lẻ. **Server-only** — không Wrapper/client.
+
+| File | Vai trò |
+|------|---------|
+| `ImageOverlayCardsGrid.tsx` | Orchestrator: `<section>` + `flex flex-wrap justify-center` |
+| `ImageOverlayCardsGridCard.tsx` | Leaf: Media absolute + overlay + `<h3>`; link optional |
+| `src/data/image-overlay-cards-grid.ts` | Mock / CMS (`ImageOverlayCardsGrid` registry) |
+
+**Model:**
+
+```ts
+export interface ImageOverlayCardsGridItemModel {
+  image: MediaModel;
+  title: string;
+  link?: LinkModel; // có url.trim() → Link; không → <article>
+}
+
+export interface ImageOverlayCardsGridModel {
+  className?: string;
+  items: ImageOverlayCardsGridItemModel[];
+  gap?: number; // default 24 — width calc card giả định 24px
+}
+```
+
+**Render guards:** `items.length === 0` → `return null`.
+
+**Layout:** container `style={{ gap }}` (default 24). Card width: `w-[calc((100%-24px)/2)]` mobile, `md:w-[calc((100%-48px)/3)]` tablet+; `shrink-0 grow-0` + `justify-center` căn item lẻ.
+
+**Card UI:** `aspect-square`; `rounded-t-[20px] rounded-b-none`; Media `object-cover` + `group-hover:scale-105`; overlay `bg-gradient-to-t from-black/60 via-black/25 to-transparent`; title `text-[20px] font-bold text-brand-white` absolute bottom center; `cursor-pointer` chỉ khi có link.
+
+**Semantic classes:** `image-overlay-cards-grid`, `image-overlay-cards-grid-card`, `image-overlay-cards-grid-card-media`, `image-overlay-cards-grid-card-image`, `image-overlay-cards-grid-card-overlay`, `image-overlay-cards-grid-card-title`, `image-overlay-cards-grid-card-link`.
+
+**WordPress (sau):** widget repeater `image` + `title` + optional `link`.
+
 ## Quick reference — feature cards grid (server)
 
 Grid card giống `FeatureCardsCarouselCard` nhưng đơn giản hơn: luôn `Link`, `description` optional, hover zoom ảnh. **Server-only** — không Wrapper/client.

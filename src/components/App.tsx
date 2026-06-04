@@ -2,6 +2,8 @@ import { header } from "@/data/header";
 import Header from "./header/Header";
 import HeroSection from "./hero-section/HeroSection";
 import { heroSection } from "@/data/hero-section";
+import ImageOverlayCardsGrid from "./image-overlay-cards-grid/ImageOverlayCardsGrid";
+import imageOverlayCardsGrid from "@/data/image-overlay-cards-grid";
 import NumberIconGrid from "./number-icon-grid/NumberIconGrid";
 import numberIconGrid from "@/data/number-icon-grid";
 import PricingCards from "./pricing-cards/PricingCards";
@@ -44,6 +46,9 @@ const App = () => {
     <div>
       <Header {...header} />
       <HeroSection {...heroSection} />
+      <div className="mx-auto max-w-7xl px-4 py-8">
+        <ImageOverlayCardsGrid {...imageOverlayCardsGrid} />
+      </div>
       <CustomerTestimonialsWrapper {...customerTestimonialsWrapper} />
       <NumberIconGrid {...numberIconGrid} />
 
