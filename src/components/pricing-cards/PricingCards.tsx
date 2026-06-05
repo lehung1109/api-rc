@@ -45,7 +45,7 @@ const PricingCards = (model: PricingCardsModel) => {
               <div
                 className={cn(
                   "pricing-cards-title bg-brand-navy px-[10px] py-[20px] text-center text-[20px] font-semibold text-brand-white",
-                  isActive && "bg-brand-gold",
+                  isActive && "bg-brand-gold text-brand-navy",
                 )}
               >
                 {titleText}
