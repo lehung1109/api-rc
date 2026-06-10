@@ -2,7 +2,7 @@
 
 Dự án render React thành HTML tĩnh (SSR) và hydrate phía browser cho các component có `"use client"`. Tài liệu này mô tả quy ước đặt tên và các bước khi thêm component mới.
 
-## Tổng quan luồng
+## Tổng quan luồng chính
 
 ```mermaid
 flowchart TB
