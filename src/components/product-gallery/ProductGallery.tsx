@@ -59,7 +59,14 @@ const ProductGallery = (model: ProductGalleryModel) => {
         children: "a",
         pswpModule: () => import("photoswipe"),
         spacing: 0.8,
-        padding: { top: 20, bottom: 40, left: 100, right: 100 },
+        paddingFn: (viewportSize, itemData, index) => {
+          return {
+            top: 20,
+            bottom: 40,
+            left: viewportSize.x < 768 ? 0 : 100,
+            right: viewportSize.x < 768 ? 0 : 100,
+          };
+        },
       });
 
       lightbox.init();
