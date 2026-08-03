@@ -13,6 +13,13 @@ type PreviewPage = {
   title: string;
   path: string;
   source: "html" | "tsx";
+  variants: PreviewPageVariant[];
+};
+
+type PreviewPageVariant = {
+  id: string;
+  title: string;
+  path: string;
 };
 
 function scanIndexHtml(dir: string, base = dir) {
@@ -79,6 +86,62 @@ function readPageTitle(filePath: string, slug: string) {
   return titleMatch?.[1] ?? titleFromSlug(slug);
 }
 
+function getVariantPath(slug: string, variantId: string) {
+  const pagePath = `/pages/${slug}/`;
+
+  if (variantId === "default") {
+    return pagePath;
+  }
+
+  return `${pagePath}?variant=${encodeURIComponent(variantId)}`;
+}
+
+function readPageVariants(filePath: string, slug: string): PreviewPageVariant[] {
+  const content = fs.readFileSync(filePath, "utf8");
+  const variantsMatch = /pageVariants\s*=\s*\[([\s\S]*?)\]/.exec(content);
+
+  if (!variantsMatch) {
+    return [
+      {
+        id: "default",
+        title: "Default",
+        path: getVariantPath(slug, "default"),
+      },
+    ];
+  }
+
+  const variants = [...variantsMatch[1].matchAll(/\{([\s\S]*?)\}/g)]
+    .map((variantMatch) => {
+      const idMatch = /id\s*:\s*["'`]([^"'`]+)["'`]/.exec(variantMatch[1]);
+      const titleMatch = /title\s*:\s*["'`]([^"'`]+)["'`]/.exec(variantMatch[1]);
+      const id = idMatch?.[1];
+
+      if (!id) {
+        return undefined;
+      }
+
+      return {
+        id,
+        title: titleMatch?.[1] ?? titleFromSlug(id),
+        path: getVariantPath(slug, id),
+      };
+    })
+    .filter((variant): variant is PreviewPageVariant => Boolean(variant));
+
+  if (variants.some((variant) => variant.id === "default")) {
+    return variants;
+  }
+
+  return [
+    {
+      id: "default",
+      title: "Default",
+      path: getVariantPath(slug, "default"),
+    },
+    ...variants,
+  ];
+}
+
 function getPreviewPages(): PreviewPage[] {
   const pagesDir = resolve(__dirname, "pages");
   const pagesBySlug = new Map<string, PreviewPage>();
@@ -89,6 +152,13 @@ function getPreviewPages(): PreviewPage[] {
       title: slug,
       path: `/pages/${slug}/`,
       source: "html",
+      variants: [
+        {
+          id: "default",
+          title: "Default",
+          path: getVariantPath(slug, "default"),
+        },
+      ],
     });
   }
 
@@ -98,6 +168,7 @@ function getPreviewPages(): PreviewPage[] {
       title: readPageTitle(filePath, slug),
       path: `/pages/${slug}/`,
       source: "tsx",
+      variants: readPageVariants(filePath, slug),
     });
   }
 

@@ -5,6 +5,27 @@ import { previewPages } from "virtual:preview-pages";
 
 import "./styles.css";
 
+type SelectedPreview = {
+  slug: string;
+  variant: string;
+};
+
+const getDefaultVariant = (slug: string) => {
+  const page = previewPages.find((previewPage) => previewPage.slug === slug);
+
+  return page?.variants.find((variant) => variant.id === "default") ?? page?.variants[0];
+};
+
+const getPreviewUrl = (slug: string, variant: string) => {
+  const params = new URLSearchParams({ page: slug });
+
+  if (variant !== "default") {
+    params.set("variant", variant);
+  }
+
+  return `/?${params.toString()}`;
+};
+
 const getInitialSlug = () => {
   const requestedSlug = new URLSearchParams(window.location.search).get("page");
   const requestedPage = previewPages.find(
@@ -16,20 +37,40 @@ const getInitialSlug = () => {
   return requestedPage?.slug ?? fallbackPage?.slug ?? "";
 };
 
+const getInitialSelection = (): SelectedPreview => {
+  const params = new URLSearchParams(window.location.search);
+  const slug = getInitialSlug();
+  const requestedVariant = params.get("variant") ?? "default";
+  const page = previewPages.find((previewPage) => previewPage.slug === slug);
+  const variant = page?.variants.some(
+    (previewVariant) => previewVariant.id === requestedVariant,
+  )
+    ? requestedVariant
+    : "default";
+
+  return { slug, variant };
+};
+
 const DevPreview = () => {
-  const [selectedSlug, setSelectedSlug] = useState(getInitialSlug);
+  const [selectedPreview, setSelectedPreview] = useState(getInitialSelection);
   const selectedPage =
-    previewPages.find((page) => page.slug === selectedSlug) ?? previewPages[0];
+    previewPages.find((page) => page.slug === selectedPreview.slug) ?? previewPages[0];
+  const selectedVariant =
+    selectedPage?.variants.find((variant) => variant.id === selectedPreview.variant) ??
+    getDefaultVariant(selectedPage?.slug ?? "");
 
-  const selectPage = (slug: string) => {
-    const hasPage = previewPages.some((page) => page.slug === slug);
+  const selectPage = (slug: string, variant = "default") => {
+    const page = previewPages.find((previewPage) => previewPage.slug === slug);
+    const hasVariant = page?.variants.some(
+      (previewVariant) => previewVariant.id === variant,
+    );
 
-    if (!hasPage) {
+    if (!page || !hasVariant) {
       return;
     }
 
-    setSelectedSlug(slug);
-    window.history.pushState(null, "", `/?page=${encodeURIComponent(slug)}`);
+    setSelectedPreview({ slug, variant });
+    window.history.pushState(null, "", getPreviewUrl(slug, variant));
   };
 
   if (!selectedPage) {
@@ -58,7 +99,52 @@ const DevPreview = () => {
         >
           <ul className="space-y-1">
             {previewPages.map((page) => {
-              const isSelected = page.slug === selectedPage.slug;
+              const hasVariants = page.variants.length > 1;
+              const defaultVariant = getDefaultVariant(page.slug);
+              const isSelected =
+                page.slug === selectedPage.slug &&
+                defaultVariant?.id === selectedVariant?.id;
+
+              if (hasVariants) {
+                return (
+                  <li key={page.slug}>
+                    <p className="px-3 pb-1 pt-3 text-xs font-semibold uppercase tracking-normal text-slate-500">
+                      {page.title} variants
+                    </p>
+
+                    <ul className="space-y-1">
+                      {page.variants.map((variant) => {
+                        const isVariantSelected =
+                          page.slug === selectedPage.slug &&
+                          variant.id === selectedVariant?.id;
+                        const variantTitle =
+                          variant.id === "default" ? page.title : variant.title;
+
+                        return (
+                          <li key={`${page.slug}:${variant.id}`}>
+                            <a
+                              aria-current={isVariantSelected ? "page" : undefined}
+                              className={[
+                                "block rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                                isVariantSelected
+                                  ? "bg-slate-950 text-white"
+                                  : "text-slate-700 hover:bg-slate-100 hover:text-slate-950",
+                              ].join(" ")}
+                              href={getPreviewUrl(page.slug, variant.id)}
+                              onClick={(event) => {
+                                event.preventDefault();
+                                selectPage(page.slug, variant.id);
+                              }}
+                            >
+                              {variantTitle}
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </li>
+                );
+              }
 
               return (
                 <li key={page.slug}>
@@ -70,10 +156,10 @@ const DevPreview = () => {
                         ? "bg-slate-950 text-white"
                         : "text-slate-700 hover:bg-slate-100 hover:text-slate-950",
                     ].join(" ")}
-                    href={`/?page=${encodeURIComponent(page.slug)}`}
+                    href={getPreviewUrl(page.slug, defaultVariant?.id ?? "default")}
                     onClick={(event) => {
                       event.preventDefault();
-                      selectPage(page.slug);
+                      selectPage(page.slug, defaultVariant?.id ?? "default");
                     }}
                   >
                     {page.title}
@@ -89,7 +175,7 @@ const DevPreview = () => {
         <div className="h-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
           <iframe
             className="h-full w-full border-0"
-            src={selectedPage.path}
+            src={selectedVariant?.path ?? selectedPage.path}
             title="Selected preview page"
           />
         </div>

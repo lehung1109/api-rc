@@ -80,6 +80,30 @@ test('tsx page files are listed and render as independent page urls', async ({ p
   await expect(page.getByRole('navigation', { name: /mục lục/i })).toBeVisible();
 });
 
+test('tsx page variants are listed and render from query string urls', async ({ page }) => {
+  await page.goto('http://localhost:5173/');
+
+  await expect(page.getByText('home variants')).toBeVisible();
+  await page.getByRole('link', { name: 'Apartment variant' }).click();
+
+  await expect(page).toHaveURL('http://localhost:5173/?page=home&variant=apartment');
+  await expect(page.locator('iframe[title="Selected preview page"]')).toHaveAttribute(
+    'src',
+    '/pages/home/?variant=apartment',
+  );
+
+  const previewFrame = page.frameLocator('iframe[title="Selected preview page"]');
+  await expect(previewFrame.getByText('Home apartment variant')).toBeVisible();
+
+  await page.goto('http://localhost:5173/pages/home/?variant=apartment');
+
+  await expect(page.getByText('Home apartment variant')).toBeVisible();
+
+  await page.goto('http://localhost:5173/pages/home/?variant=missing');
+
+  await expect(page.getByText('Thi công nội thất chung cư đẹp')).toBeVisible();
+});
+
 test('tsx page files build as independent static html entries', async ({ browserName }) => {
   test.skip(browserName !== 'chromium', 'Vite build output is browser-independent.');
   test.setTimeout(90_000);

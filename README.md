@@ -38,6 +38,25 @@ Các preview page nằm trong `pages/<slug>/page.tsx`. Trang root sẽ liệt k�
 - `pages/carousel/page.tsx` -> `http://localhost:5173/pages/carousel/`
 - `pages/table-of-contents/page.tsx` -> `http://localhost:5173/pages/table-of-contents/`
 
+Một preview page có thể khai báo nhiều variant bằng `pageVariants`. Variant được chọn bằng query string `variant`; nếu không khai báo hoặc query string không hợp lệ, preview sẽ dùng `default`:
+
+```tsx
+export const pageVariants = [
+  { id: "default", title: "Default" },
+  { id: "apartment", title: "Apartment variant" },
+];
+
+export default function HomePage({ variant = "default" }: { variant?: string }) {
+  if (variant === "apartment") {
+    return <ApartmentHome />;
+  }
+
+  return <DefaultHome />;
+}
+```
+
+Ví dụ URL variant: `http://localhost:5173/pages/home/?variant=apartment`. Convention này chỉ áp dụng cho Vite preview/static page shell, không đổi cách render component vào `html/` hoặc API `/api/render-rc`.
+
 ## Build
 
 ```bash

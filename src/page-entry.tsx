@@ -6,10 +6,14 @@ import type { ComponentType } from "react";
 import "./styles.css";
 
 type PageModule = {
-  default: ComponentType;
+  default: ComponentType<{ variant?: string }>;
   pageMeta?: {
     title?: string;
   };
+  pageVariants?: Array<{
+    id: string;
+    title?: string;
+  }>;
 };
 
 const pageModules = import.meta.glob<PageModule>("../pages/**/page.tsx");
@@ -19,6 +23,18 @@ const getPageSlug = () => {
   const slug = match?.[1];
 
   return slug ? decodeURIComponent(slug) : "";
+};
+
+const getRequestedVariant = () =>
+  new URLSearchParams(window.location.search).get("variant") ?? "default";
+
+const getSelectedVariant = (pageModule: PageModule) => {
+  const requestedVariant = getRequestedVariant();
+  const variants = pageModule.pageVariants ?? [{ id: "default" }];
+
+  return variants.some((variant) => variant.id === requestedVariant)
+    ? requestedVariant
+    : "default";
 };
 
 const renderMissingPage = (slug: string) => (
@@ -43,12 +59,13 @@ const renderPage = async () => {
 
   const pageModule = await loadPage();
   const Page = pageModule.default;
+  const variant = getSelectedVariant(pageModule);
 
   if (pageModule.pageMeta?.title) {
     document.title = pageModule.pageMeta.title;
   }
 
-  ReactDOM.createRoot(app).render(<Page />);
+  ReactDOM.createRoot(app).render(<Page variant={variant} />);
 };
 
 await renderPage();
