@@ -13,7 +13,10 @@ type SelectedPreview = {
 const getDefaultVariant = (slug: string) => {
   const page = previewPages.find((previewPage) => previewPage.slug === slug);
 
-  return page?.variants.find((variant) => variant.id === "default") ?? page?.variants[0];
+  return (
+    page?.variants.find((variant) => variant.id === "default") ??
+    page?.variants[0]
+  );
 };
 
 const getPreviewUrl = (slug: string, variant: string) => {
@@ -54,10 +57,12 @@ const getInitialSelection = (): SelectedPreview => {
 const DevPreview = () => {
   const [selectedPreview, setSelectedPreview] = useState(getInitialSelection);
   const selectedPage =
-    previewPages.find((page) => page.slug === selectedPreview.slug) ?? previewPages[0];
+    previewPages.find((page) => page.slug === selectedPreview.slug) ??
+    previewPages[0];
   const selectedVariant =
-    selectedPage?.variants.find((variant) => variant.id === selectedPreview.variant) ??
-    getDefaultVariant(selectedPage?.slug ?? "");
+    selectedPage?.variants.find(
+      (variant) => variant.id === selectedPreview.variant,
+    ) ?? getDefaultVariant(selectedPage?.slug ?? "");
 
   const selectPage = (slug: string, variant = "default") => {
     const page = previewPages.find((previewPage) => previewPage.slug === slug);
@@ -123,7 +128,9 @@ const DevPreview = () => {
                         return (
                           <li key={`${page.slug}:${variant.id}`}>
                             <a
-                              aria-current={isVariantSelected ? "page" : undefined}
+                              aria-current={
+                                isVariantSelected ? "page" : undefined
+                              }
                               className={[
                                 "block rounded-md px-3 py-2 text-sm font-medium transition-colors",
                                 isVariantSelected
@@ -156,7 +163,10 @@ const DevPreview = () => {
                         ? "bg-slate-950 text-white"
                         : "text-slate-700 hover:bg-slate-100 hover:text-slate-950",
                     ].join(" ")}
-                    href={getPreviewUrl(page.slug, defaultVariant?.id ?? "default")}
+                    href={getPreviewUrl(
+                      page.slug,
+                      defaultVariant?.id ?? "default",
+                    )}
                     onClick={(event) => {
                       event.preventDefault();
                       selectPage(page.slug, defaultVariant?.id ?? "default");

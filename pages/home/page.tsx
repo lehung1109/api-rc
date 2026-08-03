@@ -15,7 +15,11 @@ export const pageVariants = [
   },
 ];
 
-export default function HomePage({ variant = "default" }: { variant?: string }) {
+export default function HomePage({
+  variant = "default",
+}: {
+  variant?: string;
+}) {
   if (variant === "apartment") {
     return (
       <main className="mx-auto max-w-4xl px-4 py-12">
