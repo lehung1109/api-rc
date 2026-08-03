@@ -1,63 +1,130 @@
-# api-rc — Hướng dẫn tạo component
+# api-rc
 
-Dự án render React thành HTML tĩnh (SSR) và hydrate phía browser cho các component có `"use client"`. Tài liệu này mô tả quy ước đặt tên và các bước khi thêm component mới.
+`api-rc` là project render React component thành HTML tĩnh/HTML qua API, đồng thời hydrate các component có tương tác trên browser. Repo hiện có ba workflow chính:
 
-## Tổng quan luồng
+- Build HTML tĩnh vào `html/` để nhúng vào CMS/WordPress.
+- Build browser bundle `dist/react-loader.js` và `dist/react-loader.css` để hydrate client islands.
+- Chạy Express render API tại `/api/render-rc` cho nhu cầu render component theo request.
 
-```mermaid
-flowchart TB
-  subgraph build [Build]
-    discover[discover-client-components]
-    registry[generate-client-registry]
-    generateHtml[generate-html.ts renderToString]
-    webpack[webpack: registry then bundle]
-    discover --> generateHtml
-    generateHtml --> htmlFiles[html/*.html]
-    discover --> registry
-    registry --> webpack
-  end
-  subgraph runtime [Trang WordPress / HTML]
-    staticHtml[HTML + comment markers]
-    scriptTag["script data-rct + JSON"]
-    hydrate[react-loader hydrateRoot]
-    staticHtml --> hydrate
-    scriptTag --> hydrate
-  end
-  htmlFiles --> staticHtml
-  webpack --> hydrate
+## Yêu cầu môi trường
+
+- Bun cho các script build/generate.
+- Node.js để chạy server đã build và một số CLI trong test.
+- Playwright browsers nếu cần chạy e2e: `npx playwright install`.
+
+## Cài đặt
+
+```bash
+bun install
 ```
 
-| Loại | Directive | SSR (`scripts/generate-html.ts`) | Hydrate (browser) |
-|------|-----------|-------------------|-------------------|
-| Server component | Không có `"use client"` | Khai báo tay trong `STATIC_COMPONENT_MAP` (vd. `Header`, `App`) | Không |
-| Client component | `"use client"` dòng đầu | Tự phát hiện + file data | Tự đăng ký qua `src/generated/client-registry.ts` |
+Nếu clone repo lần đầu và TypeScript báo thiếu file generated, chạy:
 
----
+```bash
+bun run generate
+```
 
-## Quy ước đặt tên
+## Chạy phát triển
 
-Giả sử component file là `MyFeature.tsx` (PascalCase):
+```bash
+bun run dev
+```
 
-| Mục | Quy ước | Ví dụ |
-|-----|---------|--------|
-| File component | `src/components/<folder>/MyFeature.tsx` | `src/components/carousel/Carousel.tsx` |
-| File data | `src/data/my-feature.ts` (kebab-case) | `src/data/autocomplete-search.ts` |
-| Export data | `myFeature` (camelCase) **hoặc** `export default` | `autocompleteSearch`, `carousel` (default) |
-| Key hydrate (`data-rct`) | Cùng camelCase export | `autocompleteSearch`, `carousel` |
-| File HTML output | `html/MyFeature.html` | `html/Carousel.html` |
+Lệnh này chạy Vite dev preview và Webpack watch cùng lúc. Vite phục vụ preview ở `http://localhost:5173/`; Webpack tự sinh client registry trước mỗi lần compile và build browser assets vào `dist/`.
 
-Công thức:
+Các preview page nằm trong `pages/<slug>/page.tsx`. Trang root sẽ liệt kê các page tìm thấy và render page đang chọn trong iframe. Ví dụ:
 
-- `MyFeature` → data file: `my-feature.ts`
-- `MyFeature` → export / `data-rct`: `myFeature`
+- `pages/home/page.tsx` -> `http://localhost:5173/pages/home/`
+- `pages/carousel/page.tsx` -> `http://localhost:5173/pages/carousel/`
+- `pages/table-of-contents/page.tsx` -> `http://localhost:5173/pages/table-of-contents/`
 
----
+## Build
 
-## 1. Client component (có tương tác, hooks)
+```bash
+bun run build
+```
 
-Dùng khi cần `useState`, `useEffect`, event handler, v.v.
+Pipeline build đầy đủ sẽ:
 
-### Bước 1 — Tạo component
+1. Sinh generated registries và metadata (`bun run generate`).
+2. Render HTML tĩnh vào `html/` (`bun run build:html`).
+3. Bundle browser loader/styles vào `dist/` (`bun run build:browser`).
+4. Bundle Express server vào `dist/server.js` (`bun run build:server`).
+
+## Server render API
+
+Build server:
+
+```bash
+bun run build:server
+```
+
+Chạy server đã build:
+
+```bash
+bun run start
+```
+
+Chạy server ở chế độ development/watch:
+
+```bash
+bun run dev:server
+```
+
+Mặc định server lắng nghe ở `http://localhost:3000`. Có thể đổi port bằng biến môi trường `PORT`; giới hạn JSON body mặc định là `1mb`, có thể đổi bằng `JSON_LIMIT`.
+
+### `POST /api/render-rc`
+
+Render một component có trong server registry.
+
+```json
+{
+  "component": "Header",
+  "props": {}
+}
+```
+
+Response thành công:
+
+```json
+{
+  "html": "<header>...</header>",
+  "hash": "..."
+}
+```
+
+### `POST /api/projects/filter`
+
+Lọc dữ liệu project showcase theo `area`, `beds`, `style`.
+
+```json
+{
+  "area": "",
+  "beds": "",
+  "style": ""
+}
+```
+
+## Scripts thường dùng
+
+| Lệnh | Mô tả |
+|------|-------|
+| `bun run dev` | Chạy Vite preview và Webpack watch. |
+| `bun run generate` | Sinh server registry, client registry, version json và restart txt. |
+| `bun run build` | Chạy toàn bộ pipeline generate, HTML, browser bundle và server bundle. |
+| `bun run build:html` | Render component ra `html/*.html`. |
+| `bun run build:browser` | Bundle `react-loader`, CSS và chạy post-build commands. |
+| `bun run build:server` | Bundle `src/server.ts` thành `dist/server.js`. |
+| `bun run dev:server` | Chạy render API bằng Bun watch. |
+| `bun run start` | Chạy `dist/server.js` bằng Node. |
+| `bun run typecheck` | Kiểm tra TypeScript. |
+| `npx playwright test` | Chạy Playwright tests. |
+
+## Quy ước component
+
+### Client component
+
+Dùng khi component cần hooks, state, effects hoặc browser events. File phải có directive trong 5 dòng đầu:
 
 ```tsx
 "use client";
@@ -66,209 +133,99 @@ export interface MyFeatureModel {
   title: string;
 }
 
-const MyFeature = (model: MyFeatureModel) => {
-  const { title } = model;
-  return <div>{title}</div>;
-};
-
-export default MyFeature;
+export default function MyFeature(model: MyFeatureModel) {
+  return <div>{model.title}</div>;
+}
 ```
 
-- `"use client"` phải nằm trong **5 dòng đầu** file.
-- `export default` component.
-- Không đặt file trong `src/components/ui/` (thư mục này bị bỏ qua khi quét).
+Quy ước đi kèm:
 
-### Bước 2 — Tạo data
+- File component: `src/components/<folder>/MyFeature.tsx`.
+- File data: `src/data/my-feature.ts`.
+- Export data: `myFeature` hoặc `default`.
+- Key hydrate (`data-rct`): `myFeature`.
+- Output HTML: `html/MyFeature.html`.
 
-`src/data/my-feature.ts`:
-
-```ts
-import type { MyFeatureModel } from "@/components/my-folder/MyFeature";
-
-const myFeature: MyFeatureModel = {
-  title: "Hello",
-};
-
-export { myFeature };
-// hoặc: export default myFeature;
-```
-
-Nếu dùng `export default`, build vẫn nhận data (ưu tiên named export, fallback `default`).
-
-### Bước 3 — Gắn vào layout server component
-
-Trong component cha (không có `"use client"`), bọc bằng `ClientComponentWrapper` và thêm `ReactSection` với **cùng key** `data-rct`:
+Khi đặt client component bên trong server component, bọc island bằng `ClientComponentWrapper` và thêm `ReactSection` cùng key:
 
 ```tsx
-import MyFeature from "./my-folder/MyFeature";
-import ClientComponentWrapper from "../ClientComponentWrapper";
-import ReactSection from "../ReactSection";
-import type { MyFeatureModel } from "./my-folder/MyFeature";
-
-// trong JSX:
 <ClientComponentWrapper>
   <MyFeature {...myFeatureData} />
   <ReactSection type="myFeature" data={myFeatureData} />
 </ClientComponentWrapper>
 ```
 
-- `type` của `ReactSection` = camelCase tên component (`myFeature`).
-- `data` = object props truyền vào component (JSON trong `<script data-rct>`).
+Client registry được sinh tự động tại `src/generated/client-registry.ts` và `src/generated/client-server-registry.ts`; không sửa tay các file này.
 
-### Bước 4 — Build
+### Server component
 
-```bash
-bun run build:html
-```
-
-Script sẽ:
-
-1. Render `html/MyFeature.html` (và các client component khác)
-2. Giữ `html/Header.html`, `html/App.html` từ map tĩnh
-
-Registry (`src/generated/client-registry.ts`) được webpack sinh tự động khi chạy `dev` / `build:browser`.
-
-Không cần sửa `scripts/generate-html.ts` hay `client-components.tsx` cho client component mới.
-
-### Kiểm tra nhanh
-
-```bash
-bun run typecheck
-bun run build:browser
-```
-
----
-
-## 2. Server component (HTML tĩnh, không hydrate)
-
-Dùng cho layout, markup không cần JavaScript phía client.
-
-### Bước 1 — Component (không có `"use client"`)
+Dùng cho markup không cần hydrate phía browser. Component không có `"use client"`.
 
 ```tsx
 export interface SectionModel {
   heading: string;
 }
 
-const Section = (model: SectionModel) => {
-  return <section><h2>{model.heading}</h2></section>;
-};
-
-export default Section;
+export default function Section(model: SectionModel) {
+  return <section>{model.heading}</section>;
+}
 ```
 
-### Bước 2 — Data
+Server registry được sinh từ `src/lib/discover-render-components.ts` qua `scripts/generate-server-registry.ts`. Registry quét các file `.tsx` trong `src/components/`, bỏ qua `src/components/ui/` và các helper như `ClientComponentWrapper`, `ReactSection`, `client-components.tsx`.
 
-`src/data/section.ts` với export `section` hoặc `export default`.
+Khi chạy `build:html`, script đọc `src/data/*.ts`, đổi tên file kebab-case sang PascalCase để tìm component tương ứng trong server registry, rồi lấy export camelCase hoặc `default` làm model. Ví dụ `src/data/project-showcase.ts` sẽ render component `ProjectShowcase` với export `projectShowcase` hoặc `default`.
 
-### Bước 3 — Đăng ký SSR (nếu cần file HTML riêng)
+Nếu cần render HTML tĩnh riêng vào `html/`, thêm component renderable và data file đúng quy ước, sau đó chạy:
 
-Thêm vào `STATIC_COMPONENT_MAP` trong [`scripts/generate-html.ts`](scripts/generate-html.ts):
-
-```ts
-import Section from "@/components/section/Section";
-import { section } from "@/data/section";
-
-const STATIC_COMPONENT_MAP = {
-  // ...
-  Section: {
-    component: Section,
-    model: section,
-    needFormat: true, // true = format HTML bằng Prettier
-  },
-};
+```bash
+bun run build:html
 ```
 
-Chạy `bun run build:html` → `html/Section.html`.
+## Cấu trúc chính
 
----
-
-## 3. Trang tổng hợp (`App`, `Header`)
-
-- [`src/components/App.tsx`](src/components/App.tsx): ghép nhiều section, bọc client components.
-- [`scripts/generate-html.ts`](scripts/generate-html.ts): `App` và `Header` nằm trong `STATIC_COMPONENT_MAP`.
-- Data: [`src/data/header.ts`](src/data/header.ts), v.v.
-
-Client component lồng trong `App`/`Header` vẫn cần `ClientComponentWrapper` + `ReactSection` như mục 1.
-
----
-
-## Cấu trúc thư mục gợi ý
-
-```
-src/
-  components/
-    my-feature/
-      MyFeature.tsx      # "use client" nếu cần hydrate
-    header/
-      Header.tsx         # server component
-    ui/                  # primitives — không auto-discover
-    ClientComponentWrapper.tsx
-    ReactSection.tsx
-    client-components.tsx  # re-export registry generated
-  data/
-    my-feature.ts
-  generated/
-    client-registry.ts   # auto-generated — không sửa tay
-  lib/
-    discover-client-components.ts
-html/
-  MyFeature.html
-  App.html
-scripts/
-  generate-client-registry.ts
-  generate-html.ts
+```text
+pages/                         # Preview pages độc lập cho Vite
+html/                          # HTML tĩnh được generate
+dist/                          # Browser/server build output
+scripts/                       # Generate/build helper scripts
+src/components/                # React components
+src/data/                      # Demo/model data cho render tĩnh
+src/generated/                 # File auto-generated, không sửa tay
+src/lib/                       # Discover/render/filter utilities
+src/react-loader.tsx           # Browser hydration entry
+src/server.ts                  # Express render API
+tests/                         # Playwright tests
 ```
 
----
+## Kiểm tra
 
-## Scripts thường dùng
+```bash
+bun run typecheck
+npx playwright test
+```
 
-| Lệnh | Mô tả |
-|------|--------|
-| `bun run dev` | Vite + Webpack watch (registry tự sinh trước mỗi lần compile) |
-| `bun run build` | `build:html` rồi `build:browser` |
-| `bun run build:html` | SSR → `html/` |
-| `bun run build:browser` | Sinh registry (webpack plugin) + bundle + post-build HTML/copy |
-| `bun run typecheck` | Kiểm tra TypeScript |
-
----
-
-## Ví dụ có sẵn trong repo
-
-| Component | Client? | Data | `data-rct` |
-|-----------|---------|------|------------|
-| [`AutocompleteSearch`](src/components/header/AutocompleteSearch.tsx) | Có | [`autocomplete-search.ts`](src/data/autocomplete-search.ts) | `autocompleteSearch` |
-| [`Carousel`](src/components/carousel/Carousel.tsx) | Có | [`carousel.ts`](src/data/carousel.ts) | `carousel` |
-| [`Header`](src/components/header/Header.tsx) | Không | [`header.ts`](src/data/header.ts) | — |
-| [`App`](src/components/App.tsx) | Không | — | — |
-
-Tham khảo cách gắn client component: [`HeaderTop.tsx`](src/components/header/HeaderTop.tsx).
-
----
+Playwright sẽ tự start Vite preview tại `http://localhost:5173/` theo `playwright.config.ts`.
 
 ## Lỗi thường gặp
 
-**Component không xuất hiện trong `html/` sau `build:html`**
+**Component không xuất hiện trong `html/`**
 
-- Thiếu `"use client"` hoặc directive không khớp regex (phải đúng `"use client"` / `'use client'`).
-- Thiếu file data đúng tên kebab-case.
-- File nằm trong `src/components/ui/`.
+- Thiếu `"use client"` với client component hoặc directive nằm quá xa đầu file.
+- Thiếu data file đúng tên kebab-case.
+- Component nằm trong thư mục bị bỏ qua khi discover.
+- Chưa chạy `bun run generate` hoặc `bun run build:html` sau khi thêm component.
 
-**Hydrate không chạy trên trang**
+**Hydrate không chạy**
 
-- `ReactSection` `type` khác key trong registry (phải camelCase, vd. `myFeature`).
-- Chưa chạy webpack / `dev` (registry chưa cập nhật).
-- Thiếu `ClientComponentWrapper` (comment markers cho pipeline HTML).
+- `ReactSection type` khác key trong registry.
+- Thiếu `ClientComponentWrapper` quanh island.
+- Chưa chạy `bun run build:browser` hoặc Webpack watch chưa rebuild.
 
-**TypeScript báo lỗi import generated**
+**API báo component not found**
 
-- Chạy `bun run build:browser` hoặc `bun run scripts/generate-client-registry.ts` trước `typecheck` lần đầu clone repo.
+- Chưa chạy `bun run generate:server-registry` hoặc `bun run build:server` sau khi thêm component.
+- Tên `component` gửi lên API không khớp registry key.
 
----
+**TypeScript báo lỗi import từ `src/generated/`**
 
-## Ghi chú kỹ thuật
-
-- SSR client component chỉ render HTML tĩnh; hooks chạy khi `react-loader` gọi `hydrateRoot`.
-- `src/generated/client-registry.ts` do [`scripts/generate-client-registry.ts`](scripts/generate-client-registry.ts) sinh ra — chỉnh sửa tay sẽ bị ghi đè.
-- Override quy ước (tùy chọn, chưa bật): có thể thêm `src/client-component.overrides.json` theo plan nếu cần data file tên khác.
+- Chạy `bun run generate` trước khi `bun run typecheck`.
