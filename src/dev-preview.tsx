@@ -102,20 +102,19 @@ const DevPreview = () => {
           aria-label="Preview pages"
           className="min-h-0 flex-1 overflow-y-auto p-3"
         >
-          <ul className="space-y-1">
+          <ul className="space-y-3">
             {previewPages.map((page) => {
-              const hasVariants = page.variants.length > 1;
               const defaultVariant = getDefaultVariant(page.slug);
-              const isSelected =
-                page.slug === selectedPage.slug &&
-                defaultVariant?.id === selectedVariant?.id;
 
-              if (hasVariants) {
-                return (
-                  <li key={page.slug}>
-                    <p className="px-3 pb-1 pt-3 text-xs font-semibold uppercase tracking-normal text-slate-500">
-                      {page.title} variants
-                    </p>
+              return (
+                <li
+                  className="border-b border-slate-100 pb-3 last:border-b-0 last:pb-0"
+                  key={page.slug}
+                >
+                  <section>
+                    <h2 className="px-3 pb-1 text-xs font-semibold uppercase tracking-normal text-slate-500">
+                      {page.title}
+                    </h2>
 
                     <ul className="space-y-1">
                       {page.variants.map((variant) => {
@@ -123,7 +122,7 @@ const DevPreview = () => {
                           page.slug === selectedPage.slug &&
                           variant.id === selectedVariant?.id;
                         const variantTitle =
-                          variant.id === "default" ? page.title : variant.title;
+                          variant.id === defaultVariant?.id ? page.title : variant.title;
 
                         return (
                           <li key={`${page.slug}:${variant.id}`}>
@@ -149,31 +148,7 @@ const DevPreview = () => {
                         );
                       })}
                     </ul>
-                  </li>
-                );
-              }
-
-              return (
-                <li key={page.slug}>
-                  <a
-                    aria-current={isSelected ? "page" : undefined}
-                    className={[
-                      "block rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                      isSelected
-                        ? "bg-slate-950 text-white"
-                        : "text-slate-700 hover:bg-slate-100 hover:text-slate-950",
-                    ].join(" ")}
-                    href={getPreviewUrl(
-                      page.slug,
-                      defaultVariant?.id ?? "default",
-                    )}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      selectPage(page.slug, defaultVariant?.id ?? "default");
-                    }}
-                  >
-                    {page.title}
-                  </a>
+                  </section>
                 </li>
               );
             })}

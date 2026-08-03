@@ -83,7 +83,7 @@ test('tsx page files are listed and render as independent page urls', async ({ p
 test('tsx page variants are listed and render from query string urls', async ({ page }) => {
   await page.goto('http://localhost:5173/');
 
-  await expect(page.getByText('home variants')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'home' })).toBeVisible();
   await page.getByRole('link', { name: 'Apartment variant' }).click();
 
   await expect(page).toHaveURL('http://localhost:5173/?page=home&variant=apartment');
