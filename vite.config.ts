@@ -4,6 +4,15 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import fs from "node:fs";
 import { resolve, relative, dirname } from "node:path";
 
+const previewPagesModuleId = "virtual:preview-pages";
+const resolvedPreviewPagesModuleId = `\0${previewPagesModuleId}`;
+
+type PreviewPage = {
+  slug: string;
+  title: string;
+  path: string;
+};
+
 function scanIndexHtml(dir: string, base = dir) {
   const entries: Record<string, string> = {};
 
@@ -24,6 +33,18 @@ function scanIndexHtml(dir: string, base = dir) {
   return entries;
 }
 
+function getPreviewPages(): PreviewPage[] {
+  const pagesDir = resolve(__dirname, "pages");
+
+  return Object.keys(scanIndexHtml(pagesDir, pagesDir))
+    .sort((a, b) => a.localeCompare(b))
+    .map((slug) => ({
+      slug,
+      title: slug,
+      path: `/pages/${slug}/`,
+    }));
+}
+
 export default defineConfig({
   build: {
     rollupOptions: {
@@ -32,6 +53,19 @@ export default defineConfig({
   },
   plugins: [
     tsconfigPaths(),
+    {
+      name: "preview-pages-module",
+      resolveId(id) {
+        if (id === previewPagesModuleId) {
+          return resolvedPreviewPagesModuleId;
+        }
+      },
+      load(id) {
+        if (id === resolvedPreviewPagesModuleId) {
+          return `export const previewPages = ${JSON.stringify(getPreviewPages())};`;
+        }
+      },
+    },
     {
       name: "pages-trailing-slash",
       configureServer(server) {
