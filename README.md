@@ -146,14 +146,15 @@ Quy ước đi kèm:
 - Key hydrate (`data-rct`): `myFeature`.
 - Output HTML: `html/MyFeature.html`.
 
-Khi đặt client component bên trong server component, bọc island bằng `ClientComponentWrapper` và thêm `ReactSection` cùng key:
+Khi đặt client component bên trong server component, bọc island bằng `ClientComponentWrapper`. Wrapper cần `type` đúng với key hydrate và `hydrateData` đúng với props hydrate; wrapper sẽ tự sinh `ReactSection`/`script[data-rct]` với target id ổn định:
 
 ```tsx
-<ClientComponentWrapper>
+<ClientComponentWrapper type="myFeature" hydrateData={myFeatureData}>
   <MyFeature {...myFeatureData} />
-  <ReactSection type="myFeature" data={myFeatureData} />
 </ClientComponentWrapper>
 ```
+
+Chỉ dùng trực tiếp `ReactSection` khi thật sự cần tự quản lý target hydrate; đa số server wrapper nên dùng `ClientComponentWrapper` để tránh lệch `data-rct`, `data-rc-target` và `identifierPrefix`.
 
 Client registry được sinh tự động tại `src/generated/client-registry.ts` và `src/generated/client-server-registry.ts`; không sửa tay các file này.
 
