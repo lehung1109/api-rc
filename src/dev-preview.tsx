@@ -122,7 +122,9 @@ const DevPreview = () => {
                           page.slug === selectedPage.slug &&
                           variant.id === selectedVariant?.id;
                         const variantTitle =
-                          variant.id === defaultVariant?.id ? page.title : variant.title;
+                          variant.id === defaultVariant?.id
+                            ? page.title
+                            : variant.title;
 
                         return (
                           <li key={`${page.slug}:${variant.id}`}>
