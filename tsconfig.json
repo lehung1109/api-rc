@@ -42,6 +42,6 @@
     },
     "moduleResolution": "bundler",
   },
-  "include": ["src/**/*", "types", "scripts/**/*"],
+  "include": ["src/**/*", "types", "scripts/**/*", "pages/**/*"],
   "exclude": ["node_modules", "dist"]
 }
