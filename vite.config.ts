@@ -136,12 +136,12 @@ function renderTsxPageShell(slug: string) {
 </html>`;
 }
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   build: {
     rollupOptions: {
       input: {
         ...scanIndexHtml(resolve(__dirname, "pages"), resolve(__dirname)),
-        ...getGeneratedTsxHtmlEntries(),
+        ...(command === "build" ? getGeneratedTsxHtmlEntries() : {}),
       },
     },
   },
@@ -233,4 +233,4 @@ export default defineConfig({
       },
     },
   ],
-});
+}));
