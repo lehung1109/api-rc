@@ -132,14 +132,14 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
         <div className="construction-header-actions flex items-center gap-1 md:hidden">
           <label
             htmlFor={CONSTRUCTION_HEADER_SEARCH_CHECKBOX_ID}
-            className="construction-header-search-open flex cursor-pointer items-center justify-center p-3 text-brand-navy transition-colors group-data-[scrolled=true]/construction-header:text-brand-white"
+            className="construction-header-search-open flex cursor-pointer items-center justify-center p-3 text-brand-navy"
             aria-label={openSearchLabel}
           >
             <Search className="h-6 w-6" />
           </label>
           <label
             htmlFor={CONSTRUCTION_HEADER_MENU_CHECKBOX_ID}
-            className="construction-header-menu-open flex cursor-pointer items-center justify-center p-3 text-brand-navy transition-colors group-data-[scrolled=true]/construction-header:text-brand-white"
+            className="construction-header-menu-open flex cursor-pointer items-center justify-center p-3 text-brand-navy"
             aria-label={openMenuLabel}
           >
             <Menu className="h-7 w-7" />

@@ -38,11 +38,11 @@ const ConstructionHeaderSearchModal = (
         "fixed inset-0 z-[70] flex items-center justify-center bg-transparent p-4",
         "invisible pointer-events-none",
         "peer-checked/search:visible peer-checked/search:pointer-events-auto",
-        "transition-[opacity,transform] duration-300 ease-out",
+        "transition-opacity duration-500 ease-out",
         enableFadeIn && "opacity-0 peer-checked/search:opacity-100",
         !enableFadeIn && "opacity-100",
-        enableSlideIn && "translate-y-4 peer-checked/search:translate-y-0",
-        !enableSlideIn && "translate-y-0",
+        enableSlideIn &&
+          "peer-checked/search:[&_.construction-header-search-modal-close]:translate-y-0 peer-checked/search:[&_.construction-header-search-modal-body]:translate-y-0",
         className,
       )}
     >
@@ -58,17 +58,31 @@ const ConstructionHeaderSearchModal = (
 
       <label
         htmlFor={checkboxId}
-        className="construction-header-search-modal-close absolute top-4 right-4 z-10 flex cursor-pointer items-center justify-center p-3 text-brand-white"
+        className={cn(
+          "construction-header-search-modal-close absolute top-4 right-4 z-10 flex cursor-pointer items-center justify-center p-3 text-brand-white",
+          "transition-transform duration-500 ease-out",
+          enableSlideIn && "translate-y-10",
+          !enableSlideIn && "translate-y-0",
+        )}
         aria-label={closeLabel}
       >
         <X className="h-8 w-8" />
       </label>
 
-      <div className="construction-header-search-modal-content relative z-10 w-full max-w-xl px-4">
-        <HeaderSearch
-          autocomplete_search={autocomplete_search}
-          className="construction-header-search-modal-input w-full"
-        />
+      <div
+        className={cn(
+          "construction-header-search-modal-body relative z-10 w-full max-w-xl px-4",
+          "transition-transform duration-500 ease-out",
+          enableSlideIn && "-translate-y-10",
+          !enableSlideIn && "translate-y-0",
+        )}
+      >
+        <div className="construction-header-search-modal-content w-full">
+          <HeaderSearch
+            autocomplete_search={autocomplete_search}
+            className="construction-header-search-modal-input w-full"
+          />
+        </div>
       </div>
     </div>
   );
