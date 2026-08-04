@@ -124,7 +124,7 @@ const ConstructionHeaderMenuModal = (
         </div>
 
         <div className="construction-header-menu-modal-inner relative flex min-h-full flex-col px-0 py-6 md:min-h-0 md:py-0">
-          <div className="construction-header-menu-modal-logo mb-6 max-w-[150px] px-6 leading-0 md:hidden">
+          <div className="construction-header-menu-modal-logo mb-6 ml-6 w-[150px] leading-0 md:hidden">
             <Media {...logo} className="h-auto w-full" />
           </div>
 
