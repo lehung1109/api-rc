@@ -16,6 +16,8 @@ import type { ConstructionHeaderModalAnimationModel } from "./ConstructionHeader
 import ConstructionHeaderSearchModal from "./ConstructionHeaderSearchModal";
 import type { ConstructionHeaderScrollMonitorModel } from "./ConstructionHeaderScrollMonitor";
 import ConstructionHeaderScrollMonitor from "./ConstructionHeaderScrollMonitor";
+import type { ConstructionHeaderTopModel } from "./ConstructionHeaderTop";
+import ConstructionHeaderTop from "./ConstructionHeaderTop";
 
 export const CONSTRUCTION_HEADER_MENU_CHECKBOX_ID =
   "construction-header-menu-open";
@@ -25,6 +27,7 @@ export const CONSTRUCTION_HEADER_ROOT_ID = "construction-header";
 
 export interface ConstructionHeaderModel {
   className?: string;
+  headerTop: ConstructionHeaderTopModel;
   logo: MediaModel;
   menu: Omit<ConstructionHeaderMenuModel, "searchItem">;
   socialLinks: ConstructionHeaderSocialLinkModel[];
@@ -43,6 +46,7 @@ export interface ConstructionHeaderModel {
 const ConstructionHeader = (model: ConstructionHeaderModel) => {
   const {
     className,
+    headerTop,
     logo,
     menu,
     socialLinks,
@@ -80,7 +84,8 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
     <header
       id={headerId}
       className={cn(
-        "construction-header group/construction-header sticky top-0 z-50 left-0 right-0",
+        "construction-header group/construction-header z-50 left-0 right-0 top-0",
+        "fixed md:absolute md:data-[scrolled=true]:fixed",
         "bg-transparent",
         className,
       )}
@@ -123,6 +128,8 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
           />
         </picture>
       </div>
+
+      <ConstructionHeaderTop {...headerTop} />
 
       <div className="construction-header-bar relative z-20 mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:pointer-events-none">
         <div className="construction-header-logo max-w-[120px] leading-0 md:pointer-events-auto">

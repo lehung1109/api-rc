@@ -15,6 +15,8 @@ test.describe("ConstructionHeader", () => {
 
     const header = page.locator("#construction-header");
     await expect(header).toBeVisible();
+    await expect(header).toHaveCSS("position", "fixed");
+    await expect(page.locator(".construction-header-top")).toBeHidden();
     await expect(
       page.locator(".construction-header-search-open"),
     ).toBeVisible();
@@ -88,6 +90,11 @@ test.describe("ConstructionHeader", () => {
 
     const header = page.locator("#construction-header");
     await expect(header).toBeVisible();
+    await expect(header).toHaveCSS("position", "absolute");
+    await expect(page.locator(".construction-header-top")).toBeVisible();
+    await expect(
+      page.locator(".construction-header-top-hotline"),
+    ).toHaveText("Hotline: 0000 000 000");
     await expect(
       page.locator(".construction-header-search-open"),
     ).toBeHidden();
@@ -121,17 +128,24 @@ test.describe("ConstructionHeader", () => {
     await expect(page.getByPlaceholder("Gõ tìm kiếm...")).toBeVisible();
   });
 
-  test("sticky background after scroll threshold", async ({ page }) => {
+  test("desktop: fixed + hide top after scroll threshold", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto(constructionUrl);
 
     const header = page.locator("#construction-header");
+    const headerTop = page.locator(".construction-header-top");
     await expect(header).not.toHaveAttribute("data-scrolled", "true");
+    await expect(header).toHaveCSS("position", "absolute");
+    await expect(headerTop).toBeVisible();
 
     await page.evaluate(() => window.scrollTo(0, 200));
     await expect(header).toHaveAttribute("data-scrolled", "true");
+    await expect(header).toHaveCSS("position", "fixed");
+    await expect(headerTop).toBeHidden();
 
     await page.evaluate(() => window.scrollTo(0, 0));
     await expect(header).not.toHaveAttribute("data-scrolled", "true");
+    await expect(header).toHaveCSS("position", "absolute");
+    await expect(headerTop).toBeVisible();
   });
 });

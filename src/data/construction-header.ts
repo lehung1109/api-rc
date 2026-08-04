@@ -12,6 +12,9 @@ const link = (url: string, is_external = false): LinkModel => ({
 const iconDimensions = { width: 24, height: 24 };
 
 const constructionHeader: ConstructionHeaderModel = {
+  headerTop: {
+    hotlineText: "Hotline: 0000 000 000",
+  },
   logo: {
     url: "https://noithat.ichouse.vn/wp-content/uploads/2024/02/logo.jpg",
     alt: "ICHouse",
