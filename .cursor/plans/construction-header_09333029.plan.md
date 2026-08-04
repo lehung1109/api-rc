@@ -154,3 +154,10 @@ flowchart TD
 ## Ghi chú kỹ thuật quan trọng
 - Không sửa logic hydrate của `AutocompleteSearch`: dùng `HeaderSearch`/`ClientComponentWrapper` để đảm bảo island hydration.
 - Đảm bảo z-index cho modal overlay (> các block khác) để không bị style khác override.
+- Tuân thủ `react-components` skill:
+  - Server-first; chỉ dùng client island cho phần thật sự cần state/effect (ở đây là scroll monitor).
+  - Một file `.tsx` chỉ chứa một component.
+  - Breakpoint chuẩn `md` (768px), responsive theo một cây DOM.
+- Phạm vi shadcn UI:
+  - Dùng primitive sẵn có (`Input` thông qua `AutocompleteSearch`, `Button` nếu cần focus/hover chuẩn).
+  - Không dùng `Sheet`/`Dialog`/`DropdownMenu`/`Collapsible` cho modal/menu toggle; dùng CSS-first + checkbox/label theo kế hoạch.
