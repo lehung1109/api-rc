@@ -9,7 +9,7 @@ todos:
     content: "Implement `ConstructionHeaderMenu.tsx` dùng chung markup desktop+mobile; dropdown: mobile slide-in-from-left, desktop fade nhẹ, item cuối 'liên hệ' border+hover, active/open bold."
     status: pending
   - id: build-modals
-    content: Implement `ConstructionHeaderSearchModal.tsx` (overlay transparent, center AutocompleteSearch, close top-right, fade+slide toggle) và `ConstructionHeaderMenuModal.tsx` (overlay full screen, background image, logo/social/underline, close top-right, fade+slide toggle).
+    content: Implement `ConstructionHeaderSearchModal.tsx` (overlay transparent, center AutocompleteSearch, close top-right, fade+slide toggle) và `ConstructionHeaderMenuModal.tsx` (overlay full screen, nền dùng `picture` responsive + overlay layer, logo/social/underline, close top-right, fade+slide toggle).
     status: pending
   - id: scroll-monitor-island
     content: "Tạo `ConstructionHeaderScrollMonitor.tsx` client island: theo dõi scrollY và set data attribute cho header khi qua `stickyAfterPx`."
@@ -81,7 +81,7 @@ flowchart TD
 ### 3) Modal Menu full-viewport (mobile)
 - `ConstructionHeaderMenuModal.tsx`:
   - Overlay `fixed inset-0` full viewport.
-  - Background image (prop) + overlay layer để tạo độ tương phản.
+  - Nền dùng `picture` (prop) để responsive theo breakpoint, kèm overlay layer để tạo độ tương phản.
   - Close button trên phải.
   - Layout theo ảnh:
     - Logo (duplicate item) + link home.
@@ -120,11 +120,11 @@ flowchart TD
    - close button.
    - animation fade/slide bật/tắt.
 4. Tạo `ConstructionHeaderMenuModal.tsx`:
-   - overlay full screen + background image.
+   - overlay full screen + nền `picture` responsive.
    - logo duplicate + socials + underline + menu.
    - close button + animation fade/slide bật/tắt.
 5. Tạo `ConstructionHeaderScrollMonitor.tsx` + data file threshold.
-6. Tạo `src/data/construction-header.ts` với toàn bộ text/href/images theo ảnh; dùng `public/images/concrete-bg-official-updated.jpg` làm background mặc định cho menu modal (truyền qua props).
+6. Tạo `src/data/construction-header.ts` với toàn bộ text/href/images theo ảnh; dùng `public/images/concrete-bg-official-updated.jpg` làm ảnh nền mặc định cho `picture` trong menu modal (truyền qua props, có thể bổ sung source cho từng breakpoint).
 7. Cập nhật [`src/components/App.tsx`](src/components/App.tsx) để home page render `ConstructionHeader` thay vì `Header`.
 8. Playwright đối chiếu:
    - Tạo test mới `tests/construction-header.spec.ts`.
@@ -138,7 +138,7 @@ flowchart TD
 - Mobile:
   - Header right có search + hamburger.
   - Search modal full viewport, transparent background, input ở giữa, close button top-right, animation fade+slide khi mở/đóng.
-  - Hamburger modal full viewport, background image, close top-right, layout đúng logo-social-underline-menu.
+  - Hamburger modal full viewport, nền `picture` responsive, close top-right, layout đúng logo-social-underline-menu.
   - Dropdown submenu slide in từ trái; item đang mở + active item bold.
   - Sticky background hoạt động sau `stickyAfterPx`.
 - Desktop:
