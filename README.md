@@ -70,6 +70,29 @@ Pipeline build đầy đủ sẽ:
 3. Bundle browser loader/styles vào `dist/` (`bun run build:browser`).
 4. Bundle Express server vào `dist/server.js` (`bun run build:server`).
 
+### Nhúng browser loader
+
+`dist/react-loader.js` là ES module. Khi nhúng vào CMS/WordPress hoặc HTML copy-paste, luôn load file này bằng `type="module"`; nếu nhúng như classic script, browser sẽ báo `Cannot use 'import.meta' outside a module`.
+
+```html
+<link rel="stylesheet" href="/path/to/react-loader.css" />
+<script type="module" src="/path/to/react-loader.js"></script>
+```
+
+Khi deploy browser assets, copy toàn bộ `dist/`, không chỉ `react-loader.js` và `react-loader.css`. Loader có thể lazy-load các chunk component được Vite sinh ra, ví dụ `Carousel.*.js` hoặc `ProductGallery.*.js`.
+
+Với WordPress enqueue script truyền thống, thêm `type="module"` cho đúng handle:
+
+```php
+add_filter('script_loader_tag', function ($tag, $handle, $src) {
+  if ($handle === 'api-rc-react-loader') {
+    return '<script type="module" src="' . esc_url($src) . '"></script>';
+  }
+
+  return $tag;
+}, 10, 3);
+```
+
 ## Server render API
 
 Build server:

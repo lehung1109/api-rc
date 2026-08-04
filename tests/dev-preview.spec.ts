@@ -1,6 +1,7 @@
 import { expect, test, type BrowserContext, type Page } from '@playwright/test';
 import { execFile } from 'node:child_process';
 import fs from 'node:fs/promises';
+import http from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
@@ -9,6 +10,47 @@ const execFileAsync = promisify(execFile);
 const viteCliPath = path.resolve(process.cwd(), 'node_modules', 'vite', 'bin', 'vite.js');
 
 const migratedPageSlugs = ['autocomplete-search', 'carousel', 'home', 'table-of-contents'];
+
+async function createStaticServer(rootDir: string) {
+  const server = http.createServer(async (request, response) => {
+    const requestUrl = new URL(request.url ?? '/', 'http://localhost');
+    const pathname = requestUrl.pathname === '/' ? '/index.html' : requestUrl.pathname;
+    const filePath = path.join(rootDir, decodeURIComponent(pathname));
+
+    try {
+      const content = await fs.readFile(filePath);
+      const extension = path.extname(filePath);
+      const contentType = extension === '.html'
+        ? 'text/html; charset=utf-8'
+        : extension === '.css'
+          ? 'text/css; charset=utf-8'
+          : extension === '.js'
+            ? 'text/javascript; charset=utf-8'
+            : 'application/octet-stream';
+
+      response.writeHead(200, { 'Content-Type': contentType });
+      response.end(content);
+    } catch {
+      response.writeHead(404);
+      response.end('Not found');
+    }
+  });
+
+  await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
+  const address = server.address();
+
+  if (!address || typeof address === 'string') {
+    server.close();
+    throw new Error('Unable to start static server for browser asset test.');
+  }
+
+  return {
+    url: `http://127.0.0.1:${address.port}`,
+    close: () => new Promise<void>((resolve, reject) => {
+      server.close((error) => error ? reject(error) : resolve());
+    }),
+  };
+}
 
 async function expectPageRender(
   context: BrowserContext,
@@ -175,6 +217,57 @@ test('browser assets build with stable loader and stylesheet filenames', async (
     expect(loader).toContain('hydrateRoot');
     expect(stylesheet).toContain('--e-global-color-primary');
   } finally {
+    await fs.rm(outDir, { recursive: true, force: true });
+  }
+});
+
+test('browser loader is documented and loadable as an ES module', async ({ browserName, page }) => {
+  test.skip(browserName !== 'chromium', 'Vite build output is browser-independent.');
+  test.setTimeout(90_000);
+
+  const readme = await fs.readFile(path.resolve(process.cwd(), 'README.md'), 'utf8');
+
+  expect(readme).toContain('<script type="module" src="/path/to/react-loader.js"></script>');
+  expect(readme).toContain('copy toàn bộ `dist/`');
+
+  const outDir = await fs.mkdtemp(path.join(os.tmpdir(), 'api-rc-browser-module-'));
+  let staticServer: Awaited<ReturnType<typeof createStaticServer>> | undefined;
+
+  try {
+    await execFileAsync(process.execPath, [
+      viteCliPath,
+      'build',
+      '--config',
+      'vite.browser.config.ts',
+      '--outDir',
+      outDir,
+      '--emptyOutDir',
+    ], {
+      cwd: process.cwd(),
+    });
+
+    await fs.writeFile(path.join(outDir, 'index.html'), `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/react-loader.css" />
+  </head>
+  <body>
+    <script type="module" src="/react-loader.js"></script>
+  </body>
+</html>`);
+
+    staticServer = await createStaticServer(outDir);
+
+    const pageErrors: string[] = [];
+    page.on('pageerror', (error) => pageErrors.push(error.message));
+
+    await page.goto(staticServer.url);
+    await expect.poll(() => page.evaluate(() => typeof (globalThis as any).renderComponents)).toBe('function');
+
+    expect(pageErrors).not.toContain("Cannot use 'import.meta' outside a module");
+  } finally {
+    await staticServer?.close();
     await fs.rm(outDir, { recursive: true, force: true });
   }
 });
