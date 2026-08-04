@@ -127,3 +127,35 @@ test('tsx page files build as independent static html entries', async ({ browser
     await fs.rm(outDir, { recursive: true, force: true });
   }
 });
+
+test('browser assets build with stable loader and stylesheet filenames', async ({ browserName }) => {
+  test.skip(browserName !== 'chromium', 'Vite build output is browser-independent.');
+  test.setTimeout(90_000);
+
+  const outDir = await fs.mkdtemp(path.join(os.tmpdir(), 'api-rc-browser-build-'));
+
+  try {
+    await execFileAsync(process.execPath, [
+      viteCliPath,
+      'build',
+      '--config',
+      'vite.browser.config.ts',
+      '--outDir',
+      outDir,
+      '--emptyOutDir',
+    ], {
+      cwd: process.cwd(),
+    });
+
+    const builtFiles = await fs.readdir(outDir);
+    const loader = await fs.readFile(path.join(outDir, 'react-loader.js'), 'utf8');
+    const stylesheet = await fs.readFile(path.join(outDir, 'react-loader.css'), 'utf8');
+
+    expect(builtFiles).toContain('react-loader.js');
+    expect(builtFiles).toContain('react-loader.css');
+    expect(loader).toContain('hydrateRoot');
+    expect(stylesheet).toContain('--e-global-color-primary');
+  } finally {
+    await fs.rm(outDir, { recursive: true, force: true });
+  }
+});

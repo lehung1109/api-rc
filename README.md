@@ -3,7 +3,7 @@
 `api-rc` là project render React component thành HTML tĩnh/HTML qua API, đồng thời hydrate các component có tương tác trên browser. Repo hiện có ba workflow chính:
 
 - Build HTML tĩnh vào `html/` để nhúng vào CMS/WordPress.
-- Build browser bundle `dist/react-loader.js` và `dist/react-loader.css` để hydrate client islands.
+- Build browser bundle `dist/react-loader.js` và `dist/react-loader.css` bằng Vite để hydrate client islands.
 - Chạy Express render API tại `/api/render-rc` cho nhu cầu render component theo request.
 
 ## Yêu cầu môi trường
@@ -30,7 +30,7 @@ bun run generate
 bun run dev
 ```
 
-Lệnh này chạy Vite dev preview và Webpack watch cùng lúc. Vite phục vụ preview ở `http://localhost:5173/`; Webpack tự sinh client registry trước mỗi lần compile và build browser assets vào `dist/`.
+Lệnh này chạy Vite dev preview và Vite browser watch cùng lúc. Preview phục vụ ở `http://localhost:5173/`; browser watch tự sinh client registry trước mỗi lần compile và build browser assets vào `dist/`.
 
 Các preview page nằm trong `pages/<slug>/page.tsx`. Trang root sẽ liệt kê các page tìm thấy và render page đang chọn trong iframe. Ví dụ:
 
@@ -128,11 +128,11 @@ Lọc dữ liệu project showcase theo `area`, `beds`, `style`.
 
 | Lệnh | Mô tả |
 |------|-------|
-| `bun run dev` | Chạy Vite preview và Webpack watch. |
+| `bun run dev` | Chạy Vite preview và Vite browser watch. |
 | `bun run generate` | Sinh server registry, client registry, version json và restart txt. |
 | `bun run build` | Chạy toàn bộ pipeline generate, HTML, browser bundle và server bundle. |
 | `bun run build:html` | Render component ra `html/*.html`. |
-| `bun run build:browser` | Bundle `react-loader`, CSS và chạy post-build commands. |
+| `bun run build:browser` | Bundle `react-loader`, CSS bằng Vite và chạy post-build commands. |
 | `bun run build:server` | Bundle `src/server.ts` thành `dist/server.js`. |
 | `bun run dev:server` | Chạy render API bằng Bun watch. |
 | `bun run start` | Chạy `dist/server.js` bằng Node. |
@@ -239,7 +239,7 @@ Playwright sẽ tự start Vite preview tại `http://localhost:5173/` theo `pla
 
 - `ReactSection type` khác key trong registry.
 - Thiếu `ClientComponentWrapper` quanh island.
-- Chưa chạy `bun run build:browser` hoặc Webpack watch chưa rebuild.
+- Chưa chạy `bun run build:browser` hoặc Vite browser watch chưa rebuild.
 
 **API báo component not found**
 
