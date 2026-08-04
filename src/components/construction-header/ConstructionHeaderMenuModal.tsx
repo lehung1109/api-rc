@@ -102,21 +102,21 @@ const ConstructionHeaderMenuModal = (
         </picture>
       </div>
 
-      <div className="construction-header-menu-modal-inner relative flex min-h-full flex-col px-6 py-6 md:min-h-0 md:px-0 md:py-0">
+      <div className="construction-header-menu-modal-inner relative flex min-h-full flex-col px-0 py-6 md:min-h-0 md:py-0">
         <label
           htmlFor={checkboxId}
-          className="construction-header-menu-modal-close absolute top-4 right-4 z-10 flex cursor-pointer items-center justify-center p-3 text-brand-white md:hidden"
+          className="construction-header-menu-modal-close absolute top-4 right-4 z-10 flex cursor-pointer items-center justify-center p-3 text-brand-navy md:hidden"
           aria-label={closeLabel}
         >
           <X className="h-8 w-8" />
         </label>
 
-        <div className="construction-header-menu-modal-logo mb-6 max-w-[160px] leading-0 md:hidden">
+        <div className="construction-header-menu-modal-logo mb-6 max-w-[160px] px-6 leading-0 md:hidden">
           <Media {...logo} className="h-auto w-full" />
         </div>
 
         {socialLinks.length > 0 ? (
-          <ul className="construction-header-menu-modal-social mb-4 flex list-none flex-wrap items-center gap-3 p-0 md:hidden">
+          <ul className="construction-header-menu-modal-social mb-4 flex list-none flex-wrap items-center gap-3 px-6 py-0 md:hidden">
             {socialLinks.map((item) => (
               <li key={`${item.link.url}-${item.icon.alt}`}>
                 <Link
@@ -140,7 +140,7 @@ const ConstructionHeaderMenuModal = (
         ) : null}
 
         <div
-          className="construction-header-menu-modal-underline mb-6 h-px w-full bg-brand-white/40 md:hidden"
+          className="construction-header-menu-modal-underline mx-6 mb-6 h-px bg-brand-navy md:hidden"
           aria-hidden
         />
 
