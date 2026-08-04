@@ -230,6 +230,7 @@ test('browser loader shares React runtime between versioned entry and lazy chunk
   expect(readme).toContain('<script type="module" src="/path/to/react-loader.js"></script>');
   expect(readme).toContain('copy toàn bộ `dist/`');
   expect(readme).toContain('react-vendor.*.js');
+  expect(readme).toContain('tắt `modulePreload`');
 
   const outDir = await fs.mkdtemp(path.join(os.tmpdir(), 'api-rc-browser-module-'));
   let staticServer: Awaited<ReturnType<typeof createStaticServer>> | undefined;
@@ -249,6 +250,13 @@ test('browser loader shares React runtime between versioned entry and lazy chunk
 
     const builtFiles = await fs.readdir(outDir);
     expect(builtFiles.some((file) => /^react-vendor\..+\.js$/.test(file))).toBe(true);
+
+    const loader = await fs.readFile(path.join(outDir, 'react-loader.js'), 'utf8');
+    const preloadDependencies = loader.match(/m\.f\|\|\(m\.f=\[([^\]]*)\]\)/)?.[1] ?? '';
+
+    expect(preloadDependencies).not.toContain('AutocompleteSearch.');
+    expect(preloadDependencies).not.toContain('Carousel.');
+    expect(preloadDependencies).not.toContain('ProductGallery.');
 
     await fs.writeFile(path.join(outDir, 'index.html'), `<!doctype html>
 <html lang="en">

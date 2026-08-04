@@ -70,6 +70,7 @@ export default defineConfig({
   build: {
     outDir: "dist",
     emptyOutDir: false,
+    modulePreload: false,
     rollupOptions: {
       input: {
         "react-loader": "src/react-loader.tsx",
