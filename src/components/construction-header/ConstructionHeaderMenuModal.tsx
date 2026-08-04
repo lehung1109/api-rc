@@ -37,7 +37,6 @@ export interface ConstructionHeaderMenuModalModel {
   closeLabel: string;
   checkboxId: string;
   animation?: ConstructionHeaderModalAnimationModel;
-  overlayClassName?: string;
   className?: string;
 }
 
@@ -52,7 +51,6 @@ const ConstructionHeaderMenuModal = (
     closeLabel,
     checkboxId,
     animation,
-    overlayClassName,
     className,
   } = model;
 
@@ -102,12 +100,6 @@ const ConstructionHeaderMenuModal = (
             decoding="async"
           />
         </picture>
-        <div
-          className={cn(
-            "construction-header-menu-modal-overlay absolute inset-0 bg-brand-navy/75",
-            overlayClassName,
-          )}
-        />
       </div>
 
       <div className="construction-header-menu-modal-inner relative flex min-h-full flex-col px-6 py-6 md:min-h-0 md:px-0 md:py-0">

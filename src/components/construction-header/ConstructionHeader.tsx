@@ -38,7 +38,6 @@ export interface ConstructionHeaderModel {
   searchMenuItemLabel: string;
   menuModalAnimation?: ConstructionHeaderModalAnimationModel;
   searchModalAnimation?: ConstructionHeaderModalAnimationModel;
-  overlayClassName?: string;
 }
 
 const ConstructionHeader = (model: ConstructionHeaderModel) => {
@@ -57,7 +56,6 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
     searchMenuItemLabel,
     menuModalAnimation,
     searchModalAnimation,
-    overlayClassName,
   } = model;
 
   const headerId = scrollMonitor.targetId || CONSTRUCTION_HEADER_ROOT_ID;
@@ -69,7 +67,6 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
     closeLabel: closeMenuLabel,
     checkboxId: CONSTRUCTION_HEADER_MENU_CHECKBOX_ID,
     ...(menuModalAnimation ? { animation: menuModalAnimation } : {}),
-    ...(overlayClassName ? { overlayClassName } : {}),
     menu: {
       ...menu,
       searchItem: {
@@ -84,8 +81,7 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
       id={headerId}
       className={cn(
         "construction-header group/construction-header sticky top-0 z-50 left-0 right-0",
-        "bg-transparent transition-[background-color,box-shadow] duration-300",
-        "data-[scrolled=true]:bg-brand-white data-[scrolled=true]:shadow-md",
+        "bg-transparent",
         className,
       )}
     >
@@ -100,6 +96,34 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
         className="peer/search sr-only"
       />
 
+      <div
+        className={cn(
+          "construction-header-scrolled-background pointer-events-none absolute inset-0 -z-10 overflow-hidden",
+          "opacity-0 transition-opacity duration-300",
+          "group-data-[scrolled=true]/construction-header:opacity-100",
+        )}
+        aria-hidden
+      >
+        <picture className="absolute inset-0 block h-full w-full">
+          {(background.sources ?? []).map((source) => (
+            <source
+              key={`${source.media}-${source.srcSet}`}
+              media={source.media}
+              srcSet={source.srcSet}
+            />
+          ))}
+          <img
+            src={background.img.url}
+            alt={background.img.alt}
+            width={background.img.width}
+            height={background.img.height}
+            className="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </div>
+
       <div className="construction-header-bar relative z-20 mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:pointer-events-none">
         <div className="construction-header-logo max-w-[150px] leading-0 md:pointer-events-auto">
           <Media {...logo} className="h-auto w-full" />
@@ -108,14 +132,14 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
         <div className="construction-header-actions flex items-center gap-1 md:hidden">
           <label
             htmlFor={CONSTRUCTION_HEADER_SEARCH_CHECKBOX_ID}
-            className="construction-header-search-open flex cursor-pointer items-center justify-center p-3 text-brand-navy group-data-[scrolled=true]/construction-header:text-brand-navy"
+            className="construction-header-search-open flex cursor-pointer items-center justify-center p-3 text-brand-navy transition-colors group-data-[scrolled=true]/construction-header:text-brand-white"
             aria-label={openSearchLabel}
           >
             <Search className="h-6 w-6" />
           </label>
           <label
             htmlFor={CONSTRUCTION_HEADER_MENU_CHECKBOX_ID}
-            className="construction-header-menu-open flex cursor-pointer items-center justify-center p-3 text-brand-navy"
+            className="construction-header-menu-open flex cursor-pointer items-center justify-center p-3 text-brand-navy transition-colors group-data-[scrolled=true]/construction-header:text-brand-white"
             aria-label={openMenuLabel}
           >
             <Menu className="h-7 w-7" />

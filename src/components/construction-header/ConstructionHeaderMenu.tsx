@@ -33,8 +33,7 @@ function hasLevel3(children?: ConstructionHeaderMenuItemModel[]) {
 
 const linkBaseClass = cn(
   "construction-header-menu-link flex items-center text-base transition-colors duration-150",
-  "text-brand-white",
-  "md:text-brand-white group-data-[scrolled=true]/construction-header:md:text-brand-navy",
+  "text-brand-white md:text-brand-white",
 );
 
 function getLinkClass(active?: boolean, isContact?: boolean) {
@@ -47,7 +46,7 @@ function getLinkClass(active?: boolean, isContact?: boolean) {
     isContact &&
       cn(
         "border border-brand-white px-4 py-2",
-        "md:border-brand-white group-data-[scrolled=true]/construction-header:md:border-brand-navy",
+        "md:border-brand-white",
         "md:hover:bg-brand-gold md:hover:border-brand-gold md:hover:text-brand-white",
       ),
   );
@@ -212,7 +211,6 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                   className={cn(
                     "construction-header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center px-4 text-brand-white",
                     "md:pointer-events-none md:cursor-default md:px-1 md:text-brand-white",
-                    "group-data-[scrolled=true]/construction-header:md:text-brand-navy",
                   )}
                   aria-label={`${openSubmenuLabelPrefix} ${item.label}`}
                 >
