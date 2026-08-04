@@ -51,8 +51,15 @@ Playwright starts the Vite preview from `playwright.config.ts` at `http://localh
 
 ## Editing Rules For Agents
 
-- Keep changes scoped to source files and docs unless generated outputs are explicitly requested.
-- After adding or renaming renderable components, run `bun run generate` or the specific registry generation script before validation.
-- After changing static render behavior, validate with `bun run build:html` or `bun run build`.
-- After changing preview pages or browser interactions, validate with `npx playwright test` when feasible.
-- If documentation and implementation disagree, inspect the implementation, update `README.md`, then update this file if the agent guidance also changed.
+- Keep changes scoped to source files and docs unless generated outputs are
+  explicitly requested.
+- After adding or renaming renderable components, run `bun run generate` or the
+  specific registry generation script before validation.
+- After changing static render behavior, validate with `bun run build:html` or
+  `bun run build`.
+- After changing preview pages or browser interactions, validate with
+  `npx playwright test` when feasible.
+- After completing any implementation or bugfix task, rerun the relevant test
+  case or focused validation command before reporting the task as complete.
+- If documentation and implementation disagree, inspect the implementation,
+  update `README.md`, then update this file if the agent guidance also changed.

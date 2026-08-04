@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type BrowserContext, type Page } from '@playwright/test';
 import { execFile } from 'node:child_process';
 import fs from 'node:fs/promises';
 import os from 'node:os';
@@ -9,6 +9,21 @@ const execFileAsync = promisify(execFile);
 const viteCliPath = path.resolve(process.cwd(), 'node_modules', 'vite', 'bin', 'vite.js');
 
 const migratedPageSlugs = ['autocomplete-search', 'carousel', 'home', 'table-of-contents'];
+
+async function expectPageRender(
+  context: BrowserContext,
+  url: string,
+  assertPage: (previewPage: Page) => Promise<void>,
+) {
+  const previewPage = await context.newPage();
+
+  try {
+    await previewPage.goto(url);
+    await assertPage(previewPage);
+  } finally {
+    await previewPage.close();
+  }
+}
 
 test.describe.configure({ mode: 'serial' });
 
@@ -37,7 +52,7 @@ test('root dev preview lists pages and updates the iframe selection', async ({ p
   );
 });
 
-test('legacy html preview pages are migrated to tsx page files', async ({ page }) => {
+test('legacy html preview pages are migrated to tsx page files', async ({ context }) => {
   for (const slug of migratedPageSlugs) {
     await expect(async () => {
       await fs.access(path.resolve(process.cwd(), 'pages', slug, 'page.tsx'));
@@ -48,17 +63,21 @@ test('legacy html preview pages are migrated to tsx page files', async ({ page }
     }).not.toPass();
   }
 
-  await page.goto('http://localhost:5173/pages/home/');
-  await expect(page.getByText('Thi công nội thất chung cư đẹp')).toBeVisible();
+  await expectPageRender(context, 'http://localhost:5173/pages/home/', async (previewPage) => {
+    await expect(previewPage.getByText('Thi công nội thất chung cư đẹp')).toBeVisible();
+  });
 
-  await page.goto('http://localhost:5173/pages/carousel/');
-  await expect(page.locator('.swiper')).toBeVisible();
+  await expectPageRender(context, 'http://localhost:5173/pages/carousel/', async (previewPage) => {
+    await expect(previewPage.locator('.swiper')).toBeVisible();
+  });
 
-  await page.goto('http://localhost:5173/pages/autocomplete-search/');
-  await expect(page.getByPlaceholder('Gõ tìm kiếm...')).toBeVisible();
+  await expectPageRender(context, 'http://localhost:5173/pages/autocomplete-search/', async (previewPage) => {
+    await expect(previewPage.getByPlaceholder('Gõ tìm kiếm...')).toBeVisible();
+  });
 
-  await page.goto('http://localhost:5173/pages/table-of-contents/');
-  await expect(page.getByRole('navigation', { name: /mục lục/i })).toBeVisible();
+  await expectPageRender(context, 'http://localhost:5173/pages/table-of-contents/', async (previewPage) => {
+    await expect(previewPage.getByRole('navigation', { name: /mục lục/i })).toBeVisible();
+  });
 });
 
 test('tsx page files are listed and render as independent page urls', async ({ page }) => {

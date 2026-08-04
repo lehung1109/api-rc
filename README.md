@@ -226,6 +226,8 @@ npx playwright test
 
 Playwright sẽ tự start Vite preview tại `http://localhost:5173/` theo `playwright.config.ts`.
 
+Khi một task implement hoặc bugfix hoàn tất, luôn chạy lại test case hoặc command validation liên quan trước khi coi task là xong. Ví dụ: nếu sửa preview page hoặc tương tác browser, chạy test Playwright tương ứng; nếu sửa build/static render, chạy script build tương ứng.
+
 ## Lỗi thường gặp
 
 **Component không xuất hiện trong `html/`**
