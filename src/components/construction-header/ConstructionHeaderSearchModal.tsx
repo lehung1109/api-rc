@@ -51,10 +51,14 @@ const ConstructionHeaderSearchModal = (
         className="construction-header-search-modal-backdrop absolute inset-0 cursor-pointer"
         aria-hidden
       />
+      <div
+        className="construction-header-search-modal-overlay pointer-events-none absolute inset-0 bg-[#0b0b0bcc]"
+        aria-hidden
+      />
 
       <label
         htmlFor={checkboxId}
-        className="construction-header-search-modal-close absolute top-4 right-4 z-10 flex cursor-pointer items-center justify-center p-3 text-brand-navy"
+        className="construction-header-search-modal-close absolute top-4 right-4 z-10 flex cursor-pointer items-center justify-center p-3 text-brand-white"
         aria-label={closeLabel}
       >
         <X className="h-8 w-8" />

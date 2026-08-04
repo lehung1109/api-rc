@@ -7,7 +7,7 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "dev": "concurrently \"vite\" \"vite build --config vite.browser.config.ts --watch\"",
+    "dev": "vite",
     "build": "bun run generate && bun run build:html && bun run build:browser && bun run build:server",
     "build:html": "bun run scripts/generate-html.ts ",
     "build:browser": "vite build --config vite.browser.config.ts",
