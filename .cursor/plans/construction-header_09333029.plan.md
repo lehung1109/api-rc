@@ -4,32 +4,34 @@ overview: Tạo `ConstructionHeader.tsx` đáp ứng layout mobile/desktop trong
 todos:
   - id: design-props-model
     content: Định nghĩa prop/model cho `ConstructionHeader` (logo/menu/social/search/modal animations/sticky threshold) đảm bảo toàn bộ text là props.
-    status: pending
+    status: completed
   - id: build-menu-component
     content: "Implement `ConstructionHeaderMenu.tsx` dùng chung markup desktop+mobile; dropdown: mobile slide-in-from-left, desktop fade nhẹ, item cuối 'liên hệ' border+hover, active/open bold."
-    status: pending
+    status: completed
   - id: build-modals
     content: Implement `ConstructionHeaderSearchModal.tsx` (overlay transparent, center AutocompleteSearch, close top-right, fade+slide toggle) và `ConstructionHeaderMenuModal.tsx` (overlay full screen, nền dùng `picture` responsive + overlay layer, logo/social/underline, close top-right, fade+slide toggle).
-    status: pending
+    status: completed
   - id: scroll-monitor-island
     content: "Tạo `ConstructionHeaderScrollMonitor.tsx` client island: theo dõi scrollY và set data attribute cho header khi qua `stickyAfterPx`."
-    status: pending
+    status: completed
   - id: add-data-and-wire-home
     content: Tạo `src/data/construction-header.ts` và `src/data/construction-header-scroll-monitor.ts`; cập nhật `src/components/App.tsx` để render `ConstructionHeader` thay cho `Header` trên home.
-    status: pending
+    status: completed
   - id: playwright-compare
     content: Thêm `tests/construction-header.spec.ts` + baseline screenshot (lấy từ ảnh người dùng) và chạy Playwright để đối chiếu mobile/desktop + mở/đóng modal.
-    status: pending
+    status: completed
 isProject: false
 ---
 
 ## Mục tiêu
+
 - Thêm component mới `ConstructionHeader.tsx` theo đúng mô tả (mobile/desktop, modal full-viewport, dropdown, sticky background theo scroll, animation fade/slide tùy prop).
 - Tránh duplicate markup cho “menu” (dùng chung một cây DOM như pattern checkbox overlay hiện có trong `src/components/header/Header.tsx`).
 - Text và href lấy từ props/data; animation slide-in/fade-in bật/tắt qua prop.
 - Sau khi triển khai: chạy Playwright và đối chiếu screenshot với ảnh người dùng cung cấp.
 
 ## Các file dự kiến tạo/đổi
+
 - Tạo mới (server component, không “use client”):
   - [`src/components/construction-header/ConstructionHeader.tsx`](src/components/construction-header/ConstructionHeader.tsx)
   - [`src/components/construction-header/ConstructionHeaderMenu.tsx`](src/components/construction-header/ConstructionHeaderMenu.tsx)
@@ -44,6 +46,7 @@ isProject: false
   - [`src/components/App.tsx`](src/components/App.tsx) thay `Header` bằng `ConstructionHeader`
 
 ## Thiết kế/luồng hoạt động
+
 ```mermaid
 flowchart TD
   A[ConstructionHeader (server)] --> B[Checkbox: menu open]
@@ -57,6 +60,7 @@ flowchart TD
 ```
 
 ### 1) Pattern “one DOM tree” cho menu mobile/desktop
+
 - Lặp theo cách `src/components/header/Header.tsx` đang làm: dùng checkbox + panel `max-md:fixed` và `md:contents` để cùng một `HeaderMenu` hoạt động cho cả mobile và desktop.
   - Tham chiếu pattern:
     - [`src/components/header/Header.tsx`](src/components/header/Header.tsx): `input id="header-menu-open"` + `header-menu-panel max-md:fixed ... md:contents`.
@@ -68,6 +72,7 @@ flowchart TD
   - Thêm một “item search” trong desktop menu (label mở modal search).
 
 ### 2) Modal Search full-viewport (mobile)
+
 - `ConstructionHeaderSearchModal.tsx`:
   - Overlay `fixed inset-0` full viewport.
   - Nền `transparent` để nhìn xuyên các block phía dưới.
@@ -79,6 +84,7 @@ flowchart TD
     - Khi checkbox search open: `fade in` + `slide in` (config qua prop `enableFadeIn`/`enableSlideIn`).
 
 ### 3) Modal Menu full-viewport (mobile)
+
 - `ConstructionHeaderMenuModal.tsx`:
   - Overlay `fixed inset-0` full viewport.
   - Nền dùng `picture` (prop) để responsive theo breakpoint, kèm overlay layer để tạo độ tương phản.
@@ -93,6 +99,7 @@ flowchart TD
   - Dropdown animation slide-in từ trái (trong `ConstructionHeaderMenu.tsx`).
 
 ### 4) Sticky theo scroll threshold
+
 - Vì architecture dùng “client islands”, không đặt `useEffect` trong component server.
 - Tạo `ConstructionHeaderScrollMonitor.tsx` (client island):
   - Lắng nghe `scroll`.
@@ -100,6 +107,7 @@ flowchart TD
 - `ConstructionHeader.tsx` sẽ dùng tailwind class dựa trên `[data-scrolled="true"]` thông qua selector/data-variant (hoặc fallback: set class theo inline style nếu cần). Mục tiêu là chỉ đổi nền/shadow của header khi đã scroll.
 
 ### 5) Tất cả text phải là props
+
 - Model `construction-header.ts` sẽ bao gồm:
   - `placeholder` cho search.
   - `menu.items[]` gồm label/href/children/active.
@@ -108,6 +116,7 @@ flowchart TD
 - Trong code không hardcode label hiển thị (chỉ dùng icons và class).
 
 ## Kế hoạch triển khai
+
 1. Tạo skeleton các component mới trong `src/components/construction-header/`.
 2. Xây dựng `ConstructionHeaderMenu.tsx` dựa trên `src/components/header/HeaderMenu.tsx`, nhưng đổi các class để:
    - desktop: dropdown fade nhẹ, align right + flex-wrap.
@@ -135,6 +144,7 @@ flowchart TD
    - Dùng screenshot so sánh thủ công hoặc snapshot với baseline đặt trong `tests/fixtures/` từ ảnh người dùng cung cấp.
 
 ## Tiêu chí chấp nhận (Acceptance Criteria)
+
 - Mobile:
   - Header right có search + hamburger.
   - Search modal full viewport, transparent background, input ở giữa, close button top-right, animation fade+slide khi mở/đóng.
@@ -152,6 +162,7 @@ flowchart TD
   - Mỗi file `.tsx` chỉ export/contain 1 component.
 
 ## Ghi chú kỹ thuật quan trọng
+
 - Không sửa logic hydrate của `AutocompleteSearch`: dùng `HeaderSearch`/`ClientComponentWrapper` để đảm bảo island hydration.
 - Đảm bảo z-index cho modal overlay (> các block khác) để không bị style khác override.
 - Tuân thủ `react-components` skill:

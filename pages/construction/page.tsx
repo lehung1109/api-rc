@@ -1,0 +1,24 @@
+import ConstructionHeader from "../../src/components/construction-header/ConstructionHeader";
+import { constructionHeader } from "../../src/data/construction-header";
+
+export const pageMeta = {
+  title: "construction",
+};
+
+export default function ConstructionPage() {
+  return (
+    <div>
+      <ConstructionHeader {...constructionHeader} />
+      <main className="mx-auto max-w-7xl px-4 py-16">
+        <p className="text-2xl font-bold text-brand-navy">
+          Construction page preview
+        </p>
+        <p className="mt-4 text-base text-brand-navy/70">
+          Preview page dành riêng cho ConstructionHeader — cuộn trang để kiểm
+          tra sticky background.
+        </p>
+        <div className="mt-12 h-[120vh] rounded-lg bg-brand-white-hover/80" />
+      </main>
+    </div>
+  );
+}

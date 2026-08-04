@@ -1,0 +1,148 @@
+import { Menu, Search } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import ClientComponentWrapper from "../ClientComponentWrapper";
+import type { AutocompleteSearchModel } from "../header/AutocompleteSearch";
+import type { MediaModel } from "../media/Media";
+import Media from "../media/Media";
+import type { ConstructionHeaderMenuModel } from "./ConstructionHeaderMenu";
+import type {
+  ConstructionHeaderMenuModalModel,
+  ConstructionHeaderPictureModel,
+  ConstructionHeaderSocialLinkModel,
+} from "./ConstructionHeaderMenuModal";
+import ConstructionHeaderMenuModal from "./ConstructionHeaderMenuModal";
+import type { ConstructionHeaderModalAnimationModel } from "./ConstructionHeaderSearchModal";
+import ConstructionHeaderSearchModal from "./ConstructionHeaderSearchModal";
+import type { ConstructionHeaderScrollMonitorModel } from "./ConstructionHeaderScrollMonitor";
+import ConstructionHeaderScrollMonitor from "./ConstructionHeaderScrollMonitor";
+
+export const CONSTRUCTION_HEADER_MENU_CHECKBOX_ID =
+  "construction-header-menu-open";
+export const CONSTRUCTION_HEADER_SEARCH_CHECKBOX_ID =
+  "construction-header-search-open";
+export const CONSTRUCTION_HEADER_ROOT_ID = "construction-header";
+
+export interface ConstructionHeaderModel {
+  className?: string;
+  logo: MediaModel;
+  menu: Omit<ConstructionHeaderMenuModel, "searchItem">;
+  socialLinks: ConstructionHeaderSocialLinkModel[];
+  background: ConstructionHeaderPictureModel;
+  autocomplete_search: AutocompleteSearchModel;
+  scrollMonitor: ConstructionHeaderScrollMonitorModel;
+  openMenuLabel: string;
+  closeMenuLabel: string;
+  openSearchLabel: string;
+  closeSearchLabel: string;
+  searchMenuItemLabel: string;
+  menuModalAnimation?: ConstructionHeaderModalAnimationModel;
+  searchModalAnimation?: ConstructionHeaderModalAnimationModel;
+  overlayClassName?: string;
+}
+
+const ConstructionHeader = (model: ConstructionHeaderModel) => {
+  const {
+    className,
+    logo,
+    menu,
+    socialLinks,
+    background,
+    autocomplete_search,
+    scrollMonitor,
+    openMenuLabel,
+    closeMenuLabel,
+    openSearchLabel,
+    closeSearchLabel,
+    searchMenuItemLabel,
+    menuModalAnimation,
+    searchModalAnimation,
+    overlayClassName,
+  } = model;
+
+  const headerId = scrollMonitor.targetId || CONSTRUCTION_HEADER_ROOT_ID;
+
+  const menuModalModel: ConstructionHeaderMenuModalModel = {
+    logo,
+    socialLinks,
+    background,
+    closeLabel: closeMenuLabel,
+    checkboxId: CONSTRUCTION_HEADER_MENU_CHECKBOX_ID,
+    ...(menuModalAnimation ? { animation: menuModalAnimation } : {}),
+    ...(overlayClassName ? { overlayClassName } : {}),
+    menu: {
+      ...menu,
+      searchItem: {
+        label: searchMenuItemLabel,
+        checkboxId: CONSTRUCTION_HEADER_SEARCH_CHECKBOX_ID,
+      },
+    },
+  };
+
+  return (
+    <header
+      id={headerId}
+      className={cn(
+        "construction-header group/construction-header sticky top-0 z-50 left-0 right-0",
+        "bg-transparent transition-[background-color,box-shadow] duration-300",
+        "data-[scrolled=true]:bg-brand-white data-[scrolled=true]:shadow-md",
+        className,
+      )}
+    >
+      <input
+        id={CONSTRUCTION_HEADER_MENU_CHECKBOX_ID}
+        type="checkbox"
+        className="peer/menu sr-only"
+      />
+      <input
+        id={CONSTRUCTION_HEADER_SEARCH_CHECKBOX_ID}
+        type="checkbox"
+        className="peer/search sr-only"
+      />
+
+      <div className="construction-header-bar relative z-20 mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:pointer-events-none">
+        <div className="construction-header-logo max-w-[150px] leading-0 md:pointer-events-auto">
+          <Media {...logo} className="h-auto w-full" />
+        </div>
+
+        <div className="construction-header-actions flex items-center gap-1 md:hidden">
+          <label
+            htmlFor={CONSTRUCTION_HEADER_SEARCH_CHECKBOX_ID}
+            className="construction-header-search-open flex cursor-pointer items-center justify-center p-3 text-brand-navy group-data-[scrolled=true]/construction-header:text-brand-navy"
+            aria-label={openSearchLabel}
+          >
+            <Search className="h-6 w-6" />
+          </label>
+          <label
+            htmlFor={CONSTRUCTION_HEADER_MENU_CHECKBOX_ID}
+            className="construction-header-menu-open flex cursor-pointer items-center justify-center p-3 text-brand-navy"
+            aria-label={openMenuLabel}
+          >
+            <Menu className="h-7 w-7" />
+          </label>
+        </div>
+      </div>
+
+      <ConstructionHeaderMenuModal {...menuModalModel} />
+
+      <ConstructionHeaderSearchModal
+        autocomplete_search={autocomplete_search}
+        closeLabel={closeSearchLabel}
+        checkboxId={CONSTRUCTION_HEADER_SEARCH_CHECKBOX_ID}
+        {...(searchModalAnimation
+          ? { animation: searchModalAnimation }
+          : {})}
+      />
+
+      <ClientComponentWrapper
+        type="constructionHeaderScrollMonitor"
+        hydrateData={scrollMonitor}
+        className="construction-header-scroll-monitor hidden"
+      >
+        <ConstructionHeaderScrollMonitor {...scrollMonitor} />
+      </ClientComponentWrapper>
+    </header>
+  );
+};
+
+export default ConstructionHeader;
