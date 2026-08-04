@@ -79,7 +79,7 @@ Pipeline build đầy đủ sẽ:
 <script type="module" src="/path/to/react-loader.js"></script>
 ```
 
-Khi deploy browser assets, copy toàn bộ `dist/`, không chỉ `react-loader.js` và `react-loader.css`. Loader có thể lazy-load các chunk component được Vite sinh ra, ví dụ `Carousel.*.js` hoặc `ProductGallery.*.js`.
+Khi deploy browser assets, copy toàn bộ `dist/`, không chỉ `react-loader.js` và `react-loader.css`. Loader có thể lazy-load các chunk component được Vite sinh ra, ví dụ `Carousel.*.js` hoặc `ProductGallery.*.js`. React runtime được tách vào chunk chung `react-vendor.*.js` để entry `react-loader.js` và các lazy chunk dùng cùng một React instance, kể cả khi WordPress thêm query version như `react-loader.js?ver=...`.
 
 Với WordPress enqueue script truyền thống, thêm `type="module"` cho đúng handle:
 

@@ -77,6 +77,17 @@ export default defineConfig({
       output: {
         entryFileNames: "[name].js",
         chunkFileNames: "[name].[hash].js",
+        manualChunks(id) {
+          const normalizedId = id.split(path.sep).join("/");
+
+          if (
+            normalizedId.includes("/node_modules/react/") ||
+            normalizedId.includes("/node_modules/react-dom/") ||
+            normalizedId.includes("/node_modules/scheduler/")
+          ) {
+            return "react-vendor";
+          }
+        },
         assetFileNames: (assetInfo) => {
           if (assetInfo.names?.some((name) => name.endsWith(".css"))) {
             return "react-loader.css";

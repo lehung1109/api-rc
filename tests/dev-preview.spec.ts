@@ -221,7 +221,7 @@ test('browser assets build with stable loader and stylesheet filenames', async (
   }
 });
 
-test('browser loader is documented and loadable as an ES module', async ({ browserName, page }) => {
+test('browser loader shares React runtime between versioned entry and lazy chunks', async ({ browserName, page }) => {
   test.skip(browserName !== 'chromium', 'Vite build output is browser-independent.');
   test.setTimeout(90_000);
 
@@ -229,6 +229,7 @@ test('browser loader is documented and loadable as an ES module', async ({ brows
 
   expect(readme).toContain('<script type="module" src="/path/to/react-loader.js"></script>');
   expect(readme).toContain('copy toàn bộ `dist/`');
+  expect(readme).toContain('react-vendor.*.js');
 
   const outDir = await fs.mkdtemp(path.join(os.tmpdir(), 'api-rc-browser-module-'));
   let staticServer: Awaited<ReturnType<typeof createStaticServer>> | undefined;
@@ -246,6 +247,9 @@ test('browser loader is documented and loadable as an ES module', async ({ brows
       cwd: process.cwd(),
     });
 
+    const builtFiles = await fs.readdir(outDir);
+    expect(builtFiles.some((file) => /^react-vendor\..+\.js$/.test(file))).toBe(true);
+
     await fs.writeFile(path.join(outDir, 'index.html'), `<!doctype html>
 <html lang="en">
   <head>
@@ -253,7 +257,13 @@ test('browser loader is documented and loadable as an ES module', async ({ brows
     <link rel="stylesheet" href="/react-loader.css" />
   </head>
   <body>
-    <script type="module" src="/react-loader.js"></script>
+    <div id="rc-island-autocomplete-search"></div>
+    <script
+      data-rct="autocompleteSearch"
+      data-rc-target="rc-island-autocomplete-search"
+      type="application/json"
+    >{"placeholder":"Search posts","api_url":"/wp-json/wp/v2/search"}</script>
+    <script type="module" src="/react-loader.js?ver=test"></script>
   </body>
 </html>`);
 
@@ -264,8 +274,10 @@ test('browser loader is documented and loadable as an ES module', async ({ brows
 
     await page.goto(staticServer.url);
     await expect.poll(() => page.evaluate(() => typeof (globalThis as any).renderComponents)).toBe('function');
+    await expect(page.getByPlaceholder('Search posts')).toBeVisible();
 
     expect(pageErrors).not.toContain("Cannot use 'import.meta' outside a module");
+    expect(pageErrors).not.toContain("Cannot read properties of null (reading 'useState')");
   } finally {
     await staticServer?.close();
     await fs.rm(outDir, { recursive: true, force: true });
