@@ -125,7 +125,7 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
       </div>
 
       <div className="construction-header-bar relative z-20 mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:pointer-events-none">
-        <div className="construction-header-logo max-w-[150px] leading-0 md:pointer-events-auto">
+        <div className="construction-header-logo max-w-[120px] leading-0 md:pointer-events-auto">
           <Media {...logo} className="h-auto w-full" />
         </div>
 

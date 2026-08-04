@@ -13,11 +13,11 @@ const iconDimensions = { width: 24, height: 24 };
 
 const constructionHeader: ConstructionHeaderModel = {
   logo: {
-    url: "//noithat.ichouse.vn/wp-content/uploads/2024/02/ct-el-logo-dark.png",
+    url: "https://noithat.ichouse.vn/wp-content/uploads/2024/02/logo.jpg",
     alt: "ICHouse",
     display_dimensions: {
       width: 150,
-      height: 48,
+      height: 150,
     },
     link: {
       url: "/",
