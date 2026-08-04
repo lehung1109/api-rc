@@ -3,7 +3,7 @@
 `api-rc` là project render React component thành HTML tĩnh/HTML qua API, đồng thời hydrate các component có tương tác trên browser. Repo hiện có ba workflow chính:
 
 - Build HTML tĩnh vào `html/` để nhúng vào CMS/WordPress.
-- Build browser bundle `dist/react-loader.js` và `dist/react-loader.css` để hydrate client islands.
+- Build browser bundle `dist/react-loader.js` và `dist/react-loader.css` bằng Vite để hydrate client islands.
 - Chạy Express render API tại `/api/render-rc` cho nhu cầu render component theo request.
 
 ## Yêu cầu môi trường
@@ -30,7 +30,7 @@ bun run generate
 bun run dev
 ```
 
-Lệnh này chạy Vite dev preview và Webpack watch cùng lúc. Vite phục vụ preview ở `http://localhost:5173/`; Webpack tự sinh client registry trước mỗi lần compile và build browser assets vào `dist/`.
+Lệnh này chạy Vite dev preview và Vite browser watch cùng lúc. Preview phục vụ ở `http://localhost:5173/`; browser watch tự sinh client registry trước mỗi lần compile và build browser assets vào `dist/`.
 
 Các preview page nằm trong `pages/<slug>/page.tsx`. Trang root sẽ liệt kê các page tìm thấy và render page đang chọn trong iframe. Ví dụ:
 
@@ -69,6 +69,29 @@ Pipeline build đầy đủ sẽ:
 2. Render HTML tĩnh vào `html/` (`bun run build:html`).
 3. Bundle browser loader/styles vào `dist/` (`bun run build:browser`).
 4. Bundle Express server vào `dist/server.js` (`bun run build:server`).
+
+### Nhúng browser loader
+
+`dist/react-loader.js` là ES module. Khi nhúng vào CMS/WordPress hoặc HTML copy-paste, luôn load file này bằng `type="module"`; nếu nhúng như classic script, browser sẽ báo `Cannot use 'import.meta' outside a module`.
+
+```html
+<link rel="stylesheet" href="/path/to/react-loader.css" />
+<script type="module" src="/path/to/react-loader.js"></script>
+```
+
+Khi deploy browser assets, copy toàn bộ `dist/`, không chỉ `react-loader.js` và `react-loader.css`. Loader có thể lazy-load các chunk component được Vite sinh ra, ví dụ `Carousel.*.js` hoặc `ProductGallery.*.js`, và stylesheet có thể tham chiếu các font `.woff2` được build kèm. React runtime được tách vào chunk chung `react-vendor.*.js` để entry `react-loader.js` và các lazy chunk dùng cùng một React instance, kể cả khi WordPress thêm query version như `react-loader.js?ver=...`. Browser build tắt `modulePreload` của Vite để không preload trước các component chunks; component chunks vẫn được tải lazy khi island tương ứng hydrate.
+
+Với WordPress enqueue script truyền thống, thêm `type="module"` cho đúng handle:
+
+```php
+add_filter('script_loader_tag', function ($tag, $handle, $src) {
+  if ($handle === 'api-rc-react-loader') {
+    return '<script type="module" src="' . esc_url($src) . '"></script>';
+  }
+
+  return $tag;
+}, 10, 3);
+```
 
 ## Server render API
 
@@ -128,11 +151,11 @@ Lọc dữ liệu project showcase theo `area`, `beds`, `style`.
 
 | Lệnh | Mô tả |
 |------|-------|
-| `bun run dev` | Chạy Vite preview và Webpack watch. |
+| `bun run dev` | Chạy Vite preview và Vite browser watch. |
 | `bun run generate` | Sinh server registry, client registry, version json và restart txt. |
 | `bun run build` | Chạy toàn bộ pipeline generate, HTML, browser bundle và server bundle. |
 | `bun run build:html` | Render component ra `html/*.html`. |
-| `bun run build:browser` | Bundle `react-loader`, CSS và chạy post-build commands. |
+| `bun run build:browser` | Bundle `react-loader`, CSS bằng Vite và chạy post-build commands. |
 | `bun run build:server` | Bundle `src/server.ts` thành `dist/server.js`. |
 | `bun run dev:server` | Chạy render API bằng Bun watch. |
 | `bun run start` | Chạy `dist/server.js` bằng Node. |
@@ -226,6 +249,8 @@ npx playwright test
 
 Playwright sẽ tự start Vite preview tại `http://localhost:5173/` theo `playwright.config.ts`.
 
+Khi một task implement hoặc bugfix hoàn tất, luôn chạy lại test case hoặc command validation liên quan trước khi coi task là xong. Ví dụ: nếu sửa preview page hoặc tương tác browser, chạy test Playwright tương ứng; nếu sửa build/static render, chạy script build tương ứng.
+
 ## Lỗi thường gặp
 
 **Component không xuất hiện trong `html/`**
@@ -239,7 +264,7 @@ Playwright sẽ tự start Vite preview tại `http://localhost:5173/` theo `pla
 
 - `ReactSection type` khác key trong registry.
 - Thiếu `ClientComponentWrapper` quanh island.
-- Chưa chạy `bun run build:browser` hoặc Webpack watch chưa rebuild.
+- Chưa chạy `bun run build:browser` hoặc Vite browser watch chưa rebuild.
 
 **API báo component not found**
 
