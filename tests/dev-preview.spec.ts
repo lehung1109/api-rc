@@ -216,6 +216,17 @@ test('browser assets build with stable loader and stylesheet filenames', async (
     expect(builtFiles).toContain('react-loader.css');
     expect(loader).toContain('hydrateRoot');
     expect(stylesheet).toContain('--e-global-color-primary');
+
+    const fontUrls = [...stylesheet.matchAll(/url\((['"]?)([^'")]+\.woff2)\1\)/g)]
+      .map((match) => match[2]);
+
+    expect(fontUrls.some((fontUrl) => /geist-latin-wght-normal\..+\.woff2$/.test(fontUrl))).toBe(true);
+    expect(fontUrls.every((fontUrl) => !fontUrl.startsWith('/'))).toBe(true);
+
+    for (const fontUrl of fontUrls) {
+      const fontPath = path.join(outDir, fontUrl.replace(/^\.\//, '').replace(/^\//, ''));
+      await fs.access(fontPath);
+    }
   } finally {
     await fs.rm(outDir, { recursive: true, force: true });
   }

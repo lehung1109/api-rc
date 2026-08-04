@@ -67,6 +67,7 @@ function browserPostBuildPlugin(): Plugin {
 
 export default defineConfig({
   plugins: [tsconfigPaths(), generateClientRegistryPlugin(), browserPostBuildPlugin()],
+  base: "./",
   build: {
     outDir: "dist",
     emptyOutDir: false,
