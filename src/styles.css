@@ -404,7 +404,7 @@ a.construction-header-menu-submenu-link {
     color: var(--e-global-color-primary);
   }
 
-  .elementor .e-div-block-base {
+  .elementor .e-div-block-base.elementor-element {
     padding: 0;
   }
 
