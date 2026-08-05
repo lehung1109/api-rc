@@ -41,6 +41,9 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
 
   const titleText = title.trim();
   const validItems = items.filter((item) => item.title.trim().length > 0);
+  const hasAnyIcon = validItems.some((item) =>
+    Boolean(item.iconImage?.url.trim()),
+  );
   const validImages = images.filter((image) => image.url.trim().length > 0);
   const hasButton =
     buttonLabel.trim().length > 0 && buttonLink.url.trim().length > 0;
@@ -89,7 +92,8 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
         {validItems.length > 0 ? (
           <div
             className={cn(
-              "fields-of-activity-accordion pl-12 md:pl-14",
+              "fields-of-activity-accordion",
+              hasAnyIcon && "pl-12 md:pl-14",
               "-translate-x-10 opacity-0 transition-[opacity,transform] duration-[1250ms] ease-out",
               "group-data-[in-view=true]/foa:translate-x-0 group-data-[in-view=true]/foa:opacity-100",
               "motion-reduce:translate-x-0 motion-reduce:opacity-100 motion-reduce:transition-none",

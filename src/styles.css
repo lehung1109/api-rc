@@ -408,6 +408,10 @@ p.text-brand-white {
   display: block !important;
 }
 
+#main {
+  background: transparent !important;
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
