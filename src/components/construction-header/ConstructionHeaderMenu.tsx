@@ -32,15 +32,15 @@ function hasLevel3(children?: ConstructionHeaderMenuItemModel[]) {
 }
 
 const linkBaseClass =
-  "construction-header-menu-link flex items-center text-xl transition-[color,background-color,font-weight] duration-150";
+  "construction-header-menu-link flex items-center text-xl transition-[color,background-color] duration-150";
 
 const mobileHoverBgClass = "max-md:hover:bg-[rgb(0_0_0/10%)]";
 const mobileOpenBgClass = "max-md:has-[:checked]:bg-[rgb(0_0_0/5%)]";
 const submenuLinkClass = cn(
-  "construction-header-menu-submenu-link block py-2 text-base font-normal leading-[1.35]",
-  "text-brand-navy/80 transition-[color,font-weight] duration-150",
-  "hover:font-bold hover:text-brand-navy",
-  "md:text-brand-navy/70 md:hover:font-bold md:hover:text-brand-gold",
+  "construction-header-menu-submenu-link block w-full py-2 text-base font-normal leading-[1.35]",
+  "text-brand-navy/80 transition-[color,background-color] duration-150",
+  "hover:text-brand-navy",
+  "md:px-4 md:text-brand-navy/70 md:hover:bg-brand-navy md:hover:text-brand-white",
 );
 
 function getLinkClass(
@@ -52,16 +52,14 @@ function getLinkClass(
 
   return cn(
     linkBaseClass,
-    active
-      ? "font-bold text-brand-navy md:text-brand-gold"
-      : "font-medium text-brand-navy/80 md:text-brand-white",
-    "max-md:hover:font-bold max-md:hover:text-brand-navy",
+    "font-medium",
+    active ? "text-brand-navy" : "text-brand-navy/80",
+    "hover:text-brand-navy",
     hoverBg && mobileHoverBgClass,
-    !active && "md:hover:text-brand-gold",
     isContact &&
       cn(
-        "md:border md:border-brand-white md:px-4 md:py-2",
-        "md:hover:bg-brand-gold md:hover:border-brand-gold md:hover:text-brand-white",
+        "md:border md:border-brand-navy md:px-4 md:py-2",
+        "md:hover:bg-brand-navy md:hover:border-brand-navy md:hover:text-brand-white",
       ),
   );
 }
@@ -76,7 +74,7 @@ function renderMenuDropdownBody(
         className={cn(
           "construction-header-menu-dropdown-body",
           "flex flex-col gap-6 px-6 py-4",
-          "md:grid md:auto-cols-fr md:grid-flow-col md:gap-5 md:px-5 md:py-4 md:w-max",
+          "md:grid md:auto-cols-fr md:grid-flow-col md:gap-5 md:px-0 md:py-4 md:w-max",
         )}
       >
         {level2.map((col) => (
@@ -87,12 +85,17 @@ function renderMenuDropdownBody(
             {col.href ? (
               <a
                 href={normalizeHref(col.href)}
-                className="construction-header-menu-section-title mb-2 block text-[15px] font-normal uppercase text-brand-navy hover:text-brand-navy md:mb-3 md:text-brand-navy md:hover:text-brand-gold"
+                className={cn(
+                  "construction-header-menu-section-title mb-2 block w-full text-[15px] font-normal uppercase text-brand-navy",
+                  "transition-[color,background-color] duration-150",
+                  "hover:text-brand-navy md:mb-3 md:px-4 md:text-brand-navy",
+                  "md:hover:bg-brand-navy md:hover:text-brand-white",
+                )}
               >
                 {col.label}
               </a>
             ) : (
-              <p className="construction-header-menu-section-title mb-2 text-[15px] font-normal uppercase text-brand-navy md:mb-3 md:text-brand-navy">
+              <p className="construction-header-menu-section-title mb-2 text-[15px] font-normal uppercase text-brand-navy md:mb-3 md:px-4 md:text-brand-navy">
                 {col.label}
               </p>
             )}
@@ -116,7 +119,7 @@ function renderMenuDropdownBody(
   }
 
   return (
-    <div className="construction-header-menu-dropdown-body min-w-0 px-6 py-4 md:min-w-[220px] md:px-4">
+    <div className="construction-header-menu-dropdown-body min-w-0 px-6 py-4 md:min-w-[220px] md:px-0">
       <ul className="mb-0">
         {level2.map((sub) => (
           <li key={sub.label}>
@@ -171,7 +174,6 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                 key={item.label}
                 className={cn(
                   "construction-header-menu-item relative",
-                  item.active && "font-bold",
                 )}
               >
                 <a
@@ -179,7 +181,6 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                   className={cn(
                     getLinkClass(item.active, isContact),
                     "h-12 w-full px-6 md:px-4",
-                    item.active && "font-bold",
                   )}
                   aria-current={item.active ? "page" : undefined}
                 >
@@ -196,7 +197,6 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                 "construction-header-menu-item group relative",
                 "has-[:checked]:[&_.construction-header-menu-chevron]:rotate-180",
                 mobileOpenBgClass,
-                item.active && "font-bold",
               )}
             >
               <input
@@ -212,7 +212,6 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                   "max-md:peer-checked/sub:bg-[rgb(0_0_0/5%)]",
                   "peer-checked/sub:[&_.construction-header-menu-link]:text-brand-navy",
                   "peer-checked/sub:[&_.construction-header-menu-chevron-trigger]:text-brand-navy",
-                  "md:peer-checked/sub:[&_.construction-header-menu-link]:text-brand-gold",
                 )}
               >
                 <a
@@ -220,8 +219,7 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                   className={cn(
                     getLinkClass(item.active, false, { hoverBg: false }),
                     "flex-1 px-6 md:px-4",
-                    "max-md:group-hover/row:font-bold max-md:group-hover/row:text-brand-navy",
-                    item.active && "font-bold",
+                    "group-hover/row:text-brand-navy",
                   )}
                   aria-current={item.active ? "page" : undefined}
                 >
@@ -232,8 +230,8 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                   htmlFor={itemCheckboxId}
                   className={cn(
                     "construction-header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center pr-6 pl-8 text-brand-navy/80 transition-colors duration-150",
-                    "max-md:group-hover/row:text-brand-navy",
-                    "md:pointer-events-none md:cursor-default md:px-1 md:text-brand-white",
+                    "group-hover/row:text-brand-navy",
+                    "md:pointer-events-none md:cursor-default md:px-1",
                     item.active && "text-brand-navy",
                   )}
                   aria-label={`${openSubmenuLabelPrefix} ${item.label}`}
@@ -258,7 +256,7 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                   className={cn(
                     "construction-header-menu-dropdown-inner relative",
                     "max-md:border-0 max-md:bg-transparent max-md:shadow-none",
-                    "md:border md:border-brand-navy/15 md:bg-brand-white md:shadow-md md:shadow-brand-navy/10",
+                    "md:overflow-hidden md:rounded-[5px] md:border md:border-brand-navy/15 md:bg-brand-white md:shadow-md md:shadow-brand-navy/10",
                     useColumns ? "md:flex md:justify-end" : "",
                   )}
                 >
@@ -275,9 +273,8 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
               htmlFor={searchItem.checkboxId}
               className={cn(
                 linkBaseClass,
-                "h-12 cursor-pointer gap-2 px-6 font-medium text-brand-navy/80 hover:text-brand-navy md:px-4 md:text-brand-white md:hover:text-brand-gold",
+                "h-12 cursor-pointer gap-2 px-6 font-medium text-brand-navy/80 hover:text-brand-navy md:px-4",
                 mobileHoverBgClass,
-                "max-md:hover:font-bold",
               )}
             >
               <Search className="h-4 w-4" aria-hidden />
