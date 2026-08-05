@@ -367,6 +367,22 @@ a.construction-header-menu-submenu-link {
   }
 }
 
+.text-brand-white p {
+  color: inherit;
+}
+
+a.text-brand-white {
+  color: var(--e-global-color-tertiary);
+}
+
+a.text-brand-white:hover{
+  color: var(--e-global-color-primary);
+}
+
+a.hover\:bg-brand-white:hover {
+  background-color: var(--e-global-color-tertiary) !important;
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
