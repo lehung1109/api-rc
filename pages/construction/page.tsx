@@ -1,5 +1,7 @@
 import ConstructionHeader from "../../src/components/construction-header/ConstructionHeader";
+import VideoHeroBannerWrapper from "../../src/components/video-hero-banner/VideoHeroBannerWrapper";
 import { constructionHeader } from "../../src/data/construction-header";
+import videoHeroBannerWrapper from "../../src/data/video-hero-banner-wrapper";
 
 export const pageMeta = {
   title: "construction",
@@ -9,6 +11,7 @@ export default function ConstructionPage() {
   return (
     <div>
       <ConstructionHeader {...constructionHeader} />
+      <VideoHeroBannerWrapper {...videoHeroBannerWrapper} />
       <main className="mx-auto max-w-7xl px-4 py-16">
         <p className="text-2xl font-bold text-brand-navy">
           Construction page preview

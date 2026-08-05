@@ -312,6 +312,7 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 | `FeatureCardsCarousel` | `FeatureCardsCarouselWrapper` | `feature-cards-carousel-wrapper.ts` | `feature-cards-carousel.ts` (re-export) |
 | `TableOfContents` | `TableOfContentsWrapper` | `table-of-contents-wrapper.ts` | `table-of-contents.ts` (re-export) |
 | `CustomerTestimonialsGrid` | `CustomerTestimonialsWrapper` | `customer-testimonials-wrapper.ts` | `customer-testimonials-grid.ts` (re-export) |
+| `VideoHeroBanner` | `VideoHeroBannerWrapper` | `video-hero-banner-wrapper.ts` | `video-hero-banner.ts` (re-export) |
 
 ## Quick reference — header stack
 
@@ -357,6 +358,33 @@ export interface HeroSectionModel {
 **Typography:** subtitle / htmlText / button dùng `text-base` — không `text-sm`.
 
 **WordPress:** widget `EAI-hero-section` — `title_heading`, `content_centered`, `content_full_width`, `button_variant` → `titleHeading`, `contentCentered`, `contentFullWidth`, `buttonVariant`.
+
+## Quick reference — video hero banner (client + wrapper)
+
+Hero full viewport (`h-dvh`) nền video HLS (`.m3u8`) + poster SSR. **Client + wrapper** — mount qua `VideoHeroBannerWrapper`, không mount `VideoHeroBanner` trực tiếp. Không title/CTA.
+
+| File | Vai trò |
+|------|---------|
+| `VideoHeroBanner.tsx` | `"use client"` — `<video>` + `hls.js` / Safari native HLS |
+| `VideoHeroBannerWrapper.tsx` | Server entry: `<section>` + poster `Media` + overlay + `type="videoHeroBanner"` |
+| `src/data/video-hero-banner-wrapper.ts` | Mock / CMS canonical |
+| `src/data/video-hero-banner.ts` | Re-export cho client registry |
+
+**Model:**
+
+```ts
+export interface VideoHeroBannerModel {
+  className?: string;
+  url: string;        // .m3u8
+  poster: MediaModel;
+}
+```
+
+**Render guards (wrapper):** `!url.trim()` hoặc `!poster.url.trim()` → `return null`.
+
+**Behavior:** Safari → `video.src`; else `hls.js`. `autoPlay` `muted` `loop` `playsInline`. Video `opacity-0` → `opacity-100` khi `canplay`/`playing`. Poster SSR nằm dưới. Overlay `.video-hero-banner-overlay` trong `styles.css` (gradient top fade).
+
+**Semantic classes:** `video-hero-banner`, `video-hero-banner-poster`, `video-hero-banner-overlay`, `video-hero-banner-video-root`, `video-hero-banner-video`.
 
 ## Quick reference — page title bar (server)
 

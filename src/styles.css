@@ -252,3 +252,11 @@ html body[data-scroll-locked] {
   animation-iteration-count: infinite;
   animation-play-state: running;
 }
+
+.video-hero-banner-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0) 30%
+  );
+}
