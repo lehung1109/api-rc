@@ -366,6 +366,47 @@ export interface FieldsOfActivityModel {
 
 **WordPress:** widget `EAI-fields-of-activity` — title, repeater items (`content_html`, `icon_image`, `default_open`), `image_1`/`image_2`, CTA, `scroll_reveal_target_id` → `eai_rc_render_html('FieldsOfActivity', …)`.
 
+## Quick reference — construction highlights (server + scroll reveal island)
+
+Section điểm nổi bật: nền `bg-brand-navy`, subtitle + `titleHtml`, accordion CSS trái (icon luôn bên trái title) + 1 ảnh phải. **Server-only** accordion — checkbox độc lập (`defaultOpen` → `defaultChecked`), không Wrapper cho accordion; chỉ island scroll reveal.
+
+| File | Vai trò |
+|------|---------|
+| `ConstructionHighlights.tsx` | Orchestrator: `<section>` navy + header + grid + scroll island |
+| `ConstructionHighlightsAccordionItem.tsx` | Leaf: checkbox + icon trái + title ~40px + content HTML (grid-rows animate) |
+| `ConstructionHighlightsScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
+| `src/data/construction-highlights.ts` | Mock / CMS (`ConstructionHighlights` registry) |
+| `src/data/construction-highlights-scroll-reveal.ts` | Client registry (re-export `targetId`) |
+
+**Model:**
+
+```ts
+export interface ConstructionHighlightsItemModel {
+  title: string;
+  contentHtml: string;
+  iconImage?: MediaModel;   // luôn hiện bên trái title
+  defaultOpen?: boolean;
+}
+
+export interface ConstructionHighlightsModel {
+  className?: string;
+  subtitle: string;            // ~14px uppercase text-brand-white/70
+  titleHtml: string;           // ~24px → <h2>; highlight via HTML (text-brand-gold)
+  items: ConstructionHighlightsItemModel[];
+  image: MediaModel;           // 1 ảnh phải
+  checkboxIdPrefix?: string;
+  scrollReveal?: { targetId?: string }; // default "construction-highlights"
+}
+```
+
+**UI:** full-bleed `bg-brand-navy`; inner `max-w-7xl`; subtitle `text-[14px]`; title `text-2xl text-brand-white`; accordion title `text-2xl md:text-[40px]`, closed `opacity-50`, open `opacity-100`; content `text-base text-justify text-brand-white`; open/close `grid-rows-[0fr]→[1fr]`; không CTA/chevron. Slide-in 1.25s (header+accordion trái, media phải) qua `ConstructionHighlightsScrollReveal` + CSS trong `styles.css`.
+
+**Semantic classes:** `construction-highlights`, `construction-highlights-inner`, `construction-highlights-header`, `construction-highlights-subtitle`, `construction-highlights-title`, `construction-highlights-body`, `construction-highlights-accordion`, `construction-highlights-item`, `construction-highlights-item-trigger`, `construction-highlights-item-title`, `construction-highlights-item-icon`, `construction-highlights-item-content`, `construction-highlights-media`, `construction-highlights-image`.
+
+**Mount:** `pages/construction/page.tsx` (sau FieldsOfActivity).
+
+**WordPress:** widget `EAI-construction-highlights` — `subtitle`, `title_html` (WYSIWYG), repeater items (`content_html`, `icon_image`, `default_open`), `image`, `scroll_reveal_target_id` → `eai_rc_render_html('ConstructionHighlights', …)`. Helper: `construction-highlights.php`.
+
 ## Quick reference — about intro (server + scroll reveal island)
 
 Section intro 2 cột (text trái / ảnh phải), nền `Media` + overlay kiểu ProcessSection. Inner copy+ảnh luôn `max-w-7xl` (nền vẫn full-bleed). Slide-in khi scroll qua client monitor nhỏ (pattern ConstructionHeaderScrollMonitor).

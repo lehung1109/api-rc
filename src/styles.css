@@ -293,6 +293,41 @@ html body[data-scroll-locked] {
   }
 }
 
+/* ── Construction Highlights: scroll slide-in ───────────────────────────────── */
+.construction-highlights-header,
+.construction-highlights-accordion {
+  opacity: 0;
+  transform: translateX(-2.5rem);
+  transition:
+    opacity 1.25s ease-out,
+    transform 1.25s ease-out;
+}
+
+.construction-highlights-media {
+  opacity: 0;
+  transform: translateX(2.5rem);
+  transition:
+    opacity 1.25s ease-out,
+    transform 1.25s ease-out;
+}
+
+.construction-highlights[data-in-view="true"] .construction-highlights-header,
+.construction-highlights[data-in-view="true"] .construction-highlights-accordion,
+.construction-highlights[data-in-view="true"] .construction-highlights-media {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .construction-highlights-header,
+  .construction-highlights-accordion,
+  .construction-highlights-media {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ── Construction Header: Porto Bootstrap override ─────────────────────────────
    Porto theme loads bootstrap.css which redefines Tailwind utility classes
    (.py-4, .gap-4, .p-3) with a different spacing scale and !important,
