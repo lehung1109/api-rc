@@ -298,3 +298,11 @@ html body[data-scroll-locked] {
 .construction-header .construction-header-menu-link {
   color: inherit !important;
 }
+
+.peer-checked\/search\:opacity-100:is(:where(.peer\/search):checked~*) {
+  opacity: 1 !important;
+}
+
+.peer-checked\/search\:visible:is(:where(.peer\/search):checked~*) {
+  visibility: visible !important;
+}
