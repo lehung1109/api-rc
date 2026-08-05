@@ -2,7 +2,7 @@ import type { PageBackgroundModel } from "@/components/page-background/PageBackg
 
 const pageBackground: PageBackgroundModel = {
   mobileImage: {
-    url: "https://placehold.co/768x1024/152243/ffffff?text=Page+BG+Mobile",
+    url: "/images/concrete-bg-official-updated-mobile.jpg",
     alt: "Nền trang mobile",
     display_dimensions: {
       width: 768,

@@ -392,6 +392,14 @@ a.hover\:bg-brand-white:hover {
   height: 100%;
 }
 
+p.text-brand-white {
+  color: var(--e-global-color-tertiary);
+}
+
+[data-scrolled="true"] p.construction-header-top-hotline {
+  color: var(--e-global-color-primary);
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
@@ -436,5 +444,9 @@ a.hover\:bg-brand-white:hover {
 
   #header .container-fluid {
     padding: 0;
+  }
+
+  div .md\:block {
+    display: block;
   }
 }

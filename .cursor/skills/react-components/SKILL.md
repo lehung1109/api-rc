@@ -325,6 +325,47 @@ Files: `Footer` (orchestrator) → `FooterTop` / `FooterBottom` → `FooterLinkC
 Data: `src/data/footer.ts` — `{ top, bottom }` aggregate; chỉ `Footer` mount từ App/API.  
 Màu: theo [Brand colors](#brand-colors-ichouse) — `bg-brand-navy`, `text-brand-gold`, `hover:text-brand-gold-hover`, v.v.
 
+## Quick reference — fields of activity (server)
+
+Section lĩnh vực hoạt động: accordion CSS trái + 2 ảnh grayscale phải + CTA. **Server-only** — checkbox độc lập (`defaultOpen` → `defaultChecked`), không Wrapper/client.
+
+| File | Vai trò |
+|------|---------|
+| `FieldsOfActivity.tsx` | Orchestrator: `<section>` + h2 + grid + CTA + scroll island |
+| `FieldsOfActivityAccordionItem.tsx` | Leaf: checkbox + title/icon/chevron + content HTML |
+| `FieldsOfActivityImages.tsx` | Leaf: 2 ảnh `flex` + `gap-5`, grayscale → color hover |
+| `FieldsOfActivityScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
+| `src/data/fields-of-activity.ts` | Mock / CMS (`FieldsOfActivity` registry) |
+| `src/data/fields-of-activity-scroll-reveal.ts` | Client registry (re-export `targetId`) |
+
+**Model:**
+
+```ts
+export interface FieldsOfActivityItemModel {
+  title: string;
+  contentHtml: string;
+  iconImage?: MediaModel;   // hiện phía trên title khi mở
+  defaultOpen?: boolean;
+}
+
+export interface FieldsOfActivityModel {
+  className?: string;
+  title: string;            // → <h2>
+  items: FieldsOfActivityItemModel[];
+  images: MediaModel[];     // tối đa 2
+  buttonLabel: string;
+  buttonLink: LinkModel;
+}
+```
+
+**UI:** container `max-w-7xl`, không nền; title `text-2xl md:text-3xl`; accordion title/chevron `text-brand-navy` → gold hover/open; icon absolute trái phía trên title khi mở; content `text-base text-brand-navy` + `ul/li` disc; CTA `bg-brand-navy border-brand-navy text-brand-white` — hover `bg-brand-white text-brand-navy`; ảnh phải cùng hàng mọi breakpoint; slide-in 1.25s (trái/phải) qua `FieldsOfActivityScrollReveal`.
+
+**Semantic classes:** `fields-of-activity`, `fields-of-activity-title`, `fields-of-activity-accordion`, `fields-of-activity-item`, `fields-of-activity-item-trigger`, `fields-of-activity-item-title`, `fields-of-activity-item-icon`, `fields-of-activity-item-chevron`, `fields-of-activity-item-content`, `fields-of-activity-images`, `fields-of-activity-image`, `fields-of-activity-button`.
+
+**Mount:** `pages/construction/page.tsx` (sau AboutIntro); preview App tùy chọn.
+
+**WordPress:** widget `EAI-fields-of-activity` — title, repeater items (`content_html`, `icon_image`, `default_open`), `image_1`/`image_2`, CTA, `scroll_reveal_target_id` → `eai_rc_render_html('FieldsOfActivity', …)`.
+
 ## Quick reference — about intro (server + scroll reveal island)
 
 Section intro 2 cột (text trái / ảnh phải), nền `Media` + overlay kiểu ProcessSection. Inner copy+ảnh luôn `max-w-7xl` (nền vẫn full-bleed). Slide-in khi scroll qua client monitor nhỏ (pattern ConstructionHeaderScrollMonitor).

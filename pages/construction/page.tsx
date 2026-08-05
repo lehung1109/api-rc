@@ -6,6 +6,8 @@ import pageBackground from "../../src/data/page-background";
 import videoHeroBannerWrapper from "../../src/data/video-hero-banner-wrapper";
 import AboutIntro from "../../src/components/about-intro/AboutIntro";
 import aboutIntro from "@/data/about-intro";
+import FieldsOfActivity from "../../src/components/fields-of-activity/FieldsOfActivity";
+import fieldsOfActivity from "@/data/fields-of-activity";
 
 export const pageMeta = {
   title: "construction",
@@ -20,6 +22,8 @@ export default function ConstructionPage() {
       <VideoHeroBannerWrapper {...videoHeroBannerWrapper} />
 
       <AboutIntro {...aboutIntro} />
+
+      <FieldsOfActivity {...fieldsOfActivity} />
 
       <main className="mx-auto max-w-7xl px-4 py-16">
         <p className="text-2xl font-bold text-brand-navy">
