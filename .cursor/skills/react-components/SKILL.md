@@ -341,7 +341,8 @@ Section intro 2 cột (text trái / ảnh phải), nền `Media` + overlay kiể
 ```ts
 export interface AboutIntroModel {
   className?: string;
-  backgroundImage: MediaModel; // demo bắt buộc có srcSet + sizes
+  backgroundMobileImage: MediaModel;  // fallback <img>
+  backgroundDesktopImage: MediaModel; // <source media="(min-width: 768px)">
   image: MediaModel;
   subtitle: string;            // gold, uppercase → <h2>
   descriptionHtml: string;     // WYSIWYG
@@ -351,13 +352,15 @@ export interface AboutIntroModel {
 }
 ```
 
-**UI:** overlay `bg-brand-navy/65` + gradient; description font lớn (`text-lg` → `lg:text-2xl`); CTA ghost trắng — hover `bg-brand-white` + `text-brand-navy`. Semantic: `about-intro`, `about-intro-copy`, `about-intro-media`, `about-intro-subtitle`, `about-intro-description`, `about-intro-button`, `about-intro-background-image`. `.about-intro-inner` luôn `mx-auto w-full max-w-7xl` (không co nền).
+**UI:** nền `<picture>` (art-direction mobile/desktop, pattern PageBackground); overlay `bg-brand-navy/65` + gradient; description font lớn (`text-lg` → `lg:text-2xl`); CTA ghost trắng — hover `bg-brand-white` + `text-brand-navy`. Semantic: `about-intro`, `about-intro-copy`, `about-intro-media`, `about-intro-subtitle`, `about-intro-description`, `about-intro-button`, `about-intro-background-picture`, `about-intro-background-image`. `.about-intro-inner` luôn `mx-auto w-full max-w-7xl` (không co nền).
 
-**Animation:** CSS trong `styles.css` — copy từ trái, media từ phải; `[data-in-view=true]`; `prefers-reduced-motion` hiện ngay.
+**Background guards:** cả hai `url` trim rỗng → không render nền. Chỉ một phía → vẫn render; `source` chỉ khi có `backgroundDesktopImage.url`. Desktop `srcSet` = `backgroundDesktopImage.srcSet` hoặc `url`.
+
+**Animation:** CSS trong `styles.css` — copy từ trái, media từ phải; `[data-in-view=true]`; `prefers-reduced-motion` hiện ngay. Duration slide-in `1.2s`.
 
 **Mount:** `App.tsx` ngay sau `HeroSection`.
 
-**WordPress:** widget `EAI-about-intro` — MEDIA nền/ảnh (+ resolution), subtitle, WYSIWYG `description_html`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('AboutIntro', …)`. `eai_rc_map_media_model` gắn `srcSet`/`sizes` khi có attachment id.
+**WordPress:** widget `EAI-about-intro` — MEDIA nền mobile/desktop (+ resolution), ảnh nội dung (+ resolution), subtitle, WYSIWYG `description_html`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('AboutIntro', …)`. Helper fallback: widget cũ chỉ có `background_image` → map sang cả mobile + desktop. `eai_rc_map_media_model` gắn `srcSet`/`sizes` khi có attachment id.
 
 ## Quick reference — hero section (server)
 

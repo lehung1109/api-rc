@@ -266,8 +266,8 @@ html body[data-scroll-locked] {
 .about-intro-media {
   opacity: 0;
   transition:
-    opacity 0.7s ease-out,
-    transform 0.7s ease-out;
+    opacity 1.2s ease-out,
+    transform 1.2s ease-out;
 }
 
 .about-intro-copy {
@@ -383,6 +383,10 @@ a.hover\:bg-brand-white:hover {
   background-color: var(--e-global-color-tertiary) !important;
 }
 
+#main > .container-fluid {
+  padding: 0;
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
@@ -426,10 +430,6 @@ a.hover\:bg-brand-white:hover {
   }
 
   #header .container-fluid {
-    padding: 0;
-  }
-
-  #main > .container-fluid {
     padding: 0;
   }
 }

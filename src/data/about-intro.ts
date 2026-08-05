@@ -1,15 +1,22 @@
 import type { AboutIntroModel } from "@/components/about-intro/AboutIntro";
 
 const aboutIntro: AboutIntroModel = {
-  backgroundImage: {
+  backgroundMobileImage: {
+    url: "https://placehold.co/768x1024/152243/ffffff?text=About+BG+Mobile",
+    alt: "Nền About Intro mobile",
+    display_dimensions: {
+      width: 768,
+      height: 1024,
+    },
+  },
+  backgroundDesktopImage: {
     url: "https://placehold.co/1920x1080/152243/ffffff?text=About+BG+Desktop",
-    alt: "Nền skyline About Intro",
+    alt: "Nền About Intro desktop",
     display_dimensions: {
       width: 1920,
       height: 1080,
     },
     srcSet:
-      "https://placehold.co/768x1024/152243/ffffff?text=About+BG+Mobile 768w, " +
       "https://placehold.co/1280x800/152243/ffffff?text=About+BG+Tablet 1280w, " +
       "https://placehold.co/1920x1080/152243/ffffff?text=About+BG+Desktop 1920w",
     sizes: "100vw",

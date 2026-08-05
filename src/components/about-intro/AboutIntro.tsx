@@ -11,7 +11,8 @@ import AboutIntroScrollReveal, {
 
 export interface AboutIntroModel {
   className?: string;
-  backgroundImage: MediaModel;
+  backgroundMobileImage: MediaModel;
+  backgroundDesktopImage: MediaModel;
   image: MediaModel;
   subtitle: string;
   descriptionHtml: string;
@@ -25,7 +26,8 @@ const DEFAULT_SCROLL_REVEAL_TARGET_ID = "about-intro";
 const AboutIntro = (model: AboutIntroModel) => {
   const {
     className,
-    backgroundImage,
+    backgroundMobileImage,
+    backgroundDesktopImage,
     image,
     subtitle,
     descriptionHtml,
@@ -39,7 +41,15 @@ const AboutIntro = (model: AboutIntroModel) => {
   const hasButton =
     buttonLabel.trim().length > 0 && buttonLink.url.trim().length > 0;
   const hasImage = image.url.trim().length > 0;
-  const hasBackground = backgroundImage.url.trim().length > 0;
+  const mobileBgUrl = backgroundMobileImage.url.trim();
+  const desktopBgUrl = backgroundDesktopImage.url.trim();
+  const hasBackground = Boolean(mobileBgUrl || desktopBgUrl);
+  const backgroundFallback = mobileBgUrl
+    ? backgroundMobileImage
+    : backgroundDesktopImage;
+  const backgroundFallbackUrl = backgroundFallback.url.trim();
+  const desktopBgSrcSet =
+    backgroundDesktopImage.srcSet?.trim() || desktopBgUrl;
   const targetId =
     scrollReveal?.targetId?.trim() || DEFAULT_SCROLL_REVEAL_TARGET_ID;
   const scrollRevealModel: AboutIntroScrollRevealModel = {
@@ -60,13 +70,29 @@ const AboutIntro = (model: AboutIntroModel) => {
       )}
     >
       {hasBackground ? (
-        <Media
-          {...backgroundImage}
-          className={cn(
-            "about-intro-background-image absolute inset-0 z-0 h-full w-full max-w-none object-cover",
-            backgroundImage.className,
-          )}
-        />
+        <picture className="about-intro-background-picture absolute inset-0 z-0 block h-full w-full">
+          {desktopBgUrl ? (
+            <source media="(min-width: 768px)" srcSet={desktopBgSrcSet} />
+          ) : null}
+          <img
+            src={backgroundFallbackUrl}
+            alt={backgroundFallback.alt}
+            width={backgroundFallback.display_dimensions.width}
+            height={backgroundFallback.display_dimensions.height}
+            className={cn(
+              "about-intro-background-image h-full w-full max-w-none object-cover",
+              backgroundFallback.className,
+            )}
+            loading="lazy"
+            decoding="async"
+            {...(backgroundFallback.srcSet
+              ? { srcSet: backgroundFallback.srcSet }
+              : {})}
+            {...(backgroundFallback.sizes
+              ? { sizes: backgroundFallback.sizes }
+              : {})}
+          />
+        </picture>
       ) : null}
 
       <div
