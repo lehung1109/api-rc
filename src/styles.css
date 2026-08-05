@@ -321,3 +321,8 @@ html body[data-scroll-locked] {
 a.construction-header-menu-link:hover {
   color: var(--e-global-color-primary_hover);
 }
+
+.construction-header-menu-modal-social-link img {
+  width: 100%;
+  height: auto;
+}
