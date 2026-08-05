@@ -367,4 +367,8 @@ a.construction-header-menu-submenu-link {
   [data-scrolled=true] .construction-header-menu-link {
     color: var(--e-global-color-primary);
   }
+
+  .elementor .e-div-block-base {
+    padding: 0;
+  }
 }
