@@ -80,7 +80,7 @@ const AboutIntro = (model: AboutIntroModel) => {
             width={backgroundFallback.display_dimensions.width}
             height={backgroundFallback.display_dimensions.height}
             className={cn(
-              "about-intro-background-image h-full w-full max-w-none object-cover",
+              "about-intro-background-image h-full w-full max-w-none object-cover object-left-bottom",
               backgroundFallback.className,
             )}
             loading="lazy"
@@ -94,15 +94,6 @@ const AboutIntro = (model: AboutIntroModel) => {
           />
         </picture>
       ) : null}
-
-      <div
-        className="pointer-events-none absolute inset-0 z-1 bg-brand-navy/65"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-0 z-1 bg-gradient-to-b from-brand-navy/50 via-brand-navy/40 to-brand-navy/60"
-        aria-hidden="true"
-      />
 
       <div className="about-intro-inner relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
         <div className="about-intro-copy">
