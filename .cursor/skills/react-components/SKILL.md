@@ -511,11 +511,11 @@ export interface PageBackgroundModel {
 
 ## Quick reference — video hero banner (client + wrapper)
 
-Hero full viewport (`h-dvh`) nền video HLS (`.m3u8`) + poster SSR. **Client + wrapper** — mount qua `VideoHeroBannerWrapper`, không mount `VideoHeroBanner` trực tiếp. Không title/CTA.
+Hero full viewport (`h-dvh`) nền video progressive (MP4/WebM) + poster SSR. **Client + wrapper** — mount qua `VideoHeroBannerWrapper`, không mount `VideoHeroBanner` trực tiếp. Không title/CTA.
 
 | File | Vai trò |
 |------|---------|
-| `VideoHeroBanner.tsx` | `"use client"` — `<video>` + `hls.js` / Safari native HLS |
+| `VideoHeroBanner.tsx` | `"use client"` — `<video src>` native |
 | `VideoHeroBannerWrapper.tsx` | Server entry: `<section>` + poster `Media` + overlay + `type="videoHeroBanner"` |
 | `src/data/video-hero-banner-wrapper.ts` | Mock / CMS canonical |
 | `src/data/video-hero-banner.ts` | Re-export cho client registry |
@@ -525,17 +525,18 @@ Hero full viewport (`h-dvh`) nền video HLS (`.m3u8`) + poster SSR. **Client + 
 ```ts
 export interface VideoHeroBannerModel {
   className?: string;
-  url: string;        // .m3u8
+  url: string;        // MP4 / WebM
   poster: MediaModel;
 }
 ```
 
 **Render guards (wrapper):** `!url.trim()` hoặc `!poster.url.trim()` → `return null`.
 
-**Behavior:** Safari → `video.src`; else `hls.js`. `autoPlay` `muted` `loop` `playsInline`. Video `opacity-0` → `opacity-100` khi `canplay`/`playing`. Poster SSR nằm dưới. Overlay `.video-hero-banner-overlay` trong `styles.css` (gradient top fade).
+**Behavior:** `video.src = url`. `autoPlay` `muted` `loop` `playsInline`. Video `opacity-0` → `opacity-100` khi `canplay`/`playing`. Poster SSR nằm dưới. Overlay `.video-hero-banner-overlay` trong `styles.css` (gradient top fade).
 
 **Semantic classes:** `video-hero-banner`, `video-hero-banner-poster`, `video-hero-banner-overlay`, `video-hero-banner-video-root`, `video-hero-banner-video`.
 
+**WordPress:** widget `EAI-video-hero-banner` — MEDIA `video` (`media_types: video`) + poster → `url` + `poster`; `eai_rc_render_html('VideoHeroBannerWrapper', …)`.
 ## Quick reference — page title bar (server)
 
 Thanh tiêu đề trang: title trái, breadcrumb phải, nền xám nhạt, `border-b`. **Server-only** — không Wrapper/client.
