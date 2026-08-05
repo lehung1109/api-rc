@@ -83,6 +83,9 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
     },
   };
 
+  const enableMenuFadeIn = menuModalAnimation?.enableFadeIn !== false;
+  const enableMenuSlideIn = menuModalAnimation?.enableSlideIn !== false;
+
   return (
     <header
       id={headerId}
@@ -135,7 +138,18 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
 
       <ConstructionHeaderTop {...headerTop} />
 
-      <div className="construction-header-bar relative z-20 flex items-center justify-between gap-4 border-b border-brand-white-hover px-[30px] py-4 md:pointer-events-none">
+      <div
+        className={cn(
+          "construction-header-bar relative z-20 flex items-center justify-between gap-4 border-b border-brand-white-hover px-[30px] py-4 md:pointer-events-none",
+          // Forward peer/menu to nested modal (modal is no longer a sibling of the checkbox)
+          "max-md:peer-checked/menu:[&_.construction-header-menu-modal]:visible",
+          "max-md:peer-checked/menu:[&_.construction-header-menu-modal]:pointer-events-auto",
+          enableMenuFadeIn &&
+            "max-md:peer-checked/menu:[&_.construction-header-menu-modal]:opacity-100",
+          enableMenuSlideIn &&
+            "max-md:peer-checked/menu:[&_.construction-header-menu-modal-close]:translate-y-0 max-md:peer-checked/menu:[&_.construction-header-menu-modal-body]:translate-y-0",
+        )}
+      >
         <div className="construction-header-logo max-w-[120px] leading-0 md:pointer-events-auto">
           <Media {...logo} className="h-auto w-full" />
         </div>
@@ -156,9 +170,9 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
             <Menu className="h-7 w-7" />
           </label>
         </div>
-      </div>
 
-      <ConstructionHeaderMenuModal {...menuModalModel} />
+        <ConstructionHeaderMenuModal {...menuModalModel} />
+      </div>
 
       <ConstructionHeaderSearchModal
         autocomplete_search={autocomplete_search}

@@ -61,19 +61,15 @@ const ConstructionHeaderMenuModal = (
     <div
       className={cn(
         "construction-header-menu-modal",
-        // Mobile: full-viewport overlay
+        // Mobile: full-viewport overlay (open state via peer on .construction-header-bar)
         "max-md:fixed max-md:inset-0 max-md:z-[60] max-md:overflow-y-auto",
         "max-md:invisible max-md:pointer-events-none",
-        "max-md:peer-checked/menu:visible max-md:peer-checked/menu:pointer-events-auto",
         "max-md:transition-opacity max-md:duration-500 max-md:ease-out",
-        enableFadeIn &&
-          "max-md:opacity-0 max-md:peer-checked/menu:opacity-100",
+        enableFadeIn && "max-md:opacity-0",
         !enableFadeIn && "max-md:opacity-100",
-        enableSlideIn &&
-          "max-md:peer-checked/menu:[&_.construction-header-menu-modal-close]:translate-y-0 max-md:peer-checked/menu:[&_.construction-header-menu-modal-body]:translate-y-0",
-        // Desktop: absolute to header bottom (bar row), right-aligned
-        "md:absolute md:bottom-0 md:right-0 md:z-30 md:flex md:items-center md:px-[30px] md:py-4",
-        "md:visible md:pointer-events-auto md:opacity-100",
+        // Desktop: flex row with logo inside bar (vertically centered between underlines)
+        "md:static md:z-30 md:ml-auto md:flex md:items-center md:pointer-events-auto",
+        "md:visible md:opacity-100",
         className,
       )}
     >
