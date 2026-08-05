@@ -294,11 +294,6 @@ html body[data-scroll-locked] {
   padding: 0.75rem !important;
 }
 
-/* Fix 6: Porto global "a { color: ... }" overrides Tailwind text-brand-white on desktop nav links */
-.construction-header .construction-header-menu-link {
-  color: inherit !important;
-}
-
 .peer-checked\/search\:opacity-100:is(:where(.peer\/search):checked~*) {
   opacity: 1 !important;
 }
