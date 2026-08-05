@@ -327,7 +327,7 @@ Màu: theo [Brand colors](#brand-colors-ichouse) — `bg-brand-navy`, `text-bran
 
 ## Quick reference — about intro (server + scroll reveal island)
 
-Section intro 2 cột (text trái / ảnh phải), nền `Media` + overlay kiểu ProcessSection, **không** `max-w-7xl`. Slide-in khi scroll qua client monitor nhỏ (pattern ConstructionHeaderScrollMonitor).
+Section intro 2 cột (text trái / ảnh phải), nền `Media` + overlay kiểu ProcessSection. Inner copy+ảnh luôn `max-w-7xl` (nền vẫn full-bleed). Slide-in khi scroll qua client monitor nhỏ (pattern ConstructionHeaderScrollMonitor).
 
 | File | Vai trò |
 |------|---------|
@@ -351,7 +351,7 @@ export interface AboutIntroModel {
 }
 ```
 
-**UI:** overlay `bg-brand-navy/65` + gradient; description font lớn (`text-lg` → `lg:text-2xl`); CTA ghost trắng — hover `bg-brand-white` + `text-brand-navy`. Semantic: `about-intro`, `about-intro-copy`, `about-intro-media`, `about-intro-subtitle`, `about-intro-description`, `about-intro-button`, `about-intro-background-image`.
+**UI:** overlay `bg-brand-navy/65` + gradient; description font lớn (`text-lg` → `lg:text-2xl`); CTA ghost trắng — hover `bg-brand-white` + `text-brand-navy`. Semantic: `about-intro`, `about-intro-copy`, `about-intro-media`, `about-intro-subtitle`, `about-intro-description`, `about-intro-button`, `about-intro-background-image`. `.about-intro-inner` luôn `mx-auto w-full max-w-7xl` (không co nền).
 
 **Animation:** CSS trong `styles.css` — copy từ trái, media từ phải; `[data-in-view=true]`; `prefers-reduced-motion` hiện ngay.
 

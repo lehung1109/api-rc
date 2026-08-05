@@ -78,7 +78,7 @@ const AboutIntro = (model: AboutIntroModel) => {
         aria-hidden="true"
       />
 
-      <div className="about-intro-inner relative z-10 grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+      <div className="about-intro-inner relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
         <div className="about-intro-copy">
           {subtitleText ? (
             <h2 className="about-intro-subtitle text-base font-medium uppercase tracking-[0.12em] text-brand-gold md:text-lg">
