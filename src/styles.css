@@ -306,3 +306,7 @@ html body[data-scroll-locked] {
 .peer-checked\/search\:visible:is(:where(.peer\/search):checked~*) {
   visibility: visible !important;
 }
+
+.group-data-\[scrolled\=true\]\/construction-header\:opacity-100:is(:where(.group\/construction-header)[data-scrolled=true] *) {
+  opacity: 1 !important;
+}
