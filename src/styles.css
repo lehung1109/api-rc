@@ -317,3 +317,7 @@ html body[data-scroll-locked] {
 .construction-header-menu-dropdown-body ul {
   padding: 0;
 }
+
+a.construction-header-menu-link:hover {
+  color: var(--e-global-color-primary_hover);
+}
