@@ -375,4 +375,8 @@ a.construction-header-menu-submenu-link {
   #header .container-fluid {
     padding: 0;
   }
+
+  #main > .container-fluid {
+    padding: 0;
+  }
 }
