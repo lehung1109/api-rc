@@ -260,3 +260,34 @@ html body[data-scroll-locked] {
     rgba(0, 0, 0, 0) 30%
   );
 }
+
+/* ── Construction Header: Porto Bootstrap override ─────────────────────────────
+   Porto theme loads bootstrap.css which redefines Tailwind utility classes
+   (.py-4, .gap-4, .p-3) with a different spacing scale and !important,
+   causing the header bar to be taller than intended.
+   These rules restore the correct Tailwind values, scoped to the header only.
+
+   Affected Bootstrap rules:
+     .py-4  { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important }
+     .gap-4 { gap: 1.5rem !important }
+     .p-3   { padding: 1rem !important }
+     ul     { padding-left: 2rem }  (browser/Bootstrap default)
+──────────────────────────────────────────────────────────────────────────────── */
+
+/* Fix 1 + 2: .construction-header-bar uses .py-4 (→ 1rem) and .gap-4 (→ 1rem) */
+.construction-header .construction-header-bar {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  gap: 1rem !important;
+}
+
+/* Fix 3: <ul>.construction-header-menu-list gets padding-left: 2rem from Bootstrap */
+.construction-header .construction-header-menu-list {
+  padding-left: 0 !important;
+}
+
+/* Fix 4: search/menu open labels use .p-3 (→ 0.75rem), Bootstrap overrides to 1rem */
+.construction-header .construction-header-search-open,
+.construction-header .construction-header-menu-open {
+  padding: 0.75rem !important;
+}
