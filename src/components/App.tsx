@@ -46,6 +46,7 @@ const App = () => {
     <div>
       <Header {...header} />
       <HeroSection {...heroSection} />
+
       <div className="mx-auto max-w-7xl px-4 py-8">
         <ImageOverlayCardsGrid {...imageOverlayCardsGrid} />
       </div>

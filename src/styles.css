@@ -261,6 +261,37 @@ html body[data-scroll-locked] {
   );
 }
 
+.about-intro-copy,
+.about-intro-media {
+  opacity: 0;
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
+}
+
+.about-intro-copy {
+  transform: translateX(-2.5rem);
+}
+
+.about-intro-media {
+  transform: translateX(2.5rem);
+}
+
+.about-intro[data-in-view="true"] .about-intro-copy,
+.about-intro[data-in-view="true"] .about-intro-media {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-intro-copy,
+  .about-intro-media {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ── Construction Header: Porto Bootstrap override ─────────────────────────────
    Porto theme loads bootstrap.css which redefines Tailwind utility classes
    (.py-4, .gap-4, .p-3) with a different spacing scale and !important,
@@ -336,6 +367,11 @@ a.construction-header-menu-submenu-link {
 }
 
 @media only screen and (min-width: 48rem) {
+  .construction-header-menu-dropdown-body {
+    width: max-content;
+    max-width: 70vw;
+  }
+
   a.construction-header-menu-link {
     color: var(--e-global-color-tertiary);
   }

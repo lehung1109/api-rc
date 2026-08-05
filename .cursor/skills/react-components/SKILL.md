@@ -325,6 +325,40 @@ Files: `Footer` (orchestrator) → `FooterTop` / `FooterBottom` → `FooterLinkC
 Data: `src/data/footer.ts` — `{ top, bottom }` aggregate; chỉ `Footer` mount từ App/API.  
 Màu: theo [Brand colors](#brand-colors-ichouse) — `bg-brand-navy`, `text-brand-gold`, `hover:text-brand-gold-hover`, v.v.
 
+## Quick reference — about intro (server + scroll reveal island)
+
+Section intro 2 cột (text trái / ảnh phải), nền `Media` + overlay kiểu ProcessSection, **không** `max-w-7xl`. Slide-in khi scroll qua client monitor nhỏ (pattern ConstructionHeaderScrollMonitor).
+
+| File | Vai trò |
+|------|---------|
+| `AboutIntro.tsx` | Server entry: `<section>` + nền/overlay + copy + media + island |
+| `AboutIntroScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
+| `src/data/about-intro.ts` | Mock / CMS canonical (`AboutIntro` registry) |
+| `src/data/about-intro-scroll-reveal.ts` | Client registry (re-export `targetId` từ about-intro) |
+
+**Model:**
+
+```ts
+export interface AboutIntroModel {
+  className?: string;
+  backgroundImage: MediaModel; // demo bắt buộc có srcSet + sizes
+  image: MediaModel;
+  subtitle: string;            // gold, uppercase → <h2>
+  descriptionHtml: string;     // WYSIWYG
+  buttonLabel: string;
+  buttonLink: LinkModel;       // ghost: border + text brand-white
+  scrollReveal?: { targetId?: string }; // default "about-intro"
+}
+```
+
+**UI:** overlay `bg-brand-navy/65` + gradient; description font lớn (`text-lg` → `lg:text-2xl`); CTA ghost trắng — hover `bg-brand-white` + `text-brand-navy`. Semantic: `about-intro`, `about-intro-copy`, `about-intro-media`, `about-intro-subtitle`, `about-intro-description`, `about-intro-button`, `about-intro-background-image`.
+
+**Animation:** CSS trong `styles.css` — copy từ trái, media từ phải; `[data-in-view=true]`; `prefers-reduced-motion` hiện ngay.
+
+**Mount:** `App.tsx` ngay sau `HeroSection`.
+
+**WordPress:** widget `EAI-about-intro` — MEDIA nền/ảnh (+ resolution), subtitle, WYSIWYG `description_html`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('AboutIntro', …)`. `eai_rc_map_media_model` gắn `srcSet`/`sizes` khi có attachment id.
+
 ## Quick reference — hero section (server)
 
 Banner hero: nền ảnh + overlay, subtitle, title, HTML tùy chọn, CTA. **Server-only** — không Wrapper/client.
