@@ -27,13 +27,13 @@ Widget SSR từ api-rc là HTML thật cho crawler. Ưu tiên **phần tử sema
 
 | Cấp | Dùng khi | Ví dụ |
 |-----|----------|--------|
-| `<h1>` | **Một lần trên view trang** | `PageTitleBar` (`title` prop) |
+| `<h1>` | **Một lần trên view trang** | `PageTitleBar` (`title`); `HeroSection` / `AboutIntro` (subtitle) khi là tiêu đề chính |
 | `<h2>` | Tiêu đề section widget | `DesignConsultationCta` (`heading`) |
 | `<h3>` | Tiêu đề cột / card / bước con | `FooterLinkColumn`, `FeatureCardsGridCard`, `ProcessSection` |
 
 **Do:** text tiêu đề từ props (`title`, `heading`, `label`) — không để heading rỗng.
 
-**Exception (Page Hero):** một “hero” dùng làm **tiêu đề chính của trang** có thể dùng `<h1>` **khi không dùng `PageTitleBar`** trên cùng view. Nếu trang vẫn có `PageTitleBar`, hero nên dùng `<h2>` như một section.
+**Exception (Page Hero / About Intro):** một “hero” hoặc `AboutIntro` dùng làm **tiêu đề chính của trang** có thể dùng `<h1>` **khi không dùng `PageTitleBar`** trên cùng view. Nếu trang vẫn có `PageTitleBar`, chúng nên dùng `<h2>` như một section.
 
 **Avoid:** thêm `<h1>` trong widget section (trừ ngoại lệ Page Hero ở trên); nhảy cấp (`h1` → `h3`); “giả heading” bằng `<p>`/`<div>` + `font-bold` khi text là tiêu đề có nghĩa.
 

@@ -73,7 +73,7 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
       {titleText ? (
         <h2
           className={cn(
-            "fields-of-activity-title text-2xl font-bold leading-tight md:text-3xl",
+            "fields-of-activity-title text-sm font-bold leading-tight",
             "translate-y-10 opacity-0 transition-[opacity,transform] duration-[1250ms] ease-out",
             "group-data-[in-view=true]/foa:translate-y-0 group-data-[in-view=true]/foa:opacity-100",
             "motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",

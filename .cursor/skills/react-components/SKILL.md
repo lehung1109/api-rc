@@ -385,7 +385,7 @@ export interface AboutIntroModel {
   backgroundMobileImage: MediaModel;  // fallback <img>
   backgroundDesktopImage: MediaModel; // <source media="(min-width: 768px)">
   image: MediaModel;
-  subtitle: string;            // gold, uppercase → <h2>
+  subtitle: string;            // gold, uppercase → <h1> (tiêu đề chính trang khi không PageTitleBar)
   descriptionHtml: string;     // WYSIWYG
   buttonLabel: string;
   buttonLink: LinkModel;       // ghost: border + text brand-white
@@ -400,6 +400,8 @@ export interface AboutIntroModel {
 **Animation:** CSS trong `styles.css` — copy từ trái, media từ phải; `[data-in-view=true]`; `prefers-reduced-motion` hiện ngay. Duration slide-in `1.2s`.
 
 **Mount:** `App.tsx` ngay sau `HeroSection`.
+
+**SEO:** `subtitle` → `<h1>` khi AboutIntro là tiêu đề chính trang (không `PageTitleBar` trên cùng view) — giống ngoại lệ Page Hero.
 
 **WordPress:** widget `EAI-about-intro` — MEDIA nền mobile/desktop (+ resolution), ảnh nội dung (+ resolution), subtitle, WYSIWYG `description_html`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('AboutIntro', …)`. Helper fallback: widget cũ chỉ có `background_image` → map sang cả mobile + desktop. `eai_rc_map_media_model` gắn `srcSet`/`sizes` khi có attachment id.
 
