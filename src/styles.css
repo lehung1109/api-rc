@@ -306,7 +306,7 @@ html body[data-scroll-locked] {
   opacity: 1 !important;
 }
 
-.construction-header-menu-modal-background img {
+.construction-header-menu-modal-background picture img {
   height: 100%;
 }
 
