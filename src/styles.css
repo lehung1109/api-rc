@@ -400,6 +400,10 @@ p.text-brand-white {
   color: var(--e-global-color-primary);
 }
 
+.group-data-\[in-view\=true\]\/foa\:opacity-100:is(:where(.group\/foa)[data-in-view=true] *) {
+  opacity: 1 !important;
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
