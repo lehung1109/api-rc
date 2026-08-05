@@ -326,3 +326,11 @@ a.construction-header-menu-link:hover {
   width: 100%;
   height: auto;
 }
+
+a.construction-header-menu-submenu-link {
+  color: #666;
+
+  &:hover {
+    color: var(--e-global-color-primary);
+  }
+}
