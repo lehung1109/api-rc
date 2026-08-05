@@ -16,7 +16,7 @@ const ConstructionHeaderTop = (model: ConstructionHeaderTopModel) => {
         className,
       )}
     >
-      <div className="mx-auto max-w-7xl px-4 py-2">
+      <div className="px-[30px] py-2">
         <p className="construction-header-top-hotline mbe-0! text-right text-sm text-brand-navy">
           {hotlineText}
         </p>

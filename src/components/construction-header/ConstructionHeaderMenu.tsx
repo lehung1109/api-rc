@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { ChevronDownIcon, Search } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -32,7 +33,7 @@ function hasLevel3(children?: ConstructionHeaderMenuItemModel[]) {
 }
 
 const linkBaseClass =
-  "construction-header-menu-link flex items-center text-xl transition-[color,background-color] duration-150";
+  "construction-header-menu-link flex items-center text-base transition-[color,background-color] duration-150";
 
 const mobileHoverBgClass = "max-md:hover:bg-[rgb(0_0_0/10%)]";
 const mobileOpenBgClass = "max-md:has-[:checked]:bg-[rgb(0_0_0/5%)]";
@@ -58,7 +59,7 @@ function getLinkClass(
     hoverBg && mobileHoverBgClass,
     isContact &&
       cn(
-        "md:border md:border-brand-navy md:px-4 md:py-2",
+        "md:h-10 md:w-[150px] md:justify-center md:uppercase md:rounded-[5px] md:border md:border-brand-navy md:px-4",
         "md:hover:bg-brand-navy md:hover:border-brand-navy md:hover:text-brand-white",
       ),
   );
@@ -168,12 +169,29 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
           const itemCheckboxId = `${checkboxIdPrefix}-${index}`;
           const isContact = index === items.length - 1;
 
+          const searchLi =
+            isContact && searchItem ? (
+              <li className="construction-header-menu-item construction-header-menu-item--search relative hidden md:block">
+                <label
+                  htmlFor={searchItem.checkboxId}
+                  className={cn(
+                    linkBaseClass,
+                    "h-12 cursor-pointer px-6 font-medium text-brand-navy/80 hover:text-brand-navy md:px-4",
+                    mobileHoverBgClass,
+                  )}
+                  aria-label={searchItem.label}
+                >
+                  <Search className="h-4 w-4" aria-hidden />
+                </label>
+              </li>
+            ) : null;
+
           if (!hasDropdown) {
-            return (
+            const menuLi = (
               <li
-                key={item.label}
                 className={cn(
                   "construction-header-menu-item relative",
+                  isContact && "md:ml-6",
                 )}
               >
                 <a
@@ -181,6 +199,7 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                   className={cn(
                     getLinkClass(item.active, isContact),
                     "h-12 w-full px-6 md:px-4",
+                    isContact && "md:h-10 md:w-[150px]",
                   )}
                   aria-current={item.active ? "page" : undefined}
                 >
@@ -188,11 +207,21 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                 </a>
               </li>
             );
+
+            if (!searchLi) {
+              return <Fragment key={item.label}>{menuLi}</Fragment>;
+            }
+
+            return (
+              <Fragment key={item.label}>
+                {searchLi}
+                {menuLi}
+              </Fragment>
+            );
           }
 
-          return (
+          const menuLi = (
             <li
-              key={item.label}
               className={cn(
                 "construction-header-menu-item group relative",
                 "has-[:checked]:[&_.construction-header-menu-chevron]:rotate-180",
@@ -265,23 +294,18 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
               </div>
             </li>
           );
-        })}
 
-        {searchItem ? (
-          <li className="construction-header-menu-item construction-header-menu-item--search relative hidden md:block">
-            <label
-              htmlFor={searchItem.checkboxId}
-              className={cn(
-                linkBaseClass,
-                "h-12 cursor-pointer gap-2 px-6 font-medium text-brand-navy/80 hover:text-brand-navy md:px-4",
-                mobileHoverBgClass,
-              )}
-            >
-              <Search className="h-4 w-4" aria-hidden />
-              <span>{searchItem.label}</span>
-            </label>
-          </li>
-        ) : null}
+          if (!searchLi) {
+            return <Fragment key={item.label}>{menuLi}</Fragment>;
+          }
+
+          return (
+            <Fragment key={item.label}>
+              {searchLi}
+              {menuLi}
+            </Fragment>
+          );
+        })}
       </ul>
     </nav>
   );

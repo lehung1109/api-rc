@@ -41,6 +41,8 @@ export interface ConstructionHeaderModel {
   searchMenuItemLabel: string;
   menuModalAnimation?: ConstructionHeaderModalAnimationModel;
   searchModalAnimation?: ConstructionHeaderModalAnimationModel;
+  /** When true, scrolled background is visible from the initial state. */
+  alwaysShowBackground?: boolean;
 }
 
 const ConstructionHeader = (model: ConstructionHeaderModel) => {
@@ -60,6 +62,7 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
     searchMenuItemLabel,
     menuModalAnimation,
     searchModalAnimation,
+    alwaysShowBackground = false,
   } = model;
 
   const headerId = scrollMonitor.targetId || CONSTRUCTION_HEADER_ROOT_ID;
@@ -106,6 +109,7 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
           "construction-header-scrolled-background pointer-events-none absolute inset-0 -z-10 overflow-hidden",
           "opacity-0 transition-opacity duration-300",
           "group-data-[scrolled=true]/construction-header:opacity-100",
+          alwaysShowBackground && "opacity-100",
         )}
         aria-hidden
       >
@@ -131,7 +135,7 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
 
       <ConstructionHeaderTop {...headerTop} />
 
-      <div className="construction-header-bar relative z-20 mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:pointer-events-none">
+      <div className="construction-header-bar relative z-20 flex items-center justify-between gap-4 border-b border-brand-white-hover px-[30px] py-4 md:pointer-events-none">
         <div className="construction-header-logo max-w-[120px] leading-0 md:pointer-events-auto">
           <Media {...logo} className="h-auto w-full" />
         </div>
@@ -152,9 +156,9 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
             <Menu className="h-7 w-7" />
           </label>
         </div>
-      </div>
 
-      <ConstructionHeaderMenuModal {...menuModalModel} />
+        <ConstructionHeaderMenuModal {...menuModalModel} />
+      </div>
 
       <ConstructionHeaderSearchModal
         autocomplete_search={autocomplete_search}

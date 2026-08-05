@@ -72,7 +72,7 @@ const ConstructionHeaderMenuModal = (
         enableSlideIn &&
           "max-md:peer-checked/menu:[&_.construction-header-menu-modal-close]:translate-y-0 max-md:peer-checked/menu:[&_.construction-header-menu-modal-body]:translate-y-0",
         // Desktop: in-flow / absolute right of header bar
-        "md:absolute md:inset-y-0 md:right-0 md:z-30 md:flex md:items-center md:px-4",
+        "md:absolute md:inset-y-0 md:right-0 md:z-30 md:flex md:items-center md:px-[30px]",
         "md:visible md:pointer-events-auto md:opacity-100",
         className,
       )}
