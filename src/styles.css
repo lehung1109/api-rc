@@ -371,4 +371,8 @@ a.construction-header-menu-submenu-link {
   .elementor .e-div-block-base {
     padding: 0;
   }
+
+  #header .container-fluid {
+    padding: 0;
+  }
 }
