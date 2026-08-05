@@ -67,8 +67,9 @@ function getLinkClass(
 
   return cn(
     linkBaseClass,
-    "font-medium",
-    active ? "text-brand-navy" : "text-brand-navy/80",
+    active
+      ? "construction-header-menu-link-active font-bold text-brand-navy"
+      : "font-medium text-brand-navy/80",
     "max-md:hover:text-brand-navy",
     desktopChromeTextClass,
     !active && desktopChromeHoverClass,
