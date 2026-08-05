@@ -89,6 +89,7 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
   return (
     <header
       id={headerId}
+      {...(alwaysShowBackground ? { "data-solid": "true" } : {})}
       className={cn(
         "construction-header group/construction-header z-50 left-0 right-0 top-0",
         "fixed md:absolute md:data-[scrolled=true]:fixed",
@@ -140,7 +141,9 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
 
       <div
         className={cn(
-          "construction-header-bar relative z-20 flex items-center justify-between gap-4 border-b border-brand-white-hover px-[30px] py-4 md:pointer-events-none",
+          "construction-header-bar relative z-20 flex items-center justify-between gap-4 border-b border-brand-white px-[30px] py-4 md:pointer-events-none",
+          "group-data-[scrolled=true]/construction-header:border-brand-navy",
+          "group-data-[solid=true]/construction-header:border-brand-navy",
           // Forward peer/menu to nested modal (modal is no longer a sibling of the checkbox)
           "max-md:peer-checked/menu:[&_.construction-header-menu-modal]:visible",
           "max-md:peer-checked/menu:[&_.construction-header-menu-modal]:pointer-events-auto",
@@ -157,14 +160,22 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
         <div className="construction-header-actions flex items-center gap-1 md:hidden">
           <label
             htmlFor={CONSTRUCTION_HEADER_SEARCH_CHECKBOX_ID}
-            className="construction-header-search-open flex cursor-pointer items-center justify-center p-3 text-brand-navy"
+            className={cn(
+              "construction-header-search-open flex cursor-pointer items-center justify-center p-3 text-brand-white transition-colors duration-150",
+              "group-data-[scrolled=true]/construction-header:text-brand-navy",
+              "group-data-[solid=true]/construction-header:text-brand-navy",
+            )}
             aria-label={openSearchLabel}
           >
             <Search className="h-6 w-6" />
           </label>
           <label
             htmlFor={CONSTRUCTION_HEADER_MENU_CHECKBOX_ID}
-            className="construction-header-menu-open flex cursor-pointer items-center justify-center p-3 text-brand-navy"
+            className={cn(
+              "construction-header-menu-open flex cursor-pointer items-center justify-center p-3 text-brand-white transition-colors duration-150",
+              "group-data-[scrolled=true]/construction-header:text-brand-navy",
+              "group-data-[solid=true]/construction-header:text-brand-navy",
+            )}
             aria-label={openMenuLabel}
           >
             <Menu className="h-7 w-7" />

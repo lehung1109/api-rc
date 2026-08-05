@@ -37,6 +37,20 @@ const linkBaseClass =
 
 const mobileHoverBgClass = "max-md:hover:bg-[rgb(0_0_0/10%)]";
 const mobileOpenBgClass = "max-md:has-[:checked]:bg-[rgb(0_0_0/5%)]";
+
+/** Top-level chrome over hero: white on desktop until scroll/solid, navy on mobile modal. */
+const desktopChromeTextClass = cn(
+  "md:text-brand-white",
+  "md:group-data-[scrolled=true]/construction-header:text-brand-navy",
+  "md:group-data-[solid=true]/construction-header:text-brand-navy",
+);
+
+const desktopChromeHoverClass = cn(
+  "md:hover:text-brand-gold",
+  "md:group-data-[scrolled=true]/construction-header:hover:text-brand-navy",
+  "md:group-data-[solid=true]/construction-header:hover:text-brand-navy",
+);
+
 const submenuLinkClass = cn(
   "construction-header-menu-submenu-link block w-full py-2 text-base font-normal leading-[1.35]",
   "text-brand-navy/80 transition-[color,background-color] duration-150",
@@ -55,11 +69,15 @@ function getLinkClass(
     linkBaseClass,
     "font-medium",
     active ? "text-brand-navy" : "text-brand-navy/80",
-    "hover:text-brand-navy",
+    "max-md:hover:text-brand-navy",
+    desktopChromeTextClass,
+    !active && desktopChromeHoverClass,
     hoverBg && mobileHoverBgClass,
     isContact &&
       cn(
-        "md:h-10 md:w-[150px] md:justify-center md:uppercase md:rounded-[5px] md:border md:border-brand-navy md:px-4",
+        "md:h-10 md:w-[150px] md:justify-center md:uppercase md:rounded-[5px] md:border md:border-brand-white md:px-4",
+        "md:group-data-[scrolled=true]/construction-header:border-brand-navy",
+        "md:group-data-[solid=true]/construction-header:border-brand-navy",
         "md:hover:bg-brand-navy md:hover:border-brand-navy md:hover:text-brand-white",
       ),
   );
@@ -176,7 +194,9 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                   htmlFor={searchItem.checkboxId}
                   className={cn(
                     linkBaseClass,
-                    "h-12 cursor-pointer px-6 font-medium text-brand-navy/80 hover:text-brand-navy md:px-4",
+                    "h-12 cursor-pointer px-6 font-medium text-brand-navy/80 max-md:hover:text-brand-navy md:px-4",
+                    desktopChromeTextClass,
+                    desktopChromeHoverClass,
                     mobileHoverBgClass,
                   )}
                   aria-label={searchItem.label}
@@ -249,6 +269,9 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                     getLinkClass(item.active, false, { hoverBg: false }),
                     "flex-1 px-6 md:px-4",
                     "group-hover/row:text-brand-navy",
+                    "md:group-hover/row:text-brand-gold",
+                    "md:group-data-[scrolled=true]/construction-header:group-hover/row:text-brand-navy",
+                    "md:group-data-[solid=true]/construction-header:group-hover/row:text-brand-navy",
                   )}
                   aria-current={item.active ? "page" : undefined}
                 >
@@ -260,6 +283,10 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                   className={cn(
                     "construction-header-menu-chevron-trigger flex shrink-0 cursor-pointer items-center pr-6 pl-8 text-brand-navy/80 transition-colors duration-150",
                     "group-hover/row:text-brand-navy",
+                    desktopChromeTextClass,
+                    "md:group-hover/row:text-brand-gold",
+                    "md:group-data-[scrolled=true]/construction-header:group-hover/row:text-brand-navy",
+                    "md:group-data-[solid=true]/construction-header:group-hover/row:text-brand-navy",
                     "md:pointer-events-none md:cursor-default md:px-1",
                     item.active && "text-brand-navy",
                   )}
