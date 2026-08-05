@@ -84,10 +84,10 @@ const constructionHeader: ConstructionHeaderModel = {
   ],
   background: {
     img: {
-      url: "/images/concrete-bg-official-updated.jpg",
-      alt: "",
-      width: 1920,
-      height: 1080,
+      url: "https://placehold.co/768x1024/152243/ffffff?text=Header+BG+Mobile",
+      alt: "Nền header construction",
+      width: 768,
+      height: 1024,
     },
     sources: [
       {
