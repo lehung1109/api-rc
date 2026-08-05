@@ -393,6 +393,35 @@ export interface HeroSectionModel {
 
 **WordPress:** widget `EAI-hero-section` — `title_heading`, `content_centered`, `content_full_width`, `button_variant` → `titleHeading`, `contentCentered`, `contentFullWidth`, `buttonVariant`.
 
+## Quick reference — page background (server)
+
+Nền toàn trang `fixed` viewport (wallpaper), ảnh mobile/desktop qua `<picture>`. **Server-only** — không Wrapper/client, không overlay.
+
+| File | Vai trò |
+|------|---------|
+| `PageBackground.tsx` | `fixed inset-0` + `<picture>` |
+| `src/data/page-background.ts` | Mock / CMS (`PageBackground` registry) |
+
+**Model:**
+
+```ts
+export interface PageBackgroundModel {
+  className?: string;
+  mobileImage: MediaModel;   // fallback <img>
+  desktopImage: MediaModel;  // <source media="(min-width: 768px)">
+}
+```
+
+**Render guards:** cả hai `url` trim rỗng → `return null`. Chỉ một phía → vẫn render; `source` chỉ khi có `desktopImage.url`.
+
+**UI:** `pointer-events-none`, `aria-hidden`, `-z-10`, `object-cover`. `alt=""` (decorative). Desktop `srcSet` = `desktopImage.srcSet` hoặc `url`.
+
+**Semantic classes:** `page-background`, `page-background-picture`, `page-background-image`.
+
+**Mount:** preview `pages/construction/page.tsx` (đầu trang); không mặc định trong `App.tsx`.
+
+**WordPress:** widget `EAI-page-background` — MEDIA `mobile_image` / `desktop_image` (+ resolution) → `eai_rc_render_html('PageBackground', …)`.
+
 ## Quick reference — video hero banner (client + wrapper)
 
 Hero full viewport (`h-dvh`) nền video HLS (`.m3u8`) + poster SSR. **Client + wrapper** — mount qua `VideoHeroBannerWrapper`, không mount `VideoHeroBanner` trực tiếp. Không title/CTA.

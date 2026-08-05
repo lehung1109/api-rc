@@ -1,6 +1,8 @@
 import ConstructionHeader from "../../src/components/construction-header/ConstructionHeader";
+import PageBackground from "../../src/components/page-background/PageBackground";
 import VideoHeroBannerWrapper from "../../src/components/video-hero-banner/VideoHeroBannerWrapper";
 import { constructionHeader } from "../../src/data/construction-header";
+import pageBackground from "../../src/data/page-background";
 import videoHeroBannerWrapper from "../../src/data/video-hero-banner-wrapper";
 import AboutIntro from "../../src/components/about-intro/AboutIntro";
 import aboutIntro from "@/data/about-intro";
@@ -12,6 +14,7 @@ export const pageMeta = {
 export default function ConstructionPage() {
   return (
     <div>
+      <PageBackground {...pageBackground} />
       <ConstructionHeader {...constructionHeader} />
 
       <VideoHeroBannerWrapper {...videoHeroBannerWrapper} />
