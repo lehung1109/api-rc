@@ -403,7 +403,7 @@ a.construction-header-menu-submenu-link {
 }
 
 .text-brand-white p {
-  color: inherit;
+  color: var(--e-global-color-tertiary);
 }
 
 a.text-brand-white {
