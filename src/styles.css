@@ -363,4 +363,8 @@ a.construction-header-menu-submenu-link {
   a.construction-header-menu-link-contact:hover {
     color: var(--e-global-color-tertiary);
   }
+
+  [data-scrolled=true] .construction-header-menu-link {
+    color: var(--e-global-color-primary);
+  }
 }
