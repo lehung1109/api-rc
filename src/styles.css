@@ -343,4 +343,24 @@ a.construction-header-menu-submenu-link {
   a.construction-header-menu-link:hover {
     color: var(--e-global-color-secondary);
   }
+
+  a.construction-header-menu-submenu-link {
+    color: var(--e-global-color-primary);
+  }
+
+  a.construction-header-menu-submenu-link:hover {
+    color: var(--e-global-color-tertiary);
+  }
+
+  .md\:hidden {
+    display: none !important
+  }
+
+  label.flex {
+    display: flex;
+  }
+
+  a.construction-header-menu-link-contact:hover {
+    color: var(--e-global-color-tertiary);
+  }
 }

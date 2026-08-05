@@ -76,6 +76,7 @@ function getLinkClass(
     hoverBg && mobileHoverBgClass,
     isContact &&
       cn(
+        "construction-header-menu-link-contact",
         "md:h-10 md:w-[150px] md:justify-center md:uppercase md:rounded-[5px] md:border md:border-brand-white md:px-4",
         "md:group-data-[scrolled=true]/construction-header:border-brand-navy",
         "md:group-data-[solid=true]/construction-header:border-brand-navy",
