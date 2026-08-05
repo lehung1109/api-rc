@@ -334,3 +334,13 @@ a.construction-header-menu-submenu-link {
     color: var(--e-global-color-primary);
   }
 }
+
+@media only screen and (min-width: 48rem) {
+  a.construction-header-menu-link {
+    color: var(--e-global-color-tertiary);
+  }
+
+  a.construction-header-menu-link:hover {
+    color: var(--e-global-color-secondary);
+  }
+}
