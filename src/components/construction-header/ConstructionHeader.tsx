@@ -156,9 +156,9 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
             <Menu className="h-7 w-7" />
           </label>
         </div>
-
-        <ConstructionHeaderMenuModal {...menuModalModel} />
       </div>
+
+      <ConstructionHeaderMenuModal {...menuModalModel} />
 
       <ConstructionHeaderSearchModal
         autocomplete_search={autocomplete_search}
