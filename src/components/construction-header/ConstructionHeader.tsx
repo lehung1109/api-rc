@@ -110,7 +110,7 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
 
       <div
         className={cn(
-          "construction-header-scrolled-background pointer-events-none absolute inset-0 -z-10 overflow-hidden",
+          "construction-header-scrolled-background pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-brand-white-hover",
           "opacity-0 transition-opacity duration-300",
           "group-data-[scrolled=true]/construction-header:opacity-100",
           alwaysShowBackground && "opacity-100",
