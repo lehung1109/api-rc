@@ -105,11 +105,11 @@ const ContactCta = (model: ContactCtaModel) => {
           </div>
 
           {hasImage ? (
-            <div className="contact-cta-media relative min-h-[240px] md:min-h-full">
+            <div className="contact-cta-media min-h-[240px] md:min-h-full">
               <Media
                 {...image}
                 className={cn(
-                  "contact-cta-image absolute inset-0 h-full w-full max-w-none object-cover",
+                  "contact-cta-image h-full w-full max-w-none object-cover",
                   image.className,
                 )}
               />
