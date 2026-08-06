@@ -450,6 +450,39 @@ export interface AboutIntroModel {
 
 **WordPress:** widget `EAI-about-intro` — MEDIA nền mobile/desktop (+ resolution), ảnh nội dung (+ resolution), subtitle, WYSIWYG `description_html`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('AboutIntro', …)`. Helper fallback: widget cũ chỉ có `background_image` → map sang cả mobile + desktop. `eai_rc_map_media_model` gắn `srcSet`/`sizes` khi có attachment id.
 
+## Quick reference — director intro (server + scroll reveal island)
+
+Section intro giám đốc: 2 cột (ảnh trái / content phải), **không nền**, padding `py-20` (80px). Inner luôn `max-w-7xl`. Slide-in khi scroll (pattern AboutIntroScrollReveal).
+
+| File | Vai trò |
+|------|---------|
+| `DirectorIntro.tsx` | Server entry: `<section>` + media + copy + island |
+| `DirectorIntroScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
+| `src/data/director-intro.ts` | Mock / CMS canonical (`DirectorIntro` registry) |
+| `src/data/director-intro-scroll-reveal.ts` | Client registry (re-export `targetId` từ director-intro) |
+
+**Model:**
+
+```ts
+export interface DirectorIntroModel {
+  className?: string;
+  image: MediaModel;
+  subtitle: string;            // text-base uppercase text-brand-gold → <h2>
+  descriptionHtml: string;     // WYSIWYG → text-[24px] text-brand-navy
+  buttonLabel: string;
+  buttonLink: LinkModel;       // FoA-style navy CTA
+  scrollReveal?: { targetId?: string }; // default "director-intro"
+}
+```
+
+**UI:** không nền; section `px-6 py-20 md:px-10`; inner `max-w-7xl` grid 2 cột; media trước / copy sau; subtitle gold `text-base`; description `text-[24px] text-brand-navy`; CTA giống `fields-of-activity-button` (`bg-brand-navy` → hover white/navy). Semantic: `director-intro`, `director-intro-inner`, `director-intro-media`, `director-intro-copy`, `director-intro-subtitle`, `director-intro-description`, `director-intro-button`, `director-intro-image`.
+
+**Animation:** Tailwind trên TSX — `group/director` + `group-data-[in-view=true]/director:*`; media `-translate-x-10`, copy `translate-x-10`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
+
+**Mount:** `pages/construction/page.tsx` (sau AboutIntro).
+
+**WordPress:** widget `EAI-director-intro` — MEDIA ảnh (+ resolution), subtitle, WYSIWYG `description_html`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('DirectorIntro', …)`.
+
 ## Quick reference — hero section (server)
 
 Banner hero: nền ảnh + overlay, subtitle, title, HTML tùy chọn, CTA. **Server-only** — không Wrapper/client.

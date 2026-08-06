@@ -6,6 +6,8 @@ import pageBackground from "../../src/data/page-background";
 import videoHeroBannerWrapper from "../../src/data/video-hero-banner-wrapper";
 import AboutIntro from "../../src/components/about-intro/AboutIntro";
 import aboutIntro from "@/data/about-intro";
+import DirectorIntro from "../../src/components/director-intro/DirectorIntro";
+import directorIntro from "@/data/director-intro";
 import FieldsOfActivity from "../../src/components/fields-of-activity/FieldsOfActivity";
 import fieldsOfActivity from "@/data/fields-of-activity";
 import ConstructionHighlights from "../../src/components/construction-highlights/ConstructionHighlights";
@@ -24,6 +26,8 @@ export default function ConstructionPage() {
       <VideoHeroBannerWrapper {...videoHeroBannerWrapper} />
 
       <AboutIntro {...aboutIntro} />
+
+      <DirectorIntro {...directorIntro} />
 
       <FieldsOfActivity {...fieldsOfActivity} />
 
