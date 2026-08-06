@@ -9,12 +9,15 @@ import AboutIntroScrollReveal, {
   type AboutIntroScrollRevealModel,
 } from "./AboutIntroScrollReveal";
 
+export type AboutIntroSubtitleHeading = "h1" | "h2";
+
 export interface AboutIntroModel {
   className?: string;
   backgroundMobileImage: MediaModel;
   backgroundDesktopImage: MediaModel;
   image: MediaModel;
   subtitle: string;
+  subtitleHeading?: AboutIntroSubtitleHeading;
   descriptionHtml: string;
   buttonLabel: string;
   buttonLink: LinkModel;
@@ -30,6 +33,7 @@ const AboutIntro = (model: AboutIntroModel) => {
     backgroundDesktopImage,
     image,
     subtitle,
+    subtitleHeading = "h2",
     descriptionHtml,
     buttonLabel,
     buttonLink,
@@ -55,6 +59,7 @@ const AboutIntro = (model: AboutIntroModel) => {
   const scrollRevealModel: AboutIntroScrollRevealModel = {
     targetId,
   };
+  const SubtitleTag = subtitleHeading === "h1" ? "h1" : "h2";
 
   if (!hasBackground && !subtitleText && !description && !hasImage && !hasButton) {
     return null;
@@ -98,9 +103,9 @@ const AboutIntro = (model: AboutIntroModel) => {
       <div className="about-intro-inner relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
         <div className="about-intro-copy">
           {subtitleText ? (
-            <h1 className="about-intro-subtitle text-base font-medium uppercase tracking-[0.12em] text-brand-gold md:text-lg">
+            <SubtitleTag className="about-intro-subtitle text-base font-medium uppercase tracking-[0.12em] text-brand-gold md:text-lg">
               {subtitleText}
-            </h1>
+            </SubtitleTag>
           ) : null}
 
           {description ? (

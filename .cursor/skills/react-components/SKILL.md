@@ -469,7 +469,8 @@ export interface AboutIntroModel {
   backgroundMobileImage: MediaModel; // fallback <img>
   backgroundDesktopImage: MediaModel; // <source media="(min-width: 768px)">
   image: MediaModel;
-  subtitle: string; // gold, uppercase → <h1> (tiêu đề chính trang khi không PageTitleBar)
+  subtitle: string; // gold, uppercase → tag theo subtitleHeading
+  subtitleHeading?: "h1" | "h2"; // default "h2"
   descriptionHtml: string; // WYSIWYG
   buttonLabel: string;
   buttonLink: LinkModel; // ghost: border + text brand-white
@@ -485,9 +486,9 @@ export interface AboutIntroModel {
 
 **Mount:** `App.tsx` ngay sau `HeroSection`.
 
-**SEO:** `subtitle` → `<h1>` khi AboutIntro là tiêu đề chính trang (không `PageTitleBar` trên cùng view) — giống ngoại lệ Page Hero.
+**SEO:** `subtitle` → `<h1>` hoặc `<h2>` theo `subtitleHeading` (default `h2`). Chọn `h1` khi AboutIntro là tiêu đề chính trang (không `PageTitleBar`).
 
-**WordPress:** widget `EAI-about-intro` — MEDIA nền mobile/desktop (+ resolution), ảnh nội dung (+ resolution), subtitle, WYSIWYG `description_html`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('AboutIntro', …)`. Helper fallback: widget cũ chỉ có `background_image` → map sang cả mobile + desktop. `eai_rc_map_media_model` gắn `srcSet`/`sizes` khi có attachment id.
+**WordPress:** widget `EAI-about-intro` — MEDIA nền mobile/desktop (+ resolution), ảnh nội dung (+ resolution), subtitle, `subtitle_heading` (h1|h2, default h2), WYSIWYG `description_html`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('AboutIntro', …)`. Helper fallback: widget cũ chỉ có `background_image` → map sang cả mobile + desktop. `eai_rc_map_media_model` gắn `srcSet`/`sizes` khi có attachment id.
 
 ## Quick reference — director intro (server + scroll reveal island)
 
