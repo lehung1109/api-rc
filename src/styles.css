@@ -631,6 +631,10 @@ button.contact-popup-close {
     color: var(--e-global-color-primary);
   }
 
+  [data-solid=true] .construction-header-top {
+    border-bottom-color: var(--e-global-color-primary);
+  }
+
   .elementor .e-div-block-base.elementor-element {
     padding: 0;
   }
