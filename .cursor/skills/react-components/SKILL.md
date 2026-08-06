@@ -362,7 +362,7 @@ export interface ConstructionFooterModel {
 
 **Mount:** `pages/construction/page.tsx` (sau ContactPopup).
 
-**WordPress:** widget `EAI-construction-footer` — MEDIA logo/badge, TEXT company/phone/email/copyright, URL phone/email, repeater menu/social/addresses → `eai_rc_render_html('ConstructionFooter', …)`.
+**WordPress:** widget `EAI-construction-footer` — MEDIA logo/badge, SELECT `menu_id` (WP nav, top-level), TEXT company/phone/email/copyright (phone/email → auto `tel:`/`mailto:`), repeater social/addresses → `eai_rc_render_html('ConstructionFooter', …)`.
 
 ## Quick reference — fields of activity (server)
 
