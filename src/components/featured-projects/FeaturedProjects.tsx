@@ -1,10 +1,14 @@
 import { cn } from "@/lib/utils";
 
+import ClientComponentWrapper from "../ClientComponentWrapper";
 import type { LinkModel } from "../link/Link";
 import Link from "../link/Link";
 import FeaturedProjectsCard, {
   type FeaturedProjectsItemModel,
 } from "./FeaturedProjectsCard";
+import FeaturedProjectsScrollReveal, {
+  type FeaturedProjectsScrollRevealModel,
+} from "./FeaturedProjectsScrollReveal";
 
 export type { FeaturedProjectsItemModel };
 
@@ -15,10 +19,21 @@ export interface FeaturedProjectsModel {
   items: FeaturedProjectsItemModel[];
   buttonLabel: string;
   buttonLink: LinkModel;
+  scrollReveal?: FeaturedProjectsScrollRevealModel;
 }
 
+const DEFAULT_SCROLL_REVEAL_TARGET_ID = "featured-projects";
+
 const FeaturedProjects = (model: FeaturedProjectsModel) => {
-  const { className, subtitle, title, items, buttonLabel, buttonLink } = model;
+  const {
+    className,
+    subtitle,
+    title,
+    items,
+    buttonLabel,
+    buttonLink,
+    scrollReveal,
+  } = model;
 
   const subtitleText = subtitle.trim();
   const titleText = title.trim();
@@ -28,6 +43,12 @@ const FeaturedProjects = (model: FeaturedProjectsModel) => {
   const validItems = items.filter(
     (item) => item.image.url.trim().length > 0 && item.link.url.trim().length > 0,
   );
+
+  const targetId =
+    scrollReveal?.targetId?.trim() || DEFAULT_SCROLL_REVEAL_TARGET_ID;
+  const scrollRevealModel: FeaturedProjectsScrollRevealModel = {
+    targetId,
+  };
 
   if (
     validItems.length === 0 &&
@@ -41,21 +62,37 @@ const FeaturedProjects = (model: FeaturedProjectsModel) => {
   const itemKey = (item: FeaturedProjectsItemModel, index: number) =>
     `${item.image.url}-${item.title}-${index}`;
 
+  const slideInBase = cn(
+    "opacity-0 transition-[opacity,translate] duration-[1.2s] ease-out",
+    "group-data-[in-view=true]/featured:opacity-100 group-data-[in-view=true]/featured:translate-x-0 group-data-[in-view=true]/featured:translate-y-0",
+    "motion-reduce:opacity-100 motion-reduce:translate-x-0 motion-reduce:translate-y-0 motion-reduce:transition-none",
+  );
+
   return (
     <section
-      className={cn("featured-projects w-full px-[30px] py-20", className)}
+      id={targetId}
+      className={cn(
+        "featured-projects group/featured w-full overflow-hidden px-[30px] py-20",
+        className,
+      )}
     >
       {subtitleText || titleText ? (
         <header className="featured-projects-header mx-auto max-w-7xl text-center">
           {subtitleText ? (
-            <p className="featured-projects-subtitle mb-0 text-md font-medium uppercase tracking-[0.12em] text-brand-gold">
+            <p
+              className={cn(
+                "featured-projects-subtitle mb-0 translate-y-10 text-md font-medium uppercase tracking-[0.12em] text-brand-gold",
+                slideInBase,
+              )}
+            >
               {subtitleText}
             </p>
           ) : null}
           {titleText ? (
             <h2
               className={cn(
-                "featured-projects-title text-2xl leading-snug text-brand-navy",
+                "featured-projects-title translate-y-10 text-2xl leading-snug text-brand-navy",
+                slideInBase,
                 subtitleText && "mt-3",
               )}
             >
@@ -69,6 +106,8 @@ const FeaturedProjects = (model: FeaturedProjectsModel) => {
         <ul
           className={cn(
             "featured-projects-grid grid w-full list-none grid-cols-1 gap-4 p-0",
+            "-translate-x-10",
+            slideInBase,
             "md:grid-cols-3",
             (subtitleText || titleText) && "mt-10 md:mt-12",
           )}
@@ -102,6 +141,14 @@ const FeaturedProjects = (model: FeaturedProjectsModel) => {
           </Link>
         </div>
       ) : null}
+
+      <ClientComponentWrapper
+        type="featuredProjectsScrollReveal"
+        hydrateData={scrollRevealModel}
+        className="featured-projects-scroll-reveal hidden"
+      >
+        <FeaturedProjectsScrollReveal {...scrollRevealModel} />
+      </ClientComponentWrapper>
     </section>
   );
 };

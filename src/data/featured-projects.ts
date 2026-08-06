@@ -49,6 +49,9 @@ const featuredProjects: FeaturedProjectsModel = {
     is_external: false,
     nofollow: false,
   },
+  scrollReveal: {
+    targetId: "featured-projects",
+  },
 };
 
 export default featuredProjects;
