@@ -523,6 +523,47 @@ export interface DirectorIntroModel {
 
 **WordPress:** widget `EAI-director-intro` — MEDIA ảnh (+ resolution), subtitle, WYSIWYG `description_html`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('DirectorIntro', …)`.
 
+## Quick reference — director profile (server + scroll reveal island)
+
+Section hồ sơ giám đốc: nền ảnh mobile/desktop full-bleed + gradient navy trái→phải, subtitle + descriptionHtml + lưới item viền trắng. Padding `py-20` (80px). Inner luôn `max-w-7xl`. Slide-in từ trái khi scroll (stagger).
+
+| File                                          | Vai trò                                                |
+| --------------------------------------------- | ------------------------------------------------------ |
+| `DirectorProfile.tsx`                         | Orchestrator: `<section>` + nền/overlay + copy + items |
+| `DirectorProfileItem.tsx`                     | Leaf: border white + title (`h3`) + description        |
+| `DirectorProfileScrollReveal.tsx`             | `"use client"` — IntersectionObserver → `data-in-view` |
+| `src/data/director-profile.ts`                | Mock / CMS (`DirectorProfile` registry)                |
+| `src/data/director-profile-scroll-reveal.ts`  | Client registry (re-export `targetId`)                 |
+
+**Model:**
+
+```ts
+export interface DirectorProfileItemModel {
+  title: string;
+  description: string;
+}
+
+export interface DirectorProfileModel {
+  className?: string;
+  backgroundMobileImage: MediaModel;
+  backgroundDesktopImage: MediaModel;
+  subtitle: string; // → <h2> uppercase text-brand-white text-base+
+  descriptionHtml: string; // WYSIWYG; highlight via text-brand-gold
+  items: DirectorProfileItemModel[];
+  scrollReveal?: { targetId?: string }; // default "director-profile"
+}
+```
+
+**Render guards:** lọc item thiếu cả `title` và `description` (trim); rỗng hoàn toàn (không bg + không subtitle/description/items) → `return null`.
+
+**UI:** nền `<picture>` (AboutIntro pattern); overlay `bg-brand-navy/40` + `bg-gradient-to-r from-brand-navy/90 via-brand-navy/55 to-transparent`; section `px-6 py-20 md:px-10`; description `text-lg` → `lg:text-2xl`; items `grid-cols-1 sm:grid-cols-2 md:grid-cols-3`, `border border-brand-white`, title/description `text-base+` centered. Semantic: `director-profile`, `director-profile-inner`, `director-profile-overlay`, `director-profile-subtitle`, `director-profile-description`, `director-profile-items`, `director-profile-item`, `director-profile-item-title`, `director-profile-item-description`, `director-profile-background-picture`, `director-profile-background-image`. Picture img fill: rule trong `styles.css` (cùng AboutIntro).
+
+**Animation:** Tailwind trên TSX — `group/profile` + `group-data-[in-view=true]/profile:*`; tất cả `-translate-x-10`; stagger `transitionDelay` theo index; `motion-reduce:*` hiện ngay. Duration `1.2s`.
+
+**Mount:** `pages/construction/page.tsx` (sau DirectorIntro).
+
+**WordPress:** widget `EAI-director-profile` — MEDIA nền mobile/desktop (+ resolution), subtitle, WYSIWYG `description_html`, repeater items (title + description TEXTAREA), `scroll_reveal_target_id` → `eai_rc_render_html('DirectorProfile', …)`. Helper: `director-profile.php`.
+
 ## Quick reference — vision mission (server + scroll reveal island)
 
 Section tầm nhìn / sứ mệnh: 2 cột text (title cột + items title/description), **không nền**, padding `py-20` (80px). Inner luôn `max-w-7xl`. Slide-in khi scroll (cột chẵn trái, cột lẻ phải).
@@ -561,7 +602,7 @@ export interface VisionMissionModel {
 
 **Animation:** Tailwind trên TSX — `group/vision` + `group-data-[in-view=true]/vision:*`; cột index chẵn `-translate-x-10`, lẻ `translate-x-10`; `transition-[opacity,translate]`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
 
-**Mount:** `pages/construction/page.tsx` (sau DirectorIntro).
+**Mount:** `pages/construction/page.tsx` (sau DirectorProfile).
 
 **WordPress:** widget `EAI-vision-mission` — repeater `columns` (title + nested repeater `items`: title + description TEXTAREA), `scroll_reveal_target_id` → `eai_rc_render_html('VisionMission', …)`. Helper: `vision-mission.php`.
 

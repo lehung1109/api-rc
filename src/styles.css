@@ -530,7 +530,8 @@ a.hover\:bg-brand-white:hover {
   padding: 0;
 }
 
-.about-intro-background-picture img {
+.about-intro-background-picture img,
+.director-profile-background-picture img {
   width: 100%;
   height: 100% !important;
 }
