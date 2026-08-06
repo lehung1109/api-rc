@@ -44,7 +44,7 @@ const ConstructionFooterContact = (model: ConstructionFooterContactModel) => {
       {hasPhone ? (
         <div className={cn(columnClass, "construction-footer-contact-phone")}>
           <Phone
-            className="construction-footer-contact-icon h-5 w-5 text-brand-navy"
+            className="construction-footer-contact-icon h-[30px] w-[30px] text-brand-navy"
             aria-hidden
             strokeWidth={1.5}
           />
@@ -68,7 +68,7 @@ const ConstructionFooterContact = (model: ConstructionFooterContactModel) => {
           )}
         >
           <MapPin
-            className="construction-footer-contact-icon h-5 w-5 text-brand-navy"
+            className="construction-footer-contact-icon h-[30px] w-[30px] text-brand-navy"
             aria-hidden
             strokeWidth={1.5}
           />
@@ -83,7 +83,7 @@ const ConstructionFooterContact = (model: ConstructionFooterContactModel) => {
       {hasEmail ? (
         <div className={cn(columnClass, "construction-footer-contact-email")}>
           <Send
-            className="construction-footer-contact-icon h-5 w-5 text-brand-navy"
+            className="construction-footer-contact-icon h-[30px] w-[30px] text-brand-navy"
             aria-hidden
             strokeWidth={1.5}
           />

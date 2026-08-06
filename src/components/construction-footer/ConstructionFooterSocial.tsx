@@ -41,7 +41,7 @@ const ConstructionFooterSocial = (model: ConstructionFooterSocialModel) => {
           key={`${item.ariaLabel}-${item.link.url}`}
           {...item.link}
           className={cn(
-            "construction-footer-social-link inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-brand-navy text-brand-navy transition-colors hover:border-brand-gold hover:text-brand-gold",
+            "construction-footer-social-link inline-flex items-center justify-center text-brand-navy transition-colors hover:text-brand-gold",
             item.link.className,
           )}
         >
@@ -50,7 +50,7 @@ const ConstructionFooterSocial = (model: ConstructionFooterSocialModel) => {
             {...item.icon}
             alt=""
             className={cn(
-              "construction-footer-social-icon h-5 w-5 object-contain",
+              "construction-footer-social-icon h-10 w-10 rounded-full object-contain",
               item.icon.className,
             )}
           />

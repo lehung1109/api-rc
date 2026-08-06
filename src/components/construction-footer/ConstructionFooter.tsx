@@ -94,7 +94,7 @@ const ConstructionFooter = (model: ConstructionFooterModel) => {
         {companyNameText || validSocialLinks.length > 0 ? (
           <div className="construction-footer-company flex w-full flex-col items-center gap-6 border-t border-brand-navy/15 pt-8">
             {companyNameText ? (
-              <h2 className="construction-footer-company-name max-w-3xl text-balance text-lg font-bold text-brand-navy md:text-xl">
+              <h2 className="construction-footer-company-name max-w-3xl text-balance text-2xl font-bold text-brand-navy">
                 {companyNameText}
               </h2>
             ) : null}
