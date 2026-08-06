@@ -50,7 +50,7 @@ const FloatingContactPhone = (model: FloatingContactPhoneModel) => {
       <span
         className={cn(
           "floating-contact-phone-label relative z-[9] -ml-0.5",
-          "inline-flex items-center rounded-full bg-brand-gold py-2 pr-4 pl-5",
+          "inline-flex items-center rounded-r-full bg-brand-gold py-2 pr-4 pl-5 ml-4",
           "text-[20px] font-semibold leading-none text-brand-white shadow-md",
         )}
       >

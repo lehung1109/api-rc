@@ -266,12 +266,12 @@ html body[data-scroll-locked] {
   content: "";
   position: absolute;
   top: 50%;
-  left: 0.35rem;
+  left: 0;
   z-index: 1;
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 1rem 0.85rem 1rem 0;
+  border-width: 18px 0.85rem 18px 0;
   border-color: transparent var(--e-global-color-secondary) transparent transparent;
   transform: translate(-100%, -50%);
   pointer-events: none;
@@ -508,7 +508,7 @@ a.text-brand-white {
   color: var(--e-global-color-tertiary);
 }
 
-a.text-brand-white:hover{
+a.hover\:text-brand-white {
   color: var(--e-global-color-primary);
 }
 
