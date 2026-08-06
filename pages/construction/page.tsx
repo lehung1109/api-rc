@@ -14,6 +14,10 @@ import ConstructionHighlights from "../../src/components/construction-highlights
 import constructionHighlights from "@/data/construction-highlights";
 import FeaturedProjects from "../../src/components/featured-projects/FeaturedProjects";
 import featuredProjects from "@/data/featured-projects";
+import ContactCta from "../../src/components/contact-cta/ContactCta";
+import contactCta from "@/data/contact-cta";
+import ContactPopupWrapper from "../../src/components/contact-popup/ContactPopupWrapper";
+import contactPopupWrapper from "@/data/contact-popup-wrapper";
 
 export const pageMeta = {
   title: "construction",
@@ -36,6 +40,10 @@ export default function ConstructionPage() {
       <ConstructionHighlights {...constructionHighlights} />
 
       <FeaturedProjects {...featuredProjects} />
+
+      <ContactCta {...contactCta} />
+
+      <ContactPopupWrapper {...contactPopupWrapper} />
 
       <main className="mx-auto max-w-7xl px-4 py-16">
         <p className="text-2xl font-bold text-brand-navy">
