@@ -80,7 +80,7 @@ const ConstructionFooter = (model: ConstructionFooterModel) => {
   return (
     <footer
       className={cn(
-        "construction-footer w-full px-6 py-20 text-center text-base text-brand-navy md:px-10",
+        "construction-footer w-full px-6 pt-20 pb-0 text-center text-base text-brand-navy md:px-10",
         className,
       )}
     >

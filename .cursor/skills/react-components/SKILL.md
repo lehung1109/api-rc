@@ -358,7 +358,7 @@ export interface ConstructionFooterModel {
 
 **Render guards:** rỗng hoàn toàn → `return null`. Menu/social lọc thiếu url/label/icon. Phone/email chỉ khi `text` + `link.url` trim.
 
-**UI:** `py-20` (80px), inner `max-w-7xl`, `text-base text-brand-navy text-center`, divider `border-brand-navy/15`. Contact `md:grid-cols-[1fr_2fr_1fr]` (25% / 50% / 25%) + border giữa cột. Social `rounded-full border border-brand-navy`. Semantic: `construction-footer`, `construction-footer-brand`, `construction-footer-nav`, `construction-footer-company-name`, `construction-footer-social`, `construction-footer-contact`, `construction-footer-bottom`, `construction-footer-copyright`, `construction-footer-badge`.
+**UI:** `pt-20 pb-0` (80px top, no bottom), inner `max-w-7xl`, `text-base text-brand-navy text-center`, divider `border-brand-navy/15`. Contact `md:grid-cols-[1fr_2fr_1fr]` (25% / 50% / 25%) + border giữa cột. Social `rounded-full border border-brand-navy`. Semantic: `construction-footer`, `construction-footer-brand`, `construction-footer-nav`, `construction-footer-company-name`, `construction-footer-social`, `construction-footer-contact`, `construction-footer-bottom`, `construction-footer-copyright`, `construction-footer-badge`.
 
 **Mount:** `pages/construction/page.tsx` (sau ContactPopup).
 
