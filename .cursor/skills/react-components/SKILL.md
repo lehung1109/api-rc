@@ -477,7 +477,7 @@ export interface DirectorIntroModel {
 
 **UI:** không nền; section `px-6 py-20 md:px-10`; inner `max-w-7xl` grid 2 cột; media trước / copy sau; subtitle gold `text-base`; description `text-[24px] text-brand-navy`; CTA giống `fields-of-activity-button` (`bg-brand-navy` → hover white/navy). Semantic: `director-intro`, `director-intro-inner`, `director-intro-media`, `director-intro-copy`, `director-intro-subtitle`, `director-intro-description`, `director-intro-button`, `director-intro-image`.
 
-**Animation:** Tailwind trên TSX — `group/director` + `group-data-[in-view=true]/director:*`; media `-translate-x-10`, copy `translate-x-10`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
+**Animation:** Tailwind trên TSX — `group/director` + `group-data-[in-view=true]/director:*`; media `-translate-x-10`, copy `translate-x-10`; `transition-[opacity,translate]` (TW v4 dùng property `translate`, không `transform`); `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
 
 **Mount:** `pages/construction/page.tsx` (sau AboutIntro).
 
