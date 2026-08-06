@@ -530,6 +530,12 @@ p.text-brand-white {
   height: 120px;
 }
 
+.wpcf7-form .wpcf7-submit {
+  color: var(--e-global-color-tertiary);
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
