@@ -9,7 +9,7 @@ const fieldsOfActivity: FieldsOfActivityModel = {
         "<ul><li>Thiết kế kiến trúc công trình dân dụng</li><li>Thiết kế nội thất và hồ sơ kỹ thuật thi công</li></ul>",
       iconImage: {
         url: "https://placehold.co/80x80/D9A441/022B63/png?text=Icon",
-        alt: "Biểu tượng thiết kế",
+        alt: "Biểu tượng lĩnh vực hoạt động",
         display_dimensions: {
           width: 80,
           height: 80,
@@ -22,8 +22,8 @@ const fieldsOfActivity: FieldsOfActivityModel = {
       contentHtml:
         "<ul><li>Thi công xây dựng phần thô và hoàn thiện</li><li>Giám sát và bàn giao công trình</li></ul>",
       iconImage: {
-        url: "https://placehold.co/80x80/022B63/ffffff/png?text=Icon",
-        alt: "Biểu tượng thi công",
+        url: "https://placehold.co/80x80/D9A441/022B63/png?text=Icon",
+        alt: "Biểu tượng lĩnh vực hoạt động",
         display_dimensions: {
           width: 80,
           height: 80,
