@@ -22,9 +22,6 @@ const FieldsOfActivityImages = (model: FieldsOfActivityImagesModel) => {
     <div
       className={cn(
         "fields-of-activity-images flex flex-row gap-5",
-        "translate-x-10 opacity-0 transition-[opacity,transform] duration-[1250ms] ease-out",
-        "group-data-[in-view=true]/foa:translate-x-0 group-data-[in-view=true]/foa:opacity-100",
-        "motion-reduce:translate-x-0 motion-reduce:opacity-100 motion-reduce:transition-none",
         className,
       )}
     >

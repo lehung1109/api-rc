@@ -66,27 +66,20 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
     <section
       id={targetId}
       className={cn(
-        "fields-of-activity group/foa mx-auto w-full max-w-7xl overflow-hidden px-4 py-8 text-brand-navy",
+        "fields-of-activity mx-auto w-full max-w-7xl overflow-hidden px-4 py-16 text-brand-navy",
         className,
       )}
     >
       {titleText ? (
-        <h2
-          className={cn(
-            "fields-of-activity-title text-sm font-bold leading-tight",
-            "translate-y-10 opacity-0 transition-[opacity,transform] duration-[1250ms] ease-out",
-            "group-data-[in-view=true]/foa:translate-y-0 group-data-[in-view=true]/foa:opacity-100",
-            "motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",
-          )}
-        >
+        <h2 className="fields-of-activity-title text-sm font-bold leading-tight">
           {titleText}
         </h2>
       ) : null}
 
       <div
         className={cn(
-          "fields-of-activity-body mt-10 grid grid-cols-1 gap-8",
-          "md:mt-14 md:grid-cols-2 md:gap-12",
+          "fields-of-activity-body mt-7 grid grid-cols-1 gap-8",
+          "md:grid-cols-2 md:gap-12",
         )}
       >
         {validItems.length > 0 ? (
@@ -94,9 +87,6 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
             className={cn(
               "fields-of-activity-accordion",
               hasAnyIcon && "pl-12 md:pl-14",
-              "-translate-x-10 opacity-0 transition-[opacity,transform] duration-[1250ms] ease-out",
-              "group-data-[in-view=true]/foa:translate-x-0 group-data-[in-view=true]/foa:opacity-100",
-              "motion-reduce:translate-x-0 motion-reduce:opacity-100 motion-reduce:transition-none",
             )}
           >
             {validItems.map((item, index) => (

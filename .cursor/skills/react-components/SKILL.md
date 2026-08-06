@@ -358,7 +358,7 @@ export interface FieldsOfActivityModel {
 }
 ```
 
-**UI:** container `max-w-7xl`, không nền; title `text-2xl md:text-3xl`; accordion title/chevron `text-brand-navy` → gold hover/open; icon absolute trái phía trên title khi mở; content `text-base text-brand-navy` + `ul/li` disc; CTA `bg-brand-navy border-brand-navy text-brand-white` — hover `bg-brand-white text-brand-navy`; ảnh phải cùng hàng mọi breakpoint; slide-in 1.25s (trái/phải) qua `FieldsOfActivityScrollReveal`.
+**UI:** container `max-w-7xl`, không nền; title `text-2xl md:text-3xl`; accordion title/chevron `text-brand-navy` → gold hover/open; icon absolute trái phía trên title khi mở; content `text-base text-brand-navy` + `ul/li` disc; CTA `bg-brand-navy border-brand-navy text-brand-white` — hover `bg-brand-white text-brand-navy`; ảnh phải cùng hàng mọi breakpoint; slide-in 1.25s (title từ dưới, accordion trái, images phải) qua `FieldsOfActivityScrollReveal` + CSS trong `styles.css`.
 
 **Semantic classes:** `fields-of-activity`, `fields-of-activity-title`, `fields-of-activity-accordion`, `fields-of-activity-item`, `fields-of-activity-item-trigger`, `fields-of-activity-item-title`, `fields-of-activity-item-icon`, `fields-of-activity-item-chevron`, `fields-of-activity-item-content`, `fields-of-activity-images`, `fields-of-activity-image`, `fields-of-activity-button`.
 
@@ -399,7 +399,7 @@ export interface ConstructionHighlightsModel {
 }
 ```
 
-**UI:** full-bleed `bg-brand-navy`; inner `max-w-7xl`; subtitle `text-[14px]`; title `text-2xl text-brand-white`; accordion title `text-2xl md:text-[40px]`, closed `opacity-50`, open `opacity-100`; content `text-base text-justify text-brand-white`; open/close `grid-rows-[0fr]→[1fr]`; không CTA/chevron. Slide-in 1.25s (header+accordion trái, media phải) qua `ConstructionHighlightsScrollReveal` + CSS trong `styles.css`.
+**UI:** full-bleed `bg-brand-navy`; inner `max-w-7xl`; subtitle `text-[14px]`; title `text-2xl text-brand-white`; accordion title `text-2xl md:text-[40px]`, closed `opacity-50`, open `opacity-100`; content `text-base text-justify text-brand-white`; open/close `grid-rows-[0fr]→[1fr]`; không CTA/chevron. Slide-in 1.25s (subtitle+title từ dưới, accordion trái, media phải) qua `ConstructionHighlightsScrollReveal` + CSS trong `styles.css`.
 
 **Semantic classes:** `construction-highlights`, `construction-highlights-inner`, `construction-highlights-header`, `construction-highlights-subtitle`, `construction-highlights-title`, `construction-highlights-body`, `construction-highlights-accordion`, `construction-highlights-item`, `construction-highlights-item-trigger`, `construction-highlights-item-title`, `construction-highlights-item-icon`, `construction-highlights-item-content`, `construction-highlights-media`, `construction-highlights-image`.
 

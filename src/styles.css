@@ -294,7 +294,15 @@ html body[data-scroll-locked] {
 }
 
 /* ── Construction Highlights: scroll slide-in ───────────────────────────────── */
-.construction-highlights-header,
+.construction-highlights-subtitle,
+.construction-highlights-title {
+  opacity: 0;
+  transform: translateY(2.5rem);
+  transition:
+    opacity 1.25s ease-out,
+    transform 1.25s ease-out;
+}
+
 .construction-highlights-accordion {
   opacity: 0;
   transform: translateX(-2.5rem);
@@ -311,17 +319,61 @@ html body[data-scroll-locked] {
     transform 1.25s ease-out;
 }
 
-.construction-highlights[data-in-view="true"] .construction-highlights-header,
+.construction-highlights[data-in-view="true"] .construction-highlights-subtitle,
+.construction-highlights[data-in-view="true"] .construction-highlights-title,
 .construction-highlights[data-in-view="true"] .construction-highlights-accordion,
 .construction-highlights[data-in-view="true"] .construction-highlights-media {
   opacity: 1;
-  transform: translateX(0);
+  transform: translate(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .construction-highlights-header,
+  .construction-highlights-subtitle,
+  .construction-highlights-title,
   .construction-highlights-accordion,
   .construction-highlights-media {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── Fields of Activity: scroll slide-in ────────────────────────────────────── */
+.fields-of-activity-title {
+  opacity: 0;
+  transform: translateY(2.5rem);
+  transition:
+    opacity 1.25s ease-out,
+    transform 1.25s ease-out;
+}
+
+.fields-of-activity-accordion {
+  opacity: 0;
+  transform: translateX(-2.5rem);
+  transition:
+    opacity 1.25s ease-out,
+    transform 1.25s ease-out;
+}
+
+.fields-of-activity-images {
+  opacity: 0;
+  transform: translateX(2.5rem);
+  transition:
+    opacity 1.25s ease-out,
+    transform 1.25s ease-out;
+}
+
+.fields-of-activity[data-in-view="true"] .fields-of-activity-title,
+.fields-of-activity[data-in-view="true"] .fields-of-activity-accordion,
+.fields-of-activity[data-in-view="true"] .fields-of-activity-images {
+  opacity: 1;
+  transform: translate(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fields-of-activity-title,
+  .fields-of-activity-accordion,
+  .fields-of-activity-images {
     opacity: 1;
     transform: none;
     transition: none;
@@ -433,10 +485,6 @@ p.text-brand-white {
 
 [data-scrolled="true"] p.construction-header-top-hotline {
   color: var(--e-global-color-primary);
-}
-
-.group-data-\[in-view\=true\]\/foa\:opacity-100:is(:where(.group\/foa)[data-in-view=true] *) {
-  opacity: 1 !important;
 }
 
 .peer-checked\/acc\:block:is(:where(.peer\/acc):checked~*) {
