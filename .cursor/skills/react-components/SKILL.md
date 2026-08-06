@@ -1016,15 +1016,16 @@ export interface TableOfContentsModel {
 
 ## Quick reference — contact CTA (server) + contact popup (client + CF7)
 
-Banner CTA 2 cột (content trái / ảnh phải) + popup singleton mở từ nhiều trigger. CF7 **không** đi qua props api-rc (tránh nonce stale trong transient).
+Banner CTA 2 cột (content trái / ảnh phải) + popup mở theo **shared key**. CF7 **không** đi qua props api-rc (tránh nonce stale trong transient). Có thể nhiều popup / trang.
 
 | File | Vai trò |
 |------|---------|
-| `ContactCta.tsx` | Server: section white `py-20`, content navy (+ optional BG image), ảnh phải full-bleed, nút `data-contact-popup-open` |
-| `ContactPopup.tsx` | `"use client"` — modal overlay; lắng nghe `data-contact-popup-open` + `ichouse:contact-popup:open`; mount CF7 từ `#eai-contact-popup-cf7-source` |
+| `ContactCta.tsx` | Server: section white `py-20`, content navy (+ optional BG image), ảnh phải full-bleed, nút `data-contact-popup-open="{popupTarget}"` |
+| `contact-popup-key.ts` | `normalizeContactPopupKey`, `contactPopupCf7SourceId`, event/attr constants |
+| `ContactPopup.tsx` | `"use client"` — modal; chỉ mở khi key khớp; mount CF7 từ `#eai-contact-popup-cf7-source-{key}` |
 | `ContactPopupWrapper.tsx` | Server entry: `type="contactPopup"` |
-| `src/data/contact-cta.ts` | Mock banner (`ContactCta` registry) |
-| `src/data/contact-popup-wrapper.ts` | Canonical popup (`contentHtml` demo Vite) |
+| `src/data/contact-cta.ts` | Mock banner (`popupTarget: "tu-van"`) |
+| `src/data/contact-popup-wrapper.ts` | Canonical popup (`popupKey: "tu-van"`, `contentHtml` demo Vite) |
 | `src/data/contact-popup.ts` | Re-export client registry |
 
 **ContactCta model:**
@@ -1035,6 +1036,7 @@ export interface ContactCtaModel {
   subtitle: string;
   title: string;
   buttonLabel: string;
+  popupTarget: string; // khớp ContactPopup.popupKey
   image: MediaModel;
   contentBackgroundImage?: MediaModel; // optional — thiếu → chỉ bg-brand-navy
 }
@@ -1045,16 +1047,17 @@ export interface ContactCtaModel {
 ```ts
 export interface ContactPopupModel {
   className?: string;
+  popupKey: string; // bắt buộc; unique trên trang
   contentHtml?: string; // fallback Vite / khi thiếu CF7 source
 }
 ```
 
-**Open/close:** click `[data-contact-popup-open]` hoặc `CustomEvent("ichouse:contact-popup:open")`; đóng bằng X (trái), overlay, Escape; body scroll lock.
+**Open/close:** click `[data-contact-popup-open="{key}"]` hoặc `CustomEvent("ichouse:contact-popup:open", { detail: { key } })`; đóng bằng X (trái), overlay, Escape; body scroll lock. Key rỗng → CTA không gắn attr; popup không lắng nghe.
 
-**CF7 (WordPress):** widget popup `do_shortcode` → sibling `#eai-contact-popup-cf7-source`; React move DOM vào dialog + `wpcf7.init`. Đặt **một** `ContactPopupWrapper` / trang.
+**CF7 (WordPress):** widget popup `do_shortcode` → sibling `#eai-contact-popup-cf7-source-{key}`; React move DOM vào dialog + `wpcf7.init`. CTA `popup_target` ↔ Popup `popup_key` (cùng slug).
 
 **Semantic:** `contact-cta`, `contact-cta-content`, `contact-cta-media`, `contact-cta-button`, `contact-popup`, `contact-popup-backdrop`, `contact-popup-dialog`, `contact-popup-close`, `contact-popup-body`.
 
 **Mount:** `pages/construction/page.tsx` (sau FeaturedProjects).
 
-**WordPress:** `EAI-contact-cta` → `ContactCta`; `EAI-contact-popup` → `ContactPopupWrapper` + CF7 SELECT.
+**WordPress:** `EAI-contact-cta` → `ContactCta` + `popup_target`; `EAI-contact-popup` → `ContactPopupWrapper` + `popup_key` + CF7 SELECT.

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 
+import { normalizeContactPopupKey } from "../contact-popup/contact-popup-key";
 import type { MediaModel } from "../media/Media";
 import Media from "../media/Media";
 
@@ -8,6 +9,8 @@ export interface ContactCtaModel {
   subtitle: string;
   title: string;
   buttonLabel: string;
+  /** Must match a ContactPopup `popupKey` on the page. */
+  popupTarget: string;
   image: MediaModel;
   contentBackgroundImage?: MediaModel;
 }
@@ -18,6 +21,7 @@ const ContactCta = (model: ContactCtaModel) => {
     subtitle,
     title,
     buttonLabel,
+    popupTarget,
     image,
     contentBackgroundImage,
   } = model;
@@ -25,6 +29,7 @@ const ContactCta = (model: ContactCtaModel) => {
   const subtitleText = subtitle.trim();
   const titleText = title.trim();
   const label = buttonLabel.trim();
+  const targetKey = normalizeContactPopupKey(popupTarget);
   const hasImage = image.url.trim().length > 0;
   const contentBgUrl = contentBackgroundImage?.url?.trim() ?? "";
   const hasContentBg = contentBgUrl.length > 0;
@@ -81,7 +86,9 @@ const ContactCta = (model: ContactCtaModel) => {
               {label ? (
                 <button
                   type="button"
-                  data-contact-popup-open
+                  {...(targetKey
+                    ? { "data-contact-popup-open": targetKey }
+                    : {})}
                   className={cn(
                     "contact-cta-button mt-8 inline-flex cursor-pointer items-center justify-center",
                     "border border-brand-white bg-transparent px-8 py-3",

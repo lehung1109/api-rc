@@ -4,6 +4,7 @@ const contactCta: ContactCtaModel = {
   subtitle: "LIÊN HỆ NGAY VỚI CHÚNG TÔI",
   title: "Liên hệ với ICHouse để nhận tư vấn miễn phí",
   buttonLabel: "ĐẶT LỊCH NGAY",
+  popupTarget: "tu-van",
   image: {
     url: "https://placehold.co/960x640/png?text=Contact+CTA",
     alt: "Đội ngũ tư vấn công trình",
