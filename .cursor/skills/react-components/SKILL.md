@@ -672,12 +672,12 @@ export interface PageBackgroundModel {
 
 ## Quick reference — video hero banner (client + wrapper)
 
-Hero full viewport (`h-dvh`) nền video progressive (MP4/WebM) + poster SSR. **Client + wrapper** — mount qua `VideoHeroBannerWrapper`, không mount `VideoHeroBanner` trực tiếp. Không title/CTA.
+Hero full viewport (`h-dvh`) nền video progressive (MP4/WebM) + poster SSR. **Client + wrapper** — mount qua `VideoHeroBannerWrapper`, không mount `VideoHeroBanner` trực tiếp. Title optional SSR; không CTA.
 
 | File                                    | Vai trò                                                                         |
 | --------------------------------------- | ------------------------------------------------------------------------------- |
 | `VideoHeroBanner.tsx`                   | `"use client"` — `<video src>` native                                           |
-| `VideoHeroBannerWrapper.tsx`            | Server entry: `<section>` + poster `Media` + overlay + `type="videoHeroBanner"` |
+| `VideoHeroBannerWrapper.tsx`            | Server entry: `<section>` + poster `Media` + overlay + title SSR + `type="videoHeroBanner"` |
 | `src/data/video-hero-banner-wrapper.ts` | Mock / CMS canonical                                                            |
 | `src/data/video-hero-banner.ts`         | Re-export cho client registry                                                   |
 
@@ -688,16 +688,17 @@ export interface VideoHeroBannerModel {
   className?: string;
   url: string; // MP4 / WebM
   poster: MediaModel;
+  title?: string; // optional — SSR only in Wrapper (`h1`)
 }
 ```
 
-**Render guards (wrapper):** `!url.trim()` hoặc `!poster.url.trim()` → `return null`.
+**Render guards (wrapper):** `!url.trim()` hoặc `!poster.url.trim()` → `return null`. Title chỉ render khi `title.trim()` có nội dung.
 
-**Behavior:** `video.src = url`. `autoPlay` `muted` `loop` `playsInline`. Video `opacity-0` → `opacity-100` khi `canplay`/`playing`. Poster SSR nằm dưới. Overlay `.video-hero-banner-overlay` trong `styles.css` (gradient top fade).
+**Behavior:** `video.src = url`. `autoPlay` `muted` `loop` `playsInline`. Video `opacity-0` → `opacity-100` khi `canplay`/`playing`. Poster SSR nằm dưới. Overlay `.video-hero-banner-overlay` trong `styles.css` (gradient top fade); khi có title → modifier `--has-title` + fade đáy. Title absolute đáy (`bottom-10` / `md:bottom-20`) trong `max-w-7xl`, `text-brand-white`.
 
-**Semantic classes:** `video-hero-banner`, `video-hero-banner-poster`, `video-hero-banner-overlay`, `video-hero-banner-video-root`, `video-hero-banner-video`.
+**Semantic classes:** `video-hero-banner`, `video-hero-banner--has-title`, `video-hero-banner-poster`, `video-hero-banner-overlay`, `video-hero-banner-video-root`, `video-hero-banner-video`, `video-hero-banner-content`, `video-hero-banner-content-inner`, `video-hero-banner-title`.
 
-**WordPress:** widget `EAI-video-hero-banner` — MEDIA `video` (`media_types: video`) + poster → `url` + `poster`; `eai_rc_render_html('VideoHeroBannerWrapper', …)`.
+**WordPress:** widget `EAI-video-hero-banner` — MEDIA `video` (`media_types: video`) + poster → `url` + `poster`; TEXT `title` optional; `eai_rc_render_html('VideoHeroBannerWrapper', …)`.
 
 ## Quick reference — page title bar (server)
 

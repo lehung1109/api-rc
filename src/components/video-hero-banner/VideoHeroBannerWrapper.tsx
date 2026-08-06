@@ -9,7 +9,9 @@ import VideoHeroBanner, {
 export type { VideoHeroBannerModel };
 
 const VideoHeroBannerWrapper = (model: VideoHeroBannerModel) => {
-  const { className, url, poster } = model;
+  const { className, url, poster, title } = model;
+  const titleText = title?.trim() ?? "";
+  const hasTitle = titleText.length > 0;
 
   if (!url.trim() || !poster.url.trim()) {
     return null;
@@ -19,6 +21,7 @@ const VideoHeroBannerWrapper = (model: VideoHeroBannerModel) => {
     <section
       className={cn(
         "video-hero-banner relative h-dvh w-full overflow-hidden",
+        hasTitle && "video-hero-banner--has-title",
         className,
       )}
     >
@@ -37,6 +40,15 @@ const VideoHeroBannerWrapper = (model: VideoHeroBannerModel) => {
       >
         <VideoHeroBanner {...model} />
       </ClientComponentWrapper>
+      {hasTitle ? (
+        <div className="video-hero-banner-content pointer-events-none absolute inset-x-0 bottom-10 z-10 md:bottom-20">
+          <div className="video-hero-banner-content-inner mx-auto w-full max-w-7xl px-6 md:px-10">
+            <h1 className="video-hero-banner-title text-2xl font-bold text-brand-white md:text-4xl lg:text-5xl">
+              {titleText}
+            </h1>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 };

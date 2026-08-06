@@ -10,6 +10,8 @@ export interface VideoHeroBannerModel {
   /** Progressive media URL (MP4 / WebM) */
   url: string;
   poster: MediaModel;
+  /** Optional — SSR only in VideoHeroBannerWrapper */
+  title?: string;
 }
 
 const VideoHeroBanner = (model: VideoHeroBannerModel) => {

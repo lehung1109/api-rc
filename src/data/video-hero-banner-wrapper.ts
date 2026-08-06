@@ -7,6 +7,7 @@ const videoHeroBannerWrapper: VideoHeroBannerModel = {
     alt: "Video hero poster",
     display_dimensions: { width: 1920, height: 1080 },
   },
+  title: "ICHouse Interior",
 };
 
 export default videoHeroBannerWrapper;

@@ -296,6 +296,16 @@ html body[data-scroll-locked] {
   );
 }
 
+.video-hero-banner--has-title .video-hero-banner-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0) 70%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
 .about-intro-copy,
 .about-intro-media {
   opacity: 0;
