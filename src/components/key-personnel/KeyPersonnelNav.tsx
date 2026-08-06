@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 const navButtonClass = cn(
   "key-personnel-nav-button",
-  "grid h-12 w-12 shrink-0 cursor-pointer place-items-center md:h-14 md:w-14",
+  "absolute top-1/2 z-10 hidden h-14 w-14 cursor-pointer place-items-center md:grid",
   "text-brand-white transition-colors duration-300",
   "hover:text-brand-white-hover",
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-white",
@@ -30,15 +30,13 @@ const KeyPersonnelNavButton = ({
       onClick={() => (isPrev ? swiper?.slidePrev() : swiper?.slideNext())}
       className={cn(
         navButtonClass,
-        isPrev ? "key-personnel-nav-prev" : "key-personnel-nav-next",
+        isPrev
+          ? "key-personnel-nav-prev left-0 -translate-x-full -translate-y-1/2"
+          : "key-personnel-nav-next right-0 translate-x-full -translate-y-1/2",
       )}
       aria-label={isPrev ? "Previous slide" : "Next slide"}
     >
-      <Icon
-        className="h-9 w-9 md:h-11 md:w-11"
-        strokeWidth={1.5}
-        aria-hidden
-      />
+      <Icon className="h-14 w-14" strokeWidth={1.5} aria-hidden />
     </button>
   );
 };

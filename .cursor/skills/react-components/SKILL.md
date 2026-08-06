@@ -615,7 +615,7 @@ Section đội ngũ nhân sự chủ chốt: nền `bg-brand-navy`, title upperc
 | ----------------------------------------- | -------------------------------------------------------------------- |
 | `KeyPersonnel.tsx`                        | `"use client"` — section navy + Swiper + pagination                  |
 | `KeyPersonnelCard.tsx`                    | Leaf: Media `aspect-[4/5]` + h3 + descriptionHtml + link underline   |
-| `KeyPersonnelNav.tsx`                     | Prev/Next ngoài Swiper (`onSwiper`); nút `h-12 md:h-14`, icon `h-9 md:h-11`, chữ `brand-white` |
+| `KeyPersonnelNav.tsx`                     | Prev/Next absolute ngoài track (`-translate-x-full` / `translate-x-full`), `hidden md:grid`; nút `h-14`, icon `h-11` |
 | `KeyPersonnelWrapper.tsx`                 | Server entry: `ClientComponentWrapper` + `type="keyPersonnel"`       |
 | `src/data/key-personnel-wrapper.ts`       | Mock / CMS canonical (`KeyPersonnelWrapper` registry)                |
 | `src/data/key-personnel.ts`               | Re-export cho client registry                                        |
@@ -640,7 +640,7 @@ export interface KeyPersonnelModel {
 
 **Render guards:** lọc item thiếu `image.url` hoặc `title` (trim); rỗng items + không title → `return null`. Link chỉ khi `link.url` + `linkLabel` trim.
 
-**UI:** section `bg-brand-navy px-6 py-20 md:px-10`; inner `max-w-7xl`; title `text-base uppercase text-brand-white/70`; card title `text-lg md:text-xl font-bold text-brand-white`; description `text-base text-brand-white/70`; link underline `after:scale-x-[0.35]` → `hover:after:scale-x-100`. Slider flex: `KeyPersonnelNavPrev` | Swiper `min-w-0 flex-1` | `KeyPersonnelNavNext` (nav ngoài track, không đè card). Swiper: `loop: false`; mobile `slidesPerView/Group: 2`; `md` (768) `3`; Pagination bullets trắng. Nav: nút `h-12 w-12 md:h-14 md:w-14`, icon `h-9 w-9 md:h-11 md:w-11`. Semantic: `key-personnel`, `key-personnel-inner`, `key-personnel-title`, `key-personnel-slider`, `key-personnel-swiper`, `key-personnel-pagination`, `key-personnel-card`, `key-personnel-card-media`, `key-personnel-card-image`, `key-personnel-card-body`, `key-personnel-card-title`, `key-personnel-card-description`, `key-personnel-card-link`, `key-personnel-nav`, `key-personnel-nav-prev`, `key-personnel-nav-next`.
+**UI:** section `bg-brand-navy px-6 py-20 md:px-10`; inner `max-w-7xl`; title `text-base uppercase text-brand-white/70`; card title `text-lg md:text-xl font-bold text-brand-white`; description `text-base text-brand-white/70`; link underline `after:scale-x-[0.35]` → `hover:after:scale-x-100`. Slider `relative w-full`; Swiper full-width (nav không thu hẹp content). Nav absolute ngoài mép: prev `left-0 -translate-x-full`, next `right-0 translate-x-full`; `hidden md:grid` (ẩn mobile). Swiper: `loop: false`; mobile `slidesPerView/Group: 2`; `md` (768) `3`; Pagination bullets trắng. Nav: nút `h-14 w-14`, icon `h-11 w-11`. Semantic: `key-personnel`, `key-personnel-inner`, `key-personnel-title`, `key-personnel-slider`, `key-personnel-swiper`, `key-personnel-pagination`, `key-personnel-card`, `key-personnel-card-media`, `key-personnel-card-image`, `key-personnel-card-body`, `key-personnel-card-title`, `key-personnel-card-description`, `key-personnel-card-link`, `key-personnel-nav`, `key-personnel-nav-prev`, `key-personnel-nav-next`.
 
 **Mount:** `pages/construction/page.tsx` (sau VisionMission).
 

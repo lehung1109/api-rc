@@ -9,10 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import KeyPersonnelCard, {
   type KeyPersonnelItemModel,
 } from "./KeyPersonnelCard";
-import {
-  KeyPersonnelNavNext,
-  KeyPersonnelNavPrev,
-} from "./KeyPersonnelNav";
+import { KeyPersonnelNavNext, KeyPersonnelNavPrev } from "./KeyPersonnelNav";
 
 export type { KeyPersonnelItemModel };
 
@@ -41,7 +38,7 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
   return (
     <section
       className={cn(
-        "key-personnel bg-brand-navy px-6 py-20 md:px-10",
+        "key-personnel bg-brand-navy px-6 py-20 md:px-14",
         className,
       )}
     >
@@ -53,7 +50,7 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
         ) : null}
 
         {validItems.length > 0 ? (
-          <div className="key-personnel-slider key-personnel-nav group flex w-full items-center gap-1 md:gap-2">
+          <div className="key-personnel-slider key-personnel-nav group relative w-full">
             <KeyPersonnelNavPrev swiper={swiper} />
 
             <Swiper
@@ -70,7 +67,7 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
                   slidesPerGroup: 3,
                 },
               }}
-              className="key-personnel-swiper key-personnel-pagination min-w-0 flex-1 !pb-12"
+              className="key-personnel-swiper key-personnel-pagination w-full !pb-12"
               style={
                 {
                   "--swiper-pagination-bullet-width": "8px",
