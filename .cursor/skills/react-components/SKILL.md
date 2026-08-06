@@ -572,7 +572,7 @@ Section tin tức / sự kiện: nền `bg-brand-navy`, title trắng `text-base
 | File                                    | Vai trò                                                                              |
 | --------------------------------------- | ------------------------------------------------------------------------------------ |
 | `NewsEvents.tsx`                        | Orchestrator: `<section>` navy + title + grid + CTA + island                         |
-| `NewsEventsCard.tsx`                    | Leaf: `Link` + Media `aspect-video` + time (Clock + `text-sm`) + title (`text-base`) |
+| `NewsEventsCard.tsx`                    | Leaf: `Link` + Media + time (Clock + `text-sm`) + title (`text-base`); side mobile: row + `aspect-180/105` |
 | `NewsEventsScrollReveal.tsx`            | `"use client"` — IntersectionObserver → `data-in-view`                               |
 | `src/data/news-events.ts`               | Mock / CMS (`NewsEvents` registry)                                                   |
 | `src/data/news-events-scroll-reveal.ts` | Client registry (re-export `targetId` từ news-events)                                |
@@ -599,7 +599,7 @@ export interface NewsEventsModel {
 
 **Render guards:** lọc item thiếu `image.url` hoặc `link.url`; `slice(0, 5)`; rỗng toàn bộ (items + title + CTA) → `return null`. CTA chỉ khi `buttonLabel` + `buttonLink.url` trim.
 
-**UI:** section `bg-brand-navy px-6 py-20 md:px-10`; inner `max-w-7xl`; desktop `md:grid-cols-2` (featured trái / side 2×2 phải); mobile stack; ảnh mọi card `aspect-video`; time `text-sm` + Lucide Clock; title item `h3 text-base`; CTA centered ghost trắng. Semantic: `news-events`, `news-events-inner`, `news-events-title`, `news-events-grid`, `news-events-featured`, `news-events-side`, `news-events-item`, `news-events-item-media`, `news-events-item-time`, `news-events-item-title`, `news-events-button`.
+**UI:** section `bg-brand-navy px-6 py-20 md:px-10`; inner `max-w-7xl`; desktop `md:grid-cols-2` (featured trái / side 2×2 phải); mobile featured stack, side cards `flex-row` (ảnh trái `w-45 aspect-180/105` / content phải), `md:` side trở lại `flex-col` + `aspect-video`; featured luôn `aspect-video`; time `text-sm` + Lucide Clock; title item `h3 text-base`; CTA centered ghost trắng. Semantic: `news-events`, `news-events-inner`, `news-events-title`, `news-events-grid`, `news-events-featured`, `news-events-side`, `news-events-item`, `news-events-item-media`, `news-events-item-body`, `news-events-item-time`, `news-events-item-title`, `news-events-button`.
 
 **Animation:** Tailwind trên TSX — `group/news` + `group-data-[in-view=true]/news:*`; title + CTA `translate-y-10`; featured `-translate-x-10`; side `translate-x-10`; `transition-[opacity,translate]`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
 
