@@ -12,6 +12,8 @@ import FieldsOfActivity from "../../src/components/fields-of-activity/FieldsOfAc
 import fieldsOfActivity from "@/data/fields-of-activity";
 import ConstructionHighlights from "../../src/components/construction-highlights/ConstructionHighlights";
 import constructionHighlights from "@/data/construction-highlights";
+import FeaturedProjects from "../../src/components/featured-projects/FeaturedProjects";
+import featuredProjects from "@/data/featured-projects";
 
 export const pageMeta = {
   title: "construction",
@@ -32,6 +34,8 @@ export default function ConstructionPage() {
       <FieldsOfActivity {...fieldsOfActivity} />
 
       <ConstructionHighlights {...constructionHighlights} />
+
+      <FeaturedProjects {...featuredProjects} />
 
       <main className="mx-auto max-w-7xl px-4 py-16">
         <p className="text-2xl font-bold text-brand-navy">

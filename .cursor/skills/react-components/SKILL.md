@@ -483,6 +483,44 @@ export interface DirectorIntroModel {
 
 **WordPress:** widget `EAI-director-intro` — MEDIA ảnh (+ resolution), subtitle, WYSIWYG `description_html`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('DirectorIntro', …)`.
 
+## Quick reference — featured projects (server)
+
+Section dự án nổi bật: subtitle gold + h2 trong `max-w-7xl`, lưới 3 ảnh portrait full-bleed trong padding section, hover overlay + Plus + content; CTA kiểu DirectorIntro. **Server-only** — không Wrapper/client.
+
+| File | Vai trò |
+|------|---------|
+| `FeaturedProjects.tsx` | Orchestrator: `<section>` + header + grid + CTA |
+| `FeaturedProjectsCard.tsx` | Leaf: `Link` + Media + hover overlay/Plus/content |
+| `src/data/featured-projects.ts` | Mock / CMS (`FeaturedProjects` registry) |
+
+**Model:**
+
+```ts
+export interface FeaturedProjectsItemModel {
+  image: MediaModel;
+  title: string;
+  description: string; // multi-line → whitespace-pre-line
+  link: LinkModel;
+}
+
+export interface FeaturedProjectsModel {
+  className?: string;
+  subtitle: string;      // text-md uppercase text-brand-gold
+  title: string;         // → <h2> text-2xl text-brand-navy
+  items: FeaturedProjectsItemModel[];
+  buttonLabel: string;
+  buttonLink: LinkModel; // DirectorIntro-style navy CTA
+}
+```
+
+**Render guards:** lọc item thiếu `image.url` hoặc `link.url`; rỗng toàn bộ (items + header + CTA) → `return null`. CTA chỉ khi `buttonLabel` + `buttonLink.url` trim.
+
+**UI:** section `px-[30px] py-20` (không `max-w-7xl` trên section); header `mx-auto max-w-7xl text-center`; grid `grid-cols-1 md:grid-cols-3`; card `aspect-[3/4]`; hover `bg-brand-navy/65` + Plus giữa (`strokeWidth={1}` + `vector-effect:non-scaling-stroke` giữ nét 1px khi scale, desktop `md:h-[190px] md:w-[190px]`) + content đáy (title `text-lg font-bold`, description `text-base`). Semantic: `featured-projects`, `featured-projects-header`, `featured-projects-subtitle`, `featured-projects-title`, `featured-projects-grid`, `featured-projects-item`, `featured-projects-item-media`, `featured-projects-item-overlay`, `featured-projects-item-plus`, `featured-projects-item-content`, `featured-projects-item-title`, `featured-projects-item-description`, `featured-projects-button`.
+
+**Mount:** `pages/construction/page.tsx` (sau ConstructionHighlights).
+
+**WordPress:** widget `EAI-featured-projects` — subtitle, title, repeater items (image + description TEXTAREA + link), CTA → `eai_rc_render_html('FeaturedProjects', …)`.
+
 ## Quick reference — hero section (server)
 
 Banner hero: nền ảnh + overlay, subtitle, title, HTML tùy chọn, CTA. **Server-only** — không Wrapper/client.
