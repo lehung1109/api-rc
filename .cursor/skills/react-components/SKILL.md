@@ -527,6 +527,48 @@ export interface FeaturedProjectsModel {
 
 **WordPress:** widget `EAI-featured-projects` — subtitle, title, repeater items (image + description TEXTAREA + link), CTA, `scroll_reveal_target_id` → `eai_rc_render_html('FeaturedProjects', …)`.
 
+## Quick reference — news events (server + scroll reveal island)
+
+Section tin tức / sự kiện: nền `bg-brand-navy`, title trắng `text-base`, lưới 1 featured (50% trái) + 4 nhỏ (2×2 phải), CTA ghost giống `contact-cta-button`. Slide-in khi scroll.
+
+| File | Vai trò |
+|------|---------|
+| `NewsEvents.tsx` | Orchestrator: `<section>` navy + title + grid + CTA + island |
+| `NewsEventsCard.tsx` | Leaf: `Link` + Media `aspect-video` + time (Clock + `text-sm`) + title (`text-base`) |
+| `NewsEventsScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
+| `src/data/news-events.ts` | Mock / CMS (`NewsEvents` registry) |
+| `src/data/news-events-scroll-reveal.ts` | Client registry (re-export `targetId` từ news-events) |
+
+**Model:**
+
+```ts
+export interface NewsEventsItemModel {
+  image: MediaModel;
+  time: string;      // đã format sẵn (PHP: get_the_modified_date)
+  title: string;
+  link: LinkModel;
+}
+
+export interface NewsEventsModel {
+  className?: string;
+  title: string;         // → <h2> text-base text-brand-white uppercase
+  items: NewsEventsItemModel[]; // tối đa 5 hợp lệ
+  buttonLabel: string;
+  buttonLink: LinkModel; // ghost = contact-cta-button style
+  scrollReveal?: { targetId?: string }; // default "news-events"
+}
+```
+
+**Render guards:** lọc item thiếu `image.url` hoặc `link.url`; `slice(0, 5)`; rỗng toàn bộ (items + title + CTA) → `return null`. CTA chỉ khi `buttonLabel` + `buttonLink.url` trim.
+
+**UI:** section `bg-brand-navy px-6 py-20 md:px-10`; inner `max-w-7xl`; desktop `md:grid-cols-2` (featured trái / side 2×2 phải); mobile stack; ảnh mọi card `aspect-video`; time `text-sm` + Lucide Clock; title item `h3 text-base`; CTA centered ghost trắng. Semantic: `news-events`, `news-events-inner`, `news-events-title`, `news-events-grid`, `news-events-featured`, `news-events-side`, `news-events-item`, `news-events-item-media`, `news-events-item-time`, `news-events-item-title`, `news-events-button`.
+
+**Animation:** Tailwind trên TSX — `group/news` + `group-data-[in-view=true]/news:*`; title + CTA `translate-y-10`; featured `-translate-x-10`; side `translate-x-10`; `transition-[opacity,translate]`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
+
+**Mount:** `pages/construction/page.tsx` (sau FeaturedProjects, trước ContactCta).
+
+**WordPress:** widget `EAI-news-events` — `title`, `post_type` (5 bài `orderby=modified` có thumbnail), `image_resolution`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('NewsEvents', …)`. Helper: `news-events.php`. Editor sample khi `items` rỗng.
+
 ## Quick reference — hero section (server)
 
 Banner hero: nền ảnh + overlay, subtitle, title, HTML tùy chọn, CTA. **Server-only** — không Wrapper/client.

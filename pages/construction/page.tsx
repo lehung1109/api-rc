@@ -14,6 +14,8 @@ import ConstructionHighlights from "../../src/components/construction-highlights
 import constructionHighlights from "@/data/construction-highlights";
 import FeaturedProjects from "../../src/components/featured-projects/FeaturedProjects";
 import featuredProjects from "@/data/featured-projects";
+import NewsEvents from "../../src/components/news-events/NewsEvents";
+import newsEvents from "@/data/news-events";
 import ContactCta from "../../src/components/contact-cta/ContactCta";
 import contactCta from "@/data/contact-cta";
 import ContactPopupWrapper from "../../src/components/contact-popup/ContactPopupWrapper";
@@ -40,6 +42,8 @@ export default function ConstructionPage() {
       <ConstructionHighlights {...constructionHighlights} />
 
       <FeaturedProjects {...featuredProjects} />
+
+      <NewsEvents {...newsEvents} />
 
       <ContactCta {...contactCta} />
 
