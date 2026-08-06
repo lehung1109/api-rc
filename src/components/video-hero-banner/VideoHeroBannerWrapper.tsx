@@ -9,7 +9,7 @@ import VideoHeroBanner, {
 export type { VideoHeroBannerModel };
 
 const VideoHeroBannerWrapper = (model: VideoHeroBannerModel) => {
-  const { className, url, poster, title } = model;
+  const { className, url, poster, title, mobileAspectRatio = false } = model;
   const titleText = title?.trim() ?? "";
   const hasTitle = titleText.length > 0;
 
@@ -20,7 +20,10 @@ const VideoHeroBannerWrapper = (model: VideoHeroBannerModel) => {
   return (
     <section
       className={cn(
-        "video-hero-banner relative aspect-[561/774] h-auto w-full overflow-hidden md:aspect-auto md:h-dvh",
+        "video-hero-banner relative w-full overflow-hidden",
+        mobileAspectRatio
+          ? "aspect-[561/774] h-auto md:aspect-auto md:h-dvh"
+          : "h-dvh",
         hasTitle && "video-hero-banner--has-title",
         className,
       )}

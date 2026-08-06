@@ -689,16 +689,17 @@ export interface VideoHeroBannerModel {
   url: string; // MP4 / WebM
   poster: MediaModel;
   title?: string; // optional — SSR only in Wrapper (`h1`)
+  mobileAspectRatio?: boolean; // default false — mobile portrait 561/774; desktop h-dvh
 }
 ```
 
 **Render guards (wrapper):** `!url.trim()` hoặc `!poster.url.trim()` → `return null`. Title chỉ render khi `title.trim()` có nội dung.
 
-**Behavior:** `video.src = url`. `autoPlay` `muted` `loop` `playsInline`. Video `opacity-0` → `opacity-100` khi `canplay`/`playing`. Poster SSR nằm dưới. Overlay `.video-hero-banner-overlay` trong `styles.css` (gradient top fade); khi có title → modifier `--has-title` + fade đáy. **Mobile:** section `aspect-[561/774]` (video fill); **desktop (`md+`):** `h-dvh`. Title absolute đáy `bottom-20` (80px) trong `max-w-7xl`, `text-brand-white`.
+**Behavior:** `video.src = url`. `autoPlay` `muted` `loop` `playsInline`. Video `opacity-0` → `opacity-100` khi `canplay`/`playing`. Poster SSR nằm dưới. Overlay `.video-hero-banner-overlay` trong `styles.css` (gradient top fade); khi có title → modifier `--has-title` + fade đáy. **`mobileAspectRatio`:** `false` (default) → section `h-dvh`; `true` → mobile `aspect-[561/774]`, desktop `md:h-dvh`. Title absolute đáy `bottom-20` (80px) trong `max-w-7xl`, `text-brand-white`.
 
 **Semantic classes:** `video-hero-banner`, `video-hero-banner--has-title`, `video-hero-banner-poster`, `video-hero-banner-overlay`, `video-hero-banner-video-root`, `video-hero-banner-video`, `video-hero-banner-content`, `video-hero-banner-content-inner`, `video-hero-banner-title`.
 
-**WordPress:** widget `EAI-video-hero-banner` — MEDIA `video` (`media_types: video`) + poster → `url` + `poster`; TEXT `title` optional; `eai_rc_render_html('VideoHeroBannerWrapper', …)`.
+**WordPress:** widget `EAI-video-hero-banner` — MEDIA `video` (`media_types: video`) + poster → `url` + `poster`; TEXT `title` optional; SWITCHER `mobile_aspect_ratio` → `mobileAspectRatio`; `eai_rc_render_html('VideoHeroBannerWrapper', …)`.
 
 ## Quick reference — page title bar (server)
 

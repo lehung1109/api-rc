@@ -8,6 +8,7 @@ const videoHeroBannerWrapper: VideoHeroBannerModel = {
     display_dimensions: { width: 1920, height: 1080 },
   },
   title: "ICHouse Interior",
+  mobileAspectRatio: true,
 };
 
 export default videoHeroBannerWrapper;

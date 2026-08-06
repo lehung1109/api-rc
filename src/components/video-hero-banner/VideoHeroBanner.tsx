@@ -12,6 +12,8 @@ export interface VideoHeroBannerModel {
   poster: MediaModel;
   /** Optional — SSR only in VideoHeroBannerWrapper */
   title?: string;
+  /** Mobile portrait aspect 561/774; desktop stays h-dvh. Default false. */
+  mobileAspectRatio?: boolean;
 }
 
 const VideoHeroBanner = (model: VideoHeroBannerModel) => {
