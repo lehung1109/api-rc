@@ -66,7 +66,7 @@ const constructionFooter: ConstructionFooterModel = {
     },
   ],
   phone: {
-    text: "0899 984 988",
+    text: "0000 000 000",
     link: link("tel:0899984988"),
   },
   addresses: [
