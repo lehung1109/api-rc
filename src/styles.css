@@ -529,7 +529,8 @@ p.text-brand-white {
   color: var(--e-global-color-tertiary);
 }
 
-[data-scrolled="true"] p.construction-header-top-hotline {
+[data-scrolled="true"] p.construction-header-top-hotline,
+[data-solid="true"] p.construction-header-top-hotline {
   color: var(--e-global-color-primary);
 }
 
@@ -625,7 +626,8 @@ button.contact-popup-close {
     color: var(--e-global-color-tertiary);
   }
 
-  [data-scrolled=true] .construction-header-menu-link {
+  [data-scrolled=true] .construction-header-menu-link,
+  [data-solid=true] .construction-header-menu-link {
     color: var(--e-global-color-primary);
   }
 
