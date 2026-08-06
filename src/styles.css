@@ -594,6 +594,10 @@ button.contact-popup-close {
   display: block !important;
 }
 
+.flex.gap-5 {
+  gap: 20px !important;
+}
+
 .construction-footer-company .text-brand-navy {
   color: var(--e-global-color-primary);
 }
