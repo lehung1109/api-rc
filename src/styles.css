@@ -522,6 +522,10 @@ p.text-brand-white {
   opacity: 1 !important;
 }
 
+.group-data-\[in-view\=true\]\/news\:opacity-100:is(:where(.group\/news)[data-in-view=true] *) {
+  opacity: 1 !important;
+}
+
 .wpcf7-form label {
   display: block;
 }
