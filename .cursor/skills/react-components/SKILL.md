@@ -525,7 +525,7 @@ export interface DirectorIntroModel {
 
 ## Quick reference — director profile (server + scroll reveal island)
 
-Section hồ sơ giám đốc: nền ảnh mobile/desktop full-bleed + gradient navy trái→phải, subtitle + descriptionHtml + lưới item viền trắng. Padding `py-20` (80px). Inner luôn `max-w-7xl`. Slide-in từ trái khi scroll (stagger).
+Section hồ sơ giám đốc: nền ảnh mobile/desktop full-bleed + gradient navy trái→phải, subtitle + descriptionHtml + lưới item viền trắng. Padding `py-20` (80px). Inner `max-w-7xl`, desktop `lg:w-2/3` (~66%) căn trái. Slide-in từ trái khi scroll (stagger).
 
 | File                                          | Vai trò                                                |
 | --------------------------------------------- | ------------------------------------------------------ |
@@ -556,7 +556,7 @@ export interface DirectorProfileModel {
 
 **Render guards:** lọc item thiếu cả `title` và `description` (trim); rỗng hoàn toàn (không bg + không subtitle/description/items) → `return null`.
 
-**UI:** nền `<picture>` (AboutIntro pattern); overlay `bg-brand-navy/40` + `bg-gradient-to-r from-brand-navy/90 via-brand-navy/55 to-transparent`; section `px-6 py-20 md:px-10`; description `text-lg` → `lg:text-2xl`; items `grid-cols-1 sm:grid-cols-2 md:grid-cols-3`, `border border-brand-white`, title/description `text-base+` centered. Semantic: `director-profile`, `director-profile-inner`, `director-profile-overlay`, `director-profile-subtitle`, `director-profile-description`, `director-profile-items`, `director-profile-item`, `director-profile-item-title`, `director-profile-item-description`, `director-profile-background-picture`, `director-profile-background-image`. Picture img fill: rule trong `styles.css` (cùng AboutIntro).
+**UI:** nền `<picture>` (AboutIntro pattern); overlay `bg-brand-navy/40` + `bg-gradient-to-r from-brand-navy/90 via-brand-navy/55 to-transparent`; section `px-6 py-20 md:px-10`; inner `w-full max-w-7xl` → `lg:w-2/3 lg:mx-0`; description `text-xl` → `lg:text-3xl`; items `grid-cols-1 sm:grid-cols-2 md:grid-cols-3`, `border border-brand-white`, title/description `text-base+` centered. Semantic: `director-profile`, `director-profile-inner`, `director-profile-overlay`, `director-profile-subtitle`, `director-profile-description`, `director-profile-items`, `director-profile-item`, `director-profile-item-title`, `director-profile-item-description`, `director-profile-background-picture`, `director-profile-background-image`. Picture img fill: rule trong `styles.css` (cùng AboutIntro).
 
 **Animation:** Tailwind trên TSX — `group/profile` + `group-data-[in-view=true]/profile:*`; tất cả `-translate-x-10`; stagger `transitionDelay` theo index; `motion-reduce:*` hiện ngay. Duration `1.2s`.
 

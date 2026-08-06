@@ -110,7 +110,7 @@ const DirectorProfile = (model: DirectorProfileModel) => {
         aria-hidden="true"
       />
 
-      <div className="director-profile-inner relative z-10 mx-auto w-full max-w-7xl">
+      <div className="director-profile-inner relative z-10 mx-auto w-full max-w-7xl lg:mx-0 lg:w-2/3">
         {subtitleText ? (
           <h2
             className={cn(
@@ -125,7 +125,7 @@ const DirectorProfile = (model: DirectorProfileModel) => {
         {description ? (
           <div
             className={cn(
-              "director-profile-description mt-4 text-lg leading-relaxed text-brand-white md:mt-5 md:text-xl md:leading-8 lg:text-2xl lg:leading-9",
+              "director-profile-description mt-4 text-xl leading-relaxed text-brand-white md:mt-5 md:text-2xl md:leading-9 lg:text-3xl lg:leading-10",
               slideInBase,
             )}
             style={{ transitionDelay: subtitleText ? "100ms" : undefined }}
