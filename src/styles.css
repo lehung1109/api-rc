@@ -428,8 +428,20 @@ html body[data-scroll-locked] {
   opacity: 1 !important;
 }
 
+.group-data-\[in-view\=true\]\/featured\:opacity-100:is(:where(.group\/featured)[data-in-view=true] *) {
+  opacity: 1 !important;
+}
+
 .construction-header-menu-modal-background picture img {
   height: 100%;
+}
+
+.contact-cta-content img {
+  height: 100% !important;
+}
+
+.hover\:bg-brand-white:hover {
+  background-color: var(--e-global-color-tertiary) !important;
 }
 
 .construction-header-menu-chevron-trigger.flex {
