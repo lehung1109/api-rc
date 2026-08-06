@@ -598,6 +598,11 @@ button.contact-popup-close {
   gap: 20px !important;
 }
 
+.construction-highlights-item-trigger {
+  display: flex;
+  align-items: center;
+}
+
 .construction-footer-company .text-brand-navy {
   color: var(--e-global-color-primary);
 }

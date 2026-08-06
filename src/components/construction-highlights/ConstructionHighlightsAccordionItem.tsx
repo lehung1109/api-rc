@@ -94,7 +94,7 @@ const ConstructionHighlightsAccordionItem = (
                 "text-justify text-brand-white",
                 "[&_p]:mb-2 [&_ul]:mb-2 [&_ul]:list-disc [&_ul]:pl-5",
                 "[&_ol]:mb-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:list-disc",
-                hasIcon && "pl-14 md:pl-[86px]",
+                hasIcon && "md:pl-[86px]",
               )}
               dangerouslySetInnerHTML={{ __html: content }}
             />
