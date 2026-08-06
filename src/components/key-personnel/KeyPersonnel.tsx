@@ -1,13 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import { cn } from "@/lib/utils";
+import type { Swiper as SwiperType } from "swiper";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import KeyPersonnelCard, {
   type KeyPersonnelItemModel,
 } from "./KeyPersonnelCard";
-import KeyPersonnelNav from "./KeyPersonnelNav";
+import {
+  KeyPersonnelNavNext,
+  KeyPersonnelNavPrev,
+} from "./KeyPersonnelNav";
 
 export type { KeyPersonnelItemModel };
 
@@ -19,6 +24,7 @@ export interface KeyPersonnelModel {
 
 const KeyPersonnel = (model: KeyPersonnelModel) => {
   const { className, title, items } = model;
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
 
   const validItems = items.filter(
     (item) => item.image?.url?.trim() && item.title?.trim(),
@@ -47,7 +53,9 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
         ) : null}
 
         {validItems.length > 0 ? (
-          <div className="key-personnel-slider group relative w-full">
+          <div className="key-personnel-slider key-personnel-nav group flex w-full items-center gap-1 md:gap-2">
+            <KeyPersonnelNavPrev swiper={swiper} />
+
             <Swiper
               modules={[Pagination]}
               slidesPerView={2}
@@ -55,13 +63,14 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
               spaceBetween={24}
               loop={false}
               pagination={{ clickable: true }}
+              onSwiper={setSwiper}
               breakpoints={{
                 768: {
                   slidesPerView: 3,
                   slidesPerGroup: 3,
                 },
               }}
-              className="key-personnel-swiper key-personnel-pagination w-full !pb-12"
+              className="key-personnel-swiper key-personnel-pagination min-w-0 flex-1 !pb-12"
               style={
                 {
                   "--swiper-pagination-bullet-width": "8px",
@@ -75,14 +84,14 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
                 } as React.CSSProperties
               }
             >
-              <KeyPersonnelNav />
-
               {validItems.map((item, index) => (
                 <SwiperSlide key={itemKey(item, index)} className="!h-auto">
                   <KeyPersonnelCard {...item} />
                 </SwiperSlide>
               ))}
             </Swiper>
+
+            <KeyPersonnelNavNext swiper={swiper} />
           </div>
         ) : null}
       </div>
