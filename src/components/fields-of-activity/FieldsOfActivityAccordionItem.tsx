@@ -58,26 +58,27 @@ const FieldsOfActivityAccordionItem = (
           "text-brand-navy transition-[color,padding] duration-200",
           "hover:text-brand-gold",
           "peer-checked/acc:text-brand-gold",
-          hasIcon && "peer-checked/acc:pt-14",
+          hasIcon && "md:peer-checked/acc:pt-14",
           "peer-checked/acc:[&_.fields-of-activity-item-icon]:block",
           "peer-checked/acc:[&_.fields-of-activity-item-chevron]:rotate-180",
         )}
       >
-        <div className="fields-of-activity-item-heading relative min-w-0 flex-1 overflow-visible">
+        <div className="fields-of-activity-item-heading relative flex min-w-0 flex-1 items-start gap-3 overflow-visible">
+          <span className="fields-of-activity-item-title min-w-0 flex-1 text-xl font-bold leading-snug md:text-2xl">
+            {titleText}
+          </span>
           {hasIcon && iconImage ? (
             <Media
               {...iconImage}
               className={cn(
-                "fields-of-activity-item-icon absolute bottom-full right-full mb-2 hidden h-10 w-10 max-w-none object-contain",
+                "fields-of-activity-item-icon ml-auto hidden h-10 w-10 max-w-none shrink-0 object-contain",
+                "md:absolute md:bottom-full md:right-full md:mb-2 md:ml-0",
               )}
             />
           ) : null}
-          <span className="fields-of-activity-item-title block text-xl font-bold leading-snug md:text-2xl">
-            {titleText}
-          </span>
         </div>
         <ChevronDown
-          className="fields-of-activity-item-chevron mt-1 h-6 w-6 shrink-0 transition-transform duration-200"
+          className="fields-of-activity-item-chevron mt-1 hidden h-6 w-6 shrink-0 transition-transform duration-200 md:block"
           aria-hidden
         />
       </label>

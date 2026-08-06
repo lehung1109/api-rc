@@ -399,7 +399,7 @@ export interface FieldsOfActivityModel {
 }
 ```
 
-**UI:** container `max-w-7xl`, không nền; title `text-md`; accordion title/chevron `text-brand-navy` → gold hover/open; icon absolute trái phía trên title khi mở; content `text-base text-brand-navy` + `ul/li` disc; CTA `bg-brand-navy border-brand-navy text-brand-white` — hover `bg-brand-white text-brand-navy`; ảnh phải cùng hàng mọi breakpoint; slide-in 1.25s (title từ dưới, accordion trái, images phải) qua `FieldsOfActivityScrollReveal` + CSS trong `styles.css`.
+**UI:** container `max-w-7xl`, không nền; title `text-md`; accordion title/chevron `text-brand-navy` → gold hover/open; content `text-base text-brand-navy` + `ul/li` disc; CTA `bg-brand-navy border-brand-navy text-brand-white` — hover `bg-brand-white text-brand-navy`; ảnh phải cùng hàng mọi breakpoint; slide-in 1.25s (title từ dưới, accordion trái, images phải) qua `FieldsOfActivityScrollReveal` + CSS trong `styles.css`. **Mobile:** không `pl` accordion, ẩn chevron; icon bên phải cùng hàng title khi mở. **Desktop (`md+`):** `md:pl-12` (48px) khi có icon; chevron hiện; icon absolute trái phía trên title khi mở (`md:peer-checked/acc:pt-14`).
 
 **Semantic classes:** `fields-of-activity`, `fields-of-activity-title`, `fields-of-activity-accordion`, `fields-of-activity-item`, `fields-of-activity-item-trigger`, `fields-of-activity-item-title`, `fields-of-activity-item-icon`, `fields-of-activity-item-chevron`, `fields-of-activity-item-content`, `fields-of-activity-images`, `fields-of-activity-image`, `fields-of-activity-button`.
 

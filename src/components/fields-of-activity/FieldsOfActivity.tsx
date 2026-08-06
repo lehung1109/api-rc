@@ -95,7 +95,7 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
           <div
             className={cn(
               "fields-of-activity-accordion",
-              hasAnyIcon && "pl-12 md:pl-14",
+              hasAnyIcon && "md:pl-12",
             )}
           >
             {validItems.map((item, index) => (
