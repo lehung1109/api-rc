@@ -105,10 +105,11 @@ const FeaturedProjects = (model: FeaturedProjectsModel) => {
       {validItems.length > 0 ? (
         <ul
           className={cn(
-            "featured-projects-grid grid w-full list-none grid-cols-1 gap-4 p-0",
+            "featured-projects-grid flex w-full list-none flex-nowrap gap-4 overflow-x-auto p-0",
+            "snap-x snap-mandatory",
             "-translate-x-10",
             slideInBase,
-            "md:grid-cols-3",
+            "md:grid md:grid-cols-3 md:overflow-x-visible md:snap-none",
             (subtitleText || titleText) && "mt-10 md:mt-12",
           )}
         >

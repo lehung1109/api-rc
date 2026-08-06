@@ -20,7 +20,7 @@ const FeaturedProjectsCard = (item: FeaturedProjectsItemModel) => {
   const descriptionText = description.trim();
 
   return (
-    <li className="featured-projects-item-wrap min-w-0">
+    <li className="featured-projects-item-wrap max-md:w-[85%] max-md:shrink-0 max-md:snap-start md:min-w-0">
       <Link
         {...link}
         className={cn(
