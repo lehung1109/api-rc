@@ -523,6 +523,48 @@ export interface DirectorIntroModel {
 
 **WordPress:** widget `EAI-director-intro` — MEDIA ảnh (+ resolution), subtitle, WYSIWYG `description_html`, CTA URL, `scroll_reveal_target_id` → `eai_rc_render_html('DirectorIntro', …)`.
 
+## Quick reference — vision mission (server + scroll reveal island)
+
+Section tầm nhìn / sứ mệnh: 2 cột text (title cột + items title/description), **không nền**, padding `py-20` (80px). Inner luôn `max-w-7xl`. Slide-in khi scroll (cột chẵn trái, cột lẻ phải).
+
+| File                                         | Vai trò                                                                 |
+| -------------------------------------------- | ----------------------------------------------------------------------- |
+| `VisionMission.tsx`                          | Orchestrator: `<section>` + grid cột + island                           |
+| `VisionMissionColumn.tsx`                    | Leaf: title cột (`h2`) + list item title (`h3` bold) + description      |
+| `VisionMissionScrollReveal.tsx`              | `"use client"` — IntersectionObserver → `data-in-view`                  |
+| `src/data/vision-mission.ts`                 | Mock / CMS (`VisionMission` registry)                                   |
+| `src/data/vision-mission-scroll-reveal.ts`   | Client registry (re-export `targetId` từ vision-mission)                |
+
+**Model:**
+
+```ts
+export interface VisionMissionItemModel {
+  title: string;
+  description: string;
+}
+
+export interface VisionMissionColumnModel {
+  title: string;
+  items: VisionMissionItemModel[];
+}
+
+export interface VisionMissionModel {
+  className?: string;
+  columns: VisionMissionColumnModel[];
+  scrollReveal?: { targetId?: string }; // default "vision-mission"
+}
+```
+
+**Render guards:** lọc item thiếu cả `title` và `description` (trim); cột thiếu title và không còn item → bỏ; mảng cột rỗng → `return null`.
+
+**UI:** không nền; section `px-6 py-20 md:px-10`; inner `max-w-7xl md:grid-cols-2`; column title `text-base uppercase text-brand-navy/70`; item title `text-lg md:text-xl font-bold text-brand-navy`; description `text-base text-brand-navy`. Semantic: `vision-mission`, `vision-mission-inner`, `vision-mission-column`, `vision-mission-column-title`, `vision-mission-item`, `vision-mission-item-title`, `vision-mission-item-description`.
+
+**Animation:** Tailwind trên TSX — `group/vision` + `group-data-[in-view=true]/vision:*`; cột index chẵn `-translate-x-10`, lẻ `translate-x-10`; `transition-[opacity,translate]`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
+
+**Mount:** `pages/construction/page.tsx` (sau DirectorIntro).
+
+**WordPress:** widget `EAI-vision-mission` — repeater `columns` (title + nested repeater `items`: title + description TEXTAREA), `scroll_reveal_target_id` → `eai_rc_render_html('VisionMission', …)`. Helper: `vision-mission.php`.
+
 ## Quick reference — featured projects (server + scroll reveal island)
 
 Section dự án nổi bật: subtitle gold + h2 trong `max-w-7xl`, lưới 3 ảnh portrait full-bleed trong padding section, hover overlay + Plus + content; CTA kiểu DirectorIntro. Slide-in khi scroll (pattern DirectorIntroScrollReveal).

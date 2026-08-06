@@ -8,6 +8,8 @@ import AboutIntro from "../../src/components/about-intro/AboutIntro";
 import aboutIntro from "@/data/about-intro";
 import DirectorIntro from "../../src/components/director-intro/DirectorIntro";
 import directorIntro from "@/data/director-intro";
+import VisionMission from "../../src/components/vision-mission/VisionMission";
+import visionMission from "@/data/vision-mission";
 import FieldsOfActivity from "../../src/components/fields-of-activity/FieldsOfActivity";
 import fieldsOfActivity from "@/data/fields-of-activity";
 import ConstructionHighlights from "../../src/components/construction-highlights/ConstructionHighlights";
@@ -40,6 +42,8 @@ export default function ConstructionPage() {
       <AboutIntro {...aboutIntro} />
 
       <DirectorIntro {...directorIntro} />
+
+      <VisionMission {...visionMission} />
 
       <FieldsOfActivity {...fieldsOfActivity} />
 
