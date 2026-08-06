@@ -84,7 +84,7 @@ const DirectorIntro = (model: DirectorIntroModel) => {
           className={cn("director-intro-copy translate-x-10", slideInBase)}
         >
           {subtitleText ? (
-            <h2 className="director-intro-subtitle text-md font-medium uppercase tracking-[0.12em] text-brand-gold">
+            <h2 className="director-intro-subtitle mb-0 text-md font-medium uppercase tracking-[0.12em] text-brand-gold">
               {subtitleText}
             </h2>
           ) : null}
