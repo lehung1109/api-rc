@@ -80,7 +80,7 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
       )}
     >
       {titleText ? (
-        <h2 className="fields-of-activity-title text-sm font-bold leading-tight">
+        <h2 className="fields-of-activity-title text-md font-bold leading-tight">
           {titleText}
         </h2>
       ) : null}

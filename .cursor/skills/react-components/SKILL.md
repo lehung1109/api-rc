@@ -360,7 +360,7 @@ export interface FieldsOfActivityModel {
 }
 ```
 
-**UI:** container `max-w-7xl`, không nền; title `text-2xl md:text-3xl`; accordion title/chevron `text-brand-navy` → gold hover/open; icon absolute trái phía trên title khi mở; content `text-base text-brand-navy` + `ul/li` disc; CTA `bg-brand-navy border-brand-navy text-brand-white` — hover `bg-brand-white text-brand-navy`; ảnh phải cùng hàng mọi breakpoint; slide-in 1.25s (title từ dưới, accordion trái, images phải) qua `FieldsOfActivityScrollReveal` + CSS trong `styles.css`.
+**UI:** container `max-w-7xl`, không nền; title `text-md`; accordion title/chevron `text-brand-navy` → gold hover/open; icon absolute trái phía trên title khi mở; content `text-base text-brand-navy` + `ul/li` disc; CTA `bg-brand-navy border-brand-navy text-brand-white` — hover `bg-brand-white text-brand-navy`; ảnh phải cùng hàng mọi breakpoint; slide-in 1.25s (title từ dưới, accordion trái, images phải) qua `FieldsOfActivityScrollReveal` + CSS trong `styles.css`.
 
 **Semantic classes:** `fields-of-activity`, `fields-of-activity-title`, `fields-of-activity-accordion`, `fields-of-activity-item`, `fields-of-activity-item-trigger`, `fields-of-activity-item-title`, `fields-of-activity-item-icon`, `fields-of-activity-item-chevron`, `fields-of-activity-item-content`, `fields-of-activity-images`, `fields-of-activity-image`, `fields-of-activity-button`.
 
@@ -467,7 +467,7 @@ Section intro giám đốc: 2 cột (ảnh trái / content phải), **không n�
 export interface DirectorIntroModel {
   className?: string;
   image: MediaModel;
-  subtitle: string;            // text-base uppercase text-brand-gold → <h2>
+  subtitle: string;            // text-md uppercase text-brand-gold → <h2>
   descriptionHtml: string;     // WYSIWYG → text-[24px] text-brand-navy
   buttonLabel: string;
   buttonLink: LinkModel;       // FoA-style navy CTA
@@ -475,7 +475,7 @@ export interface DirectorIntroModel {
 }
 ```
 
-**UI:** không nền; section `px-6 py-20 md:px-10`; inner `max-w-7xl` grid 2 cột; media trước / copy sau; subtitle gold `text-base`; description `text-[24px] text-brand-navy`; CTA giống `fields-of-activity-button` (`bg-brand-navy` → hover white/navy). Semantic: `director-intro`, `director-intro-inner`, `director-intro-media`, `director-intro-copy`, `director-intro-subtitle`, `director-intro-description`, `director-intro-button`, `director-intro-image`.
+**UI:** không nền; section `px-6 py-20 md:px-10`; inner `max-w-7xl` grid 2 cột; media trước / copy sau; subtitle gold `text-md`; description `text-[24px] text-brand-navy`; CTA giống `fields-of-activity-button` (`bg-brand-navy` → hover white/navy). Semantic: `director-intro`, `director-intro-inner`, `director-intro-media`, `director-intro-copy`, `director-intro-subtitle`, `director-intro-description`, `director-intro-button`, `director-intro-image`.
 
 **Animation:** Tailwind trên TSX — `group/director` + `group-data-[in-view=true]/director:*`; media `-translate-x-10`, copy `translate-x-10`; `transition-[opacity,translate]` (TW v4 dùng property `translate`, không `transform`); `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
 
