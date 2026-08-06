@@ -55,7 +55,7 @@ const FeaturedProjectsCard = (item: FeaturedProjectsItemModel) => {
 
         <div className="featured-projects-item-content absolute inset-x-0 bottom-0 z-10 px-4 pb-5 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           {titleText ? (
-            <h3 className="featured-projects-item-title text-lg font-bold text-brand-white">
+            <h3 className="featured-projects-item-title text-lg font-bold !text-brand-white">
               {titleText}
             </h3>
           ) : null}

@@ -506,6 +506,10 @@ p.text-brand-white {
   opacity: 1 !important;
 }
 
+.group-hover\:opacity-100:is(:where(.group):hover *) {
+  opacity: 1 !important;
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
