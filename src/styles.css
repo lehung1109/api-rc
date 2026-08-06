@@ -52,6 +52,10 @@
     --color-brand-navy-hover: var(--e-global-color-primary_hover);
     --color-brand-gold-hover: var(--e-global-color-secondary_hover);
     --color-brand-white-hover: var(--e-global-color-tertiary_hover);
+    /* FloatingContact platform pills (exception — not brand palette) */
+    --color-floating-contact-messenger: #0084FF;
+    --color-floating-contact-zalo: #0068FF;
+    --animate-floating-contact-phone-ripple: floating-contact-phone-ripple 1.4s ease-out infinite;
     --radius-sm: calc(var(--radius) * 0.6);
     --radius-md: calc(var(--radius) * 0.8);
     --radius-lg: var(--radius);
@@ -255,6 +259,33 @@ html body[data-scroll-locked] {
   animation-direction: reverse;
   animation-iteration-count: infinite;
   animation-play-state: running;
+}
+
+/* Phone label: sharp left tip overlays rounded-full */
+.floating-contact-phone-label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0.35rem;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 1rem 0.85rem 1rem 0;
+  border-color: transparent var(--e-global-color-secondary) transparent transparent;
+  transform: translate(-100%, -50%);
+  pointer-events: none;
+}
+
+@keyframes floating-contact-phone-ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
 }
 
 .video-hero-banner-overlay {

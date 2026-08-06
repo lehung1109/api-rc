@@ -20,6 +20,8 @@ import ContactCta from "../../src/components/contact-cta/ContactCta";
 import contactCta from "@/data/contact-cta";
 import ContactPopupWrapper from "../../src/components/contact-popup/ContactPopupWrapper";
 import contactPopupWrapper from "@/data/contact-popup-wrapper";
+import FloatingContact from "../../src/components/floating-contact/FloatingContact";
+import floatingContact from "@/data/floating-contact";
 import ConstructionFooter from "../../src/components/construction-footer/ConstructionFooter";
 import constructionFooter from "@/data/construction-footer";
 
@@ -50,6 +52,8 @@ export default function ConstructionPage() {
       <ContactCta {...contactCta} />
 
       <ContactPopupWrapper {...contactPopupWrapper} />
+
+      <FloatingContact {...floatingContact} />
 
       <ConstructionFooter {...constructionFooter} />
     </div>

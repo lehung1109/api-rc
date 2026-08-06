@@ -1142,3 +1142,36 @@ export interface ContactPopupModel {
 **Mount:** `pages/construction/page.tsx` (sau FeaturedProjects).
 
 **WordPress:** `EAI-contact-cta` → `ContactCta` + `popup_target`; `EAI-contact-popup` → `ContactPopupWrapper` + `popup_key` + CF7 SELECT.
+
+## Quick reference — floating contact (server)
+
+Nút liên hệ fixed trái dưới: Messenger pill + Zalo pill + Phone (vòng + số + ripple). **Server-only** — không Wrapper/client. Không nền / box bọc ngoài.
+
+| File                                    | Vai trò                                                          |
+| --------------------------------------- | ---------------------------------------------------------------- |
+| `FloatingContact.tsx`                   | Orchestrator: `<aside>` fixed + `<nav>` xếp cột                  |
+| `FloatingContactPill.tsx`               | Leaf: pill Messenger/Zalo — `Link` + `Media` icon + label        |
+| `FloatingContactPhone.tsx`              | Leaf: vòng `brand-gold` + Lucide Phone + nhãn số (mũi nhọn) + ripple CSS |
+| `src/data/floating-contact.ts`          | Mock / CMS (`FloatingContact` registry)                          |
+
+**Model:**
+
+```ts
+export interface FloatingContactModel {
+  className?: string;
+  messenger?: { label: string; icon: MediaModel; link: LinkModel };
+  zalo?: { label: string; icon: MediaModel; link: LinkModel };
+  phone?: { label: string; link: LinkModel }; // demo "0000 000 000"
+}
+```
+
+**Render guards:** pill thiếu `label` / `icon.url` / `link.url` → bỏ; phone thiếu `label` / `link.url` → bỏ; cả ba trống → `return null`.
+
+**UI:** `fixed bottom-[50px] left-5 z-50`; flex cột `gap-2.5`; label `text-[20px]`; Messenger/Zalo nền qua Tailwind theme (`bg-floating-contact-messenger` / `bg-floating-contact-zalo` — exception ngoài brand palette); phone `bg-brand-gold` + chữ trắng + `::after` mũi nhọn (CSS `.floating-contact-phone-label`) đè bo trái label→icon + `@theme --animate-floating-contact-phone-ripple` + `delay-[0.7s]` trên ripple thứ hai; `motion-reduce:animate-none`. Không hover.
+
+**Semantic:** `floating-contact`, `floating-contact-nav`, `floating-contact-pill`, `floating-contact-phone`, `floating-contact-phone-icon`, `floating-contact-phone-label` (`::after` mũi nhọn), `floating-contact-phone-ripple`.
+
+**Mount:** `pages/construction/page.tsx` (sau ContactPopup, trước ConstructionFooter).
+
+**WordPress:** widget `EAI-floating-contact` — Messenger/Zalo (label + MEDIA icon + URL), Phone (label + URL `tel:`), `icon_resolution`, `class_name` → `eai_rc_render_html('FloatingContact', …)`. Helper: `floating-contact.php`.
+
