@@ -20,7 +20,7 @@ const VideoHeroBannerWrapper = (model: VideoHeroBannerModel) => {
   return (
     <section
       className={cn(
-        "video-hero-banner relative h-dvh w-full overflow-hidden",
+        "video-hero-banner relative aspect-[561/774] h-auto w-full overflow-hidden md:aspect-auto md:h-dvh",
         hasTitle && "video-hero-banner--has-title",
         className,
       )}
@@ -41,7 +41,7 @@ const VideoHeroBannerWrapper = (model: VideoHeroBannerModel) => {
         <VideoHeroBanner {...model} />
       </ClientComponentWrapper>
       {hasTitle ? (
-        <div className="video-hero-banner-content pointer-events-none absolute inset-x-0 bottom-10 z-10 md:bottom-20">
+        <div className="video-hero-banner-content pointer-events-none absolute inset-x-0 bottom-20 z-10">
           <div className="video-hero-banner-content-inner mx-auto w-full max-w-7xl px-6 md:px-10">
             <h1 className="video-hero-banner-title text-2xl font-bold text-brand-white md:text-4xl lg:text-5xl">
               {titleText}

@@ -694,7 +694,7 @@ export interface VideoHeroBannerModel {
 
 **Render guards (wrapper):** `!url.trim()` hoặc `!poster.url.trim()` → `return null`. Title chỉ render khi `title.trim()` có nội dung.
 
-**Behavior:** `video.src = url`. `autoPlay` `muted` `loop` `playsInline`. Video `opacity-0` → `opacity-100` khi `canplay`/`playing`. Poster SSR nằm dưới. Overlay `.video-hero-banner-overlay` trong `styles.css` (gradient top fade); khi có title → modifier `--has-title` + fade đáy. Title absolute đáy (`bottom-10` / `md:bottom-20`) trong `max-w-7xl`, `text-brand-white`.
+**Behavior:** `video.src = url`. `autoPlay` `muted` `loop` `playsInline`. Video `opacity-0` → `opacity-100` khi `canplay`/`playing`. Poster SSR nằm dưới. Overlay `.video-hero-banner-overlay` trong `styles.css` (gradient top fade); khi có title → modifier `--has-title` + fade đáy. **Mobile:** section `aspect-[561/774]` (video fill); **desktop (`md+`):** `h-dvh`. Title absolute đáy `bottom-20` (80px) trong `max-w-7xl`, `text-brand-white`.
 
 **Semantic classes:** `video-hero-banner`, `video-hero-banner--has-title`, `video-hero-banner-poster`, `video-hero-banner-overlay`, `video-hero-banner-video-root`, `video-hero-banner-video`, `video-hero-banner-content`, `video-hero-banner-content-inner`, `video-hero-banner-title`.
 
