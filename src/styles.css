@@ -522,6 +522,14 @@ p.text-brand-white {
   opacity: 1 !important;
 }
 
+.wpcf7-form label {
+  display: block;
+}
+
+.wpcf7-form textarea {
+  height: 120px;
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
