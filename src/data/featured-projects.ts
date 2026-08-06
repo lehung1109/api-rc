@@ -2,7 +2,7 @@ import type { FeaturedProjectsModel } from "@/components/featured-projects/Featu
 
 const featuredProjects: FeaturedProjectsModel = {
   subtitle: "DỰ ÁN",
-  title: "Dự án nổi bật tại Arteco",
+  title: "Dự án nổi bật tại ICHOUSE",
   items: [
     {
       image: {
@@ -12,7 +12,11 @@ const featuredProjects: FeaturedProjectsModel = {
       },
       title: "Biệt thự Nghĩa Đô",
       description: "Chủ đầu tư: Mr. TAI\nMô hình: Biệt thự - Villa",
-      link: { url: "/du-an/biet-thu-nghia-do", is_external: false, nofollow: false },
+      link: {
+        url: "/du-an/biet-thu-nghia-do",
+        is_external: false,
+        nofollow: false,
+      },
     },
     {
       image: {
@@ -32,7 +36,11 @@ const featuredProjects: FeaturedProjectsModel = {
       },
       title: "Nhà phố hiện đại",
       description: "Chủ đầu tư: Mr. Hùng\nMô hình: Nhà phố",
-      link: { url: "/du-an/nha-pho-hien-dai", is_external: false, nofollow: false },
+      link: {
+        url: "/du-an/nha-pho-hien-dai",
+        is_external: false,
+        nofollow: false,
+      },
     },
   ],
   buttonLabel: "XEM TẤT CẢ DỰ ÁN",
