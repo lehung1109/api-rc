@@ -309,6 +309,7 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 | -------------------------- | ----------------------------- | ----------------------------------- | ------------------------------------------- |
 | `Carousel`                 | `CarouselWrapper`             | `carousel-wrapper.ts`               | `carousel.ts` (re-export)                   |
 | `FeatureCardsCarousel`     | `FeatureCardsCarouselWrapper` | `feature-cards-carousel-wrapper.ts` | `feature-cards-carousel.ts` (re-export)     |
+| `KeyPersonnel`             | `KeyPersonnelWrapper`         | `key-personnel-wrapper.ts`          | `key-personnel.ts` (re-export)              |
 | `TableOfContents`          | `TableOfContentsWrapper`      | `table-of-contents-wrapper.ts`      | `table-of-contents.ts` (re-export)          |
 | `CustomerTestimonialsGrid` | `CustomerTestimonialsWrapper` | `customer-testimonials-wrapper.ts`  | `customer-testimonials-grid.ts` (re-export) |
 | `VideoHeroBanner`          | `VideoHeroBannerWrapper`      | `video-hero-banner-wrapper.ts`      | `video-hero-banner.ts` (re-export)          |
@@ -605,6 +606,45 @@ export interface VisionMissionModel {
 **Mount:** `pages/construction/page.tsx` (sau DirectorProfile).
 
 **WordPress:** widget `EAI-vision-mission` — repeater `columns` (title + nested repeater `items`: title + description TEXTAREA), `scroll_reveal_target_id` → `eai_rc_render_html('VisionMission', …)`. Helper: `vision-mission.php`.
+
+## Quick reference — key personnel (client + wrapper)
+
+Section đội ngũ nhân sự chủ chốt: nền `bg-brand-navy`, title uppercase, Swiper cards (ảnh + title + descriptionHtml + link optional). **Client + wrapper** — mount qua `KeyPersonnelWrapper`, không mount `KeyPersonnel` trực tiếp.
+
+| File                                      | Vai trò                                                              |
+| ----------------------------------------- | -------------------------------------------------------------------- |
+| `KeyPersonnel.tsx`                        | `"use client"` — section navy + Swiper + pagination                  |
+| `KeyPersonnelCard.tsx`                    | Leaf: Media `aspect-[4/5]` + h3 + descriptionHtml + link underline   |
+| `KeyPersonnelNav.tsx`                     | Chevron prev/next (`useSwiper`), chữ `brand-white`                   |
+| `KeyPersonnelWrapper.tsx`                 | Server entry: `ClientComponentWrapper` + `type="keyPersonnel"`       |
+| `src/data/key-personnel-wrapper.ts`       | Mock / CMS canonical (`KeyPersonnelWrapper` registry)                |
+| `src/data/key-personnel.ts`               | Re-export cho client registry                                        |
+
+**Model:**
+
+```ts
+export interface KeyPersonnelItemModel {
+  image: MediaModel;
+  title: string;
+  descriptionHtml: string;
+  link?: LinkModel;
+  linkLabel?: string; // hiện khi url + label đều trim
+}
+
+export interface KeyPersonnelModel {
+  className?: string;
+  title: string; // → <h2>
+  items: KeyPersonnelItemModel[];
+}
+```
+
+**Render guards:** lọc item thiếu `image.url` hoặc `title` (trim); rỗng items + không title → `return null`. Link chỉ khi `link.url` + `linkLabel` trim.
+
+**UI:** section `bg-brand-navy px-6 py-20 md:px-10`; inner `max-w-7xl`; title `text-base uppercase text-brand-white/70`; card title `text-lg md:text-xl font-bold text-brand-white`; description `text-base text-brand-white/70`; link underline `after:scale-x-[0.35]` → `hover:after:scale-x-100`. Swiper: `loop: false`; mobile `slidesPerView/Group: 2`; `md` (768) `3`; Pagination bullets trắng. Semantic: `key-personnel`, `key-personnel-inner`, `key-personnel-title`, `key-personnel-slider`, `key-personnel-swiper`, `key-personnel-pagination`, `key-personnel-card`, `key-personnel-card-media`, `key-personnel-card-image`, `key-personnel-card-body`, `key-personnel-card-title`, `key-personnel-card-description`, `key-personnel-card-link`, `key-personnel-nav`, `key-personnel-nav-prev`, `key-personnel-nav-next`.
+
+**Mount:** `pages/construction/page.tsx` (sau VisionMission).
+
+**WordPress:** widget `EAI-key-personnel` — title, repeater items (MEDIA + resolution, title, WYSIWYG `description_html`, URL link, `link_label`), `class_name` → `eai_rc_render_html('KeyPersonnelWrapper', …)`. Helper: `key-personnel.php`. Editor sample khi `items` rỗng.
 
 ## Quick reference — featured projects (server + scroll reveal island)
 

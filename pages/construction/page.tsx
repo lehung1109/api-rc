@@ -12,6 +12,8 @@ import DirectorProfile from "../../src/components/director-profile/DirectorProfi
 import directorProfile from "@/data/director-profile";
 import VisionMission from "../../src/components/vision-mission/VisionMission";
 import visionMission from "@/data/vision-mission";
+import KeyPersonnelWrapper from "../../src/components/key-personnel/KeyPersonnelWrapper";
+import keyPersonnelWrapper from "@/data/key-personnel-wrapper";
 import FieldsOfActivity from "../../src/components/fields-of-activity/FieldsOfActivity";
 import fieldsOfActivity from "@/data/fields-of-activity";
 import ConstructionHighlights from "../../src/components/construction-highlights/ConstructionHighlights";
@@ -48,6 +50,8 @@ export default function ConstructionPage() {
       <DirectorProfile {...directorProfile} />
 
       <VisionMission {...visionMission} />
+
+      <KeyPersonnelWrapper {...keyPersonnelWrapper} />
 
       <FieldsOfActivity {...fieldsOfActivity} />
 
