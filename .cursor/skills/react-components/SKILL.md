@@ -29,13 +29,13 @@ Skills are living docs. When you learn or agree on a **new api-rc convention** (
 
 **Palette strict (6 màu):** Navy / Gold / White + hover — canonical `--e-global-color-*` trong [`src/styles.css`](../../../src/styles.css) `:root`; Tailwind `brand-navy`, `brand-gold`, `brand-white`, `brand-navy-hover`, `brand-gold-hover`, `brand-white-hover`.
 
-| Token | Vai trò |
-|-------|---------|
-| `brand-navy` | Nền tối, overlay, chữ chính |
-| `brand-gold` | Accent, CTA, link, active |
-| `brand-white` | Chữ/nền sáng trên navy |
-| `brand-*-hover` | Hover/active |
-| `text-brand-navy/70` | Chữ phụ (thay xám) |
+| Token                | Vai trò                     |
+| -------------------- | --------------------------- |
+| `brand-navy`         | Nền tối, overlay, chữ chính |
+| `brand-gold`         | Accent, CTA, link, active   |
+| `brand-white`        | Chữ/nền sáng trên navy      |
+| `brand-*-hover`      | Hover/active                |
+| `text-brand-navy/70` | Chữ phụ (thay xám)          |
 
 **Ví dụ:** `bg-brand-navy`, `text-brand-gold`, `hover:bg-brand-gold-hover`, `border-brand-white-hover`.
 
@@ -52,13 +52,13 @@ Client island (only when needed)
        └─ browser hydrates via script[data-rct] (react-loader.tsx)
 ```
 
-| Layer | Role |
-|-------|------|
-| **Server component** | No `"use client"`. SSR HTML. Prefer this. |
-| **Client component** | `"use client"` first line. State, effects, Swiper, fetch-on-type, etc. |
+| Layer                                                          | Role                                                                                                                             |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Server component**                                           | No `"use client"`. SSR HTML. Prefer this.                                                                                        |
+| **Client component**                                           | `"use client"` first line. State, effects, Swiper, fetch-on-type, etc.                                                           |
 | **Wrapper** (`CarouselWrapper`, `FeatureCardsCarouselWrapper`) | Server shell: `ClientComponentWrapper` + client child + `ReactSection` — **entry point duy nhất** cho App, API render, Elementor |
-| **`ReactSection`** | Embeds props JSON: `<script data-rct="camelKey" type="application/json">` |
-| **`components/ui/`** | shadcn primitives — import only; **not** in server/client registries |
+| **`ReactSection`**                                             | Embeds props JSON: `<script data-rct="camelKey" type="application/json">`                                                        |
+| **`components/ui/`**                                           | shadcn primitives — import only; **not** in server/client registries                                                             |
 
 **Default to server.** Add `"use client"` only on the smallest subtree that needs it — never on a whole nav/section if checkbox + CSS suffices.
 
@@ -101,10 +101,10 @@ export default carouselWrapper satisfies CarouselModel;
 
 **Bắt buộc:** mỗi file `*.tsx` trong `src/components/` (trừ `ui/`) chỉ chứa **một** React component (default export). Không đặt component con (`FooCard`, `FooModal`, …) trong cùng file với orchestrator/grid.
 
-| Được phép trong file | Không được (phải tách file `.tsx` riêng) |
-|----------------------|------------------------------------------|
-| Hàm helper / `renderXxx()` **không** phải component | Component React thứ hai (`const Bar = () => …`) |
-| Map icon, guard, `cn()`, type-only | Sub-component JSX tái sử dụng (`FeatureCard`, `FeatureModal`, …) |
+| Được phép trong file                                | Không được (phải tách file `.tsx` riêng)                         |
+| --------------------------------------------------- | ---------------------------------------------------------------- |
+| Hàm helper / `renderXxx()` **không** phải component | Component React thứ hai (`const Bar = () => …`)                  |
+| Map icon, guard, `cn()`, type-only                  | Sub-component JSX tái sử dụng (`FeatureCard`, `FeatureModal`, …) |
 
 **Do:** `FeatureGrid.tsx` + `FeatureGridCard.tsx` (vd. [`customer-testimonials/`](../../../src/components/customer-testimonials/): `CustomerTestimonialsGrid` + `CustomerTestimonialsCard`).
 
@@ -123,11 +123,11 @@ src/components/<feature>/
   FeaturePart.tsx       # leaf / khối tái sử dụng (vd. FooterLinkColumn)
 ```
 
-| Vai trò | Trách nhiệm |
-|---------|-------------|
+| Vai trò                          | Trách nhiệm                                                                              |
+| -------------------------------- | ---------------------------------------------------------------------------------------- |
 | **Orchestrator** (`Feature.tsx`) | Shell semantic (`<footer>`, `<section>`), `className`, compose con; **không** markup dài |
-| **Section** | Một hàng / vùng grid (`FooterTop`, `FooterBottom`) |
-| **Leaf** | Một cột menu, logo strip, embed slot — props tối thiểu |
+| **Section**                      | Một hàng / vùng grid (`FooterTop`, `FooterBottom`)                                       |
+| **Leaf**                         | Một cột menu, logo strip, embed slot — props tối thiểu                                   |
 
 **Model:** mỗi file con export `PartNameModel`; orchestrator export `FeatureModel` **compose** (`{ top, bottom }` hoặc `{ headerTop, headerMenu, … }`). Data canonical **một file** `src/data/<feature-kebab>.ts` — aggregate toàn bộ, **không** tạo `footer-brand.ts` riêng trừ khi part được mount độc lập từ App/API.
 
@@ -184,21 +184,20 @@ animation-direction: reverse;
 animation-iteration-count: infinite;
 animation-play-state: running;
 
-@keyframes
-0% {
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
-    /* transform: scale(1); */
+@keyframes 0% {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  /* transform: scale(1); */
 }
 50% {
-    -webkit-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
 100% {
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
 }
 ```
 
@@ -215,12 +214,12 @@ Widget SSR = HTML cho crawler. Chi tiết: [react-seo-markup.mdc](../../rules/re
 
 ## Shared building blocks
 
-| Component | Use for |
-|-----------|---------|
-| `Link` | `<a>` with `url`, `is_external`, `nofollow` |
-| `Media` | `<img>` (+ optional `Link` wrap), `display_dimensions`, `srcSet` |
-| `ClientComponentWrapper` | Marks SSR→hydrate boundary (HTML comment markers) |
-| `ReactSection` | Serializes props for client hydration |
+| Component                | Use for                                                          |
+| ------------------------ | ---------------------------------------------------------------- |
+| `Link`                   | `<a>` with `url`, `is_external`, `nofollow`                      |
+| `Media`                  | `<img>` (+ optional `Link` wrap), `display_dimensions`, `srcSet` |
+| `ClientComponentWrapper` | Marks SSR→hydrate boundary (HTML comment markers)                |
+| `ReactSection`           | Serializes props for client hydration                            |
 
 ## Client component checklist
 
@@ -271,20 +270,20 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 
 ## Avoid
 
-| Do not | Do instead |
-|--------|------------|
-| Mount client component trực tiếp (`<Carousel />`, `<FeatureCardsCarousel />` trong App/API) | `<CarouselWrapper />`, `<FeatureCardsCarouselWrapper />` |
-| Mock/CMS data chỉ trong `src/data/<client>.ts` khi có wrapper | Data chính trong `src/data/<wrapper-kebab>.ts`; client data re-export nếu cần registry |
-| `"use client"` on entire layout | Server shell + minimal client island |
-| Duplicate DOM for breakpoints | One node + responsive classes ([css-first skill](../css-first-responsive-ui/SKILL.md)) |
-| Nhiều component React trong một file TSX | Một file một component ([Một component mỗi file TSX](#một-component-mỗi-file-tsx)) |
-| Một file TSX >~200 dòng với nhiều vùng UI | Tách folder feature + orchestrator + section/leaf ([Chia nhỏ component](#chia-nhỏ-component-feature-lớn)) |
-| Mount `FooterBrand` / `HeaderMenu` trực tiếp trong App khi chỉ cần cả footer/header | Chỉ mount orchestrator (`Footer`, `Header`) |
-| Inline prop destructuring in signature (inconsistent) | `(model: XxxModel)` unless matching an existing wrapper pattern |
-| New Radix/shadcn for simple toggle | Checkbox + `peer` / `group-hover` |
-| Edit `src/generated/*` | `bun run generate` |
-| New tests/docs unless asked | Focused component change only |
-| Secrets or env in component files | Keep in data/server config |
+| Do not                                                                                      | Do instead                                                                                                |
+| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Mount client component trực tiếp (`<Carousel />`, `<FeatureCardsCarousel />` trong App/API) | `<CarouselWrapper />`, `<FeatureCardsCarouselWrapper />`                                                  |
+| Mock/CMS data chỉ trong `src/data/<client>.ts` khi có wrapper                               | Data chính trong `src/data/<wrapper-kebab>.ts`; client data re-export nếu cần registry                    |
+| `"use client"` on entire layout                                                             | Server shell + minimal client island                                                                      |
+| Duplicate DOM for breakpoints                                                               | One node + responsive classes ([css-first skill](../css-first-responsive-ui/SKILL.md))                    |
+| Nhiều component React trong một file TSX                                                    | Một file một component ([Một component mỗi file TSX](#một-component-mỗi-file-tsx))                        |
+| Một file TSX >~200 dòng với nhiều vùng UI                                                   | Tách folder feature + orchestrator + section/leaf ([Chia nhỏ component](#chia-nhỏ-component-feature-lớn)) |
+| Mount `FooterBrand` / `HeaderMenu` trực tiếp trong App khi chỉ cần cả footer/header         | Chỉ mount orchestrator (`Footer`, `Header`)                                                               |
+| Inline prop destructuring in signature (inconsistent)                                       | `(model: XxxModel)` unless matching an existing wrapper pattern                                           |
+| New Radix/shadcn for simple toggle                                                          | Checkbox + `peer` / `group-hover`                                                                         |
+| Edit `src/generated/*`                                                                      | `bun run generate`                                                                                        |
+| New tests/docs unless asked                                                                 | Focused component change only                                                                             |
+| Secrets or env in component files                                                           | Keep in data/server config                                                                                |
 
 ## New component workflow
 
@@ -306,14 +305,14 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 
 ## Quick reference — client + wrapper
 
-| Client | Wrapper (API / App) | Data canonical (version.json) | Client data (registry) |
-|--------|---------------------|-------------------------------|-------------------------|
-| `Carousel` | `CarouselWrapper` | `carousel-wrapper.ts` | `carousel.ts` (re-export) |
-| `FeatureCardsCarousel` | `FeatureCardsCarouselWrapper` | `feature-cards-carousel-wrapper.ts` | `feature-cards-carousel.ts` (re-export) |
-| `TableOfContents` | `TableOfContentsWrapper` | `table-of-contents-wrapper.ts` | `table-of-contents.ts` (re-export) |
-| `CustomerTestimonialsGrid` | `CustomerTestimonialsWrapper` | `customer-testimonials-wrapper.ts` | `customer-testimonials-grid.ts` (re-export) |
-| `VideoHeroBanner` | `VideoHeroBannerWrapper` | `video-hero-banner-wrapper.ts` | `video-hero-banner.ts` (re-export) |
-| `ContactPopup` | `ContactPopupWrapper` | `contact-popup-wrapper.ts` | `contact-popup.ts` (re-export) |
+| Client                     | Wrapper (API / App)           | Data canonical (version.json)       | Client data (registry)                      |
+| -------------------------- | ----------------------------- | ----------------------------------- | ------------------------------------------- |
+| `Carousel`                 | `CarouselWrapper`             | `carousel-wrapper.ts`               | `carousel.ts` (re-export)                   |
+| `FeatureCardsCarousel`     | `FeatureCardsCarouselWrapper` | `feature-cards-carousel-wrapper.ts` | `feature-cards-carousel.ts` (re-export)     |
+| `TableOfContents`          | `TableOfContentsWrapper`      | `table-of-contents-wrapper.ts`      | `table-of-contents.ts` (re-export)          |
+| `CustomerTestimonialsGrid` | `CustomerTestimonialsWrapper` | `customer-testimonials-wrapper.ts`  | `customer-testimonials-grid.ts` (re-export) |
+| `VideoHeroBanner`          | `VideoHeroBannerWrapper`      | `video-hero-banner-wrapper.ts`      | `video-hero-banner.ts` (re-export)          |
+| `ContactPopup`             | `ContactPopupWrapper`         | `contact-popup-wrapper.ts`          | `contact-popup.ts` (re-export)              |
 
 ## Quick reference — header stack
 
@@ -326,20 +325,59 @@ Files: `Footer` (orchestrator) → `FooterTop` / `FooterBottom` → `FooterLinkC
 Data: `src/data/footer.ts` — `{ top, bottom }` aggregate; chỉ `Footer` mount từ App/API.  
 Màu: theo [Brand colors](#brand-colors-ichouse) — `bg-brand-navy`, `text-brand-gold`, `hover:text-brand-gold-hover`, v.v.
 
+## Quick reference — construction footer (server)
+
+Footer corporate trang construction (ICHOUSE): logo → menu → tên công ty → social → contact 3 cột → copyright. **Server-only**, không nền, chữ `text-brand-navy`. Không thay `Footer` ICHouse.
+
+| File                              | Vai trò                                                   |
+| --------------------------------- | --------------------------------------------------------- |
+| `ConstructionFooter.tsx`          | Orchestrator: `<footer>` + compose sections               |
+| `ConstructionFooterBrand.tsx`     | Leaf: logo `Media`                                        |
+| `ConstructionFooterNav.tsx`       | Leaf: `<nav>` + menu links                                |
+| `ConstructionFooterSocial.tsx`    | Leaf: icon tròn + `Link`                                  |
+| `ConstructionFooterContact.tsx`   | Leaf: phone / address / email (Lucide + `tel:`/`mailto:`) |
+| `ConstructionFooterBottom.tsx`    | Leaf: copyright + badge DMCA optional                     |
+| `src/data/construction-footer.ts` | Mock / CMS (`ConstructionFooter` registry)                |
+
+**Model:**
+
+```ts
+export interface ConstructionFooterModel {
+  className?: string;
+  logo: MediaModel;
+  menuItems: { label: string; link: LinkModel }[];
+  companyName: string; // → <h2>
+  socialLinks: { icon: MediaModel; link: LinkModel; ariaLabel: string }[];
+  phone: { text: string; link: LinkModel };
+  addresses: string[];
+  email: { text: string; link: LinkModel };
+  copyright: string;
+  badge?: MediaModel;
+}
+```
+
+**Render guards:** rỗng hoàn toàn → `return null`. Menu/social lọc thiếu url/label/icon. Phone/email chỉ khi `text` + `link.url` trim.
+
+**UI:** `py-20` (80px), inner `max-w-7xl`, `text-base text-brand-navy text-center`, divider `border-brand-navy/15`. Contact `md:grid-cols-[1fr_2fr_1fr]` (25% / 50% / 25%) + border giữa cột. Social `rounded-full border border-brand-navy`. Semantic: `construction-footer`, `construction-footer-brand`, `construction-footer-nav`, `construction-footer-company-name`, `construction-footer-social`, `construction-footer-contact`, `construction-footer-bottom`, `construction-footer-copyright`, `construction-footer-badge`.
+
+**Mount:** `pages/construction/page.tsx` (sau ContactPopup).
+
+**WordPress:** widget `EAI-construction-footer` — MEDIA logo/badge, TEXT company/phone/email/copyright, URL phone/email, repeater menu/social/addresses → `eai_rc_render_html('ConstructionFooter', …)`.
+
 ## Quick reference — fields of activity (server)
 
 Section lĩnh vực hoạt động: accordion CSS trái + 2 ảnh grayscale phải + CTA. **Server-only** accordion — checkbox + `peer-checked`; exclusive open qua island `AccordionExclusiveSync` (mở một → đóng sibling; click lại → đóng hết). Chỉ `defaultOpen` **đầu tiên** được `defaultChecked`.
 
-| File | Vai trò |
-|------|---------|
-| `FieldsOfActivity.tsx` | Orchestrator: `<section>` + h2 + grid + CTA + exclusive sync + scroll island |
-| `FieldsOfActivityAccordionItem.tsx` | Leaf: checkbox + title/icon/chevron + content HTML |
-| `FieldsOfActivityImages.tsx` | Leaf: 2 ảnh `flex` + `gap-5`, grayscale → color hover |
-| `FieldsOfActivityScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
-| `AccordionExclusiveSync.tsx` | `"use client"` dùng chung — uncheck sibling khi một item check |
-| `src/data/fields-of-activity.ts` | Mock / CMS (`FieldsOfActivity` registry) |
-| `src/data/fields-of-activity-scroll-reveal.ts` | Client registry (re-export `targetId`) |
-| `src/data/accordion-exclusive-sync.ts` | Client registry discovery mock |
+| File                                           | Vai trò                                                                      |
+| ---------------------------------------------- | ---------------------------------------------------------------------------- |
+| `FieldsOfActivity.tsx`                         | Orchestrator: `<section>` + h2 + grid + CTA + exclusive sync + scroll island |
+| `FieldsOfActivityAccordionItem.tsx`            | Leaf: checkbox + title/icon/chevron + content HTML                           |
+| `FieldsOfActivityImages.tsx`                   | Leaf: 2 ảnh `flex` + `gap-5`, grayscale → color hover                        |
+| `FieldsOfActivityScrollReveal.tsx`             | `"use client"` — IntersectionObserver → `data-in-view`                       |
+| `AccordionExclusiveSync.tsx`                   | `"use client"` dùng chung — uncheck sibling khi một item check               |
+| `src/data/fields-of-activity.ts`               | Mock / CMS (`FieldsOfActivity` registry)                                     |
+| `src/data/fields-of-activity-scroll-reveal.ts` | Client registry (re-export `targetId`)                                       |
+| `src/data/accordion-exclusive-sync.ts`         | Client registry discovery mock                                               |
 
 **Model:**
 
@@ -347,15 +385,15 @@ Section lĩnh vực hoạt động: accordion CSS trái + 2 ảnh grayscale ph�
 export interface FieldsOfActivityItemModel {
   title: string;
   contentHtml: string;
-  iconImage?: MediaModel;   // hiện phía trên title khi mở
+  iconImage?: MediaModel; // hiện phía trên title khi mở
   defaultOpen?: boolean;
 }
 
 export interface FieldsOfActivityModel {
   className?: string;
-  title: string;            // → <h2>
+  title: string; // → <h2>
   items: FieldsOfActivityItemModel[];
-  images: MediaModel[];     // tối đa 2
+  images: MediaModel[]; // tối đa 2
   buttonLabel: string;
   buttonLink: LinkModel;
 }
@@ -373,15 +411,15 @@ export interface FieldsOfActivityModel {
 
 Section điểm nổi bật: nền `bg-brand-navy`, subtitle + `titleHtml`, accordion CSS trái (icon luôn bên trái title) + 1 ảnh phải. **Server-only** accordion — checkbox + `peer-checked`; exclusive open qua island `AccordionExclusiveSync` (mở một → đóng sibling; click lại → đóng hết). Chỉ `defaultOpen` **đầu tiên** được `defaultChecked`. Không Wrapper cho accordion; island scroll reveal + exclusive sync.
 
-| File | Vai trò |
-|------|---------|
-| `ConstructionHighlights.tsx` | Orchestrator: `<section>` navy + header + grid + exclusive sync + scroll island |
-| `ConstructionHighlightsAccordionItem.tsx` | Leaf: checkbox + icon trái + title ~40px + content HTML (grid-rows animate) |
-| `ConstructionHighlightsScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
-| `AccordionExclusiveSync.tsx` | `"use client"` dùng chung — uncheck sibling khi một item check |
-| `src/data/construction-highlights.ts` | Mock / CMS (`ConstructionHighlights` registry) |
-| `src/data/construction-highlights-scroll-reveal.ts` | Client registry (re-export `targetId`) |
-| `src/data/accordion-exclusive-sync.ts` | Client registry discovery mock |
+| File                                                | Vai trò                                                                         |
+| --------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `ConstructionHighlights.tsx`                        | Orchestrator: `<section>` navy + header + grid + exclusive sync + scroll island |
+| `ConstructionHighlightsAccordionItem.tsx`           | Leaf: checkbox + icon trái + title ~40px + content HTML (grid-rows animate)     |
+| `ConstructionHighlightsScrollReveal.tsx`            | `"use client"` — IntersectionObserver → `data-in-view`                          |
+| `AccordionExclusiveSync.tsx`                        | `"use client"` dùng chung — uncheck sibling khi một item check                  |
+| `src/data/construction-highlights.ts`               | Mock / CMS (`ConstructionHighlights` registry)                                  |
+| `src/data/construction-highlights-scroll-reveal.ts` | Client registry (re-export `targetId`)                                          |
+| `src/data/accordion-exclusive-sync.ts`              | Client registry discovery mock                                                  |
 
 **Model:**
 
@@ -389,16 +427,16 @@ Section điểm nổi bật: nền `bg-brand-navy`, subtitle + `titleHtml`, acco
 export interface ConstructionHighlightsItemModel {
   title: string;
   contentHtml: string;
-  iconImage?: MediaModel;   // luôn hiện bên trái title
+  iconImage?: MediaModel; // luôn hiện bên trái title
   defaultOpen?: boolean;
 }
 
 export interface ConstructionHighlightsModel {
   className?: string;
-  subtitle: string;            // ~14px uppercase text-brand-white/70
-  titleHtml: string;           // ~24px → <h2>; highlight via HTML (text-brand-gold)
+  subtitle: string; // ~14px uppercase text-brand-white/70
+  titleHtml: string; // ~24px → <h2>; highlight via HTML (text-brand-gold)
   items: ConstructionHighlightsItemModel[];
-  image: MediaModel;           // 1 ảnh phải
+  image: MediaModel; // 1 ảnh phải
   checkboxIdPrefix?: string;
   scrollReveal?: { targetId?: string }; // default "construction-highlights"
 }
@@ -416,25 +454,25 @@ export interface ConstructionHighlightsModel {
 
 Section intro 2 cột (text trái / ảnh phải), nền `Media` + overlay kiểu ProcessSection. Inner copy+ảnh luôn `max-w-7xl` (nền vẫn full-bleed). Slide-in khi scroll qua client monitor nhỏ (pattern ConstructionHeaderScrollMonitor).
 
-| File | Vai trò |
-|------|---------|
-| `AboutIntro.tsx` | Server entry: `<section>` + nền/overlay + copy + media + island |
-| `AboutIntroScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
-| `src/data/about-intro.ts` | Mock / CMS canonical (`AboutIntro` registry) |
-| `src/data/about-intro-scroll-reveal.ts` | Client registry (re-export `targetId` từ about-intro) |
+| File                                    | Vai trò                                                         |
+| --------------------------------------- | --------------------------------------------------------------- |
+| `AboutIntro.tsx`                        | Server entry: `<section>` + nền/overlay + copy + media + island |
+| `AboutIntroScrollReveal.tsx`            | `"use client"` — IntersectionObserver → `data-in-view`          |
+| `src/data/about-intro.ts`               | Mock / CMS canonical (`AboutIntro` registry)                    |
+| `src/data/about-intro-scroll-reveal.ts` | Client registry (re-export `targetId` từ about-intro)           |
 
 **Model:**
 
 ```ts
 export interface AboutIntroModel {
   className?: string;
-  backgroundMobileImage: MediaModel;  // fallback <img>
+  backgroundMobileImage: MediaModel; // fallback <img>
   backgroundDesktopImage: MediaModel; // <source media="(min-width: 768px)">
   image: MediaModel;
-  subtitle: string;            // gold, uppercase → <h1> (tiêu đề chính trang khi không PageTitleBar)
-  descriptionHtml: string;     // WYSIWYG
+  subtitle: string; // gold, uppercase → <h1> (tiêu đề chính trang khi không PageTitleBar)
+  descriptionHtml: string; // WYSIWYG
   buttonLabel: string;
-  buttonLink: LinkModel;       // ghost: border + text brand-white
+  buttonLink: LinkModel; // ghost: border + text brand-white
   scrollReveal?: { targetId?: string }; // default "about-intro"
 }
 ```
@@ -455,11 +493,11 @@ export interface AboutIntroModel {
 
 Section intro giám đốc: 2 cột (ảnh trái / content phải), **không nền**, padding `py-20` (80px). Inner luôn `max-w-7xl`. Slide-in khi scroll (pattern AboutIntroScrollReveal).
 
-| File | Vai trò |
-|------|---------|
-| `DirectorIntro.tsx` | Server entry: `<section>` + media + copy + island |
-| `DirectorIntroScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
-| `src/data/director-intro.ts` | Mock / CMS canonical (`DirectorIntro` registry) |
+| File                                       | Vai trò                                                  |
+| ------------------------------------------ | -------------------------------------------------------- |
+| `DirectorIntro.tsx`                        | Server entry: `<section>` + media + copy + island        |
+| `DirectorIntroScrollReveal.tsx`            | `"use client"` — IntersectionObserver → `data-in-view`   |
+| `src/data/director-intro.ts`               | Mock / CMS canonical (`DirectorIntro` registry)          |
 | `src/data/director-intro-scroll-reveal.ts` | Client registry (re-export `targetId` từ director-intro) |
 
 **Model:**
@@ -468,10 +506,10 @@ Section intro giám đốc: 2 cột (ảnh trái / content phải), **không n�
 export interface DirectorIntroModel {
   className?: string;
   image: MediaModel;
-  subtitle: string;            // text-md uppercase text-brand-gold → <h2>
-  descriptionHtml: string;     // WYSIWYG → text-[24px] text-brand-navy
+  subtitle: string; // text-md uppercase text-brand-gold → <h2>
+  descriptionHtml: string; // WYSIWYG → text-[24px] text-brand-navy
   buttonLabel: string;
-  buttonLink: LinkModel;       // FoA-style navy CTA
+  buttonLink: LinkModel; // FoA-style navy CTA
   scrollReveal?: { targetId?: string }; // default "director-intro"
 }
 ```
@@ -488,12 +526,12 @@ export interface DirectorIntroModel {
 
 Section dự án nổi bật: subtitle gold + h2 trong `max-w-7xl`, lưới 3 ảnh portrait full-bleed trong padding section, hover overlay + Plus + content; CTA kiểu DirectorIntro. Slide-in khi scroll (pattern DirectorIntroScrollReveal).
 
-| File | Vai trò |
-|------|---------|
-| `FeaturedProjects.tsx` | Orchestrator: `<section>` + header + grid + CTA + island |
-| `FeaturedProjectsCard.tsx` | Leaf: `Link` + Media + hover overlay/Plus/content |
-| `FeaturedProjectsScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
-| `src/data/featured-projects.ts` | Mock / CMS (`FeaturedProjects` registry) |
+| File                                          | Vai trò                                                     |
+| --------------------------------------------- | ----------------------------------------------------------- |
+| `FeaturedProjects.tsx`                        | Orchestrator: `<section>` + header + grid + CTA + island    |
+| `FeaturedProjectsCard.tsx`                    | Leaf: `Link` + Media + hover overlay/Plus/content           |
+| `FeaturedProjectsScrollReveal.tsx`            | `"use client"` — IntersectionObserver → `data-in-view`      |
+| `src/data/featured-projects.ts`               | Mock / CMS (`FeaturedProjects` registry)                    |
 | `src/data/featured-projects-scroll-reveal.ts` | Client registry (re-export `targetId` từ featured-projects) |
 
 **Model:**
@@ -508,8 +546,8 @@ export interface FeaturedProjectsItemModel {
 
 export interface FeaturedProjectsModel {
   className?: string;
-  subtitle: string;      // text-md uppercase text-brand-gold
-  title: string;         // → <h2> text-2xl text-brand-navy
+  subtitle: string; // text-md uppercase text-brand-gold
+  title: string; // → <h2> text-2xl text-brand-navy
   items: FeaturedProjectsItemModel[];
   buttonLabel: string;
   buttonLink: LinkModel; // DirectorIntro-style navy CTA
@@ -531,27 +569,27 @@ export interface FeaturedProjectsModel {
 
 Section tin tức / sự kiện: nền `bg-brand-navy`, title trắng `text-base`, lưới 1 featured (50% trái) + 4 nhỏ (2×2 phải), CTA ghost giống `contact-cta-button`. Slide-in khi scroll.
 
-| File | Vai trò |
-|------|---------|
-| `NewsEvents.tsx` | Orchestrator: `<section>` navy + title + grid + CTA + island |
-| `NewsEventsCard.tsx` | Leaf: `Link` + Media `aspect-video` + time (Clock + `text-sm`) + title (`text-base`) |
-| `NewsEventsScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
-| `src/data/news-events.ts` | Mock / CMS (`NewsEvents` registry) |
-| `src/data/news-events-scroll-reveal.ts` | Client registry (re-export `targetId` từ news-events) |
+| File                                    | Vai trò                                                                              |
+| --------------------------------------- | ------------------------------------------------------------------------------------ |
+| `NewsEvents.tsx`                        | Orchestrator: `<section>` navy + title + grid + CTA + island                         |
+| `NewsEventsCard.tsx`                    | Leaf: `Link` + Media `aspect-video` + time (Clock + `text-sm`) + title (`text-base`) |
+| `NewsEventsScrollReveal.tsx`            | `"use client"` — IntersectionObserver → `data-in-view`                               |
+| `src/data/news-events.ts`               | Mock / CMS (`NewsEvents` registry)                                                   |
+| `src/data/news-events-scroll-reveal.ts` | Client registry (re-export `targetId` từ news-events)                                |
 
 **Model:**
 
 ```ts
 export interface NewsEventsItemModel {
   image: MediaModel;
-  time: string;      // đã format sẵn (PHP: get_the_modified_date)
+  time: string; // đã format sẵn (PHP: get_the_modified_date)
   title: string;
   link: LinkModel;
 }
 
 export interface NewsEventsModel {
   className?: string;
-  title: string;         // → <h2> text-base text-brand-white uppercase
+  title: string; // → <h2> text-base text-brand-white uppercase
   items: NewsEventsItemModel[]; // tối đa 5 hợp lệ
   buttonLabel: string;
   buttonLink: LinkModel; // ghost = contact-cta-button style
@@ -573,9 +611,9 @@ export interface NewsEventsModel {
 
 Banner hero: nền ảnh + overlay, subtitle, title, HTML tùy chọn, CTA. **Server-only** — không Wrapper/client.
 
-| File | Vai trò |
-|------|---------|
-| `HeroSection.tsx` | `<section>` + stage + content |
+| File                       | Vai trò                             |
+| -------------------------- | ----------------------------------- |
+| `HeroSection.tsx`          | `<section>` + stage + content       |
 | `src/data/hero-section.ts` | Mock / CMS (`HeroSection` registry) |
 
 **Model (bổ sung layout):**
@@ -587,8 +625,8 @@ export type HeroSectionButtonVariant = "default" | "yellow";
 export interface HeroSectionModel {
   // ...backgroundImage, subtitle, title, htmlText?, buttonLabel, buttonLink
   titleHeading?: HeroSectionTitleHeading; // default "h1"
-  contentCentered?: boolean;              // default false — text-center + flex justify
-  contentFullWidth?: boolean;             // default false — bỏ max-w-xl, w-full
+  contentCentered?: boolean; // default false — text-center + flex justify
+  contentFullWidth?: boolean; // default false — bỏ max-w-xl, w-full
   buttonVariant?: HeroSectionButtonVariant; // default | yellow — cùng brand-gold / brand-gold-hover
 }
 ```
@@ -607,9 +645,9 @@ export interface HeroSectionModel {
 
 Nền toàn trang `fixed` viewport (wallpaper), ảnh mobile/desktop qua `<picture>`. **Server-only** — không Wrapper/client, không overlay.
 
-| File | Vai trò |
-|------|---------|
-| `PageBackground.tsx` | `fixed inset-0` + `<picture>` |
+| File                          | Vai trò                                |
+| ----------------------------- | -------------------------------------- |
+| `PageBackground.tsx`          | `fixed inset-0` + `<picture>`          |
 | `src/data/page-background.ts` | Mock / CMS (`PageBackground` registry) |
 
 **Model:**
@@ -617,8 +655,8 @@ Nền toàn trang `fixed` viewport (wallpaper), ảnh mobile/desktop qua `<pictu
 ```ts
 export interface PageBackgroundModel {
   className?: string;
-  mobileImage: MediaModel;   // fallback <img>
-  desktopImage: MediaModel;  // <source media="(min-width: 768px)">
+  mobileImage: MediaModel; // fallback <img>
+  desktopImage: MediaModel; // <source media="(min-width: 768px)">
 }
 ```
 
@@ -636,19 +674,19 @@ export interface PageBackgroundModel {
 
 Hero full viewport (`h-dvh`) nền video progressive (MP4/WebM) + poster SSR. **Client + wrapper** — mount qua `VideoHeroBannerWrapper`, không mount `VideoHeroBanner` trực tiếp. Không title/CTA.
 
-| File | Vai trò |
-|------|---------|
-| `VideoHeroBanner.tsx` | `"use client"` — `<video src>` native |
-| `VideoHeroBannerWrapper.tsx` | Server entry: `<section>` + poster `Media` + overlay + `type="videoHeroBanner"` |
-| `src/data/video-hero-banner-wrapper.ts` | Mock / CMS canonical |
-| `src/data/video-hero-banner.ts` | Re-export cho client registry |
+| File                                    | Vai trò                                                                         |
+| --------------------------------------- | ------------------------------------------------------------------------------- |
+| `VideoHeroBanner.tsx`                   | `"use client"` — `<video src>` native                                           |
+| `VideoHeroBannerWrapper.tsx`            | Server entry: `<section>` + poster `Media` + overlay + `type="videoHeroBanner"` |
+| `src/data/video-hero-banner-wrapper.ts` | Mock / CMS canonical                                                            |
+| `src/data/video-hero-banner.ts`         | Re-export cho client registry                                                   |
 
 **Model:**
 
 ```ts
 export interface VideoHeroBannerModel {
   className?: string;
-  url: string;        // MP4 / WebM
+  url: string; // MP4 / WebM
   poster: MediaModel;
 }
 ```
@@ -660,15 +698,16 @@ export interface VideoHeroBannerModel {
 **Semantic classes:** `video-hero-banner`, `video-hero-banner-poster`, `video-hero-banner-overlay`, `video-hero-banner-video-root`, `video-hero-banner-video`.
 
 **WordPress:** widget `EAI-video-hero-banner` — MEDIA `video` (`media_types: video`) + poster → `url` + `poster`; `eai_rc_render_html('VideoHeroBannerWrapper', …)`.
+
 ## Quick reference — page title bar (server)
 
 Thanh tiêu đề trang: title trái, breadcrumb phải, nền xám nhạt, `border-b`. **Server-only** — không Wrapper/client.
 
-| File | Vai trò |
-|------|---------|
-| `PageTitleBar.tsx` | Orchestrator: `<section>`, flex title + breadcrumb |
-| `PageTitleBarBreadcrumb.tsx` | Leaf: levels, separators, `Link` |
-| `src/data/page-title-bar.ts` | Mock / CMS (`PageTitleBar` registry) |
+| File                         | Vai trò                                            |
+| ---------------------------- | -------------------------------------------------- |
+| `PageTitleBar.tsx`           | Orchestrator: `<section>`, flex title + breadcrumb |
+| `PageTitleBarBreadcrumb.tsx` | Leaf: levels, separators, `Link`                   |
+| `src/data/page-title-bar.ts` | Mock / CMS (`PageTitleBar` registry)               |
 
 **Model:**
 
@@ -692,8 +731,8 @@ export interface PageTitleBarModel {
 
 **Separator (chỉ text, `aria-hidden`, không link):**
 
-- Giữa **cấp** (`breadcrumbLevels`): ` / `
-- Giữa **item trong cùng cấp**: ` - `
+- Giữa **cấp** (`breadcrumbLevels`): `/`
+- Giữa **item trong cùng cấp**: `-`
 - Ví dụ: `Home / Chung cư - Thi công chung cư - Thiết kế chung cư`
 
 **UI:** title `text-brand-gold font-bold uppercase`; breadcrumb `text-brand-navy/70`; bar `border-b border-brand-white-hover`. Layout một cây: `flex-col gap-2` mobile, `md:flex-row md:justify-between md:items-center` desktop. `<h1>` title; `<nav aria-label="Breadcrumb">`.
@@ -704,10 +743,10 @@ export interface PageTitleBarModel {
 
 Thanh meta dự án: tối đa **4 cột**, mỗi cột **icon Lucide + title** (trên) và **content** (dưới); nền xám cùng họ với `PageTitleBar`. **Server-only** — không Wrapper/client. Thường mount ngay dưới `PageTitleBar` trên trang chi tiết dự án.
 
-| File | Vai trò |
-|------|---------|
-| `ProjectMetaBar.tsx` | `<section>` + grid + `<dl>`/`<dt>`/`<dd>` |
-| `src/data/project-meta-bar.ts` | Mock / CMS (`ProjectMetaBar` registry) |
+| File                           | Vai trò                                   |
+| ------------------------------ | ----------------------------------------- |
+| `ProjectMetaBar.tsx`           | `<section>` + grid + `<dl>`/`<dt>`/`<dd>` |
+| `src/data/project-meta-bar.ts` | Mock / CMS (`ProjectMetaBar` registry)    |
 
 **Model:**
 
@@ -746,9 +785,9 @@ export interface ProjectMetaBarModel {
 
 Danh sách bài viết liên quan: title CMS HTML (optional) + `<ul>` link. **Server-only** — không Wrapper/client. Mount qua widget `EAI-related-posts` hoặc `RelatedPostList` trực tiếp.
 
-| File | Vai trò |
-|------|---------|
-| `RelatedPostList.tsx` | Root wrapper + title + `<ul>` link |
+| File                            | Vai trò                                 |
+| ------------------------------- | --------------------------------------- |
+| `RelatedPostList.tsx`           | Root wrapper + title + `<ul>` link      |
 | `src/data/related-post-list.ts` | Mock / CMS (`RelatedPostList` registry) |
 
 **Model:**
@@ -771,13 +810,13 @@ export interface RelatedPostListModel {
 
 **Semantic classes** (3rd-party CSS — cùng pattern `footer-link-column-*`):
 
-| Node | Class |
-|------|-------|
-| Root | `related-post-list` |
+| Node             | Class                     |
+| ---------------- | ------------------------- |
+| Root             | `related-post-list`       |
 | Title (CMS HTML) | `related-post-list-title` |
-| `<ul>` | `related-post-list-list` |
-| `<li>` | `related-post-list-item` |
-| `<a>` | `related-post-list-link` |
+| `<ul>`           | `related-post-list-list`  |
+| `<li>`           | `related-post-list-item`  |
+| `<a>`            | `related-post-list-link`  |
 
 **WordPress:** widget `EAI-related-posts` — query taxonomy trong PHP (`eai_related_posts_get_rc_props`), không query trong component. Chi tiết model link: rule `wp-link-list-components.mdc`.
 
@@ -785,10 +824,10 @@ export interface RelatedPostListModel {
 
 Khối HTML tùy ý từ CMS / WYSIWYG (Elementor, post content, …). **Server-only** — không Wrapper/client.
 
-| File | Vai trò |
-|------|---------|
-| `HtmlContent.tsx` | Wrapper semantic + `dangerouslySetInnerHTML` |
-| `src/data/html-content.ts` | Mock / CMS (`HtmlContent` registry) |
+| File                       | Vai trò                                      |
+| -------------------------- | -------------------------------------------- |
+| `HtmlContent.tsx`          | Wrapper semantic + `dangerouslySetInnerHTML` |
+| `src/data/html-content.ts` | Mock / CMS (`HtmlContent` registry)          |
 
 **Model:**
 
@@ -815,12 +854,12 @@ export interface HtmlContentModel {
 
 ## Quick reference — breadcrumb (server)
 
-Breadcrumb inline: tối đa **3 cấp** (2 link + 1 current), separator `»`. Khác `PageTitleBarBreadcrumb` (mọi mục link, ` / ` + ` - `, bar xám). **Server-only** — không Wrapper/client.
+Breadcrumb inline: tối đa **3 cấp** (2 link + 1 current), separator `»`. Khác `PageTitleBarBreadcrumb` (mọi mục link, `/` + `-`, bar xám). **Server-only** — không Wrapper/client.
 
-| File | Vai trò |
-|------|---------|
-| `Breadcrumb.tsx` | `<nav>` + link cấp 1–2 + current span |
-| `src/data/breadcrumb.ts` | Mock / CMS (`Breadcrumb` registry) |
+| File                     | Vai trò                               |
+| ------------------------ | ------------------------------------- |
+| `Breadcrumb.tsx`         | `<nav>` + link cấp 1–2 + current span |
+| `src/data/breadcrumb.ts` | Mock / CMS (`Breadcrumb` registry)    |
 
 **Model:**
 
@@ -854,11 +893,11 @@ export interface BreadcrumbModel {
 
 Grid card ảnh phủ vuông 1:1, gradient tối đáy, title trắng trên ảnh; flex 2 cột mobile / 3 cột tablet, `justify-center` cho hàng lẻ. **Server-only** — không Wrapper/client.
 
-| File | Vai trò |
-|------|---------|
-| `ImageOverlayCardsGrid.tsx` | Orchestrator: `<section>` + `flex flex-wrap justify-center` |
-| `ImageOverlayCardsGridCard.tsx` | Leaf: Media absolute + overlay + `<h3>`; link optional |
-| `src/data/image-overlay-cards-grid.ts` | Mock / CMS (`ImageOverlayCardsGrid` registry) |
+| File                                   | Vai trò                                                     |
+| -------------------------------------- | ----------------------------------------------------------- |
+| `ImageOverlayCardsGrid.tsx`            | Orchestrator: `<section>` + `flex flex-wrap justify-center` |
+| `ImageOverlayCardsGridCard.tsx`        | Leaf: Media absolute + overlay + `<h3>`; link optional      |
+| `src/data/image-overlay-cards-grid.ts` | Mock / CMS (`ImageOverlayCardsGrid` registry)               |
 
 **Model:**
 
@@ -890,11 +929,11 @@ export interface ImageOverlayCardsGridModel {
 
 Grid card giống `FeatureCardsCarouselCard` nhưng đơn giản hơn: luôn `Link`, `description` optional, hover zoom ảnh. **Server-only** — không Wrapper/client.
 
-| File | Vai trò |
-|------|---------|
-| `FeatureCardsGrid.tsx` | Orchestrator: `<section>` + responsive grid |
-| `FeatureCardsGridCard.tsx` | Leaf: ảnh + title + description (khi có) |
-| `src/data/feature-cards-grid.ts` | Mock / CMS (`FeatureCardsGrid` registry) |
+| File                             | Vai trò                                     |
+| -------------------------------- | ------------------------------------------- |
+| `FeatureCardsGrid.tsx`           | Orchestrator: `<section>` + responsive grid |
+| `FeatureCardsGridCard.tsx`       | Leaf: ảnh + title + description (khi có)    |
+| `src/data/feature-cards-grid.ts` | Mock / CMS (`FeatureCardsGrid` registry)    |
 
 **Model:**
 
@@ -912,9 +951,9 @@ export interface FeatureCardsGridItemModel {
 export interface FeatureCardsGridModel {
   className?: string;
   items: FeatureCardsGridItemModel[];
-  columnsTablet?: number;  // default 2 — md breakpoint
+  columnsTablet?: number; // default 2 — md breakpoint
   columnsDesktop?: number; // default 3 — lg breakpoint
-  gap?: number;            // default 16 (px)
+  gap?: number; // default 16 (px)
 }
 ```
 
@@ -941,14 +980,14 @@ export interface FeatureCardsGridModel {
 
 Lưới dự án + filter taxonomy. Server `ProjectShowcase` bọc client `ProjectShowcaseFilters` qua `ClientComponentWrapper` + `hydrateData`.
 
-| File | Vai trò |
-|------|---------|
-| `ProjectShowcase.tsx` | `<section>` + truyền `hydrateData` (gồm `filterColumnsDesktop`) |
-| `ProjectShowcaseFilters.tsx` | `"use client"` — grid filter + fetch + grid cards |
-| `ProjectShowcaseCard.tsx` | Leaf card dự án |
-| `src/lib/project-showcase/types.ts` | Model chung |
-| `src/data/project-showcase-filters.ts` | Mock hydrate (`ProjectShowcaseFilters` registry) |
-| `src/data/project-showcase.ts` | Re-export → `ProjectShowcase` registry |
+| File                                   | Vai trò                                                         |
+| -------------------------------------- | --------------------------------------------------------------- |
+| `ProjectShowcase.tsx`                  | `<section>` + truyền `hydrateData` (gồm `filterColumnsDesktop`) |
+| `ProjectShowcaseFilters.tsx`           | `"use client"` — grid filter + fetch + grid cards               |
+| `ProjectShowcaseCard.tsx`              | Leaf card dự án                                                 |
+| `src/lib/project-showcase/types.ts`    | Model chung                                                     |
+| `src/data/project-showcase-filters.ts` | Mock hydrate (`ProjectShowcaseFilters` registry)                |
+| `src/data/project-showcase.ts`         | Re-export → `ProjectShowcase` registry                          |
 
 **Model (layout filter):**
 
@@ -971,13 +1010,13 @@ export interface ProjectShowcaseFiltersModel {
 
 Grid thumbnail YouTube + modal iframe khi click. **Client + wrapper** — mount qua `CustomerTestimonialsWrapper`, không mount `CustomerTestimonialsGrid` trực tiếp.
 
-| File | Vai trò |
-|------|---------|
-| `CustomerTestimonialsGrid.tsx` | `"use client"` — grid + modal state |
-| `CustomerTestimonialsCard.tsx` | `"use client"` — thumbnail + nút play (một card) |
-| `CustomerTestimonialsWrapper.tsx` | Server entry: `<section>` (không header/padding) + `ClientComponentWrapper` + `type="customerTestimonialsGrid"` |
-| `src/data/customer-testimonials-wrapper.ts` | Mock / CMS canonical (`CustomerTestimonialsWrapper` registry) |
-| `src/data/customer-testimonials-grid.ts` | Re-export cho client registry |
+| File                                        | Vai trò                                                                                                         |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `CustomerTestimonialsGrid.tsx`              | `"use client"` — grid + modal state                                                                             |
+| `CustomerTestimonialsCard.tsx`              | `"use client"` — thumbnail + nút play (một card)                                                                |
+| `CustomerTestimonialsWrapper.tsx`           | Server entry: `<section>` (không header/padding) + `ClientComponentWrapper` + `type="customerTestimonialsGrid"` |
+| `src/data/customer-testimonials-wrapper.ts` | Mock / CMS canonical (`CustomerTestimonialsWrapper` registry)                                                   |
+| `src/data/customer-testimonials-grid.ts`    | Re-export cho client registry                                                                                   |
 
 **Model:**
 
@@ -1009,12 +1048,12 @@ export interface CustomerTestimonialsModel {
 
 Mục lục anchor với toggle danh sách, scroll offset, và sticky compact bên phải khi scroll qua khối TOC. **Client + wrapper** — mount qua `TableOfContentsWrapper`, không mount `TableOfContents` trực tiếp.
 
-| File | Vai trò |
-|------|---------|
-| `TableOfContents.tsx` | `"use client"` — UI, IntersectionObserver, scroll anchor |
-| `TableOfContentsWrapper.tsx` | Server entry: `ClientComponentWrapper` + `type="tableOfContents"` |
-| `src/data/table-of-contents-wrapper.ts` | Mock / CMS canonical (`TableOfContentsWrapper` registry) |
-| `src/data/table-of-contents.ts` | Re-export cho client registry |
+| File                                    | Vai trò                                                           |
+| --------------------------------------- | ----------------------------------------------------------------- |
+| `TableOfContents.tsx`                   | `"use client"` — UI, IntersectionObserver, scroll anchor          |
+| `TableOfContentsWrapper.tsx`            | Server entry: `ClientComponentWrapper` + `type="tableOfContents"` |
+| `src/data/table-of-contents-wrapper.ts` | Mock / CMS canonical (`TableOfContentsWrapper` registry)          |
+| `src/data/table-of-contents.ts`         | Re-export cho client registry                                     |
 
 **Model:**
 
@@ -1044,13 +1083,13 @@ export interface TableOfContentsModel {
 
 **State classes (TSX chỉ gắn modifier; màu active trong `styles.css`):**
 
-| Node | Base | Modifier |
-|------|------|----------|
-| `nav` | `table-of-contents` | `--sticky-compact`, `--sticky-expanded` |
-| `li` | `table-of-contents-item` | `--active`, `--has-children`; open/closed qua `:has(.table-of-contents-branch-input:checked)` |
-| `a` | `table-of-contents-link` | `--active` |
-| chevron label | `table-of-contents-branch-toggle` | — |
-| nested `ol` | `table-of-contents-list` | — |
+| Node          | Base                              | Modifier                                                                                      |
+| ------------- | --------------------------------- | --------------------------------------------------------------------------------------------- |
+| `nav`         | `table-of-contents`               | `--sticky-compact`, `--sticky-expanded`                                                       |
+| `li`          | `table-of-contents-item`          | `--active`, `--has-children`; open/closed qua `:has(.table-of-contents-branch-input:checked)` |
+| `a`           | `table-of-contents-link`          | `--active`                                                                                    |
+| chevron label | `table-of-contents-branch-toggle` | —                                                                                             |
+| nested `ol`   | `table-of-contents-list`          | —                                                                                             |
 
 **Semantic classes:** `table-of-contents`, `table-of-contents-header`, `table-of-contents-title`, `table-of-contents-list`, `table-of-contents-item`, `table-of-contents-link`, `table-of-contents-branch-input`, `table-of-contents-branch-toggle`, `table-of-contents-branch-chevron`, `table-of-contents--sticky-compact`, `table-of-contents--sticky-expanded`.
 
@@ -1060,15 +1099,15 @@ export interface TableOfContentsModel {
 
 Banner CTA 2 cột (content trái / ảnh phải) + popup mở theo **shared key**. CF7 **không** đi qua props api-rc (tránh nonce stale trong transient). Có thể nhiều popup / trang.
 
-| File | Vai trò |
-|------|---------|
-| `ContactCta.tsx` | Server: section white `py-20`, content navy (+ optional BG image), ảnh phải full-bleed, nút `data-contact-popup-open="{popupTarget}"` |
-| `contact-popup-key.ts` | `normalizeContactPopupKey`, `contactPopupCf7SourceId`, event/attr constants |
-| `ContactPopup.tsx` | `"use client"` — modal; chỉ mở khi key khớp; mount CF7 từ `#eai-contact-popup-cf7-source-{key}` |
-| `ContactPopupWrapper.tsx` | Server entry: `type="contactPopup"` |
-| `src/data/contact-cta.ts` | Mock banner (`popupTarget: "tu-van"`) |
-| `src/data/contact-popup-wrapper.ts` | Canonical popup (`popupKey: "tu-van"`, `contentHtml` demo Vite) |
-| `src/data/contact-popup.ts` | Re-export client registry |
+| File                                | Vai trò                                                                                                                               |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `ContactCta.tsx`                    | Server: section white `py-20`, content navy (+ optional BG image), ảnh phải full-bleed, nút `data-contact-popup-open="{popupTarget}"` |
+| `contact-popup-key.ts`              | `normalizeContactPopupKey`, `contactPopupCf7SourceId`, event/attr constants                                                           |
+| `ContactPopup.tsx`                  | `"use client"` — modal; chỉ mở khi key khớp; mount CF7 từ `#eai-contact-popup-cf7-source-{key}`                                       |
+| `ContactPopupWrapper.tsx`           | Server entry: `type="contactPopup"`                                                                                                   |
+| `src/data/contact-cta.ts`           | Mock banner (`popupTarget: "tu-van"`)                                                                                                 |
+| `src/data/contact-popup-wrapper.ts` | Canonical popup (`popupKey: "tu-van"`, `contentHtml` demo Vite)                                                                       |
+| `src/data/contact-popup.ts`         | Re-export client registry                                                                                                             |
 
 **ContactCta model:**
 

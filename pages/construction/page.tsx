@@ -20,6 +20,8 @@ import ContactCta from "../../src/components/contact-cta/ContactCta";
 import contactCta from "@/data/contact-cta";
 import ContactPopupWrapper from "../../src/components/contact-popup/ContactPopupWrapper";
 import contactPopupWrapper from "@/data/contact-popup-wrapper";
+import ConstructionFooter from "../../src/components/construction-footer/ConstructionFooter";
+import constructionFooter from "@/data/construction-footer";
 
 export const pageMeta = {
   title: "construction",
@@ -49,16 +51,7 @@ export default function ConstructionPage() {
 
       <ContactPopupWrapper {...contactPopupWrapper} />
 
-      <main className="mx-auto max-w-7xl px-4 py-16">
-        <p className="text-2xl font-bold text-brand-navy">
-          Construction page preview
-        </p>
-        <p className="mt-4 text-base text-brand-navy/70">
-          Preview page dành riêng cho ConstructionHeader — cuộn trang để kiểm
-          tra sticky background.
-        </p>
-        <div className="mt-12 h-[120vh] rounded-lg bg-brand-white-hover/80" />
-      </main>
+      <ConstructionFooter {...constructionFooter} />
     </div>
   );
 }
