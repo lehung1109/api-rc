@@ -548,6 +548,10 @@ button.contact-popup-close {
   height: 100%;
 }
 
+.peer-checked\/acc\:\[\&_\.fields-of-activity-item-icon\]\:block:is(:where(.peer\/acc):checked~*) .fields-of-activity-item-icon {
+  display: block !important;
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
