@@ -1,4 +1,7 @@
 import { cn } from "@/lib/utils";
+import AccordionExclusiveSync, {
+  type AccordionExclusiveSyncModel,
+} from "../accordion-exclusive-sync/AccordionExclusiveSync";
 import ClientComponentWrapper from "../ClientComponentWrapper";
 import type { MediaModel } from "../media/Media";
 import Media from "../media/Media";
@@ -43,6 +46,12 @@ const ConstructionHighlights = (model: ConstructionHighlightsModel) => {
     scrollReveal?.targetId?.trim() || DEFAULT_SCROLL_REVEAL_TARGET_ID;
   const scrollRevealModel: ConstructionHighlightsScrollRevealModel = {
     targetId,
+  };
+  const firstOpenIndex = validItems.findIndex((item) => item.defaultOpen);
+  const exclusiveSyncModel: AccordionExclusiveSyncModel = {
+    rootSelector: ".construction-highlights-accordion",
+    inputSelector: ".construction-highlights-item-input",
+    sectionId: targetId,
   };
 
   if (!subtitleText && !title && validItems.length === 0 && !hasImage) {
@@ -95,6 +104,7 @@ const ConstructionHighlights = (model: ConstructionHighlightsModel) => {
                 <ConstructionHighlightsAccordionItem
                   key={`${item.title}-${index}`}
                   {...item}
+                  defaultOpen={index === firstOpenIndex}
                   checkboxId={`${checkboxIdPrefix}-${index}`}
                 />
               ))}
@@ -115,6 +125,16 @@ const ConstructionHighlights = (model: ConstructionHighlightsModel) => {
           ) : null}
         </div>
       </div>
+
+      {validItems.length > 0 ? (
+        <ClientComponentWrapper
+          type="accordionExclusiveSync"
+          hydrateData={exclusiveSyncModel}
+          className="construction-highlights-accordion-exclusive-sync hidden"
+        >
+          <AccordionExclusiveSync {...exclusiveSyncModel} />
+        </ClientComponentWrapper>
+      ) : null}
 
       <ClientComponentWrapper
         type="constructionHighlightsScrollReveal"

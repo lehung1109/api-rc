@@ -1,4 +1,7 @@
 import { cn } from "@/lib/utils";
+import AccordionExclusiveSync, {
+  type AccordionExclusiveSyncModel,
+} from "../accordion-exclusive-sync/AccordionExclusiveSync";
 import ClientComponentWrapper from "../ClientComponentWrapper";
 import type { LinkModel } from "../link/Link";
 import Link from "../link/Link";
@@ -52,6 +55,12 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
   const scrollRevealModel: FieldsOfActivityScrollRevealModel = {
     targetId,
   };
+  const firstOpenIndex = validItems.findIndex((item) => item.defaultOpen);
+  const exclusiveSyncModel: AccordionExclusiveSyncModel = {
+    rootSelector: ".fields-of-activity-accordion",
+    inputSelector: ".fields-of-activity-item-input",
+    sectionId: targetId,
+  };
 
   if (
     !titleText &&
@@ -93,6 +102,7 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
               <FieldsOfActivityAccordionItem
                 key={`${item.title}-${index}`}
                 {...item}
+                defaultOpen={index === firstOpenIndex}
                 checkboxId={`${checkboxIdPrefix}-${index}`}
               />
             ))}
@@ -121,6 +131,16 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
             {buttonLabel}
           </Link>
         </div>
+      ) : null}
+
+      {validItems.length > 0 ? (
+        <ClientComponentWrapper
+          type="accordionExclusiveSync"
+          hydrateData={exclusiveSyncModel}
+          className="fields-of-activity-accordion-exclusive-sync hidden"
+        >
+          <AccordionExclusiveSync {...exclusiveSyncModel} />
+        </ClientComponentWrapper>
       ) : null}
 
       <ClientComponentWrapper

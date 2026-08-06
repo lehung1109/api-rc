@@ -327,16 +327,18 @@ Màu: theo [Brand colors](#brand-colors-ichouse) — `bg-brand-navy`, `text-bran
 
 ## Quick reference — fields of activity (server)
 
-Section lĩnh vực hoạt động: accordion CSS trái + 2 ảnh grayscale phải + CTA. **Server-only** — checkbox độc lập (`defaultOpen` → `defaultChecked`), không Wrapper/client.
+Section lĩnh vực hoạt động: accordion CSS trái + 2 ảnh grayscale phải + CTA. **Server-only** accordion — checkbox + `peer-checked`; exclusive open qua island `AccordionExclusiveSync` (mở một → đóng sibling; click lại → đóng hết). Chỉ `defaultOpen` **đầu tiên** được `defaultChecked`.
 
 | File | Vai trò |
 |------|---------|
-| `FieldsOfActivity.tsx` | Orchestrator: `<section>` + h2 + grid + CTA + scroll island |
+| `FieldsOfActivity.tsx` | Orchestrator: `<section>` + h2 + grid + CTA + exclusive sync + scroll island |
 | `FieldsOfActivityAccordionItem.tsx` | Leaf: checkbox + title/icon/chevron + content HTML |
 | `FieldsOfActivityImages.tsx` | Leaf: 2 ảnh `flex` + `gap-5`, grayscale → color hover |
 | `FieldsOfActivityScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
+| `AccordionExclusiveSync.tsx` | `"use client"` dùng chung — uncheck sibling khi một item check |
 | `src/data/fields-of-activity.ts` | Mock / CMS (`FieldsOfActivity` registry) |
 | `src/data/fields-of-activity-scroll-reveal.ts` | Client registry (re-export `targetId`) |
+| `src/data/accordion-exclusive-sync.ts` | Client registry discovery mock |
 
 **Model:**
 
@@ -368,15 +370,17 @@ export interface FieldsOfActivityModel {
 
 ## Quick reference — construction highlights (server + scroll reveal island)
 
-Section điểm nổi bật: nền `bg-brand-navy`, subtitle + `titleHtml`, accordion CSS trái (icon luôn bên trái title) + 1 ảnh phải. **Server-only** accordion — checkbox độc lập (`defaultOpen` → `defaultChecked`), không Wrapper cho accordion; chỉ island scroll reveal.
+Section điểm nổi bật: nền `bg-brand-navy`, subtitle + `titleHtml`, accordion CSS trái (icon luôn bên trái title) + 1 ảnh phải. **Server-only** accordion — checkbox + `peer-checked`; exclusive open qua island `AccordionExclusiveSync` (mở một → đóng sibling; click lại → đóng hết). Chỉ `defaultOpen` **đầu tiên** được `defaultChecked`. Không Wrapper cho accordion; island scroll reveal + exclusive sync.
 
 | File | Vai trò |
 |------|---------|
-| `ConstructionHighlights.tsx` | Orchestrator: `<section>` navy + header + grid + scroll island |
+| `ConstructionHighlights.tsx` | Orchestrator: `<section>` navy + header + grid + exclusive sync + scroll island |
 | `ConstructionHighlightsAccordionItem.tsx` | Leaf: checkbox + icon trái + title ~40px + content HTML (grid-rows animate) |
 | `ConstructionHighlightsScrollReveal.tsx` | `"use client"` — IntersectionObserver → `data-in-view` |
+| `AccordionExclusiveSync.tsx` | `"use client"` dùng chung — uncheck sibling khi một item check |
 | `src/data/construction-highlights.ts` | Mock / CMS (`ConstructionHighlights` registry) |
 | `src/data/construction-highlights-scroll-reveal.ts` | Client registry (re-export `targetId`) |
+| `src/data/accordion-exclusive-sync.ts` | Client registry discovery mock |
 
 **Model:**
 
