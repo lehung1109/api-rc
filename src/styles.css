@@ -536,6 +536,10 @@ p.text-brand-white {
   text-transform: uppercase;
 }
 
+button.contact-popup-close {
+  border: 0;
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
