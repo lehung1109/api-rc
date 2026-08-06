@@ -34,6 +34,7 @@ const FloatingContactPill = (model: FloatingContactPillModel) => {
         variant === "messenger" && "bg-floating-contact-messenger",
         variant === "zalo" && "bg-floating-contact-zalo",
         "inline-flex items-center gap-2 rounded-full px-4 py-2",
+        "max-md:gap-0 max-md:p-2.5",
         "text-[20px] font-semibold uppercase leading-none text-brand-white no-underline",
         "shadow-md",
         className,
@@ -48,7 +49,9 @@ const FloatingContactPill = (model: FloatingContactPillModel) => {
           icon.className,
         )}
       />
-      <span className="floating-contact-pill-label">{labelText}</span>
+      <span className="floating-contact-pill-label max-md:sr-only">
+        {labelText}
+      </span>
     </Link>
   );
 };

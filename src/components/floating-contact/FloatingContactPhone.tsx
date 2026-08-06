@@ -52,6 +52,7 @@ const FloatingContactPhone = (model: FloatingContactPhoneModel) => {
           "floating-contact-phone-label relative z-[9] -ml-0.5",
           "inline-flex items-center rounded-r-full bg-brand-gold py-2 pr-4 pl-2 ml-4",
           "text-[20px] font-semibold leading-none text-brand-white shadow-md",
+          "max-md:sr-only",
         )}
       >
         <span className="relative z-10">{labelText}</span>
