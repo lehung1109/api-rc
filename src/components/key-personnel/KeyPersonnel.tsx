@@ -9,7 +9,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import KeyPersonnelCard, {
   type KeyPersonnelItemModel,
 } from "./KeyPersonnelCard";
-import { KeyPersonnelNavNext, KeyPersonnelNavPrev } from "./KeyPersonnelNav";
+import {
+  KeyPersonnelNavNext,
+  KeyPersonnelNavPrev,
+  useKeyPersonnelNavState,
+} from "./KeyPersonnelNav";
 
 export type { KeyPersonnelItemModel };
 
@@ -22,6 +26,7 @@ export interface KeyPersonnelModel {
 const KeyPersonnel = (model: KeyPersonnelModel) => {
   const { className, title, items } = model;
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
+  const { canPrev, canNext } = useKeyPersonnelNavState(swiper);
 
   const validItems = items.filter(
     (item) => item.image?.url?.trim() && item.title?.trim(),
@@ -38,7 +43,7 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
   return (
     <section
       className={cn(
-        "key-personnel bg-brand-navy px-6 py-20 md:px-14",
+        "key-personnel group bg-brand-navy px-6 py-20 md:px-14",
         className,
       )}
     >
@@ -50,8 +55,8 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
         ) : null}
 
         {validItems.length > 0 ? (
-          <div className="key-personnel-slider key-personnel-nav group relative w-full">
-            <KeyPersonnelNavPrev swiper={swiper} />
+          <div className="key-personnel-slider key-personnel-nav relative w-full">
+            <KeyPersonnelNavPrev swiper={swiper} canPrev={canPrev} />
 
             <Swiper
               modules={[Pagination]}
@@ -88,7 +93,7 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
               ))}
             </Swiper>
 
-            <KeyPersonnelNavNext swiper={swiper} />
+            <KeyPersonnelNavNext swiper={swiper} canNext={canNext} />
           </div>
         ) : null}
       </div>
