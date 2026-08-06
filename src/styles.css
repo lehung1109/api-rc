@@ -669,4 +669,8 @@ button.contact-popup-close {
   div .md\:block {
     display: block;
   }
+
+  div .md\:h-dvh {
+    height: 100dvh !important;
+  }
 }
