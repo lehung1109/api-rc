@@ -3,9 +3,7 @@ import { cn } from "@/lib/utils";
 import ClientComponentWrapper from "../ClientComponentWrapper";
 import type { LinkModel } from "../link/Link";
 import Link from "../link/Link";
-import NewsEventsCard, {
-  type NewsEventsItemModel,
-} from "./NewsEventsCard";
+import NewsEventsCard, { type NewsEventsItemModel } from "./NewsEventsCard";
 import NewsEventsScrollReveal, {
   type NewsEventsScrollRevealModel,
 } from "./NewsEventsScrollReveal";
@@ -24,14 +22,8 @@ export interface NewsEventsModel {
 const DEFAULT_SCROLL_REVEAL_TARGET_ID = "news-events";
 
 const NewsEvents = (model: NewsEventsModel) => {
-  const {
-    className,
-    title,
-    items,
-    buttonLabel,
-    buttonLink,
-    scrollReveal,
-  } = model;
+  const { className, title, items, buttonLabel, buttonLink, scrollReveal } =
+    model;
 
   const titleText = title.trim();
   const hasButton =
@@ -61,7 +53,7 @@ const NewsEvents = (model: NewsEventsModel) => {
     `${item.image.url}-${item.title}-${index}`;
 
   const slideInBase = cn(
-    "!opacity-0 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
+    "opacity-0 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
     "group-data-[in-view=true]/news:!opacity-100 group-data-[in-view=true]/news:!translate-x-0 group-data-[in-view=true]/news:!translate-y-0",
     "motion-reduce:!opacity-100 motion-reduce:!translate-x-0 motion-reduce:!translate-y-0 motion-reduce:!transition-none",
   );
@@ -117,10 +109,7 @@ const NewsEvents = (model: NewsEventsModel) => {
                 )}
               >
                 {sideItems.map((item, index) => (
-                  <NewsEventsCard
-                    key={itemKey(item, index + 1)}
-                    {...item}
-                  />
+                  <NewsEventsCard key={itemKey(item, index + 1)} {...item} />
                 ))}
               </ul>
             ) : null}

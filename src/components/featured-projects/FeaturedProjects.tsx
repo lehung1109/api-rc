@@ -41,7 +41,8 @@ const FeaturedProjects = (model: FeaturedProjectsModel) => {
     buttonLabel.trim().length > 0 && buttonLink.url.trim().length > 0;
 
   const validItems = items.filter(
-    (item) => item.image.url.trim().length > 0 && item.link.url.trim().length > 0,
+    (item) =>
+      item.image.url.trim().length > 0 && item.link.url.trim().length > 0,
   );
 
   const targetId =
@@ -50,12 +51,7 @@ const FeaturedProjects = (model: FeaturedProjectsModel) => {
     targetId,
   };
 
-  if (
-    validItems.length === 0 &&
-    !subtitleText &&
-    !titleText &&
-    !hasButton
-  ) {
+  if (validItems.length === 0 && !subtitleText && !titleText && !hasButton) {
     return null;
   }
 
@@ -63,7 +59,7 @@ const FeaturedProjects = (model: FeaturedProjectsModel) => {
     `${item.image.url}-${item.title}-${index}`;
 
   const slideInBase = cn(
-    "!opacity-0 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
+    "opacity-0 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
     "group-data-[in-view=true]/featured:!opacity-100 group-data-[in-view=true]/featured:!translate-x-0 group-data-[in-view=true]/featured:!translate-y-0",
     "motion-reduce:!opacity-100 motion-reduce:!translate-x-0 motion-reduce:!translate-y-0 motion-reduce:!transition-none",
   );

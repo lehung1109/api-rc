@@ -111,7 +111,7 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
       <div
         className={cn(
           "construction-header-scrolled-background !pointer-events-none !absolute !inset-0 !-z-10 !overflow-hidden !bg-brand-white-hover",
-          "!opacity-0 !transition-opacity !duration-300",
+          "opacity-0 !transition-opacity !duration-300",
           "group-data-[scrolled=true]/construction-header:!opacity-100",
           alwaysShowBackground && "!opacity-100",
         )}
@@ -189,9 +189,7 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
         autocomplete_search={autocomplete_search}
         closeLabel={closeSearchLabel}
         checkboxId={CONSTRUCTION_HEADER_SEARCH_CHECKBOX_ID}
-        {...(searchModalAnimation
-          ? { animation: searchModalAnimation }
-          : {})}
+        {...(searchModalAnimation ? { animation: searchModalAnimation } : {})}
       />
 
       <ClientComponentWrapper

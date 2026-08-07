@@ -79,7 +79,7 @@ const CollaborationIntro = (model: CollaborationIntroModel) => {
   }
 
   const slideInBase = cn(
-    "!opacity-0 !translate-y-10 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
+    "opacity-0 !translate-y-10 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
     "group-data-[in-view=true]/collab:!opacity-100 group-data-[in-view=true]/collab:!translate-y-0",
     "motion-reduce:!opacity-100 motion-reduce:!translate-y-0 motion-reduce:!transition-none",
   );
@@ -161,10 +161,7 @@ const CollaborationIntro = (model: CollaborationIntroModel) => {
           </div>
         ) : null}
 
-        {bottomTitleText ||
-        validItems.length > 0 ||
-        noteText ||
-        hasButton ? (
+        {bottomTitleText || validItems.length > 0 || noteText || hasButton ? (
           <div
             className={cn(
               "collaboration-intro-bottom",

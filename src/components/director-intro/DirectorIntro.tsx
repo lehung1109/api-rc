@@ -48,7 +48,7 @@ const DirectorIntro = (model: DirectorIntroModel) => {
   }
 
   const slideInBase = cn(
-    "!opacity-0 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
+    "opacity-0 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
     "group-data-[in-view=true]/director:!opacity-100 group-data-[in-view=true]/director:!translate-x-0",
     "motion-reduce:!opacity-100 motion-reduce:!translate-x-0 motion-reduce:!transition-none",
   );
@@ -65,10 +65,7 @@ const DirectorIntro = (model: DirectorIntroModel) => {
       <div className="director-intro-inner !mx-auto !grid !w-full !max-w-7xl !grid-cols-1 !items-center !gap-10 md:!grid-cols-2 md:!gap-12 lg:!gap-16">
         {hasImage ? (
           <div
-            className={cn(
-              "director-intro-media !-translate-x-10",
-              slideInBase,
-            )}
+            className={cn("director-intro-media !-translate-x-10", slideInBase)}
           >
             <Media
               {...image}
@@ -80,9 +77,7 @@ const DirectorIntro = (model: DirectorIntroModel) => {
           </div>
         ) : null}
 
-        <div
-          className={cn("director-intro-copy !translate-x-10", slideInBase)}
-        >
+        <div className={cn("director-intro-copy !translate-x-10", slideInBase)}>
           {subtitleText ? (
             <h2 className="director-intro-subtitle !mb-0 !text-base !font-normal !uppercase !leading-tight !text-brand-gold">
               {subtitleText}

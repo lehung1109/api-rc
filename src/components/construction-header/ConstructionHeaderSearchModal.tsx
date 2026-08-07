@@ -20,13 +20,8 @@ export interface ConstructionHeaderSearchModalModel {
 const ConstructionHeaderSearchModal = (
   model: ConstructionHeaderSearchModalModel,
 ) => {
-  const {
-    autocomplete_search,
-    closeLabel,
-    checkboxId,
-    animation,
-    className,
-  } = model;
+  const { autocomplete_search, closeLabel, checkboxId, animation, className } =
+    model;
 
   const enableFadeIn = animation?.enableFadeIn !== false;
   const enableSlideIn = animation?.enableSlideIn !== false;
@@ -39,7 +34,7 @@ const ConstructionHeaderSearchModal = (
         "!invisible !pointer-events-none",
         "peer-checked/search:!visible peer-checked/search:!pointer-events-auto",
         "!transition-opacity !duration-500 !ease-out",
-        enableFadeIn && "!opacity-0 peer-checked/search:!opacity-100",
+        enableFadeIn && "opacity-0 peer-checked/search:!opacity-100",
         !enableFadeIn && "!opacity-100",
         enableSlideIn &&
           "peer-checked/search:[&_.construction-header-search-modal-close]:!translate-y-0 peer-checked/search:[&_.construction-header-search-modal-body]:!translate-y-0",

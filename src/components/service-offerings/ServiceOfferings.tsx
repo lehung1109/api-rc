@@ -37,7 +37,7 @@ const ServiceOfferings = (model: ServiceOfferingsModel) => {
   }
 
   const slideInBase = cn(
-    "!opacity-0 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
+    "opacity-0 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
     "group-data-[in-view=true]/offerings:!opacity-100 group-data-[in-view=true]/offerings:!translate-x-0",
     "motion-reduce:!opacity-100 motion-reduce:!translate-x-0 motion-reduce:!transition-none",
   );

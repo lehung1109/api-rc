@@ -111,10 +111,7 @@ const ProjectCategoryGallery = (model: ProjectCategoryGalleryModel) => {
       const nextPage = page + 1;
       const result = await loadPage(category, nextPage);
       setPage(nextPage);
-      setItems((current) => [
-        ...current,
-        ...result.items.filter(isValidItem),
-      ]);
+      setItems((current) => [...current, ...result.items.filter(isValidItem)]);
       setHasMore(result.hasMore);
     } catch {
       // keep button available on failure
@@ -123,11 +120,13 @@ const ProjectCategoryGallery = (model: ProjectCategoryGalleryModel) => {
     }
   };
 
-  const validFilters = filters.filter((filter) => filter.label.trim().length > 0);
+  const validFilters = filters.filter(
+    (filter) => filter.label.trim().length > 0,
+  );
   const buttonLabel = loadMoreLabel.trim() || DEFAULT_LOAD_MORE_LABEL;
 
   const slideInBase = cn(
-    "!opacity-0 !translate-y-10 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
+    "opacity-0 !translate-y-10 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
     "group-data-[in-view=true]/gallery:!opacity-100 group-data-[in-view=true]/gallery:!translate-y-0",
     "motion-reduce:!opacity-100 motion-reduce:!translate-y-0 motion-reduce:!transition-none",
   );
