@@ -23,7 +23,7 @@ const directorProfile: DirectorProfileModel = {
   },
   subtitle: "GIÁM ĐỐC - TS. NGUYỄN ĐĂNG HẠNH",
   descriptionHtml:
-    '<p>Artéco ra đời với mong muốn thay đổi cách thức <span class="text-brand-gold">xây dựng</span> và quy chuẩn về một công trình chất lượng của người Việt. Với sứ mệnh kiến tạo những không gian sống bền vững, chúng tôi mang đến giải pháp thiết kế và thi công đồng bộ, chuẩn mực Châu Âu.</p>',
+    '<p>ICHOUSE ra đời với mong muốn thay đổi cách thức <span class="text-brand-gold">xây dựng</span> và quy chuẩn về một công trình chất lượng của người Việt. Với sứ mệnh kiến tạo những không gian sống bền vững, chúng tôi mang đến giải pháp thiết kế và thi công đồng bộ, chuẩn mực Châu Âu.</p>',
   items: [
     {
       title: "Giảng viên",
@@ -43,7 +43,7 @@ const directorProfile: DirectorProfileModel = {
     {
       title: "Chủ tịch HĐQT",
       description:
-        "công ty Artéco — định hướng chiến lược phát triển và chuẩn hóa quy trình thi công",
+        "công ty ICHOUSE — định hướng chiến lược phát triển và chuẩn hóa quy trình thi công",
     },
     {
       title: "Tác giả",

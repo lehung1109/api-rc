@@ -21,7 +21,7 @@ const outstandingAdvantages: OutstandingAdvantagesModel = {
       subtitle: "Ưu điểm vượt trội",
       title: "Chuyên gia giàu kinh nghiệm",
       description:
-        "Đội ngũ Artéco gồm các kiến trúc sư, kỹ sư và chuyên gia nội thất giàu kinh nghiệm, đồng hành cùng khách hàng từ tư vấn đến hoàn thiện công trình.",
+        "Đội ngũ ICHOUSE gồm các kiến trúc sư, kỹ sư và chuyên gia nội thất giàu kinh nghiệm, đồng hành cùng khách hàng từ tư vấn đến hoàn thiện công trình.",
     },
     {
       backgroundMobileImage: {
@@ -42,7 +42,7 @@ const outstandingAdvantages: OutstandingAdvantagesModel = {
       subtitle: "Ưu điểm vượt trội",
       title: "Quy trình làm việc khoa học",
       description:
-        "Artéco có quy trình làm việc khoa học, rõ ràng từng giai đoạn — từ khảo sát, thiết kế, thi công đến bàn giao và bảo hành — đảm bảo tiến độ và chất lượng.",
+        "ICHOUSE có quy trình làm việc khoa học, rõ ràng từng giai đoạn — từ khảo sát, thiết kế, thi công đến bàn giao và bảo hành — đảm bảo tiến độ và chất lượng.",
     },
     {
       backgroundMobileImage: {
