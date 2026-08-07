@@ -62,18 +62,18 @@ const ConstructionHighlights = (model: ConstructionHighlightsModel) => {
     <section
       id={targetId}
       className={cn(
-        "construction-highlights w-full overflow-hidden bg-brand-navy text-brand-white",
+        "construction-highlights !w-full !overflow-hidden !bg-brand-navy !text-brand-white",
         className,
       )}
     >
-      <div className="construction-highlights-inner mx-auto w-full max-w-7xl px-4 py-12 md:px-6 md:py-16">
+      <div className="construction-highlights-inner !mx-auto !w-full !max-w-7xl !px-4 !py-12 md:!px-6 md:!py-16">
         {subtitleText || title ? (
           <header className="construction-highlights-header">
             {subtitleText ? (
               <p
                 className={cn(
-                  "construction-highlights-subtitle mb-3 text-[14px] font-medium uppercase tracking-wide",
-                  "text-brand-white/70",
+                  "construction-highlights-subtitle !mb-3 !text-[14px] !font-medium !uppercase !tracking-wide",
+                  "!text-brand-white/70",
                 )}
               >
                 {subtitleText}
@@ -82,9 +82,9 @@ const ConstructionHighlights = (model: ConstructionHighlightsModel) => {
             {title ? (
               <h2
                 className={cn(
-                  "construction-highlights-title text-2xl leading-snug text-brand-white",
-                  "[&_a]:text-brand-gold [&_strong]:font-bold",
-                  "[&_.text-brand-gold]:text-brand-gold",
+                  "construction-highlights-title !text-2xl !leading-snug !text-brand-white",
+                  "[&_a]:!text-brand-gold [&_strong]:!font-bold",
+                  "[&_.text-brand-gold]:!text-brand-gold",
                 )}
                 dangerouslySetInnerHTML={{ __html: title }}
               />
@@ -94,8 +94,8 @@ const ConstructionHighlights = (model: ConstructionHighlightsModel) => {
 
         <div
           className={cn(
-            "construction-highlights-body mt-10 grid grid-cols-1 gap-8",
-            "md:mt-14 md:grid-cols-2 md:gap-12 md:items-start",
+            "construction-highlights-body !mt-10 !grid !grid-cols-1 !gap-8",
+            "md:!mt-14 md:!grid-cols-2 md:!gap-12 md:!items-start",
           )}
         >
           {validItems.length > 0 ? (
@@ -112,12 +112,12 @@ const ConstructionHighlights = (model: ConstructionHighlightsModel) => {
           ) : null}
 
           {hasImage ? (
-            <div className="construction-highlights-media relative aspect-4/3 w-full overflow-hidden md:aspect-auto md:min-h-[420px]">
+            <div className="construction-highlights-media !relative !aspect-4/3 !w-full !overflow-hidden md:!aspect-auto md:!min-h-[420px]">
               <Media
                 {...image}
                 className={cn(
-                  "construction-highlights-image h-full w-full object-cover",
-                  "md:absolute md:inset-0",
+                  "construction-highlights-image !h-full !w-full !object-cover",
+                  "md:!absolute md:!inset-0",
                   image.className,
                 )}
               />
@@ -130,7 +130,7 @@ const ConstructionHighlights = (model: ConstructionHighlightsModel) => {
         <ClientComponentWrapper
           type="accordionExclusiveSync"
           hydrateData={exclusiveSyncModel}
-          className="construction-highlights-accordion-exclusive-sync hidden"
+          className="construction-highlights-accordion-exclusive-sync !hidden"
         >
           <AccordionExclusiveSync {...exclusiveSyncModel} />
         </ClientComponentWrapper>
@@ -139,7 +139,7 @@ const ConstructionHighlights = (model: ConstructionHighlightsModel) => {
       <ClientComponentWrapper
         type="constructionHighlightsScrollReveal"
         hydrateData={scrollRevealModel}
-        className="construction-highlights-scroll-reveal hidden"
+        className="construction-highlights-scroll-reveal !hidden"
       >
         <ConstructionHighlightsScrollReveal {...scrollRevealModel} />
       </ClientComponentWrapper>

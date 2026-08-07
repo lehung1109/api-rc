@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import path from "node:path";
 
-const constructionUrl = "http://localhost:5173/pages/construction/";
+const constructionUrl = "http://127.0.0.1:5173/pages/construction/";
 const fixturesDir = path.join("tests", "fixtures", "construction-header");
 
 test.describe.configure({ mode: "serial" });

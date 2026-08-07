@@ -54,8 +54,8 @@ const VideoHeroBanner = (model: VideoHeroBannerModel) => {
     <video
       ref={videoRef}
       className={cn(
-        "video-hero-banner-video h-full w-full object-cover transition-opacity duration-300",
-        isReady ? "opacity-100" : "opacity-0",
+        "video-hero-banner-video !h-full !w-full !object-cover !transition-opacity !duration-300",
+        isReady ? "!opacity-100" : "!opacity-0",
         className,
       )}
       autoPlay

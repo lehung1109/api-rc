@@ -44,21 +44,21 @@ const VisionMission = (model: VisionMissionModel) => {
   }
 
   const slideInBase = cn(
-    "opacity-0 transition-[opacity,translate] duration-[1.2s] ease-out",
-    "group-data-[in-view=true]/vision:opacity-100 group-data-[in-view=true]/vision:translate-x-0",
-    "motion-reduce:opacity-100 motion-reduce:translate-x-0 motion-reduce:transition-none",
+    "!opacity-0 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
+    "group-data-[in-view=true]/vision:!opacity-100 group-data-[in-view=true]/vision:!translate-x-0",
+    "motion-reduce:!opacity-100 motion-reduce:!translate-x-0 motion-reduce:!transition-none",
   );
 
   return (
     <section
       id={targetId}
       className={cn(
-        "vision-mission group/vision w-full overflow-hidden",
-        "px-6 py-20 md:px-10",
+        "vision-mission group/vision !w-full !overflow-hidden",
+        "!px-6 !py-20 md:!px-10",
         className,
       )}
     >
-      <div className="vision-mission-inner mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:gap-20">
+      <div className="vision-mission-inner !mx-auto !grid !w-full !max-w-7xl !grid-cols-1 !gap-12 md:!grid-cols-2 md:!gap-16 lg:!gap-20">
         {validColumns.map((column, index) => {
           const fromLeft = index % 2 === 0;
 
@@ -68,7 +68,7 @@ const VisionMission = (model: VisionMissionModel) => {
               title={column.title}
               items={column.items}
               className={cn(
-                fromLeft ? "-translate-x-10" : "translate-x-10",
+                fromLeft ? "!-translate-x-10" : "!translate-x-10",
                 slideInBase,
               )}
             />
@@ -79,7 +79,7 @@ const VisionMission = (model: VisionMissionModel) => {
       <ClientComponentWrapper
         type="visionMissionScrollReveal"
         hydrateData={scrollRevealModel}
-        className="vision-mission-scroll-reveal hidden"
+        className="vision-mission-scroll-reveal !hidden"
       >
         <VisionMissionScrollReveal {...scrollRevealModel} />
       </ClientComponentWrapper>

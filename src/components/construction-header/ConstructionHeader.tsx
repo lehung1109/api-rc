@@ -91,33 +91,33 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
       id={headerId}
       {...(alwaysShowBackground ? { "data-solid": "true" } : {})}
       className={cn(
-        "construction-header group/construction-header z-50 left-0 right-0 top-0",
-        "fixed md:absolute md:data-[scrolled=true]:fixed",
-        "bg-transparent",
+        "construction-header group/construction-header !z-50 !left-0 !right-0 !top-0",
+        "!fixed md:!absolute md:data-[scrolled=true]:!fixed",
+        "!bg-transparent",
         className,
       )}
     >
       <input
         id={CONSTRUCTION_HEADER_MENU_CHECKBOX_ID}
         type="checkbox"
-        className="peer/menu sr-only"
+        className="peer/menu !sr-only"
       />
       <input
         id={CONSTRUCTION_HEADER_SEARCH_CHECKBOX_ID}
         type="checkbox"
-        className="peer/search sr-only"
+        className="peer/search !sr-only"
       />
 
       <div
         className={cn(
-          "construction-header-scrolled-background pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-brand-white-hover",
-          "opacity-0 transition-opacity duration-300",
-          "group-data-[scrolled=true]/construction-header:opacity-100",
-          alwaysShowBackground && "opacity-100",
+          "construction-header-scrolled-background !pointer-events-none !absolute !inset-0 !-z-10 !overflow-hidden !bg-brand-white-hover",
+          "!opacity-0 !transition-opacity !duration-300",
+          "group-data-[scrolled=true]/construction-header:!opacity-100",
+          alwaysShowBackground && "!opacity-100",
         )}
         aria-hidden
       >
-        <picture className="absolute inset-0 block h-full w-full">
+        <picture className="!absolute !inset-0 !block !h-full !w-full">
           {(background.sources ?? []).map((source) => (
             <source
               key={`${source.media}-${source.srcSet}`}
@@ -130,7 +130,7 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
             alt={background.img.alt}
             width={background.img.width}
             height={background.img.height}
-            className="h-full w-full object-cover"
+            className="!h-full !w-full !object-cover"
             loading="lazy"
             decoding="async"
           />
@@ -141,44 +141,44 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
 
       <div
         className={cn(
-          "construction-header-bar relative z-20 flex items-center justify-between gap-4 border-b border-brand-white px-[30px] py-4 md:pointer-events-none",
-          "group-data-[scrolled=true]/construction-header:border-brand-navy",
-          "group-data-[solid=true]/construction-header:border-brand-navy",
+          "construction-header-bar !relative !z-20 !flex !items-center !justify-between !gap-4 !border-b !border-brand-white !px-[30px] !py-4 md:!pointer-events-none",
+          "group-data-[scrolled=true]/construction-header:!border-brand-navy",
+          "group-data-[solid=true]/construction-header:!border-brand-navy",
           // Forward peer/menu to nested modal (modal is no longer a sibling of the checkbox)
-          "max-md:peer-checked/menu:[&_.construction-header-menu-modal]:visible",
-          "max-md:peer-checked/menu:[&_.construction-header-menu-modal]:pointer-events-auto",
+          "max-md:peer-checked/menu:[&_.construction-header-menu-modal]:!visible",
+          "max-md:peer-checked/menu:[&_.construction-header-menu-modal]:!pointer-events-auto",
           enableMenuFadeIn &&
-            "max-md:peer-checked/menu:[&_.construction-header-menu-modal]:opacity-100",
+            "max-md:peer-checked/menu:[&_.construction-header-menu-modal]:!opacity-100",
           enableMenuSlideIn &&
-            "max-md:peer-checked/menu:[&_.construction-header-menu-modal-close]:translate-y-0 max-md:peer-checked/menu:[&_.construction-header-menu-modal-body]:translate-y-0",
+            "max-md:peer-checked/menu:[&_.construction-header-menu-modal-close]:!translate-y-0 max-md:peer-checked/menu:[&_.construction-header-menu-modal-body]:!translate-y-0",
         )}
       >
-        <div className="construction-header-logo max-w-[120px] leading-0 md:pointer-events-auto">
-          <Media {...logo} className="h-auto w-full" />
+        <div className="construction-header-logo !max-w-[120px] !leading-0 md:!pointer-events-auto">
+          <Media {...logo} className="!h-auto !w-full" />
         </div>
 
-        <div className="construction-header-actions flex items-center gap-1 md:hidden">
+        <div className="construction-header-actions !flex !items-center !gap-1 md:!hidden">
           <label
             htmlFor={CONSTRUCTION_HEADER_SEARCH_CHECKBOX_ID}
             className={cn(
-              "construction-header-search-open flex cursor-pointer items-center justify-center p-3 text-brand-white transition-colors duration-150",
-              "group-data-[scrolled=true]/construction-header:text-brand-navy",
-              "group-data-[solid=true]/construction-header:text-brand-navy",
+              "construction-header-search-open !flex !cursor-pointer !items-center !justify-center !p-3 !text-brand-white !transition-colors !duration-150",
+              "group-data-[scrolled=true]/construction-header:!text-brand-navy",
+              "group-data-[solid=true]/construction-header:!text-brand-navy",
             )}
             aria-label={openSearchLabel}
           >
-            <Search className="h-6 w-6" />
+            <Search className="!h-6 !w-6" />
           </label>
           <label
             htmlFor={CONSTRUCTION_HEADER_MENU_CHECKBOX_ID}
             className={cn(
-              "construction-header-menu-open flex cursor-pointer items-center justify-center p-3 text-brand-white transition-colors duration-150",
-              "group-data-[scrolled=true]/construction-header:text-brand-navy",
-              "group-data-[solid=true]/construction-header:text-brand-navy",
+              "construction-header-menu-open !flex !cursor-pointer !items-center !justify-center !p-3 !text-brand-white !transition-colors !duration-150",
+              "group-data-[scrolled=true]/construction-header:!text-brand-navy",
+              "group-data-[solid=true]/construction-header:!text-brand-navy",
             )}
             aria-label={openMenuLabel}
           >
-            <Menu className="h-7 w-7" />
+            <Menu className="!h-7 !w-7" />
           </label>
         </div>
 
@@ -197,7 +197,7 @@ const ConstructionHeader = (model: ConstructionHeaderModel) => {
       <ClientComponentWrapper
         type="constructionHeaderScrollMonitor"
         hydrateData={scrollMonitor}
-        className="construction-header-scroll-monitor hidden"
+        className="construction-header-scroll-monitor !hidden"
       >
         <ConstructionHeaderScrollMonitor {...scrollMonitor} />
       </ClientComponentWrapper>

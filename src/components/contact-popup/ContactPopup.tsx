@@ -184,7 +184,7 @@ const ContactPopup = (model: ContactPopupModel) => {
     };
 
     const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = "!hidden";
     document.addEventListener("keydown", onKeyDown);
 
     return () => {
@@ -200,44 +200,44 @@ const ContactPopup = (model: ContactPopupModel) => {
     >
       {open ? (
         <div
-          className="contact-popup-backdrop fixed inset-0 z-[9999] flex items-center justify-center bg-brand-navy/50 p-4"
+          className="contact-popup-backdrop !fixed !inset-0 !z-[9999] !flex !items-center !justify-center !bg-brand-navy/50 !p-4"
           role="dialog"
           aria-modal="true"
           aria-label="Liên hệ"
           onClick={handleClose}
         >
           <div
-            className="contact-popup-dialog relative flex max-h-[calc(100dvh-2rem)] w-full max-w-3xl flex-col overflow-hidden rounded-lg bg-brand-white shadow-lg"
+            className="contact-popup-dialog !relative !flex !max-h-[calc(100dvh-2rem)] !w-full !max-w-3xl !flex-col !overflow-hidden !rounded-lg !bg-brand-white !shadow-lg"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="contact-popup-header shrink-0 px-3 pt-3 md:px-4 md:pt-4">
+            <div className="contact-popup-header !shrink-0 !px-3 !pt-3 md:!px-4 md:!pt-4">
               <button
                 type="button"
-                className="contact-popup-close flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-brand-navy transition-opacity hover:opacity-70"
+                className="contact-popup-close !flex !h-10 !w-10 !cursor-pointer !items-center !justify-center !rounded-full !text-brand-navy !transition-opacity hover:!opacity-70"
                 onClick={handleClose}
                 aria-label="Đóng"
               >
-                <X className="h-7 w-7" aria-hidden="true" />
+                <X className="!h-7 !w-7" aria-hidden="true" />
               </button>
             </div>
 
-            <div className="contact-popup-scroll min-h-0 flex-1 overflow-y-auto px-6 pb-6 md:px-10 md:pb-10">
+            <div className="contact-popup-scroll !min-h-0 !flex-1 !overflow-y-auto !px-6 !pb-6 md:!px-10 md:!pb-10">
               {bodyMode === "cf7" ? (
                 <div
                   ref={formSlotRef}
-                  className="contact-popup-body text-brand-navy"
+                  className="contact-popup-body !text-brand-navy"
                 />
               ) : null}
 
               {bodyMode === "fallback" ? (
                 <div
-                  className="contact-popup-fallback text-brand-navy"
+                  className="contact-popup-fallback !text-brand-navy"
                   dangerouslySetInnerHTML={{ __html: fallbackHtml }}
                 />
               ) : null}
 
               {bodyMode === "empty" ? (
-                <p className="contact-popup-empty text-base text-brand-navy/70">
+                <p className="contact-popup-empty !text-base !text-brand-navy/70">
                   Chưa chọn form
                 </p>
               ) : null}

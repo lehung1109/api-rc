@@ -26,7 +26,7 @@ const VisionMissionColumn = (model: VisionMissionColumnModel) => {
   return (
     <div className={cn("vision-mission-column", className)}>
       {titleText ? (
-        <h2 className="vision-mission-column-title mb-0 text-base font-medium uppercase tracking-[0.12em] text-brand-navy/70">
+        <h2 className="vision-mission-column-title !mb-0 !text-base !font-medium !uppercase !tracking-[0.12em] !text-brand-navy/70">
           {titleText}
         </h2>
       ) : null}
@@ -34,8 +34,8 @@ const VisionMissionColumn = (model: VisionMissionColumnModel) => {
       {validItems.length > 0 ? (
         <ul
           className={cn(
-            "vision-mission-items m-0 list-none space-y-10 p-0",
-            titleText && "mt-6 md:mt-8",
+            "vision-mission-items !m-0 !list-none !space-y-10 !p-0",
+            titleText && "!mt-6 md:!mt-8",
           )}
         >
           {validItems.map((item, index) => {
@@ -48,15 +48,15 @@ const VisionMissionColumn = (model: VisionMissionColumnModel) => {
                 className="vision-mission-item"
               >
                 {itemTitle ? (
-                  <h3 className="vision-mission-item-title mb-0 text-lg font-bold leading-snug text-brand-navy md:text-xl">
+                  <h3 className="vision-mission-item-title !mb-0 !text-lg !font-bold !leading-snug !text-brand-navy md:!text-xl">
                     {itemTitle}
                   </h3>
                 ) : null}
                 {itemDescription ? (
                   <p
                     className={cn(
-                      "vision-mission-item-description mb-0 text-base leading-relaxed text-brand-navy",
-                      itemTitle && "mt-3",
+                      "vision-mission-item-description !mb-0 !text-base !leading-relaxed !text-brand-navy",
+                      itemTitle && "!mt-3",
                     )}
                   >
                     {itemDescription}

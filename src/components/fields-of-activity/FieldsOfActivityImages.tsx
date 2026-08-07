@@ -21,20 +21,20 @@ const FieldsOfActivityImages = (model: FieldsOfActivityImagesModel) => {
   return (
     <div
       className={cn(
-        "fields-of-activity-images flex flex-row gap-5",
+        "fields-of-activity-images !flex !flex-row !gap-5",
         className,
       )}
     >
       {validImages.map((image, index) => (
         <div
           key={`${image.url}-${index}`}
-          className="fields-of-activity-image-wrap relative min-w-0 flex-1 aspect-3/4 overflow-hidden"
+          className="fields-of-activity-image-wrap !relative !min-w-0 !flex-1 !aspect-3/4 !overflow-hidden"
         >
           <Media
             {...image}
             className={cn(
-              "fields-of-activity-image absolute inset-0 h-full w-full object-cover",
-              "grayscale transition-[filter] duration-300 hover:grayscale-0",
+              "fields-of-activity-image !absolute !inset-0 !h-full !w-full !object-cover",
+              "!grayscale !transition-[filter] !duration-300 hover:!grayscale-0",
               image.className,
             )}
           />

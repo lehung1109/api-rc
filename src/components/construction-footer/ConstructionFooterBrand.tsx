@@ -17,14 +17,14 @@ const ConstructionFooterBrand = (model: ConstructionFooterBrandModel) => {
   return (
     <div
       className={cn(
-        "construction-footer-brand flex flex-col items-center",
+        "construction-footer-brand !flex !flex-col !items-center",
         className,
       )}
     >
       <Media
         {...logo}
         className={cn(
-          "construction-footer-logo mx-auto h-auto w-auto max-w-[220px]",
+          "construction-footer-logo !mx-auto !h-auto !w-auto !max-w-[220px]",
           logo.className,
         )}
       />

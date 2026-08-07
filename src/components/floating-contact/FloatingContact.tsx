@@ -49,14 +49,14 @@ const FloatingContact = (model: FloatingContactModel) => {
   return (
     <aside
       className={cn(
-        "floating-contact pointer-events-none fixed bottom-[50px] left-5 z-50",
-        "flex flex-col items-start gap-2.5",
+        "floating-contact !pointer-events-none !fixed !bottom-[50px] !left-5 !z-50",
+        "!flex !flex-col !items-start !gap-2.5",
         className,
       )}
       aria-label="Liên hệ nhanh"
     >
       <nav
-        className="floating-contact-nav pointer-events-auto flex flex-col items-start gap-2.5"
+        className="floating-contact-nav !pointer-events-auto !flex !flex-col !items-start !gap-2.5"
         aria-label="Liên hệ nhanh"
       >
         {hasMessenger ? (

@@ -48,32 +48,32 @@ const DirectorIntro = (model: DirectorIntroModel) => {
   }
 
   const slideInBase = cn(
-    "opacity-0 transition-[opacity,translate] duration-[1.2s] ease-out",
-    "group-data-[in-view=true]/director:opacity-100 group-data-[in-view=true]/director:translate-x-0",
-    "motion-reduce:opacity-100 motion-reduce:translate-x-0 motion-reduce:transition-none",
+    "!opacity-0 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
+    "group-data-[in-view=true]/director:!opacity-100 group-data-[in-view=true]/director:!translate-x-0",
+    "motion-reduce:!opacity-100 motion-reduce:!translate-x-0 motion-reduce:!transition-none",
   );
 
   return (
     <section
       id={targetId}
       className={cn(
-        "director-intro group/director w-full overflow-hidden",
-        "px-6 py-20 md:px-10",
+        "director-intro group/director !w-full !overflow-hidden",
+        "!px-6 !py-20 md:!px-10",
         className,
       )}
     >
-      <div className="director-intro-inner mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+      <div className="director-intro-inner !mx-auto !grid !w-full !max-w-7xl !grid-cols-1 !items-center !gap-10 md:!grid-cols-2 md:!gap-12 lg:!gap-16">
         {hasImage ? (
           <div
             className={cn(
-              "director-intro-media -translate-x-10",
+              "director-intro-media !-translate-x-10",
               slideInBase,
             )}
           >
             <Media
               {...image}
               className={cn(
-                "director-intro-image h-auto w-full object-cover",
+                "director-intro-image !h-auto !w-full !object-cover",
                 image.className,
               )}
             />
@@ -81,17 +81,17 @@ const DirectorIntro = (model: DirectorIntroModel) => {
         ) : null}
 
         <div
-          className={cn("director-intro-copy translate-x-10", slideInBase)}
+          className={cn("director-intro-copy !translate-x-10", slideInBase)}
         >
           {subtitleText ? (
-            <h2 className="director-intro-subtitle mb-0 text-md font-medium uppercase tracking-[0.12em] text-brand-gold">
+            <h2 className="director-intro-subtitle !mb-0 !text-md !font-medium !uppercase !tracking-[0.12em] !text-brand-gold">
               {subtitleText}
             </h2>
           ) : null}
 
           {description ? (
             <div
-              className="director-intro-description mt-4 text-[24px] leading-relaxed text-brand-navy"
+              className="director-intro-description !mt-4 !text-[24px] !leading-relaxed !text-brand-navy"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           ) : null}
@@ -100,12 +100,12 @@ const DirectorIntro = (model: DirectorIntroModel) => {
             <Link
               {...buttonLink}
               className={cn(
-                "director-intro-button mt-8 inline-flex items-center justify-center",
-                "border border-brand-navy bg-brand-navy px-8 py-3",
-                "text-lg font-bold uppercase tracking-wide text-brand-white no-underline",
-                "transition-colors",
-                "hover:border-brand-navy hover:bg-brand-white hover:text-brand-navy",
-                "md:mt-10 md:px-10 md:py-3.5 md:text-xl",
+                "director-intro-button !mt-8 !inline-flex !items-center !justify-center",
+                "!border !border-brand-navy !bg-brand-navy !px-8 !py-3",
+                "!text-lg !font-bold !uppercase !tracking-wide !text-brand-white !no-underline",
+                "!transition-colors",
+                "hover:!border-brand-navy hover:!bg-brand-white hover:!text-brand-navy",
+                "md:!mt-10 md:!px-10 md:!py-3.5 md:!text-xl",
                 buttonLink.className,
               )}
             >
@@ -118,7 +118,7 @@ const DirectorIntro = (model: DirectorIntroModel) => {
       <ClientComponentWrapper
         type="directorIntroScrollReveal"
         hydrateData={scrollRevealModel}
-        className="director-intro-scroll-reveal hidden"
+        className="director-intro-scroll-reveal !hidden"
       >
         <DirectorIntroScrollReveal {...scrollRevealModel} />
       </ClientComponentWrapper>

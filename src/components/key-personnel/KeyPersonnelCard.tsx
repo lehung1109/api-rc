@@ -21,25 +21,25 @@ const KeyPersonnelCard = (item: KeyPersonnelItemModel) => {
   const description = descriptionHtml.trim();
 
   return (
-    <article className="key-personnel-card flex h-full flex-col">
-      <div className="key-personnel-card-media relative aspect-[4/5] w-full overflow-hidden">
+    <article className="key-personnel-card !flex !h-full !flex-col">
+      <div className="key-personnel-card-media !relative !aspect-[4/5] !w-full !overflow-hidden">
         <Media
           {...image}
           className={cn(
-            "key-personnel-card-image absolute inset-0 h-full w-full object-cover",
+            "key-personnel-card-image !absolute !inset-0 !h-full !w-full !object-cover",
             image.className,
           )}
         />
       </div>
 
-      <div className="key-personnel-card-body mt-4 flex flex-1 flex-col gap-2">
-        <h3 className="key-personnel-card-title text-lg font-bold text-brand-white md:text-xl">
+      <div className="key-personnel-card-body !mt-4 !flex !flex-1 !flex-col !gap-2">
+        <h3 className="key-personnel-card-title !text-lg !font-bold !text-brand-white md:!text-xl">
           {title}
         </h3>
 
         {description ? (
           <div
-            className="key-personnel-card-description text-base text-brand-white/70 [&_li]:ml-5 [&_ol]:list-decimal [&_ul]:list-disc"
+            className="key-personnel-card-description !text-base !text-brand-white/70 [&_li]:!ml-5 [&_ol]:!list-decimal [&_ul]:!list-disc"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         ) : null}
@@ -49,10 +49,10 @@ const KeyPersonnelCard = (item: KeyPersonnelItemModel) => {
             {...link}
             className={cn(
               "key-personnel-card-link",
-              "relative mt-auto inline-block w-fit pt-2 text-base text-brand-white no-underline",
-              "after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left",
-              "after:scale-x-[0.35] after:bg-brand-white after:transition-transform after:duration-300",
-              "hover:after:scale-x-100 hover:after:bg-brand-white",
+              "!relative !mt-auto !inline-block !w-fit !pt-2 !text-base !text-brand-white !no-underline",
+              "after:!absolute after:!bottom-0 after:!left-0 after:!h-px after:!w-full after:!origin-left",
+              "after:!scale-x-[0.35] after:!bg-brand-white after:!transition-transform after:!duration-300",
+              "hover:after:!scale-x-100 hover:after:!bg-brand-white",
               link.className,
             )}
           >

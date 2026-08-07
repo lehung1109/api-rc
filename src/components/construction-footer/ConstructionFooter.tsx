@@ -80,11 +80,11 @@ const ConstructionFooter = (model: ConstructionFooterModel) => {
   return (
     <footer
       className={cn(
-        "construction-footer w-full px-6 pt-20 pb-0 text-center text-base text-brand-navy md:px-10",
+        "construction-footer !w-full !px-6 !pt-20 !pb-0 !text-center !text-base !text-brand-navy md:!px-10",
         className,
       )}
     >
-      <div className="construction-footer-inner mx-auto flex w-full max-w-7xl flex-col items-center gap-8">
+      <div className="construction-footer-inner !mx-auto !flex !w-full !max-w-7xl !flex-col !items-center !gap-8">
         {hasLogo ? <ConstructionFooterBrand logo={logo} /> : null}
 
         {validMenuItems.length > 0 ? (
@@ -92,9 +92,9 @@ const ConstructionFooter = (model: ConstructionFooterModel) => {
         ) : null}
 
         {companyNameText || validSocialLinks.length > 0 ? (
-          <div className="construction-footer-company flex w-full flex-col items-center gap-6 border-t border-brand-navy/15 pt-8">
+          <div className="construction-footer-company !flex !w-full !flex-col !items-center !gap-6 !border-t !border-brand-navy/15 !pt-8">
             {companyNameText ? (
-              <h2 className="construction-footer-company-name max-w-3xl text-balance text-2xl font-bold text-brand-navy">
+              <h2 className="construction-footer-company-name !max-w-3xl !text-balance !text-2xl !font-bold !text-brand-navy">
                 {companyNameText}
               </h2>
             ) : null}
@@ -105,7 +105,7 @@ const ConstructionFooter = (model: ConstructionFooterModel) => {
         ) : null}
 
         {hasContact ? (
-          <div className="w-full border-t border-brand-navy/15 pt-8">
+          <div className="!w-full !border-t !border-brand-navy/15 !pt-8">
             <ConstructionFooterContact
               phone={phone}
               addresses={addresses}
@@ -115,7 +115,7 @@ const ConstructionFooter = (model: ConstructionFooterModel) => {
         ) : null}
 
         {copyrightText || hasBadge ? (
-          <div className="w-full border-t border-brand-navy/15 pt-8">
+          <div className="!w-full !border-t !border-brand-navy/15 !pt-8">
             <ConstructionFooterBottom
               copyright={copyright}
               {...(hasBadge && badge ? { badge } : {})}

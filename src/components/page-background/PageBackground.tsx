@@ -25,12 +25,12 @@ const PageBackground = (model: PageBackgroundModel) => {
   return (
     <div
       className={cn(
-        "page-background pointer-events-none fixed inset-0 -z-10 overflow-hidden",
+        "page-background !pointer-events-none !fixed !inset-0 !-z-10 !overflow-hidden",
         className,
       )}
       aria-hidden
     >
-      <picture className="page-background-picture absolute inset-0 block h-full w-full">
+      <picture className="page-background-picture !absolute !inset-0 !block !h-full !w-full">
         {hasDesktopSource ? (
           <source media="(min-width: 768px)" srcSet={desktopSrcSet} />
         ) : null}
@@ -39,7 +39,7 @@ const PageBackground = (model: PageBackgroundModel) => {
           alt=""
           width={fallback.display_dimensions.width}
           height={fallback.display_dimensions.height}
-          className="page-background-image h-full w-full object-cover"
+          className="page-background-image !h-full !w-full !object-cover"
           loading="lazy"
           decoding="async"
           {...(fallback.srcSet ? { srcSet: fallback.srcSet } : {})}

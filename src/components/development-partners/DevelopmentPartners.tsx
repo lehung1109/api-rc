@@ -36,9 +36,9 @@ const DevelopmentPartners = (model: DevelopmentPartnersModel) => {
   }
 
   const slideInBase = cn(
-    "!opacity-0 !translate-y-10 transition-[opacity,translate] duration-[1.2s] ease-out",
+    "!opacity-0 !translate-y-10 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
     "group-data-[in-view=true]/partners:!opacity-100 group-data-[in-view=true]/partners:!translate-y-0",
-    "motion-reduce:!opacity-100 motion-reduce:!translate-y-0 motion-reduce:transition-none",
+    "motion-reduce:!opacity-100 motion-reduce:!translate-y-0 motion-reduce:!transition-none",
   );
 
   const itemKey = (item: DevelopmentPartnersItemModel, index: number) =>
@@ -48,16 +48,16 @@ const DevelopmentPartners = (model: DevelopmentPartnersModel) => {
     <section
       id={targetId}
       className={cn(
-        "development-partners group/partners w-full overflow-hidden",
+        "development-partners group/partners !w-full !overflow-hidden",
         "!px-6 !py-20 md:!px-10",
         className,
       )}
     >
-      <div className="development-partners-inner mx-auto w-full max-w-7xl">
+      <div className="development-partners-inner !mx-auto !w-full !max-w-7xl">
         {titleText ? (
           <h2
             className={cn(
-              "development-partners-title mb-0 font-medium uppercase tracking-[0.12em]",
+              "development-partners-title !mb-0 !font-medium !uppercase !tracking-[0.12em]",
               "!text-base !text-brand-navy/70",
               slideInBase,
             )}
@@ -85,7 +85,7 @@ const DevelopmentPartners = (model: DevelopmentPartnersModel) => {
       <ClientComponentWrapper
         type="developmentPartnersScrollReveal"
         hydrateData={scrollRevealModel}
-        className="development-partners-scroll-reveal hidden"
+        className="development-partners-scroll-reveal !hidden"
       >
         <DevelopmentPartnersScrollReveal {...scrollRevealModel} />
       </ClientComponentWrapper>

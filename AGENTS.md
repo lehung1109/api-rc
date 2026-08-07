@@ -47,7 +47,7 @@ bun run dev
 bun run dev:server
 ```
 
-Playwright starts the Vite preview from `playwright.config.ts` at `http://localhost:5173/`.
+Playwright starts the Vite preview from `playwright.config.ts` at `http://127.0.0.1:5173/`.
 
 ## Editing Rules For Agents
 

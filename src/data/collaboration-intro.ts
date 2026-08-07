@@ -8,10 +8,10 @@ const collaborationIntro: CollaborationIntroModel = {
   },
   subtitle: "GIỚI THIỆU & ĐỊNH HƯỚNG HỢP TÁC",
   titleHtml:
-    'Arteco là <span class="text-brand-gold">Tổng thầu Thiết kế và Thi công</span> chuyên nghiệp, cung cấp dịch vụ thiết kế và thi công trọn gói cho các công trình nhà ở, khách sạn, resort, văn phòng, nhà hàng, quán cà phê, spa, thương mại trên toàn quốc.',
+    'ICHOUSE là <span class="text-brand-gold">Tổng thầu Thiết kế và Thi công</span> chuyên nghiệp, cung cấp dịch vụ thiết kế và thi công trọn gói cho các công trình nhà ở, khách sạn, resort, văn phòng, nhà hàng, quán cà phê, spa, thương mại trên toàn quốc.',
   image: {
     url: "https://placehold.co/640x480/png?text=Team+Review",
-    alt: "Đội ngũ Arteco khảo sát vật liệu thi công",
+    alt: "Đội ngũ ICHOUSE khảo sát vật liệu thi công",
     display_dimensions: { width: 640, height: 480 },
   },
   bottomTitle:
@@ -59,7 +59,7 @@ const collaborationIntro: CollaborationIntroModel = {
     },
   ],
   note: "Trước khi gửi hồ sơ, vui lòng tham khảo các tiêu chí và quy trình hợp tác dưới đây để đảm bảo sự phù hợp, hiệu quả trong quá trình làm việc.",
-  buttonLabel: "TRỞ THÀNH ĐỐI TÁC ARTECO!",
+  buttonLabel: "TRỞ THÀNH ĐỐI TÁC ICHOUSE!",
   buttonLink: {
     url: "/hop-tac",
     is_external: false,
