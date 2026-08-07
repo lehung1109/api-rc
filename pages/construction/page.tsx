@@ -16,6 +16,8 @@ import KeyPersonnelWrapper from "../../src/components/key-personnel/KeyPersonnel
 import keyPersonnelWrapper from "@/data/key-personnel-wrapper";
 import DevelopmentPartners from "../../src/components/development-partners/DevelopmentPartners";
 import developmentPartners from "@/data/development-partners";
+import CollaborationIntro from "../../src/components/collaboration-intro/CollaborationIntro";
+import collaborationIntro from "@/data/collaboration-intro";
 import ServiceOfferings from "../../src/components/service-offerings/ServiceOfferings";
 import serviceOfferings from "@/data/service-offerings";
 import OutstandingAdvantages from "../../src/components/outstanding-advantages/OutstandingAdvantages";
@@ -64,6 +66,8 @@ export default function ConstructionPage() {
       <KeyPersonnelWrapper {...keyPersonnelWrapper} />
 
       <DevelopmentPartners {...developmentPartners} />
+
+      <CollaborationIntro {...collaborationIntro} />
 
       <ServiceOfferings {...serviceOfferings} />
 

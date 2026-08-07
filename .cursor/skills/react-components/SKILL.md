@@ -681,7 +681,50 @@ export interface DevelopmentPartnersModel {
 
 **Animation:** Tailwind trên TSX — `group/partners` + `group-data-[in-view=true]/partners:*`; title + grid `!translate-y-10` → `!translate-y-0`; `!opacity-0` → `!opacity-100`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
 
-**Mount:** `pages/construction/page.tsx` (sau KeyPersonnel, trước ServiceOfferings).
+**Mount:** `pages/construction/page.tsx` (sau KeyPersonnel, trước CollaborationIntro).
+
+## Quick reference — collaboration intro (server + scroll reveal island)
+
+Section giới thiệu hợp tác: nền ảnh optional → fallback `bg-brand-navy`, top 2 cột (subtitle + titleHtml / ảnh) + border-bottom, bottom title + lưới item 3+2 (icon + label, border trắng) + note + CTA ghost. **Server-only** + island scroll reveal slide từ dưới. Style Tailwind + prefix `!` chống Porto/Bootstrap.
+
+| File                                                  | Vai trò                                                         |
+| ----------------------------------------------------- | --------------------------------------------------------------- |
+| `CollaborationIntro.tsx`                              | Orchestrator: `<section>` + nền/overlay + top + bottom + island |
+| `CollaborationIntroItem.tsx`                          | Leaf: icon `Media` + title (`h3`), border trắng                 |
+| `CollaborationIntroScrollReveal.tsx`                  | `"use client"` — IntersectionObserver → `data-in-view`          |
+| `src/data/collaboration-intro.ts`                     | Mock / CMS (`CollaborationIntro` registry)                      |
+| `src/data/collaboration-intro-scroll-reveal.ts`       | Client registry (re-export `targetId`)                          |
+
+**Model:**
+
+```ts
+export interface CollaborationIntroItemModel {
+  image: MediaModel;
+  title: string;
+}
+
+export interface CollaborationIntroModel {
+  className?: string;
+  backgroundImage?: MediaModel; // optional — thiếu/url rỗng → bg-brand-navy
+  subtitle: string; // → <h2> uppercase text-base text-brand-white/70
+  titleHtml: string; // WYSIWYG lớn text-brand-white (highlight text-brand-gold)
+  image: MediaModel; // top phải
+  bottomTitle: string; // → <h2> text lớn white
+  items: CollaborationIntroItemModel[];
+  note: string; // text-brand-white/70 text-base
+  buttonLabel: string;
+  buttonLink: LinkModel; // ghost trắng → hover bg white + text navy
+  scrollReveal?: { targetId?: string }; // default "collaboration-intro"
+}
+```
+
+**Render guards:** lọc item thiếu `image.url` hoặc `title` trim; CTA chỉ khi `buttonLabel` + `buttonLink.url` trim; rỗng hoàn toàn → `return null`.
+
+**UI:** section `!px-6 !py-20 md:!px-10`; inner `max-w-7xl`; top `md:grid-cols-2`; ảnh top `rounded-tr-[40px]` → `md:rounded-tr-[60px]`; top `border-b border-brand-white/20`; items `flex flex-wrap justify-center` width `md:w-[calc((100%-32px)/3)]` (hàng 2 căn giữa); item border trắng, title `text-base`; note centered `text-brand-white/70`; CTA giống `news-events-button`. Semantic: `collaboration-intro`, `collaboration-intro-inner`, `collaboration-intro-background`, `collaboration-intro-top`, `collaboration-intro-subtitle`, `collaboration-intro-title`, `collaboration-intro-media`, `collaboration-intro-bottom`, `collaboration-intro-bottom-title`, `collaboration-intro-items`, `collaboration-intro-item`, `collaboration-intro-item-image`, `collaboration-intro-item-title`, `collaboration-intro-note`, `collaboration-intro-button`.
+
+**Animation:** Tailwind — `group/collab` + `group-data-[in-view=true]/collab:*`; inner `!translate-y-10` → `!translate-y-0`; duration `1.2s`; `motion-reduce:*` hiện ngay.
+
+**Mount:** `pages/construction/page.tsx` (sau DevelopmentPartners, trước ServiceOfferings).
 
 ## Quick reference — service offerings (server + scroll reveal island)
 
