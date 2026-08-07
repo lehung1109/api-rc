@@ -20,7 +20,8 @@
     "build:server": "bun run generate:server-registry && bun build src/server.ts --target=node --outfile=dist/server.js --packages=bundle",
     "dev:server": "bun run generate:server-registry && bun run --watch src/server.ts",
     "start": "node dist/server.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.9",

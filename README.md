@@ -239,7 +239,7 @@ bun run typecheck
 npx playwright test
 ```
 
-Playwright sẽ tự start Vite preview tại `http://localhost:5173/` theo `playwright.config.ts`.
+Playwright sẽ tự start Vite preview tại `http://127.0.0.1:5173/` theo `playwright.config.ts` (dùng `127.0.0.1` và context riêng mỗi page preview để tránh lỗi MSW/service worker trên Firefox).
 
 Khi một task implement hoặc bugfix hoàn tất, luôn chạy lại test case hoặc command validation liên quan trước khi coi task là xong. Ví dụ: nếu sửa preview page hoặc tương tác browser, chạy test Playwright tương ứng; nếu sửa build/static render, chạy script build tương ứng.
 
