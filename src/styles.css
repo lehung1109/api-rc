@@ -686,6 +686,11 @@ button.contact-popup-close {
     color: var(--e-global-color-primary);
   }
 
+  [data-scrolled=true] a.construction-header-menu-link:hover,
+  [data-solid=true] a.construction-header-menu-link:hover {
+    color: var(--e-global-color-tertiary);
+  }
+
   .elementor .e-div-block-base.elementor-element {
     padding: 0;
   }
