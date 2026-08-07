@@ -680,7 +680,43 @@ export interface DevelopmentPartnersModel {
 
 **Animation:** Tailwind trên TSX — `group/partners` + `group-data-[in-view=true]/partners:*`; title + grid `!translate-y-10` → `!translate-y-0`; `!opacity-0` → `!opacity-100`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
 
-**Mount:** `pages/construction/page.tsx` (sau KeyPersonnel, trước FieldsOfActivity).
+**Mount:** `pages/construction/page.tsx` (sau KeyPersonnel, trước ServiceOfferings).
+
+## Quick reference — service offerings (server + scroll reveal island)
+
+Section dịch vụ 2 cột: list item (title + descriptionHtml + ảnh), **không nền**, padding `!py-20` (80px). Inner `max-w-7xl`. **Server-only** + island scroll reveal. Style Tailwind + prefix `!` chống Porto/Bootstrap.
+
+| File                                             | Vai trò                                                              |
+| ------------------------------------------------ | -------------------------------------------------------------------- |
+| `ServiceOfferings.tsx`                           | Orchestrator: `<section>` + grid 2 cột + scroll island               |
+| `ServiceOfferingsItem.tsx`                       | Leaf: `h3` + descriptionHtml + `Media` grayscale → color hover       |
+| `ServiceOfferingsScrollReveal.tsx`               | `"use client"` — IntersectionObserver → `data-in-view`               |
+| `src/data/service-offerings.ts`                  | Mock / CMS (`ServiceOfferings` registry)                             |
+| `src/data/service-offerings-scroll-reveal.ts`    | Client registry (re-export `targetId`)                               |
+
+**Model:**
+
+```ts
+export interface ServiceOfferingsItemModel {
+  title: string;
+  descriptionHtml: string; // WYSIWYG — thường <ul><li>
+  image: MediaModel;
+}
+
+export interface ServiceOfferingsModel {
+  className?: string;
+  items: ServiceOfferingsItemModel[];
+  scrollReveal?: { targetId?: string }; // default "service-offerings"
+}
+```
+
+**Render guards:** lọc item thiếu `title` hoặc `image.url` trim; `descriptionHtml` rỗng vẫn render title + ảnh; mảng rỗng → `return null`.
+
+**UI:** section `!px-6 !py-20 md:!px-10`; grid `!grid-cols-1 md:!grid-cols-2`; title `h3` `!text-lg md:!text-xl !font-bold !text-brand-navy`; description `!text-base !text-brand-navy/70` + `[&_ul]:!list-disc`; media wrapper `!aspect-[450/480]`; ảnh `!absolute !inset-0 !object-cover !grayscale hover:!grayscale-0` (+ `group-hover/item`). Semantic: `service-offerings`, `service-offerings-inner`, `service-offerings-item`, `service-offerings-item-title`, `service-offerings-item-description`, `service-offerings-item-media`, `service-offerings-item-image`.
+
+**Animation:** Tailwind trên TSX — `group/offerings` + `group-data-[in-view=true]/offerings:*`; index chẵn `!-translate-x-10`, lẻ `!translate-x-10` → `!translate-x-0`; `!opacity-0` → `!opacity-100`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
+
+**Mount:** `pages/construction/page.tsx` (sau DevelopmentPartners, trước FieldsOfActivity).
 
 ## Quick reference — featured projects (server + scroll reveal island)
 
