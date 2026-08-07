@@ -639,10 +639,6 @@ button.contact-popup-close {
   margin-bottom: 5px;
 }
 
-[data-solid=true] .construction-header-top {
-  border-bottom-color: var(--e-global-color-primary);
-}
-
 .floating-contact-nav a:hover {
   color: var(--e-global-color-tertiary);
 }
@@ -684,16 +680,6 @@ button.contact-popup-close {
   }
 
   a.construction-header-menu-link-contact:hover {
-    color: var(--e-global-color-tertiary);
-  }
-
-  [data-scrolled=true] .construction-header-menu-link,
-  [data-solid=true] .construction-header-menu-link {
-    color: var(--e-global-color-primary);
-  }
-
-  [data-scrolled=true] a.construction-header-menu-link:hover,
-  [data-solid=true] a.construction-header-menu-link:hover {
     color: var(--e-global-color-tertiary);
   }
 
