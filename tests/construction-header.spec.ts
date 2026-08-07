@@ -128,6 +128,86 @@ test.describe("ConstructionHeader", () => {
     await expect(page.getByPlaceholder("Gõ tìm kiếm...")).toBeVisible();
   });
 
+  test("desktop: solid matches scrolled menu text colors", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(constructionUrl);
+
+    const header = page.locator("#construction-header");
+    const activeLink = header.getByRole("link", {
+      name: "Trang chủ",
+      exact: true,
+    });
+    const regularLink = header.getByRole("link", {
+      name: "Giới thiệu",
+      exact: true,
+    });
+    const dropdownLink = header.getByRole("link", {
+      name: "Dịch vụ",
+      exact: true,
+    });
+    const contactLink = header.getByRole("link", {
+      name: "Liên hệ",
+      exact: true,
+    });
+    const searchControl = header.locator(
+      ".construction-header-menu-item--search label",
+    );
+
+    const readColors = async () => ({
+      active: await activeLink.evaluate((element) =>
+        getComputedStyle(element).color,
+      ),
+      regular: await regularLink.evaluate((element) =>
+        getComputedStyle(element).color,
+      ),
+      contact: await contactLink.evaluate((element) =>
+        getComputedStyle(element).color,
+      ),
+      search: await searchControl.evaluate((element) =>
+        getComputedStyle(element).color,
+      ),
+    });
+
+    await header.evaluate((element) => {
+      element.removeAttribute("data-solid");
+      element.setAttribute("data-scrolled", "true");
+    });
+    await expect(regularLink).toHaveCSS("color", "rgb(2, 43, 99)");
+    const scrolledColors = await readColors();
+    await regularLink.hover();
+    await expect(regularLink).toHaveCSS("color", "rgb(217, 164, 65)");
+    const scrolledHoverColor = await regularLink.evaluate((element) =>
+      getComputedStyle(element).color,
+    );
+    await dropdownLink.hover();
+    await expect(dropdownLink).toHaveCSS("color", "rgb(217, 164, 65)");
+    const scrolledDropdownHoverColor = await dropdownLink.evaluate((element) =>
+      getComputedStyle(element).color,
+    );
+
+    await page.mouse.move(0, 799);
+    await header.evaluate((element) => {
+      element.removeAttribute("data-scrolled");
+      element.setAttribute("data-solid", "true");
+    });
+    await expect(regularLink).toHaveCSS("color", scrolledColors.regular);
+    const solidColors = await readColors();
+    await regularLink.hover();
+    await expect(regularLink).toHaveCSS("color", "rgb(217, 164, 65)");
+    const solidHoverColor = await regularLink.evaluate((element) =>
+      getComputedStyle(element).color,
+    );
+    await dropdownLink.hover();
+    await expect(dropdownLink).toHaveCSS("color", scrolledDropdownHoverColor);
+    const solidDropdownHoverColor = await dropdownLink.evaluate((element) =>
+      getComputedStyle(element).color,
+    );
+
+    expect(solidColors).toEqual(scrolledColors);
+    expect(solidHoverColor).toBe(scrolledHoverColor);
+    expect(solidDropdownHoverColor).toBe(scrolledDropdownHoverColor);
+  });
+
   test("desktop: fixed + hide top after scroll threshold", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto(constructionUrl);

@@ -41,6 +41,7 @@ Skill mới: tạo thư mục `skill-name/SKILL.md`, thêm một dòng vào bả
 ## Checklist cuối task (khi đụng component / UI)
 
 ```
+- [ ] Có test case phù hợp cho mọi feature/bugfix thay đổi component hoặc UI; focused test đã pass
 - [ ] Code + typecheck pass
 - [ ] Quy ước mới đã ghi vào skill hoặc HEADER.md (nếu có)
 - [ ] Skill cũ không còn mâu thuẫn với thay đổi vừa làm

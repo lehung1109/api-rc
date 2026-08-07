@@ -45,10 +45,7 @@ const desktopChromeTextClass = cn(
   "md:group-data-[solid=true]/construction-header:!text-brand-navy",
 );
 
-const desktopChromeHoverClass = cn(
-  "md:hover:!text-brand-gold",
-  "md:group-data-[solid=true]/construction-header:hover:!text-brand-white",
-);
+const desktopChromeHoverClass = "md:hover:!text-brand-gold";
 
 const submenuLinkClass = cn(
   "construction-header-menu-submenu-link !block !w-full !py-2 !text-base !font-normal !leading-[1.35]",
@@ -271,7 +268,6 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                     "!flex-1 !px-6 md:!px-4",
                     "group-hover/row:!text-brand-navy",
                     "md:group-hover/row:!text-brand-gold",
-                    "md:group-data-[solid=true]/construction-header:group-hover/row:!text-brand-white",
                   )}
                   aria-current={item.active ? "page" : undefined}
                 >
@@ -285,7 +281,6 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                     "group-hover/row:!text-brand-navy",
                     desktopChromeTextClass,
                     "md:group-hover/row:!text-brand-gold",
-                    "md:group-data-[solid=true]/construction-header:group-hover/row:!text-brand-white",
                     "md:!pointer-events-none md:!cursor-default md:!px-1",
                     item.active && "!text-brand-navy",
                   )}

@@ -23,7 +23,8 @@ Skills are living docs. When you learn or agree on a **new api-rc convention** (
 3. For header files: read [src/components/header/HEADER.md](../../../src/components/header/HEADER.md).
 4. When creating or editing component markup: follow [react-seo-markup.mdc](../../rules/react-seo-markup.mdc) (landmarks, `h1`–`h3`, `Link`/`Media`, `nav` + `aria-label`).
 5. When styling with brand/accent colors: follow [ichouse-brand-colors.mdc](../../rules/ichouse-brand-colors.mdc) — **chỉ** token `brand-*` (+ hover); không hex, không `neutral-*`/`gray-*`/`black`.
-6. Run `bun run typecheck` after changes. Run `bun run generate` when adding/removing renderable or client components.
+6. Mọi feature/bugfix làm thay đổi component hoặc UI phải thêm hoặc cập nhật test case phù hợp; ưu tiên test hành vi/regression gần nhất và chạy focused test trước khi báo hoàn tất.
+7. Run `bun run typecheck` after changes. Run `bun run generate` when adding/removing renderable or client components.
 
 ## Brand colors (ICHouse)
 
