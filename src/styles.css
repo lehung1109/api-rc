@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
@@ -52,7 +52,7 @@
     --color-brand-navy-hover: var(--e-global-color-primary_hover);
     --color-brand-gold-hover: var(--e-global-color-secondary_hover);
     --color-brand-white-hover: var(--e-global-color-tertiary_hover);
-    /* FloatingContact platform pills (exception — not brand palette) */
+    /* FloatingContact platform pills (exception ΓÇö not brand palette) */
     --color-floating-contact-messenger: #0084FF;
     --color-floating-contact-zalo: #0068FF;
     --animate-floating-contact-phone-ripple: floating-contact-phone-ripple 1.4s ease-out infinite;
@@ -172,7 +172,7 @@ html body[data-scroll-locked] {
   margin-right: 0 !important;
 }
 
-/* Table of contents — baseline styles (3rd-party override via semantic classes) */
+/* Table of contents ΓÇö baseline styles (3rd-party override via semantic classes) */
 .table-of-contents-list {
   counter-reset: List;
   list-style: none;
@@ -225,13 +225,13 @@ html body[data-scroll-locked] {
 .table-of-contents-item--has-children:has(
     .table-of-contents-branch-input:checked
   ) {
-  /* branch open — hook for 3rd-party */
+  /* branch open ΓÇö hook for 3rd-party */
 }
 
 .table-of-contents-item--has-children:not(
     :has(.table-of-contents-branch-input:checked)
   ) {
-  /* branch closed — hook for 3rd-party */
+  /* branch closed ΓÇö hook for 3rd-party */
 }
 
 @keyframes hero-section-stretch {
@@ -364,7 +364,7 @@ html body[data-scroll-locked] {
   }
 }
 
-/* ── Construction Highlights: scroll slide-in ───────────────────────────────── */
+/* ΓöÇΓöÇ Construction Highlights: scroll slide-in ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .construction-highlights-subtitle,
 .construction-highlights-title {
   opacity: 0;
@@ -409,7 +409,7 @@ html body[data-scroll-locked] {
   }
 }
 
-/* ── Fields of Activity: scroll slide-in ────────────────────────────────────── */
+/* ΓöÇΓöÇ Fields of Activity: scroll slide-in ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 .fields-of-activity-title {
   opacity: 0;
   transform: translateY(2.5rem);
@@ -451,7 +451,7 @@ html body[data-scroll-locked] {
   }
 }
 
-/* ── Construction Header: Porto Bootstrap override ─────────────────────────────
+/* ΓöÇΓöÇ Construction Header: Porto Bootstrap override ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
    Porto theme loads bootstrap.css which redefines Tailwind utility classes
    (.py-4, .gap-4, .p-3) with a different spacing scale and !important,
    causing the header bar to be taller than intended.
@@ -462,9 +462,9 @@ html body[data-scroll-locked] {
      .gap-4 { gap: 1.5rem !important }
      .p-3   { padding: 1rem !important }
      ul     { padding-left: 2rem }  (browser/Bootstrap default)
-──────────────────────────────────────────────────────────────────────────────── */
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
-/* Fix 1 + 2: .construction-header-bar uses .py-4 (→ 1rem) and .gap-4 (→ 1rem) */
+/* Fix 1 + 2: .construction-header-bar uses .py-4 (ΓåÆ 1rem) and .gap-4 (ΓåÆ 1rem) */
 .construction-header .construction-header-bar {
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
@@ -476,7 +476,7 @@ html body[data-scroll-locked] {
   padding-left: 0 !important;
 }
 
-/* Fix 4: search/menu open labels use .p-3 (→ 0.75rem), Bootstrap overrides to 1rem */
+/* Fix 4: search/menu open labels use .p-3 (ΓåÆ 0.75rem), Bootstrap overrides to 1rem */
 /* Fix 5: Bootstrap "label { display: inline-block }" overrides Tailwind .flex on labels */
 .construction-header .construction-header-search-open,
 .construction-header .construction-header-menu-open {
@@ -702,5 +702,28 @@ button.contact-popup-close {
 
   div .md\:h-dvh {
     height: 100dvh !important;
+  }
+}
+
+.key-personnel-swiper > .swiper-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.key-personnel-swiper > .swiper-wrapper > .swiper-slide {
+  width: auto !important;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .key-personnel-swiper > .swiper-wrapper {
+    display: flex;
+    gap: 0;
+  }
+
+  .key-personnel-swiper > .swiper-wrapper > .swiper-slide {
+    width: calc((100% - 48px) / 3) !important;
+    margin-right: 24px;
   }
 }
