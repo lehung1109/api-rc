@@ -643,9 +643,14 @@ button.contact-popup-close {
   color: var(--e-global-color-tertiary);
 }
 
+.swiper-pagination-bullet-active {
+  background-color: var(--e-global-color-tertiary) !important;
+}
+
 .about-intro-description p,
 .construction-highlights-title p,
-.construction-highlights-item-content p {
+.construction-highlights-item-content p,
+.director-profile-description p {
   color: inherit;
 }
 
