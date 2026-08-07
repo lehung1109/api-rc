@@ -45,7 +45,7 @@ const OutstandingAdvantagesItem = (model: OutstandingAdvantagesItemModel) => {
   return (
     <li
       className={cn(
-        "outstanding-advantages-item-wrap max-md:!w-[85%] max-md:!shrink-0 max-md:!snap-start md:!min-w-0",
+        "outstanding-advantages-item-wrap !min-h-[450px] max-md:!w-[85%] max-md:!shrink-0 max-md:!snap-start md:!min-w-0",
         className,
       )}
     >
