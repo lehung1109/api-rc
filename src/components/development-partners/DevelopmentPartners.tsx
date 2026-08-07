@@ -36,7 +36,7 @@ const DevelopmentPartners = (model: DevelopmentPartnersModel) => {
   }
 
   const slideInBase = cn(
-    "!opacity-0 !translate-y-10 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
+    "opacity-0 !translate-y-10 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
     "group-data-[in-view=true]/partners:!opacity-100 group-data-[in-view=true]/partners:!translate-y-0",
     "motion-reduce:!opacity-100 motion-reduce:!translate-y-0 motion-reduce:!transition-none",
   );

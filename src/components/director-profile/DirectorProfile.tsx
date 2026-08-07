@@ -47,8 +47,7 @@ const DirectorProfile = (model: DirectorProfileModel) => {
     ? backgroundMobileImage
     : backgroundDesktopImage;
   const backgroundFallbackUrl = backgroundFallback.url.trim();
-  const desktopBgSrcSet =
-    backgroundDesktopImage.srcSet?.trim() || desktopBgUrl;
+  const desktopBgSrcSet = backgroundDesktopImage.srcSet?.trim() || desktopBgUrl;
   const targetId =
     scrollReveal?.targetId?.trim() || DEFAULT_SCROLL_REVEAL_TARGET_ID;
   const scrollRevealModel: DirectorProfileScrollRevealModel = {
@@ -65,7 +64,7 @@ const DirectorProfile = (model: DirectorProfileModel) => {
   }
 
   const slideInBase = cn(
-    "!opacity-0 !-translate-x-10 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
+    "opacity-0 !-translate-x-10 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
     "group-data-[in-view=true]/profile:!opacity-100 group-data-[in-view=true]/profile:!translate-x-0",
     "motion-reduce:!opacity-100 motion-reduce:!translate-x-0 motion-reduce:!transition-none",
   );
