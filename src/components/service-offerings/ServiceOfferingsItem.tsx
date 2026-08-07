@@ -30,7 +30,7 @@ const ServiceOfferingsItem = (model: ServiceOfferingsItemModel) => {
       <h3
         className={cn(
           "service-offerings-item-title !mb-0 !leading-snug !font-bold",
-          "!text-lg !text-brand-navy md:!text-xl",
+          "!text-lg !text-brand-navy md:!text-xl lg:!text-[2rem]",
         )}
       >
         {titleText}
