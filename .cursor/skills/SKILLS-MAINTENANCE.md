@@ -12,6 +12,7 @@ Trong **cùng phiên** (hoặc trước khi kết thúc task), cập nhật skil
 | Phát hiện skill **sai** so với code hiện tại | Sửa skill **trước hoặc cùng lúc** với code |
 | Thêm quy tắc trong `HEADER.md` / feature doc mà skill chưa có | Đồng bộ vào skill + doc (một hướng dẫn chính, tránh hai bản mâu thuẫn) |
 | User nói rõ "luôn làm X" / "không được Y" | Thêm vào skill tương ứng (dùng đúng wording user nếu họ đưa câu chữ cụ thể) |
+| Chống CSS theme/Porto đè utility | Tailwind prefix `!` — ghi trong `react-components` mục *Styling* |
 | Refactor lớn đổi kiến trúc (registry, wrapper, folder layout) | Cập nhật `react-components` và file doc liên quan |
 
 **Không** chờ user nhắc "cập nhật skill" — coi đó là phần bắt buộc của task hoàn chỉnh.

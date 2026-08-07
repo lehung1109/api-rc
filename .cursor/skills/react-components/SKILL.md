@@ -169,6 +169,7 @@ Rules:
 - **Tailwind CSS v4** utilities. Breakpoint: **`md` = 768px** (`max-md:` mobile, `md:` desktop).
 - Merge classes with `cn()` from `@/lib/utils` — especially when merging prop `className`.
 - Add **semantic hooks** alongside utilities: `process-section`, `header-menu-link`, `component-*`. Enables custom CSS later without Tailwind-only selectors.
+- **Chống third-party override (Porto/Bootstrap):** dùng prefix Tailwind **`!`** (`!important`) trên utility dễ bị theme redefine — spacing (`!py-20`, `!px-6`, `!gap-4`, `!p-4`), display/grid (`!flex`, `!grid`, `!grid-cols-4`), filter (`!grayscale`, `hover:!grayscale-0`), color (`!text-brand-navy/70`), opacity/translate animation (`!opacity-0`, `!translate-y-10`). Pattern tham chiếu: `CarouselNav`, `DevelopmentPartners`. Giữ semantic class song song. **Tránh** file CSS co-located / `@import` riêng trừ khi Tailwind không đủ (keyframes phức tạp, pseudo đặc biệt).
 - Icons: **lucide-react** (`Menu`, `ChevronDownIcon`, …).
 - shadcn (`Button`, `Input`, …): reuse existing `components/ui/*`; do not add Sheet/Collapsible/Radix toggles for simple show/hide (use checkbox + CSS per css-first skill).
 - CMS HTML fields (`introContent`, WYSIWYG text): `dangerouslySetInnerHTML={{ __html: … }}` on a semantic wrapper with a stable class.
@@ -645,6 +646,41 @@ export interface KeyPersonnelModel {
 **Mount:** `pages/construction/page.tsx` (sau VisionMission).
 
 **WordPress:** widget `EAI-key-personnel` — title, repeater items (MEDIA + resolution, title, WYSIWYG `description_html`, URL link, `link_label`), `class_name` → `eai_rc_render_html('KeyPersonnelWrapper', …)`. Helper: `key-personnel.php`. Editor sample khi `items` rỗng.
+
+## Quick reference — development partners (server + scroll reveal island)
+
+Section đối tác phát triển: title uppercase + lưới logo (không link), **không nền**, padding `!py-20` (80px). Inner `max-w-7xl`. Khác `PartnerLogos` (carousel Swiper). **Server-only** + island scroll reveal. Style Tailwind + prefix `!` chống Porto/Bootstrap.
+
+| File                                               | Vai trò                                                |
+| -------------------------------------------------- | ------------------------------------------------------ |
+| `DevelopmentPartners.tsx`                          | Orchestrator: `<section>` + h2 + grid + scroll island  |
+| `DevelopmentPartnersItem.tsx`                      | Leaf: border box + `Media` grayscale → color hover     |
+| `DevelopmentPartnersScrollReveal.tsx`              | `"use client"` — IntersectionObserver → `data-in-view` |
+| `src/data/development-partners.ts`                 | Mock / CMS (`DevelopmentPartners` registry)            |
+| `src/data/development-partners-scroll-reveal.ts`   | Client registry (re-export `targetId`)                 |
+
+**Model:**
+
+```ts
+export interface DevelopmentPartnersItemModel {
+  image: MediaModel; // không link
+}
+
+export interface DevelopmentPartnersModel {
+  className?: string;
+  title: string; // → <h2>
+  items: DevelopmentPartnersItemModel[];
+  scrollReveal?: { targetId?: string }; // default "development-partners"
+}
+```
+
+**Render guards:** lọc item thiếu `image.url` trim; rỗng items + không title → `return null`.
+
+**UI:** section `!px-6 !py-20 md:!px-10`; title `!text-base !text-brand-navy/70` uppercase; grid `!grid-cols-2 md:!grid-cols-4`; item `!aspect-square !rounded-md !border !border-brand-navy/15 !p-4`; logo `!grayscale hover:!grayscale-0`. Semantic: `development-partners`, `development-partners-inner`, `development-partners-title`, `development-partners-grid`, `development-partners-item`, `development-partners-item-image`.
+
+**Animation:** Tailwind trên TSX — `group/partners` + `group-data-[in-view=true]/partners:*`; title + grid `!translate-y-10` → `!translate-y-0`; `!opacity-0` → `!opacity-100`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
+
+**Mount:** `pages/construction/page.tsx` (sau KeyPersonnel, trước FieldsOfActivity).
 
 ## Quick reference — featured projects (server + scroll reveal island)
 

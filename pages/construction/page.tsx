@@ -14,6 +14,8 @@ import VisionMission from "../../src/components/vision-mission/VisionMission";
 import visionMission from "@/data/vision-mission";
 import KeyPersonnelWrapper from "../../src/components/key-personnel/KeyPersonnelWrapper";
 import keyPersonnelWrapper from "@/data/key-personnel-wrapper";
+import DevelopmentPartners from "../../src/components/development-partners/DevelopmentPartners";
+import developmentPartners from "@/data/development-partners";
 import FieldsOfActivity from "../../src/components/fields-of-activity/FieldsOfActivity";
 import fieldsOfActivity from "@/data/fields-of-activity";
 import ConstructionHighlights from "../../src/components/construction-highlights/ConstructionHighlights";
@@ -52,6 +54,8 @@ export default function ConstructionPage() {
       <VisionMission {...visionMission} />
 
       <KeyPersonnelWrapper {...keyPersonnelWrapper} />
+
+      <DevelopmentPartners {...developmentPartners} />
 
       <FieldsOfActivity {...fieldsOfActivity} />
 
