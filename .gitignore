@@ -144,6 +144,8 @@ vite.config.ts.timestamp-*
 
 # Generated files
 src/generated/
+/html/
+/test-db/
 
 # Playwright
 /test-results/
