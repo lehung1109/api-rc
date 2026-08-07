@@ -316,6 +316,7 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 | `VideoHeroBanner`          | `VideoHeroBannerWrapper`      | `video-hero-banner-wrapper.ts`      | `video-hero-banner.ts` (re-export)          |
 | `ContactPopup`             | `ContactPopupWrapper`         | `contact-popup-wrapper.ts`          | `contact-popup.ts` (re-export)              |
 | `ProjectCategoryGallery`   | `ProjectCategoryGalleryWrapper` | `project-category-gallery-wrapper.ts` | `project-category-gallery.ts` (re-export) |
+| `JobListingList`           | `JobListingListWrapper`         | `job-listing-list-wrapper.ts`       | `job-listing-list.ts` (re-export)           |
 
 ## Quick reference — header stack
 
@@ -930,6 +931,57 @@ export interface ProjectCategoryGalleryModel {
 **UI:** filter pills outline navy / active fill navy; grid `!grid-cols-1 md:!grid-cols-3 !gap-px`; card hover như FeaturedProjects; load-more outline navy → hover fill. Style Tailwind + `!`. Slide-in từ dưới (`!translate-y-10`) qua IO trong client. Semantic: `project-category-gallery`, `project-category-gallery-filters`, `project-category-gallery-filter-item`, `project-category-gallery-grid`, `project-category-gallery-item*`, `project-category-gallery-load-more*`, `project-category-gallery-loading`, `project-category-gallery-empty`.
 
 **Mount:** `pages/construction/page.tsx` (sau FeaturedProjects, trước NewsEvents).
+
+## Quick reference — job listing list (client + wrapper)
+
+Danh sách tin tuyển dụng: nền `!bg-brand-white`, padding `!py-20`, container `max-w-7xl`. Layout ngang cố định mọi breakpoint (ảnh trái `aspect-[250/200]` `w-[250px]`, content phải). Pagination số + nút `>` đồng bộ URL `?paged=` (default trang 1). **Client + wrapper** — mount qua `JobListingListWrapper`. Endpoint `POST /api/job-listing-list` mock bằng **MSW** trong Vite DEV.
+
+| File                                           | Vai trò                                                              |
+| ---------------------------------------------- | -------------------------------------------------------------------- |
+| `JobListingList.tsx`                           | `"use client"` — list + URL sync + fetch page + loading overlay      |
+| `JobListingListCard.tsx`                       | Leaf: media + title link + meta + description                        |
+| `JobListingListPagination.tsx`                 | Leaf: numbered pagination + next chevron                             |
+| `JobListingListWrapper.tsx`                    | Server entry: `ClientComponentWrapper` + `type="jobListingList"`     |
+| `src/lib/job-listing-list/types.ts`            | Models + request/response                                            |
+| `src/lib/job-listing-list/paginate.ts`         | Pure slice + `totalPages`                                            |
+| `src/lib/job-listing-list/fetch.ts`            | Client POST fetch (8s timeout)                                       |
+| `src/lib/job-listing-list/url-page.ts`         | Đọc/ghi `paged` query param                                          |
+| `src/data/job-listing-list-wrapper.ts`         | Mock / CMS canonical (+ `jobListingListCatalog`)                     |
+| `src/data/job-listing-list.ts`                 | Re-export cho client registry                                        |
+
+**Model:**
+
+```ts
+export interface JobListingListItemModel {
+  id: string;
+  image: MediaModel;
+  categoryLabel: string;
+  title: string;
+  link: LinkModel;
+  statusLabel?: string;
+  employmentType?: string;
+  location?: string;
+  description: string;
+}
+
+export interface JobListingListModel {
+  className?: string;
+  listEndpoint: string;
+  pageSize: number;
+  items: JobListingListItemModel[];
+  totalPages: number;
+  initialPage?: number;
+  pageQueryParam?: string; // default "paged"
+}
+```
+
+**API (MSW):** `POST /api/job-listing-list` body `{ page?, pageSize? }` → `{ items, page, totalPages }`. Đổi trang = replace list + overlay loading. Fetch fail → giữ list hiện tại. URL: `readPageFromLocation` / `writePageToUrl`; `paged=1` → xóa param; `popstate` re-fetch.
+
+**UI:** item `!flex !flex-row !gap-5`; title `h3` + `Link` uppercase navy; status `!text-brand-gold`; meta `Clock`/`MapPin` `!text-brand-navy/90`; description `!text-base`; pagination inactive `!bg-brand-white-hover`, active `!bg-brand-navy !text-brand-white`. Mọi utility Tailwind dùng prefix `!`. Semantic: `job-listing-list`, `job-listing-list-inner`, `job-listing-list-items`, `job-listing-list-item*`, `job-listing-list-pagination*`, `job-listing-list-loading`, `job-listing-list-empty`.
+
+**Mount:** `pages/construction/page.tsx` (sau NewsEvents, trước ContactCta).
+
+**WordPress (sau):** widget `EAI-job-listing-list` — query posts tuyển dụng, `initialPage` từ `$_GET['paged']`, endpoint AJAX WP.
 
 ## Quick reference — news events (server + scroll reveal island)
 
