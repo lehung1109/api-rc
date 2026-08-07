@@ -68,6 +68,11 @@ function getLinkClass(
       : "!font-medium !text-brand-navy/80",
     "max-md:hover:!text-brand-navy",
     desktopChromeTextClass,
+    active &&
+      cn(
+        "md:group-data-[scrolled=true]/construction-header:!text-brand-gold",
+        "md:group-data-[solid=true]/construction-header:!text-brand-gold",
+      ),
     !active && desktopChromeHoverClass,
     hoverBg && mobileHoverBgClass,
     isContact &&
@@ -281,6 +286,8 @@ const ConstructionHeaderMenu = (model: ConstructionHeaderMenuModel) => {
                     "group-hover/row:!text-brand-navy",
                     desktopChromeTextClass,
                     "md:group-hover/row:!text-brand-gold",
+                    "md:group-data-[scrolled=true]/construction-header:group-hover/row:!text-brand-gold",
+                    "md:group-data-[solid=true]/construction-header:group-hover/row:!text-brand-gold",
                     "md:!pointer-events-none md:!cursor-default md:!px-1",
                     item.active && "!text-brand-navy",
                   )}

@@ -128,6 +128,25 @@ test.describe("ConstructionHeader", () => {
     await expect(page.getByPlaceholder("Gõ tìm kiếm...")).toBeVisible();
   });
 
+  test("desktop: solid uses navy top text and border", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(constructionUrl);
+
+    const header = page.locator("#construction-header");
+    const headerTop = header.locator(".construction-header-top");
+    const hotline = headerTop.locator(".construction-header-top-hotline");
+
+    await header.evaluate((element) => {
+      element.setAttribute("data-solid", "true");
+    });
+
+    await expect(hotline).toHaveCSS("color", "rgb(2, 43, 99)");
+    await expect(headerTop).toHaveCSS(
+      "border-bottom-color",
+      "rgb(2, 43, 99)",
+    );
+  });
+
   test("desktop: solid matches scrolled menu text colors", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto(constructionUrl);
@@ -145,12 +164,21 @@ test.describe("ConstructionHeader", () => {
       name: "Dịch vụ",
       exact: true,
     });
+    const dropdownChevron = dropdownLink
+      .locator("xpath=..")
+      .locator(".construction-header-menu-chevron-trigger");
     const contactLink = header.getByRole("link", {
       name: "Liên hệ",
       exact: true,
     });
     const searchControl = header.locator(
       ".construction-header-menu-item--search label",
+    );
+    const submenuLink = header
+      .locator(".construction-header-menu-submenu-link")
+      .first();
+    const submenuColor = await submenuLink.evaluate((element) =>
+      getComputedStyle(element).color,
     );
 
     const readColors = async () => ({
@@ -173,6 +201,8 @@ test.describe("ConstructionHeader", () => {
       element.setAttribute("data-scrolled", "true");
     });
     await expect(regularLink).toHaveCSS("color", "rgb(2, 43, 99)");
+    await expect(activeLink).toHaveCSS("color", "rgb(217, 164, 65)");
+    await expect(submenuLink).toHaveCSS("color", submenuColor);
     const scrolledColors = await readColors();
     await regularLink.hover();
     await expect(regularLink).toHaveCSS("color", "rgb(217, 164, 65)");
@@ -181,6 +211,7 @@ test.describe("ConstructionHeader", () => {
     );
     await dropdownLink.hover();
     await expect(dropdownLink).toHaveCSS("color", "rgb(217, 164, 65)");
+    await expect(dropdownChevron).toHaveCSS("color", "rgb(217, 164, 65)");
     const scrolledDropdownHoverColor = await dropdownLink.evaluate((element) =>
       getComputedStyle(element).color,
     );
@@ -191,6 +222,8 @@ test.describe("ConstructionHeader", () => {
       element.setAttribute("data-solid", "true");
     });
     await expect(regularLink).toHaveCSS("color", scrolledColors.regular);
+    await expect(activeLink).toHaveCSS("color", "rgb(217, 164, 65)");
+    await expect(submenuLink).toHaveCSS("color", submenuColor);
     const solidColors = await readColors();
     await regularLink.hover();
     await expect(regularLink).toHaveCSS("color", "rgb(217, 164, 65)");
@@ -199,6 +232,7 @@ test.describe("ConstructionHeader", () => {
     );
     await dropdownLink.hover();
     await expect(dropdownLink).toHaveCSS("color", scrolledDropdownHoverColor);
+    await expect(dropdownChevron).toHaveCSS("color", "rgb(217, 164, 65)");
     const solidDropdownHoverColor = await dropdownLink.evaluate((element) =>
       getComputedStyle(element).color,
     );
