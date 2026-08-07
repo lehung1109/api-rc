@@ -21,12 +21,12 @@ const ConstructionFooterBottom = (model: ConstructionFooterBottomModel) => {
   return (
     <div
       className={cn(
-        "construction-footer-bottom flex w-full flex-wrap items-center justify-between gap-4",
+        "construction-footer-bottom !flex !w-full !flex-wrap !items-center !justify-between !gap-4",
         className,
       )}
     >
       {copyrightText ? (
-        <p className="construction-footer-copyright text-left text-base text-brand-navy">
+        <p className="construction-footer-copyright !text-left !text-base !text-brand-navy">
           {copyrightText}
         </p>
       ) : (
@@ -36,7 +36,7 @@ const ConstructionFooterBottom = (model: ConstructionFooterBottomModel) => {
         <Media
           {...badge}
           className={cn(
-            "construction-footer-badge h-auto w-auto max-h-8",
+            "construction-footer-badge !h-auto !w-auto !max-h-8",
             badge.className,
           )}
         />

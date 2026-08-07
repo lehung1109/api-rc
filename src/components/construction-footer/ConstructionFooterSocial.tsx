@@ -32,7 +32,7 @@ const ConstructionFooterSocial = (model: ConstructionFooterSocialModel) => {
   return (
     <div
       className={cn(
-        "construction-footer-social flex flex-wrap items-center justify-center gap-3",
+        "construction-footer-social !flex !flex-wrap !items-center !justify-center !gap-3",
         className,
       )}
     >
@@ -41,16 +41,16 @@ const ConstructionFooterSocial = (model: ConstructionFooterSocialModel) => {
           key={`${item.ariaLabel}-${item.link.url}`}
           {...item.link}
           className={cn(
-            "construction-footer-social-link inline-flex items-center justify-center text-brand-navy transition-colors hover:text-brand-gold",
+            "construction-footer-social-link !inline-flex !items-center !justify-center !text-brand-navy !transition-colors hover:!text-brand-gold",
             item.link.className,
           )}
         >
-          <span className="sr-only">{item.ariaLabel}</span>
+          <span className="!sr-only">{item.ariaLabel}</span>
           <Media
             {...item.icon}
             alt=""
             className={cn(
-              "construction-footer-social-icon h-10 w-10 rounded-full object-contain",
+              "construction-footer-social-icon !h-10 !w-10 !rounded-full !object-contain",
               item.icon.className,
             )}
           />

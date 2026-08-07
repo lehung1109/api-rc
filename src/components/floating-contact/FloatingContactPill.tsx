@@ -31,12 +31,12 @@ const FloatingContactPill = (model: FloatingContactPillModel) => {
       {...link}
       className={cn(
         "floating-contact-pill",
-        variant === "messenger" && "bg-floating-contact-messenger",
-        variant === "zalo" && "bg-floating-contact-zalo",
-        "inline-flex items-center gap-2 rounded-full px-4 py-2",
-        "max-md:gap-0 max-md:p-2.5",
-        "text-[20px] font-semibold uppercase leading-none text-brand-white no-underline",
-        "shadow-md",
+        variant === "messenger" && "!bg-floating-contact-messenger",
+        variant === "zalo" && "!bg-floating-contact-zalo",
+        "!inline-flex !items-center !gap-2 !rounded-full !px-4 !py-2",
+        "max-md:!gap-0 max-md:!p-2.5",
+        "!text-[20px] !font-semibold !uppercase !leading-none !text-brand-white !no-underline",
+        "!shadow-md",
         className,
         link.className,
       )}
@@ -45,11 +45,11 @@ const FloatingContactPill = (model: FloatingContactPillModel) => {
         {...icon}
         alt=""
         className={cn(
-          "floating-contact-pill-icon h-5 w-5 shrink-0 object-contain",
+          "floating-contact-pill-icon !h-5 !w-5 !shrink-0 !object-contain",
           icon.className,
         )}
       />
-      <span className="floating-contact-pill-label max-md:sr-only">
+      <span className="floating-contact-pill-label max-md:!sr-only">
         {labelText}
       </span>
     </Link>

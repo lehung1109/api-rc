@@ -31,7 +31,7 @@ const JobListingListCard = (model: JobListingListCardModel) => {
   return (
     <li
       className={cn(
-        "job-listing-list-item-wrap !min-w-0 !border-b !border-brand-navy/15 !pb-8 !last:border-b-0 !last:pb-0",
+        "job-listing-list-item-wrap !min-w-0 !border-b !border-brand-navy/15 !pb-8 last:!border-b-0 last:!pb-0",
         className,
       )}
     >

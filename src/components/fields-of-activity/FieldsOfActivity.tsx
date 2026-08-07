@@ -75,27 +75,27 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
     <section
       id={targetId}
       className={cn(
-        "fields-of-activity mx-auto w-full max-w-7xl overflow-hidden px-4 py-16 text-brand-navy",
+        "fields-of-activity !mx-auto !w-full !max-w-7xl !overflow-hidden !px-4 !py-16 !text-brand-navy",
         className,
       )}
     >
       {titleText ? (
-        <h2 className="fields-of-activity-title text-md font-bold leading-tight">
+        <h2 className="fields-of-activity-title !text-md !font-bold !leading-tight">
           {titleText}
         </h2>
       ) : null}
 
       <div
         className={cn(
-          "fields-of-activity-body mt-7 grid grid-cols-1 gap-8",
-          "md:grid-cols-2 md:gap-12",
+          "fields-of-activity-body !mt-7 !grid !grid-cols-1 !gap-8",
+          "md:!grid-cols-2 md:!gap-12",
         )}
       >
         {validItems.length > 0 ? (
           <div
             className={cn(
               "fields-of-activity-accordion",
-              hasAnyIcon && "md:pl-12",
+              hasAnyIcon && "md:!pl-12",
             )}
           >
             {validItems.map((item, index) => (
@@ -115,16 +115,16 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
       </div>
 
       {hasButton ? (
-        <div className="fields-of-activity-cta mt-8 flex justify-center md:mt-10">
+        <div className="fields-of-activity-cta !mt-8 !flex !justify-center md:!mt-10">
           <Link
             {...buttonLink}
             className={cn(
-              "fields-of-activity-button inline-flex items-center justify-center",
-              "border border-brand-navy bg-brand-navy px-8 py-3",
-              "text-lg font-bold uppercase tracking-wide text-brand-white no-underline",
-              "transition-colors",
-              "hover:border-brand-navy hover:bg-brand-white hover:text-brand-navy",
-              "md:px-10 md:py-3.5 md:text-xl",
+              "fields-of-activity-button !inline-flex !items-center !justify-center",
+              "!border !border-brand-navy !bg-brand-navy !px-8 !py-3",
+              "!text-lg !font-bold !uppercase !tracking-wide !text-brand-white !no-underline",
+              "!transition-colors",
+              "hover:!border-brand-navy hover:!bg-brand-white hover:!text-brand-navy",
+              "md:!px-10 md:!py-3.5 md:!text-xl",
               buttonLink.className,
             )}
           >
@@ -137,7 +137,7 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
         <ClientComponentWrapper
           type="accordionExclusiveSync"
           hydrateData={exclusiveSyncModel}
-          className="fields-of-activity-accordion-exclusive-sync hidden"
+          className="fields-of-activity-accordion-exclusive-sync !hidden"
         >
           <AccordionExclusiveSync {...exclusiveSyncModel} />
         </ClientComponentWrapper>
@@ -146,7 +146,7 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
       <ClientComponentWrapper
         type="fieldsOfActivityScrollReveal"
         hydrateData={scrollRevealModel}
-        className="fields-of-activity-scroll-reveal hidden"
+        className="fields-of-activity-scroll-reveal !hidden"
       >
         <FieldsOfActivityScrollReveal {...scrollRevealModel} />
       </ClientComponentWrapper>

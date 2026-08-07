@@ -69,13 +69,13 @@ const AboutIntro = (model: AboutIntroModel) => {
     <section
       id={targetId}
       className={cn(
-        "about-intro relative w-full overflow-hidden text-brand-white",
-        "px-6 py-12 md:px-10 md:py-16",
+        "about-intro !relative !w-full !overflow-hidden !text-brand-white",
+        "!px-6 !py-12 md:!px-10 md:!py-16",
         className,
       )}
     >
       {hasBackground ? (
-        <picture className="about-intro-background-picture absolute inset-0 z-0 block h-full w-full">
+        <picture className="about-intro-background-picture !absolute !inset-0 !z-0 !block !h-full !w-full">
           {desktopBgUrl ? (
             <source media="(min-width: 768px)" srcSet={desktopBgSrcSet} />
           ) : null}
@@ -85,7 +85,7 @@ const AboutIntro = (model: AboutIntroModel) => {
             width={backgroundFallback.display_dimensions.width}
             height={backgroundFallback.display_dimensions.height}
             className={cn(
-              "about-intro-background-image h-full w-full max-w-none object-cover object-left-bottom",
+              "about-intro-background-image !h-full !w-full !max-w-none !object-cover !object-left-bottom",
               backgroundFallback.className,
             )}
             loading="lazy"
@@ -100,17 +100,17 @@ const AboutIntro = (model: AboutIntroModel) => {
         </picture>
       ) : null}
 
-      <div className="about-intro-inner relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+      <div className="about-intro-inner !relative !z-10 !mx-auto !grid !w-full !max-w-7xl !grid-cols-1 !items-center !gap-10 md:!grid-cols-2 md:!gap-12 lg:!gap-16">
         <div className="about-intro-copy">
           {subtitleText ? (
-            <SubtitleTag className="about-intro-subtitle text-base font-medium uppercase tracking-[0.12em] text-brand-gold md:text-lg">
+            <SubtitleTag className="about-intro-subtitle !text-base !font-medium !uppercase !tracking-[0.12em] !text-brand-gold md:!text-lg">
               {subtitleText}
             </SubtitleTag>
           ) : null}
 
           {description ? (
             <div
-              className="about-intro-description mt-4 text-lg leading-relaxed text-brand-white md:mt-5 md:text-xl md:leading-8 lg:text-2xl lg:leading-9"
+              className="about-intro-description !mt-4 !text-lg !leading-relaxed !text-brand-white md:!mt-5 md:!text-xl md:!leading-8 lg:!text-2xl lg:!leading-9"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           ) : null}
@@ -119,11 +119,11 @@ const AboutIntro = (model: AboutIntroModel) => {
             <Link
               {...buttonLink}
               className={cn(
-                "about-intro-button mt-8 inline-flex items-center justify-center",
-                "border border-brand-white bg-transparent px-8 py-3",
-                "text-base font-medium uppercase tracking-wide text-brand-white",
-                "transition-colors hover:border-brand-white hover:bg-brand-white hover:text-brand-navy",
-                "md:mt-10",
+                "about-intro-button !mt-8 !inline-flex !items-center !justify-center",
+                "!border !border-brand-white !bg-transparent !px-8 !py-3",
+                "!text-base !font-medium !uppercase !tracking-wide !text-brand-white",
+                "!transition-colors hover:!border-brand-white hover:!bg-brand-white hover:!text-brand-navy",
+                "md:!mt-10",
                 buttonLink.className,
               )}
             >
@@ -137,7 +137,7 @@ const AboutIntro = (model: AboutIntroModel) => {
             <Media
               {...image}
               className={cn(
-                "about-intro-image h-auto w-full object-cover",
+                "about-intro-image !h-auto !w-full !object-cover",
                 image.className,
               )}
             />
@@ -148,7 +148,7 @@ const AboutIntro = (model: AboutIntroModel) => {
       <ClientComponentWrapper
         type="aboutIntroScrollReveal"
         hydrateData={scrollRevealModel}
-        className="about-intro-scroll-reveal hidden"
+        className="about-intro-scroll-reveal !hidden"
       >
         <AboutIntroScrollReveal {...scrollRevealModel} />
       </ClientComponentWrapper>

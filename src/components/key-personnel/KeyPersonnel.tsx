@@ -43,19 +43,19 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
   return (
     <section
       className={cn(
-        "key-personnel group bg-brand-navy px-6 py-20 md:px-14",
+        "key-personnel group !bg-brand-navy !px-6 !py-20 md:!px-14",
         className,
       )}
     >
-      <div className="key-personnel-inner mx-auto w-full max-w-7xl">
+      <div className="key-personnel-inner !mx-auto !w-full !max-w-7xl">
         {sectionTitle ? (
-          <h2 className="key-personnel-title mb-8 text-base uppercase text-brand-white/70">
+          <h2 className="key-personnel-title !mb-8 !text-base !uppercase !text-brand-white/70">
             {sectionTitle}
           </h2>
         ) : null}
 
         {validItems.length > 0 ? (
-          <div className="key-personnel-slider key-personnel-nav relative w-full">
+          <div className="key-personnel-slider key-personnel-nav !relative !w-full">
             <KeyPersonnelNavPrev swiper={swiper} canPrev={canPrev} />
 
             <Swiper
@@ -72,7 +72,7 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
                   slidesPerGroup: 3,
                 },
               }}
-              className="key-personnel-swiper key-personnel-pagination w-full !pb-12"
+              className="key-personnel-swiper key-personnel-pagination !w-full !pb-12"
               style={
                 {
                   "--swiper-pagination-bullet-width": "8px",

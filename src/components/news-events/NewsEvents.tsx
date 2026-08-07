@@ -61,25 +61,25 @@ const NewsEvents = (model: NewsEventsModel) => {
     `${item.image.url}-${item.title}-${index}`;
 
   const slideInBase = cn(
-    "opacity-0 transition-[opacity,translate] duration-[1.2s] ease-out",
-    "group-data-[in-view=true]/news:opacity-100 group-data-[in-view=true]/news:translate-x-0 group-data-[in-view=true]/news:translate-y-0",
-    "motion-reduce:opacity-100 motion-reduce:translate-x-0 motion-reduce:translate-y-0 motion-reduce:transition-none",
+    "!opacity-0 !transition-[opacity,translate] !duration-[1.2s] !ease-out",
+    "group-data-[in-view=true]/news:!opacity-100 group-data-[in-view=true]/news:!translate-x-0 group-data-[in-view=true]/news:!translate-y-0",
+    "motion-reduce:!opacity-100 motion-reduce:!translate-x-0 motion-reduce:!translate-y-0 motion-reduce:!transition-none",
   );
 
   return (
     <section
       id={targetId}
       className={cn(
-        "news-events group/news w-full overflow-hidden bg-brand-navy",
-        "px-6 py-20 md:px-10",
+        "news-events group/news !w-full !overflow-hidden !bg-brand-navy",
+        "!px-6 !py-20 md:!px-10",
         className,
       )}
     >
-      <div className="news-events-inner mx-auto w-full max-w-7xl">
+      <div className="news-events-inner !mx-auto !w-full !max-w-7xl">
         {titleText ? (
           <h2
             className={cn(
-              "news-events-title mb-0 translate-y-10 text-base font-medium uppercase tracking-[0.12em] text-brand-white",
+              "news-events-title !mb-0 !translate-y-10 !text-base !font-medium !uppercase !tracking-[0.12em] !text-brand-white",
               slideInBase,
             )}
           >
@@ -90,16 +90,16 @@ const NewsEvents = (model: NewsEventsModel) => {
         {validItems.length > 0 ? (
           <div
             className={cn(
-              "news-events-grid grid grid-cols-1 gap-6",
-              (titleText || hasButton) && "mt-8 md:mt-10",
-              "md:grid-cols-2 md:gap-6",
+              "news-events-grid !grid !grid-cols-1 !gap-6",
+              (titleText || hasButton) && "!mt-8 md:!mt-10",
+              "md:!grid-cols-2 md:!gap-6",
             )}
           >
             {featured ? (
               <ul
                 className={cn(
-                  "news-events-featured list-none p-0",
-                  "-translate-x-10",
+                  "news-events-featured !list-none !p-0",
+                  "!-translate-x-10",
                   slideInBase,
                 )}
               >
@@ -110,10 +110,10 @@ const NewsEvents = (model: NewsEventsModel) => {
             {sideItems.length > 0 ? (
               <ul
                 className={cn(
-                  "news-events-side grid list-none grid-cols-1 gap-6 p-0",
-                  "translate-x-10",
+                  "news-events-side !grid !list-none !grid-cols-1 !gap-6 !p-0",
+                  "!translate-x-10",
                   slideInBase,
-                  "md:grid-cols-2",
+                  "md:!grid-cols-2",
                 )}
               >
                 {sideItems.map((item, index) => (
@@ -130,20 +130,20 @@ const NewsEvents = (model: NewsEventsModel) => {
         {hasButton ? (
           <div
             className={cn(
-              "news-events-cta flex translate-y-10 justify-center",
+              "news-events-cta !flex !translate-y-10 !justify-center",
               slideInBase,
-              validItems.length > 0 ? "mt-10 md:mt-12" : "mt-8",
+              validItems.length > 0 ? "!mt-10 md:!mt-12" : "!mt-8",
             )}
           >
             <Link
               {...buttonLink}
               className={cn(
-                "news-events-button inline-flex cursor-pointer items-center justify-center",
-                "border border-brand-white bg-transparent px-8 py-3",
-                "text-base font-bold uppercase tracking-wide text-brand-white no-underline",
-                "transition-colors",
-                "hover:bg-brand-white hover:text-brand-navy",
-                "md:px-10 md:py-3.5",
+                "news-events-button !inline-flex !cursor-pointer !items-center !justify-center",
+                "!border !border-brand-white !bg-transparent !px-8 !py-3",
+                "!text-base !font-bold !uppercase !tracking-wide !text-brand-white !no-underline",
+                "!transition-colors",
+                "hover:!bg-brand-white hover:!text-brand-navy",
+                "md:!px-10 md:!py-3.5",
                 buttonLink.className,
               )}
             >
@@ -156,7 +156,7 @@ const NewsEvents = (model: NewsEventsModel) => {
       <ClientComponentWrapper
         type="newsEventsScrollReveal"
         hydrateData={scrollRevealModel}
-        className="news-events-scroll-reveal hidden"
+        className="news-events-scroll-reveal !hidden"
       >
         <NewsEventsScrollReveal {...scrollRevealModel} />
       </ClientComponentWrapper>

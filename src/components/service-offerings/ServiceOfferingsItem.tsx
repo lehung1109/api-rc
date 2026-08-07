@@ -58,7 +58,7 @@ const ServiceOfferingsItem = (model: ServiceOfferingsItemModel) => {
           {...image}
           className={cn(
             "service-offerings-item-image !absolute !inset-0 !h-full !w-full !object-cover",
-            "!grayscale transition-[filter] duration-300",
+            "!grayscale !transition-[filter] !duration-300",
             "hover:!grayscale-0 group-hover/item:!grayscale-0",
             image.className,
           )}

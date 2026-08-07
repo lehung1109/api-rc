@@ -140,7 +140,7 @@ const ProjectCategoryGallery = (model: ProjectCategoryGalleryModel) => {
       ref={sectionRef}
       id={targetId}
       className={cn(
-        "project-category-gallery group/gallery relative !w-full !overflow-hidden !bg-brand-white !py-20",
+        "project-category-gallery group/gallery !relative !w-full !overflow-hidden !bg-brand-white !py-20",
         className,
       )}
       aria-busy={isFiltering}
@@ -148,7 +148,7 @@ const ProjectCategoryGallery = (model: ProjectCategoryGalleryModel) => {
       {validFilters.length > 0 ? (
         <nav
           className={cn(
-            "project-category-gallery-filters mx-auto !mb-10 !flex !w-full !max-w-7xl !flex-wrap !items-center !justify-center !gap-2 !px-6 md:!px-10",
+            "project-category-gallery-filters !mx-auto !mb-10 !flex !w-full !max-w-7xl !flex-wrap !items-center !justify-center !gap-2 !px-6 md:!px-10",
             slideInBase,
           )}
           aria-label="Lọc dự án theo danh mục"

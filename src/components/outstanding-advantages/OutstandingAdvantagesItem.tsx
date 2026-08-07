@@ -88,10 +88,10 @@ const OutstandingAdvantagesItem = (model: OutstandingAdvantagesItemModel) => {
 
         <span
           className={cn(
-            "outstanding-advantages-item-overlay pointer-events-none !absolute !inset-0 !z-[1]",
-            "!bg-brand-navy/65 transition-opacity duration-500 ease-out",
+            "outstanding-advantages-item-overlay !pointer-events-none !absolute !inset-0 !z-[1]",
+            "!bg-brand-navy/65 !transition-opacity !duration-500 !ease-out",
             "!opacity-100 md:!opacity-0 md:group-hover/item:!opacity-100",
-            "motion-reduce:!opacity-100 motion-reduce:transition-none",
+            "motion-reduce:!opacity-100 motion-reduce:!transition-none",
           )}
           aria-hidden="true"
         />
@@ -100,9 +100,9 @@ const OutstandingAdvantagesItem = (model: OutstandingAdvantagesItemModel) => {
           className={cn(
             "outstanding-advantages-item-top !absolute !inset-x-0 !top-0 !z-[2] !flex !h-auto !w-full !flex-col !items-center",
             "!px-4 !pt-0 !text-center md:!px-6",
-            "!translate-y-0 transition-[translate] duration-500 ease-out",
+            "!translate-y-0 !transition-[translate] !duration-500 !ease-out",
             "md:!-translate-y-[calc(137px-20px)] md:group-hover/item:!translate-y-0",
-            "motion-reduce:!translate-y-0 motion-reduce:transition-none",
+            "motion-reduce:!translate-y-0 motion-reduce:!transition-none",
           )}
         >
           {topImageUrl ? (
@@ -149,11 +149,11 @@ const OutstandingAdvantagesItem = (model: OutstandingAdvantagesItemModel) => {
             className={cn(
               "outstanding-advantages-item-bottom !absolute !inset-x-0 !z-[2]",
               "!bottom-10 !px-4 !text-center md:!bottom-12 md:!px-6",
-              "transition-[opacity,translate] duration-500 ease-out",
+              "!transition-[opacity,translate] !duration-500 !ease-out",
               "!translate-y-0 !opacity-100",
               "md:!translate-y-full md:!opacity-0",
               "md:group-hover/item:!translate-y-0 md:group-hover/item:!opacity-100",
-              "motion-reduce:!translate-y-0 motion-reduce:!opacity-100 motion-reduce:transition-none",
+              "motion-reduce:!translate-y-0 motion-reduce:!opacity-100 motion-reduce:!transition-none",
             )}
           >
             <p

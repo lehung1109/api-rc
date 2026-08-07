@@ -26,8 +26,8 @@ const DevelopmentPartnersItem = (model: DevelopmentPartnersItemModel) => {
       <Media
         {...image}
         className={cn(
-          "development-partners-item-image !h-auto !max-h-full !w-auto !max-w-full object-contain",
-          "!grayscale transition-[filter] duration-300 hover:!grayscale-0",
+          "development-partners-item-image !h-auto !max-h-full !w-auto !max-w-full !object-contain",
+          "!grayscale !transition-[filter] !duration-300 hover:!grayscale-0",
           image.className,
         )}
       />

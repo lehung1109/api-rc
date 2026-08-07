@@ -8,14 +8,14 @@ import { cn } from "@/lib/utils";
 
 const navButtonClass = cn(
   "key-personnel-nav-button",
-  "absolute top-1/2 z-10 hidden h-14 w-14 cursor-pointer place-items-center md:grid",
-  "opacity-0 transition-[opacity,color] duration-300",
-  "group-hover:enabled:opacity-100 group-hover:disabled:opacity-30",
-  "focus-visible:opacity-100",
-  "text-brand-white",
-  "hover:text-brand-white-hover",
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-white",
-  "disabled:pointer-events-none disabled:cursor-not-allowed",
+  "!absolute !top-1/2 !z-10 !hidden !h-14 !w-14 !cursor-pointer !place-items-center md:!grid",
+  "!opacity-0 !transition-[opacity,color] !duration-300",
+  "group-hover:enabled:!opacity-100 group-hover:disabled:!opacity-30",
+  "focus-visible:!opacity-100",
+  "!text-brand-white",
+  "hover:!text-brand-white-hover",
+  "focus-visible:!outline focus-visible:!outline-2 focus-visible:!outline-offset-2 focus-visible:!outline-brand-white",
+  "disabled:!pointer-events-none disabled:!cursor-not-allowed",
 );
 
 export const useKeyPersonnelNavState = (swiper: SwiperType | null) => {
@@ -73,12 +73,12 @@ const KeyPersonnelNavButton = ({
       className={cn(
         navButtonClass,
         isPrev
-          ? "key-personnel-nav-prev left-0 -translate-x-full -translate-y-1/2"
-          : "key-personnel-nav-next right-0 translate-x-full -translate-y-1/2",
+          ? "key-personnel-nav-prev !left-0 !-translate-x-full !-translate-y-1/2"
+          : "key-personnel-nav-next !right-0 !translate-x-full !-translate-y-1/2",
       )}
       aria-label={isPrev ? "Previous slide" : "Next slide"}
     >
-      <Icon className="h-14 w-14" strokeWidth={1.5} aria-hidden />
+      <Icon className="!h-14 !w-14" strokeWidth={1.5} aria-hidden />
     </button>
   );
 };

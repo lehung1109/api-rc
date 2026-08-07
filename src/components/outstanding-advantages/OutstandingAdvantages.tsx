@@ -41,9 +41,9 @@ const OutstandingAdvantages = (model: OutstandingAdvantagesModel) => {
   }
 
   const slideInBase = cn(
-    "!opacity-0 transition-opacity duration-[1.2s] ease-out",
+    "!opacity-0 !transition-opacity !duration-[1.2s] !ease-out",
     "group-data-[in-view=true]/advantages:!opacity-100",
-    "motion-reduce:!opacity-100 motion-reduce:transition-none",
+    "motion-reduce:!opacity-100 motion-reduce:!transition-none",
   );
 
   const itemKey = (item: OutstandingAdvantagesItemModel, index: number) =>

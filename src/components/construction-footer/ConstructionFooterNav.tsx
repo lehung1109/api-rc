@@ -26,16 +26,16 @@ const ConstructionFooterNav = (model: ConstructionFooterNavModel) => {
 
   return (
     <nav
-      className={cn("construction-footer-nav w-full", className)}
+      className={cn("construction-footer-nav !w-full", className)}
       aria-label={ariaLabel}
     >
-      <ul className="construction-footer-nav-list flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+      <ul className="construction-footer-nav-list !flex !flex-wrap !items-center !justify-center !gap-x-6 !gap-y-2">
         {items.map((item) => (
           <li key={`${item.label}-${item.link.url}`}>
             <Link
               {...item.link}
               className={cn(
-                "construction-footer-nav-link text-base text-brand-navy",
+                "construction-footer-nav-link !text-base !text-brand-navy",
                 item.link.className,
               )}
             >

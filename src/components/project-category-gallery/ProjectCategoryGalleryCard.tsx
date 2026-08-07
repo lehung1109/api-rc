@@ -18,7 +18,7 @@ const ProjectCategoryGalleryCard = (item: ProjectCategoryGalleryItemModel) => {
       <Link
         {...link}
         className={cn(
-          "project-category-gallery-item group relative !block !aspect-[502/602] !overflow-hidden !no-underline",
+          "project-category-gallery-item group !relative !block !aspect-[502/602] !overflow-hidden !no-underline",
           link.className,
         )}
       >
@@ -33,16 +33,16 @@ const ProjectCategoryGalleryCard = (item: ProjectCategoryGalleryItemModel) => {
         </div>
 
         <span
-          className="project-category-gallery-item-overlay pointer-events-none !absolute !inset-0 !bg-brand-navy/65 !opacity-0 !transition-opacity !duration-300 group-hover:!opacity-100"
+          className="project-category-gallery-item-overlay !pointer-events-none !absolute !inset-0 !bg-brand-navy/65 !opacity-0 !transition-opacity !duration-300 group-hover:!opacity-100"
           aria-hidden="true"
         />
 
         <span
-          className="project-category-gallery-item-plus pointer-events-none !absolute !inset-0 !z-10 !flex !items-center !justify-center !opacity-0 !transition-opacity !duration-300 group-hover:!opacity-100"
+          className="project-category-gallery-item-plus !pointer-events-none !absolute !inset-0 !z-10 !flex !items-center !justify-center !opacity-0 !transition-opacity !duration-300 group-hover:!opacity-100"
           aria-hidden="true"
         >
           <Plus
-            className="!h-16 !w-16 !text-brand-white md:!h-[190px] md:!w-[190px] [&_path]:[vector-effect:non-scaling-stroke]"
+            className="!h-16 !w-16 !text-brand-white md:!h-[190px] md:!w-[190px] [&_path]:![vector-effect:non-scaling-stroke]"
             strokeWidth={1}
           />
         </span>
