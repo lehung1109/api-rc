@@ -647,7 +647,8 @@ button.contact-popup-close {
   color: var(--e-global-color-tertiary);
 }
 
-.about-intro-description p {
+.about-intro-description p,
+.construction-highlights-title p {
   color: inherit;
 }
 
