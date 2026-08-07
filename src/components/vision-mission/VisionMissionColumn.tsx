@@ -26,7 +26,7 @@ const VisionMissionColumn = (model: VisionMissionColumnModel) => {
   return (
     <div className={cn("vision-mission-column", className)}>
       {titleText ? (
-        <h2 className="vision-mission-column-title !mb-0 !text-base !font-medium !uppercase !tracking-[0.12em] !text-brand-navy/70">
+        <h2 className="vision-mission-column-title !mb-0 !text-base !font-normal !uppercase !leading-tight !text-brand-gold">
           {titleText}
         </h2>
       ) : null}

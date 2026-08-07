@@ -72,7 +72,7 @@ const ContactCta = (model: ContactCtaModel) => {
 
             <div className="contact-cta-copy !relative !z-10">
               {subtitleText ? (
-                <p className="contact-cta-subtitle !mb-0 !text-sm !font-medium !uppercase !tracking-[0.12em] !text-brand-white">
+                <p className="contact-cta-subtitle !mb-0 !text-base !font-normal !uppercase !leading-tight !text-brand-gold">
                   {subtitleText}
                 </p>
               ) : null}

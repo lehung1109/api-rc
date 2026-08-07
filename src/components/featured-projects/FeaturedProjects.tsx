@@ -81,7 +81,7 @@ const FeaturedProjects = (model: FeaturedProjectsModel) => {
           {subtitleText ? (
             <p
               className={cn(
-                "featured-projects-subtitle !mb-0 !translate-y-10 !text-md !font-medium !uppercase !tracking-[0.12em] !text-brand-gold",
+                "featured-projects-subtitle !mb-0 !translate-y-10 !text-base !font-normal !uppercase !leading-tight !text-brand-gold",
                 slideInBase,
               )}
             >

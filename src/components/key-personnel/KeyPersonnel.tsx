@@ -49,7 +49,7 @@ const KeyPersonnel = (model: KeyPersonnelModel) => {
     >
       <div className="key-personnel-inner !mx-auto !w-full !max-w-7xl">
         {sectionTitle ? (
-          <h2 className="key-personnel-title !mb-8 !text-base !uppercase !text-brand-white/70">
+          <h2 className="key-personnel-title !mb-8 !text-base !font-normal !uppercase !leading-tight !text-brand-gold">
             {sectionTitle}
           </h2>
         ) : null}

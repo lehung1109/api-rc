@@ -114,7 +114,7 @@ const DirectorProfile = (model: DirectorProfileModel) => {
         {subtitleText ? (
           <h2
             className={cn(
-              "director-profile-subtitle !mb-0 !text-base !font-medium !uppercase !tracking-[0.12em] !text-brand-white",
+              "director-profile-subtitle !mb-0 !text-base !font-normal !uppercase !leading-tight !text-brand-gold",
               slideInBase,
             )}
           >

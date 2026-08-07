@@ -130,7 +130,7 @@ const CollaborationIntro = (model: CollaborationIntroModel) => {
             {subtitleText || titleContent ? (
               <div className="collaboration-intro-copy">
                 {subtitleText ? (
-                  <h2 className="collaboration-intro-subtitle !m-0 !text-base !font-medium !uppercase !tracking-[0.12em] !text-brand-white/70">
+                  <h2 className="collaboration-intro-subtitle !m-0 !text-base !font-normal !uppercase !leading-tight !text-brand-gold">
                     {subtitleText}
                   </h2>
                 ) : null}

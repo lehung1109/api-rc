@@ -72,8 +72,8 @@ const ConstructionHighlights = (model: ConstructionHighlightsModel) => {
             {subtitleText ? (
               <p
                 className={cn(
-                  "construction-highlights-subtitle !mb-3 !text-[14px] !font-medium !uppercase !tracking-wide",
-                  "!text-brand-white/70",
+                  "construction-highlights-subtitle !mb-3 !text-base !font-normal !uppercase !leading-tight",
+                  "!text-brand-gold",
                 )}
               >
                 {subtitleText}

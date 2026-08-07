@@ -57,8 +57,8 @@ const DevelopmentPartners = (model: DevelopmentPartnersModel) => {
         {titleText ? (
           <h2
             className={cn(
-              "development-partners-title !mb-0 !font-medium !uppercase !tracking-[0.12em]",
-              "!text-base !text-brand-navy/70",
+              "development-partners-title !mb-0 !text-base !font-normal !uppercase !leading-tight",
+              "!text-brand-gold",
               slideInBase,
             )}
           >

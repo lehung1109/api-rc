@@ -79,7 +79,7 @@ const NewsEvents = (model: NewsEventsModel) => {
         {titleText ? (
           <h2
             className={cn(
-              "news-events-title !mb-0 !translate-y-10 !text-base !font-medium !uppercase !tracking-[0.12em] !text-brand-white",
+              "news-events-title !mb-0 !translate-y-10 !text-base !font-normal !uppercase !leading-tight !text-brand-gold",
               slideInBase,
             )}
           >
