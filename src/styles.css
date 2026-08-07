@@ -648,7 +648,8 @@ button.contact-popup-close {
 }
 
 .about-intro-description p,
-.construction-highlights-title p {
+.construction-highlights-title p,
+.construction-highlights-item-content p {
   color: inherit;
 }
 
