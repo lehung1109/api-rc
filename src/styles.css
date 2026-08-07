@@ -647,6 +647,10 @@ button.contact-popup-close {
   color: var(--e-global-color-tertiary);
 }
 
+.about-intro-description p {
+  color: inherit;
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
