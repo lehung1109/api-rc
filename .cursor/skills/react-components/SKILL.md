@@ -315,6 +315,7 @@ Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`.
 | `CustomerTestimonialsGrid` | `CustomerTestimonialsWrapper` | `customer-testimonials-wrapper.ts`  | `customer-testimonials-grid.ts` (re-export) |
 | `VideoHeroBanner`          | `VideoHeroBannerWrapper`      | `video-hero-banner-wrapper.ts`      | `video-hero-banner.ts` (re-export)          |
 | `ContactPopup`             | `ContactPopupWrapper`         | `contact-popup-wrapper.ts`          | `contact-popup.ts` (re-export)              |
+| `ProjectCategoryGallery`   | `ProjectCategoryGalleryWrapper` | `project-category-gallery-wrapper.ts` | `project-category-gallery.ts` (re-export) |
 
 ## Quick reference — header stack
 
@@ -834,6 +835,58 @@ export interface FeaturedProjectsModel {
 **Mount:** `pages/construction/page.tsx` (sau ConstructionHighlights).
 
 **WordPress:** widget `EAI-featured-projects` — subtitle, title, repeater items (image + description TEXTAREA + link), CTA, `scroll_reveal_target_id` → `eai_rc_render_html('FeaturedProjects', …)`.
+
+## Quick reference — project category gallery (client + wrapper)
+
+Section gallery dự án + pill filter category + load-more. Nền `!bg-brand-white`, padding `!py-20`. Filter trong `max-w-7xl`; lưới full-bleed. **Client + wrapper** — mount qua `ProjectCategoryGalleryWrapper`. Endpoint client `POST /api/project-category-gallery` mock bằng **MSW** (`src/mocks/`) trong Vite DEV — không có Express route.
+
+| File                                                 | Vai trò                                                              |
+| ---------------------------------------------------- | -------------------------------------------------------------------- |
+| `ProjectCategoryGallery.tsx`                         | `"use client"` — filter pills + grid + overlay loading + load-more + IO slide-in |
+| `ProjectCategoryGalleryCard.tsx`                     | Leaf: Link + Media + hover overlay/Plus/content (`aspect-[502/602]`) |
+| `ProjectCategoryGalleryWrapper.tsx`                  | Server entry: `ClientComponentWrapper` + `type="projectCategoryGallery"` |
+| `src/lib/project-category-gallery/types.ts`          | Models + request/response                                            |
+| `src/lib/project-category-gallery/filter-page.ts`    | Pure filter + slice page (dùng bởi MSW handlers)                     |
+| `src/lib/project-category-gallery/fetch.ts`          | Client POST fetch (8s timeout)                                       |
+| `src/mocks/handlers.ts`                              | MSW handlers gallery + project showcase filter                       |
+| `src/data/project-category-gallery-wrapper.ts`       | Mock / CMS canonical (+ `projectCategoryGalleryCatalog`)             |
+| `src/data/project-category-gallery.ts`               | Re-export cho client registry                                        |
+
+**Model:**
+
+```ts
+export interface ProjectCategoryGalleryFilterModel {
+  label: string;
+  value: string; // "" = Tất cả
+}
+
+export interface ProjectCategoryGalleryItemModel {
+  id: string;
+  image: MediaModel;
+  title: string;
+  description: string; // multi-line → whitespace-pre-line
+  link: LinkModel;
+  category: string;
+}
+
+export interface ProjectCategoryGalleryModel {
+  className?: string;
+  filterEndpoint: string;
+  pageSize: number;
+  filters: ProjectCategoryGalleryFilterModel[];
+  items: ProjectCategoryGalleryItemModel[]; // SSR initial page
+  hasMore: boolean;
+  initialCategory?: string;
+  loadMoreLabel?: string; // default "XEM THÊM"
+  scrollReveal?: { targetId?: string }; // default "project-category-gallery"
+}
+```
+
+**API (MSW):** `POST /api/project-category-gallery` body `{ category?, page?, pageSize? }` → `{ items, hasMore }`. Filter click = page 1 replace + full-section overlay; load-more = append + spinner thay button. Fetch fail → giữ list / hiện lại button (không fallback catalog).
+
+**UI:** filter pills outline navy / active fill navy; grid `!grid-cols-1 md:!grid-cols-3 !gap-px`; card hover như FeaturedProjects; load-more outline navy → hover fill. Style Tailwind + `!`. Slide-in từ dưới (`!translate-y-10`) qua IO trong client. Semantic: `project-category-gallery`, `project-category-gallery-filters`, `project-category-gallery-filter-item`, `project-category-gallery-grid`, `project-category-gallery-item*`, `project-category-gallery-load-more*`, `project-category-gallery-loading`, `project-category-gallery-empty`.
+
+**Mount:** `pages/construction/page.tsx` (sau FeaturedProjects, trước NewsEvents).
 
 ## Quick reference — news events (server + scroll reveal island)
 

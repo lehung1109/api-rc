@@ -3,6 +3,7 @@
 import ReactDOM from "react-dom/client";
 import type { ComponentType } from "react";
 
+import { enableMocking } from "./mocks/enable";
 import "./styles.css";
 
 type PageModule = {
@@ -44,6 +45,8 @@ const renderMissingPage = (slug: string) => (
 );
 
 const renderPage = async () => {
+  await enableMocking();
+
   const slug = getPageSlug();
   const loadPage = pageModules[`../pages/${slug}/page.tsx`];
   const app = document.getElementById("app");

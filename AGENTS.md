@@ -13,7 +13,7 @@ Use `README.md` as the human-facing source of truth for setup, commands, compone
 - `src/generated/` contains generated registries. Do not edit files in this directory manually; run the relevant generate script instead.
 - `html/` and `dist/` are build outputs. Do not hand-edit them unless the user explicitly asks for generated output changes.
 - `pages/<slug>/page.tsx` contains Vite preview pages. The root dev preview lists these pages and opens the selected page in an iframe.
-- `src/server.ts` owns the Express render API, including `POST /api/render-rc` and `POST /api/projects/filter`.
+- `src/server.ts` owns the Express render API (`POST /api/render-rc`). Filter/gallery client APIs are mocked with MSW in Vite DEV (`src/mocks/`).
 - `src/react-loader.tsx` owns browser hydration for `script[data-rct]` islands.
 
 ## Component Conventions

@@ -135,23 +135,15 @@ Response thành công:
 }
 ```
 
-### `POST /api/projects/filter`
+### MSW (Vite DEV)
 
-Lọc dữ liệu project showcase theo `area`, `beds`, `style`.
-
-```json
-{
-  "area": "",
-  "beds": "",
-  "style": ""
-}
-```
+Trong `bun run dev`, client fetch tới `/api/projects/filter` và `/api/project-category-gallery` được **MSW** intercept (`src/mocks/`). Express **không** còn hai route này — chỉ còn `POST /api/render-rc`.
 
 ## Scripts thường dùng
 
 | Lệnh | Mô tả |
 |------|-------|
-| `bun run dev` | Chạy Vite preview và Vite browser watch. |
+| `bun run dev` | Chạy Vite preview (bật MSW mock API trong browser). |
 | `bun run generate` | Sinh server registry, client registry, version json và restart txt. |
 | `bun run build` | Chạy toàn bộ pipeline generate, HTML, browser bundle và server bundle. |
 | `bun run build:html` | Render component ra `html/*.html`. |
