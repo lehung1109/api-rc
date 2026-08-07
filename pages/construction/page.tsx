@@ -18,6 +18,8 @@ import DevelopmentPartners from "../../src/components/development-partners/Devel
 import developmentPartners from "@/data/development-partners";
 import ServiceOfferings from "../../src/components/service-offerings/ServiceOfferings";
 import serviceOfferings from "@/data/service-offerings";
+import OutstandingAdvantages from "../../src/components/outstanding-advantages/OutstandingAdvantages";
+import outstandingAdvantages from "@/data/outstanding-advantages";
 import YoutubeVideoList from "../../src/components/youtube-video-list/YoutubeVideoList";
 import youtubeVideoList from "@/data/youtube-video-list";
 import FieldsOfActivity from "../../src/components/fields-of-activity/FieldsOfActivity";
@@ -62,6 +64,8 @@ export default function ConstructionPage() {
       <DevelopmentPartners {...developmentPartners} />
 
       <ServiceOfferings {...serviceOfferings} />
+
+      <OutstandingAdvantages {...outstandingAdvantages} />
 
       <YoutubeVideoList {...youtubeVideoList} />
 

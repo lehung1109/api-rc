@@ -716,7 +716,46 @@ export interface ServiceOfferingsModel {
 
 **Animation:** Tailwind trên TSX — `group/offerings` + `group-data-[in-view=true]/offerings:*`; index chẵn `!-translate-x-10`, lẻ `!translate-x-10` → `!translate-x-0`; `!opacity-0` → `!opacity-100`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
 
-**Mount:** `pages/construction/page.tsx` (sau DevelopmentPartners, trước YoutubeVideoList).
+**Mount:** `pages/construction/page.tsx` (sau DevelopmentPartners, trước OutstandingAdvantages).
+
+## Quick reference — outstanding advantages (server + scroll reveal island)
+
+Section ưu điểm vượt trội: 3 card full-bleed (không nền section, không `max-w-7xl`), padding `!py-20` (80px). Mỗi item: nền `<picture>` mobile/desktop + item top (ảnh + subtitle + title) + overlay + description. **Server-only** + island scroll reveal. Style Tailwind + prefix `!` chống Porto/Bootstrap.
+
+| File                                                 | Vai trò                                                |
+| ---------------------------------------------------- | ------------------------------------------------------ |
+| `OutstandingAdvantages.tsx`                          | Orchestrator: `<section>` + list + scroll island       |
+| `OutstandingAdvantagesItem.tsx`                      | Leaf: background picture + top + overlay + bottom      |
+| `OutstandingAdvantagesScrollReveal.tsx`              | `"use client"` — IntersectionObserver → `data-in-view` |
+| `src/data/outstanding-advantages.ts`                 | Mock / CMS (`OutstandingAdvantages` registry)          |
+| `src/data/outstanding-advantages-scroll-reveal.ts`   | Client registry (re-export `targetId`)                 |
+
+**Model:**
+
+```ts
+export interface OutstandingAdvantagesItemModel {
+  backgroundMobileImage: MediaModel;  // nền — mobile / fallback <img>
+  backgroundDesktopImage: MediaModel; // nền — <source min-width: 768px>
+  image: MediaModel;                  // ảnh trong item top (phía trên subtitle)
+  subtitle: string;
+  title: string;
+  description: string;
+}
+
+export interface OutstandingAdvantagesModel {
+  className?: string;
+  items: OutstandingAdvantagesItemModel[];
+  scrollReveal?: { targetId?: string }; // default "outstanding-advantages"
+}
+```
+
+**Render guards:** lọc item thiếu `title` hoặc cả hai `background*Image.url` trim; `image` top chỉ khi có url; mảng rỗng → `return null`.
+
+**UI:** section `!py-20` (không px, không bg, không container); list mobile `!flex !overflow-x-auto !snap-x`, item `max-md:!w-[85%] max-md:!shrink-0`; desktop `md:!grid md:!grid-cols-3`; card `!aspect-[384/480]`. Stacking: background `z-0` < overlay `z-[1]` < top/bottom `z-[2]` (overlay không đè item top). Top image `!aspect-[229/137] !w-[229px] !max-w-full`. Default md: top `!-translate-y-[calc(137px-20px)]` (peek ~20px ảnh), overlay/bottom ẩn; hover: top `!translate-y-0`, overlay + bottom hiện (`!bottom-10 md:!bottom-12`). Mobile: top/overlay/bottom luôn hiện. Semantic: `outstanding-advantages`, `outstanding-advantages-inner`, `outstanding-advantages-item`, `outstanding-advantages-item-background-picture`, `outstanding-advantages-item-background-image`, `outstanding-advantages-item-top`, `outstanding-advantages-item-media`, `outstanding-advantages-item-image`, `outstanding-advantages-item-overlay`, `outstanding-advantages-item-subtitle`, `outstanding-advantages-item-title`, `outstanding-advantages-item-bottom`, `outstanding-advantages-item-description`.
+
+**Animation:** Tailwind trên TSX — `group/advantages` + `group-data-[in-view=true]/advantages:*`; list chỉ fade `!opacity-0` → `!opacity-100` (không translate). Duration `1.2s`. Không thêm CSS trong `styles.css`.
+
+**Mount:** `pages/construction/page.tsx` (sau ServiceOfferings, trước YoutubeVideoList).
 
 ## Quick reference — youtube video list (server + scroll reveal island)
 
@@ -751,7 +790,7 @@ export interface YoutubeVideoListModel {
 
 **Animation:** Tailwind trên TSX — `group/videos` + `group-data-[in-view=true]/videos:*`; list `!translate-y-10` → `!translate-y-0`; `!opacity-0` → `!opacity-100`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
 
-**Mount:** `pages/construction/page.tsx` (sau ServiceOfferings, trước FieldsOfActivity).
+**Mount:** `pages/construction/page.tsx` (sau OutstandingAdvantages, trước FieldsOfActivity).
 
 ## Quick reference — featured projects (server + scroll reveal island)
 
