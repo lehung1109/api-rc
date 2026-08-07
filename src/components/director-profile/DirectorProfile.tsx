@@ -109,7 +109,8 @@ const DirectorProfile = (model: DirectorProfileModel) => {
         aria-hidden="true"
       />
 
-      <div className="director-profile-inner !relative !z-10 !mx-auto !w-full !max-w-7xl lg:!mx-0 lg:!w-2/3">
+      <div className="director-profile-content-container !relative !z-10 !mx-auto !w-full !max-w-7xl">
+        <div className="director-profile-inner !relative !z-10 !w-full lg:!mx-0 lg:!w-2/3">
         {subtitleText ? (
           <h2
             className={cn(
@@ -155,6 +156,7 @@ const DirectorProfile = (model: DirectorProfileModel) => {
             })}
           </div>
         ) : null}
+        </div>
       </div>
 
       <ClientComponentWrapper
