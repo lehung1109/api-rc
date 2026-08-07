@@ -72,7 +72,7 @@ const FieldsOfActivityAccordionItem = (
               {...iconImage}
               className={cn(
                 "fields-of-activity-item-icon !ml-auto !hidden !h-10 !w-10 !max-w-none !shrink-0 !object-contain",
-                "md:!absolute md:!bottom-full md:!right-full md:!mb-2 md:!ml-0",
+                "md:!absolute md:!bottom-[80%] md:!right-full md:!mb-2 md:!ml-0",
               )}
             />
           ) : null}

@@ -44,9 +44,6 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
 
   const titleText = title.trim();
   const validItems = items.filter((item) => item.title.trim().length > 0);
-  const hasAnyIcon = validItems.some((item) =>
-    Boolean(item.iconImage?.url.trim()),
-  );
   const validImages = images.filter((image) => image.url.trim().length > 0);
   const hasButton =
     buttonLabel.trim().length > 0 && buttonLink.url.trim().length > 0;
@@ -75,12 +72,12 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
     <section
       id={targetId}
       className={cn(
-        "fields-of-activity !mx-auto !w-full !max-w-7xl !overflow-hidden !px-4 !py-16 !text-brand-navy",
+        "fields-of-activity !mx-auto !w-full !max-w-7xl !overflow-visible !px-4 !py-16 !text-brand-navy",
         className,
       )}
     >
       {titleText ? (
-        <h2 className="fields-of-activity-title !text-md !font-bold !leading-tight">
+        <h2 className="fields-of-activity-title !text-base !font-normal !uppercase !leading-tight !text-brand-gold">
           {titleText}
         </h2>
       ) : null}
@@ -92,12 +89,7 @@ const FieldsOfActivity = (model: FieldsOfActivityModel) => {
         )}
       >
         {validItems.length > 0 ? (
-          <div
-            className={cn(
-              "fields-of-activity-accordion",
-              hasAnyIcon && "md:!pl-12",
-            )}
-          >
+          <div className="fields-of-activity-accordion">
             {validItems.map((item, index) => (
               <FieldsOfActivityAccordionItem
                 key={`${item.title}-${index}`}
