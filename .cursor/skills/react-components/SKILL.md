@@ -995,12 +995,12 @@ export interface PageBackgroundModel {
 
 ## Quick reference — video hero banner (client + wrapper)
 
-Hero full viewport (`h-dvh`) nền video progressive (MP4/WebM) + poster SSR. **Client + wrapper** — mount qua `VideoHeroBannerWrapper`, không mount `VideoHeroBanner` trực tiếp. Title optional SSR; không CTA.
+Hero full viewport (`h-dvh`) nền video progressive (MP4/WebM) optional + poster SSR. **Client + wrapper** — mount qua `VideoHeroBannerWrapper`, không mount `VideoHeroBanner` trực tiếp. Title + description optional SSR; không CTA. Không có video → chỉ poster (không mount client island).
 
 | File                                    | Vai trò                                                                         |
 | --------------------------------------- | ------------------------------------------------------------------------------- |
-| `VideoHeroBanner.tsx`                   | `"use client"` — `<video src>` native                                           |
-| `VideoHeroBannerWrapper.tsx`            | Server entry: `<section>` + poster `Media` + overlay + title SSR + `type="videoHeroBanner"` |
+| `VideoHeroBanner.tsx`                   | `"use client"` — `<video src>` native (chỉ khi có `url`)                        |
+| `VideoHeroBannerWrapper.tsx`            | Server entry: `<section>` + poster `Media` + overlay + title/description SSR + conditional `type="videoHeroBanner"` |
 | `src/data/video-hero-banner-wrapper.ts` | Mock / CMS canonical                                                            |
 | `src/data/video-hero-banner.ts`         | Re-export cho client registry                                                   |
 
@@ -1009,20 +1009,23 @@ Hero full viewport (`h-dvh`) nền video progressive (MP4/WebM) + poster SSR. **
 ```ts
 export interface VideoHeroBannerModel {
   className?: string;
-  url: string; // MP4 / WebM
+  url?: string; // optional MP4 / WebM — thiếu → poster-only
   poster: MediaModel;
   title?: string; // optional — SSR only in Wrapper (`h1`)
+  description?: string; // optional plain text under title — SSR (`p`)
   mobileAspectRatio?: boolean; // default false — mobile portrait 561/774; desktop h-dvh
 }
 ```
 
-**Render guards (wrapper):** `!url.trim()` hoặc `!poster.url.trim()` → `return null`. Title chỉ render khi `title.trim()` có nội dung.
+**Render guards (wrapper):** `!poster.url.trim()` → `return null`. Video island chỉ khi `url?.trim()`. Title / description chỉ khi trim có nội dung. Overlay modifier `--has-title` khi có title **hoặc** description.
 
-**Behavior:** `video.src = url`. `autoPlay` `muted` `loop` `playsInline`. Video `opacity-0` → `opacity-100` khi `canplay`/`playing`. Poster SSR nằm dưới. Overlay `.video-hero-banner-overlay` trong `styles.css` (gradient top fade); khi có title → modifier `--has-title` + fade đáy. **`mobileAspectRatio`:** `false` (default) → section `h-dvh`; `true` → mobile `aspect-[561/774]`, desktop `md:h-dvh`. Title absolute đáy `bottom-20` (80px) trong `max-w-7xl`, `text-brand-white`.
+**Behavior:** Có `url` → `ClientComponentWrapper` + `video.src = url`, `autoPlay` `muted` `loop` `playsInline`; video `opacity-0` → `opacity-100` khi `canplay`/`playing`. Không `url` → chỉ poster SSR, không hydrate. Overlay `.video-hero-banner-overlay` trong `styles.css` (gradient top fade); khi có content → modifier `--has-title` + fade đáy. **`mobileAspectRatio`:** `false` (default) → section `h-dvh`; `true` → mobile `aspect-[561/774]`, desktop `md:h-dvh`. Content absolute đáy `bottom-20` (80px) trong `max-w-7xl`; title `text-brand-white`; description `text-base text-brand-white/70`.
 
-**Semantic classes:** `video-hero-banner`, `video-hero-banner--has-title`, `video-hero-banner-poster`, `video-hero-banner-overlay`, `video-hero-banner-video-root`, `video-hero-banner-video`, `video-hero-banner-content`, `video-hero-banner-content-inner`, `video-hero-banner-title`.
+**Animation:** load slide-in từ dưới (title + description) trong `styles.css` — `@keyframes video-hero-banner-content-in` 1.2s; description delay `0.15s`; `prefers-reduced-motion` hiện ngay. Không dùng scroll-reveal island.
 
-**WordPress:** widget `EAI-video-hero-banner` — MEDIA `video` (`media_types: video`) + poster → `url` + `poster`; TEXT `title` optional; SWITCHER `mobile_aspect_ratio` → `mobileAspectRatio`; `eai_rc_render_html('VideoHeroBannerWrapper', …)`.
+**Semantic classes:** `video-hero-banner`, `video-hero-banner--has-title`, `video-hero-banner-poster`, `video-hero-banner-overlay`, `video-hero-banner-video-root`, `video-hero-banner-video`, `video-hero-banner-content`, `video-hero-banner-content-inner`, `video-hero-banner-title`, `video-hero-banner-description`.
+
+**WordPress:** widget `EAI-video-hero-banner` — MEDIA `video` optional (`media_types: video`) + poster bắt buộc → `url` + `poster`; TEXT `title` / `description` optional; SWITCHER `mobile_aspect_ratio` → `mobileAspectRatio`; `eai_rc_render_html('VideoHeroBannerWrapper', …)`.
 
 ## Quick reference — page title bar (server)
 

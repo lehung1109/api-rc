@@ -306,6 +306,33 @@ html body[data-scroll-locked] {
   );
 }
 
+@keyframes video-hero-banner-content-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.video-hero-banner-title,
+.video-hero-banner-description {
+  opacity: 0;
+  transform: translateY(2.5rem);
+  animation: video-hero-banner-content-in 1.2s ease-out forwards;
+}
+
+.video-hero-banner-description {
+  animation-delay: 0.15s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-hero-banner-title,
+  .video-hero-banner-description {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
 .about-intro-copy,
 .about-intro-media {
   opacity: 0;

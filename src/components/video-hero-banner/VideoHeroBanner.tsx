@@ -7,11 +7,13 @@ import type { MediaModel } from "../media/Media";
 
 export interface VideoHeroBannerModel {
   className?: string;
-  /** Progressive media URL (MP4 / WebM) */
-  url: string;
+  /** Progressive media URL (MP4 / WebM) — optional; poster-only when absent */
+  url?: string;
   poster: MediaModel;
   /** Optional — SSR only in VideoHeroBannerWrapper */
   title?: string;
+  /** Optional plain text under title — SSR only in VideoHeroBannerWrapper */
+  description?: string;
   /** Mobile portrait aspect 561/774; desktop stays h-dvh. Default false. */
   mobileAspectRatio?: boolean;
 }
@@ -21,7 +23,7 @@ const VideoHeroBanner = (model: VideoHeroBannerModel) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isReady, setIsReady] = useState(false);
 
-  const streamUrl = url.trim();
+  const streamUrl = url?.trim() ?? "";
 
   useEffect(() => {
     const video = videoRef.current;
