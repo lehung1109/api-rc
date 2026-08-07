@@ -716,7 +716,42 @@ export interface ServiceOfferingsModel {
 
 **Animation:** Tailwind trên TSX — `group/offerings` + `group-data-[in-view=true]/offerings:*`; index chẵn `!-translate-x-10`, lẻ `!translate-x-10` → `!translate-x-0`; `!opacity-0` → `!opacity-100`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
 
-**Mount:** `pages/construction/page.tsx` (sau DevelopmentPartners, trước FieldsOfActivity).
+**Mount:** `pages/construction/page.tsx` (sau DevelopmentPartners, trước YoutubeVideoList).
+
+## Quick reference — youtube video list (server + scroll reveal island)
+
+Section list iframe YouTube: nền `!bg-brand-white`, padding `!py-20` (80px). Inner `max-w-7xl`. Prop truyền **video ID** → embed URL. **Server-only** + island scroll reveal. Style Tailwind + prefix `!` chống Porto/Bootstrap.
+
+| File                                              | Vai trò                                                |
+| ------------------------------------------------- | ------------------------------------------------------ |
+| `YoutubeVideoList.tsx`                            | Orchestrator: `<section>` + grid + scroll island       |
+| `YoutubeVideoListItem.tsx`                        | Leaf: `<li>` + iframe `aspect-video`                   |
+| `YoutubeVideoListScrollReveal.tsx`                | `"use client"` — IntersectionObserver → `data-in-view` |
+| `src/data/youtube-video-list.ts`                  | Mock / CMS (`YoutubeVideoList` registry)               |
+| `src/data/youtube-video-list-scroll-reveal.ts`    | Client registry (re-export `targetId`)                 |
+
+**Model:**
+
+```ts
+export interface YoutubeVideoListItemModel {
+  youtubeVideoId: string;
+  title?: string; // iframe title; fallback "YouTube video"
+}
+
+export interface YoutubeVideoListModel {
+  className?: string;
+  items: YoutubeVideoListItemModel[];
+  scrollReveal?: { targetId?: string }; // default "youtube-video-list"
+}
+```
+
+**Render guards:** lọc item thiếu `youtubeVideoId` trim; mảng rỗng → `return null`. Embed: `https://www.youtube.com/embed/${id}` (không nhận full iframe HTML).
+
+**UI:** section `!bg-brand-white !px-6 !py-20 md:!px-10`; grid `!grid-cols-1 md:!grid-cols-3 !gap-4`; item `!aspect-video`; iframe `!absolute !inset-0 !h-full !w-full !border-0` + `loading="lazy"`. Semantic: `youtube-video-list`, `youtube-video-list-inner`, `youtube-video-list-grid`, `youtube-video-list-item`, `youtube-video-list-iframe`.
+
+**Animation:** Tailwind trên TSX — `group/videos` + `group-data-[in-view=true]/videos:*`; list `!translate-y-10` → `!translate-y-0`; `!opacity-0` → `!opacity-100`; `motion-reduce:*` hiện ngay. Duration `1.2s`. Không thêm CSS trong `styles.css`.
+
+**Mount:** `pages/construction/page.tsx` (sau ServiceOfferings, trước FieldsOfActivity).
 
 ## Quick reference — featured projects (server + scroll reveal island)
 
