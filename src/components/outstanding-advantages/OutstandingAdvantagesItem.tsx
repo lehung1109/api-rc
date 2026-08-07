@@ -6,14 +6,15 @@ import Media from "../media/Media";
 export interface OutstandingAdvantagesItemModel {
   backgroundMobileImage: MediaModel;
   backgroundDesktopImage: MediaModel;
-  image: MediaModel;
   subtitle: string;
   title: string;
   description: string;
   className?: string;
 }
 
-const OutstandingAdvantagesItem = (model: OutstandingAdvantagesItemModel) => {
+const OutstandingAdvantagesItem = (
+  model: OutstandingAdvantagesItemModel & { image: MediaModel },
+) => {
   const {
     backgroundMobileImage,
     backgroundDesktopImage,

@@ -1,6 +1,11 @@
 import type { OutstandingAdvantagesModel } from "@/components/outstanding-advantages/OutstandingAdvantages";
 
 const outstandingAdvantages: OutstandingAdvantagesModel = {
+  image: {
+    url: "https://placehold.co/229x137/png?text=Top+Image",
+    alt: "Hình ảnh minh họa ưu điểm",
+    display_dimensions: { width: 229, height: 137 },
+  },
   items: [
     {
       backgroundMobileImage: {
@@ -12,11 +17,6 @@ const outstandingAdvantages: OutstandingAdvantagesModel = {
         url: "https://placehold.co/384x480/1a2b4a/png?text=BG+Desktop+1",
         alt: "",
         display_dimensions: { width: 384, height: 480 },
-      },
-      image: {
-        url: "https://placehold.co/229x137/png?text=Top+1",
-        alt: "Chuyên gia giàu kinh nghiệm",
-        display_dimensions: { width: 229, height: 137 },
       },
       subtitle: "Ưu điểm vượt trội",
       title: "Chuyên gia giàu kinh nghiệm",
@@ -34,11 +34,6 @@ const outstandingAdvantages: OutstandingAdvantagesModel = {
         alt: "",
         display_dimensions: { width: 384, height: 480 },
       },
-      image: {
-        url: "https://placehold.co/229x137/png?text=Top+2",
-        alt: "Quy trình làm việc khoa học",
-        display_dimensions: { width: 229, height: 137 },
-      },
       subtitle: "Ưu điểm vượt trội",
       title: "Quy trình làm việc khoa học",
       description:
@@ -54,11 +49,6 @@ const outstandingAdvantages: OutstandingAdvantagesModel = {
         url: "https://placehold.co/384x480/2c3e50/png?text=BG+Desktop+3",
         alt: "",
         display_dimensions: { width: 384, height: 480 },
-      },
-      image: {
-        url: "https://placehold.co/229x137/png?text=Top+3",
-        alt: "Bảo hành, bảo trì tới 10 năm",
-        display_dimensions: { width: 229, height: 137 },
       },
       subtitle: "Ưu điểm vượt trội",
       title: "Bảo hành, bảo trì tới 10 năm",

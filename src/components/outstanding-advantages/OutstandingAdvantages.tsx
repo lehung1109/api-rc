@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 
+import type { MediaModel } from "../media/Media";
+
 import ClientComponentWrapper from "../ClientComponentWrapper";
 import OutstandingAdvantagesItem, {
   type OutstandingAdvantagesItemModel,
@@ -13,6 +15,7 @@ export type { OutstandingAdvantagesScrollRevealModel };
 
 export interface OutstandingAdvantagesModel {
   className?: string;
+  image: MediaModel;
   items: OutstandingAdvantagesItemModel[];
   scrollReveal?: OutstandingAdvantagesScrollRevealModel;
 }
@@ -53,7 +56,7 @@ const OutstandingAdvantages = (model: OutstandingAdvantagesModel) => {
     <section
       id={targetId}
       className={cn(
-        "outstanding-advantages group/advantages !w-full !overflow-x-auto !py-20 md:!overflow-hidden",
+        "outstanding-advantages group/advantages !w-full !overflow-x-auto md:!overflow-hidden",
         className,
       )}
     >
@@ -70,7 +73,7 @@ const OutstandingAdvantages = (model: OutstandingAdvantagesModel) => {
             key={itemKey(item, index)}
             backgroundMobileImage={item.backgroundMobileImage}
             backgroundDesktopImage={item.backgroundDesktopImage}
-            image={item.image}
+            image={model.image}
             subtitle={item.subtitle}
             title={item.title}
             description={item.description}
