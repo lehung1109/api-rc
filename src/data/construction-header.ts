@@ -84,7 +84,7 @@ const constructionHeader: ConstructionHeaderModel = {
   ],
   background: {
     img: {
-      url: "https://placehold.co/768x1024/152243/ffffff?text=Header+BG+Mobile",
+      url: "https://placehold.co/768x1024/4B5563/ffffff?text=Header+BG+Mobile",
       alt: "Nền header construction",
       width: 768,
       height: 1024,
