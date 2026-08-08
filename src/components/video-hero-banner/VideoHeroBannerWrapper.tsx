@@ -60,12 +60,12 @@ const VideoHeroBannerWrapper = (model: VideoHeroBannerModel) => {
         <div className="video-hero-banner-content !pointer-events-none !absolute !inset-x-0 !bottom-20 !z-10">
           <div className="video-hero-banner-content-inner !mx-auto !flex !w-full !max-w-7xl !flex-col !gap-4 !px-6 md:!px-10">
             {hasTitle ? (
-              <h1 className="video-hero-banner-title !text-2xl !font-bold !text-brand-white md:!text-4xl lg:!text-5xl">
+              <h1 className="video-hero-banner-title !mb-0 !text-2xl !font-bold !text-brand-white md:!text-4xl lg:!text-5xl">
                 {titleText}
               </h1>
             ) : null}
             {hasDescription ? (
-              <p className="video-hero-banner-description !text-base !text-brand-white/70">
+              <p className="video-hero-banner-description !text-base !text-brand-gold">
                 {descriptionText}
               </p>
             ) : null}
