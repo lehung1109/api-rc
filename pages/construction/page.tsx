@@ -40,6 +40,8 @@ import JobListingListWrapper from "../../src/components/job-listing-list/JobList
 import jobListingListWrapper from "@/data/job-listing-list-wrapper";
 import ContactCta from "../../src/components/contact-cta/ContactCta";
 import contactCta from "@/data/contact-cta";
+import ContactPopupButton from "../../src/components/contact-popup-button/ContactPopupButton";
+import contactPopupButton from "@/data/contact-popup-button";
 import ContactPopupWrapper from "../../src/components/contact-popup/ContactPopupWrapper";
 import contactPopupWrapper from "@/data/contact-popup-wrapper";
 import FloatingContact from "../../src/components/floating-contact/FloatingContact";
@@ -94,6 +96,12 @@ export default function ConstructionPage() {
       <JobListingListWrapper {...jobListingListWrapper} />
 
       <ContactCta {...contactCta} />
+
+      <section className="contact-popup-button-demo !bg-brand-navy !px-6 !py-14 md:!px-10">
+        <div className="!mx-auto !w-full !max-w-7xl !flex !justify-center">
+          <ContactPopupButton {...contactPopupButton} />
+        </div>
+      </section>
 
       <ContactPopupWrapper {...contactPopupWrapper} />
 

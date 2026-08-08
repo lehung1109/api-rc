@@ -1568,6 +1568,29 @@ export interface ContactPopupModel {
 
 **WordPress:** `EAI-contact-cta` → `ContactCta` + `popup_target`; `EAI-contact-popup` → `ContactPopupWrapper` + `popup_key` + CF7 SELECT.
 
+## Quick reference — contact popup button (server, tái sử dụng)
+
+Nút mở contact popup độc lập, dùng lại được ở bất kỳ đâu. Popup-only: `popupTarget` hợp lệ → `<button type="button" data-contact-popup-open="{key}">`; `popupTarget` hoặc `buttonLabel` rỗng → `return null`. Không cần JS riêng — `ContactPopup` lắng nghe click toàn trang qua `[data-contact-popup-open]`.
+
+| File                                        | Vai trò                                                          |
+| ------------------------------------------- | ---------------------------------------------------------------- |
+| `ContactPopupButton.tsx`                    | Server: button ghost-white + `data-contact-popup-open`; guard popup-only |
+| `src/data/contact-popup-button.ts`          | Mock / CMS (`ContactPopupButton` registry)                       |
+
+**Model:**
+
+```ts
+export interface ContactPopupButtonModel {
+  className?: string;
+  buttonLabel: string;
+  popupTarget: string; // khớp ContactPopup.popupKey; rỗng → không render
+}
+```
+
+**UI:** ghost-white giống `collaboration-intro-button` (`!border !border-brand-white !bg-transparent !px-8 !py-3`, uppercase, hover `bg-brand-white` + `text-brand-navy`, `md:!px-10 md:!py-3.5`), `cn(..., className)` override. Semantic: `contact-popup-button`.
+
+**WordPress:** `EAI-contact-popup-button` → `ContactPopupButton` + `popup_target` (khớp `popup_key` ContactPopup) + `button_label` + `class_name`.
+
 ## Quick reference — floating contact (server)
 
 Nút liên hệ fixed trái dưới: Messenger pill + Zalo pill + Phone (vòng + số + ripple). **Server-only** — không Wrapper/client. Không nền / box bọc ngoài.
