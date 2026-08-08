@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const navButtonClass = cn(
   "key-personnel-nav-button",
   "!absolute !top-1/2 !z-10 !hidden !h-14 !w-14 !cursor-pointer !place-items-center md:!grid",
-  "opacity-0 !transition-[opacity,color] !duration-300",
+  "opacity-0 !transition-[opacity,color] !duration-300 !border-0",
   "group-hover:enabled:!opacity-100 group-hover:disabled:!opacity-30",
   "focus-visible:!opacity-100",
   "!text-brand-white",
