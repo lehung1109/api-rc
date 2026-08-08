@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 
 import ClientComponentWrapper from "../ClientComponentWrapper";
+import { normalizeContactPopupKey } from "../contact-popup/contact-popup-key";
 import type { LinkModel } from "../link/Link";
 import Link from "../link/Link";
 import type { MediaModel } from "../media/Media";
@@ -24,7 +25,9 @@ export interface CollaborationIntroModel {
   items: CollaborationIntroItemModel[];
   note: string;
   buttonLabel: string;
-  buttonLink: LinkModel;
+  buttonLink?: LinkModel;
+  /** When set, the CTA opens a ContactPopup with this key instead of navigating. */
+  popupTarget?: string;
   scrollReveal?: CollaborationIntroScrollRevealModel;
 }
 
@@ -42,6 +45,7 @@ const CollaborationIntro = (model: CollaborationIntroModel) => {
     note,
     buttonLabel,
     buttonLink,
+    popupTarget,
     scrollReveal,
   } = model;
 
@@ -52,8 +56,10 @@ const CollaborationIntro = (model: CollaborationIntroModel) => {
   const hasTopImage = image.url.trim().length > 0;
   const backgroundUrl = backgroundImage?.url.trim() ?? "";
   const hasBackground = backgroundUrl.length > 0;
+  const popupTargetKey = normalizeContactPopupKey(popupTarget ?? "");
+  const hasLink = (buttonLink?.url ?? "").trim().length > 0;
   const hasButton =
-    buttonLabel.trim().length > 0 && buttonLink.url.trim().length > 0;
+    buttonLabel.trim().length > 0 && (hasLink || popupTargetKey.length > 0);
 
   const validItems = items.filter(
     (item) => item.image.url.trim().length > 0 && item.title.trim().length > 0,
@@ -84,8 +90,40 @@ const CollaborationIntro = (model: CollaborationIntroModel) => {
     "motion-reduce:!opacity-100 motion-reduce:!translate-y-0 motion-reduce:!transition-none",
   );
 
+  const buttonClasses = cn(
+    "collaboration-intro-button !inline-flex !cursor-pointer !items-center !justify-center",
+    "!border !border-brand-white !bg-transparent !px-8 !py-3",
+    "!text-base !font-bold !uppercase !tracking-wide !text-brand-white !no-underline",
+    "!transition-colors",
+    "hover:!bg-brand-white hover:!text-brand-navy",
+    "md:!px-10 md:!py-3.5",
+    buttonLink?.className,
+  );
+
   const itemKey = (item: CollaborationIntroItemModel, index: number) =>
     `${item.image.url}-${item.title}-${index}`;
+
+  const renderCta = () => {
+    if (popupTargetKey) {
+      return (
+        <button
+          type="button"
+          data-contact-popup-open={popupTargetKey}
+          className={buttonClasses}
+        >
+          {buttonLabel}
+        </button>
+      );
+    }
+    if (buttonLink) {
+      return (
+        <Link {...buttonLink} className={buttonClasses}>
+          {buttonLabel}
+        </Link>
+      );
+    }
+    return null;
+  };
 
   return (
     <section
@@ -211,20 +249,7 @@ const CollaborationIntro = (model: CollaborationIntroModel) => {
                     "!mt-8 md:!mt-10",
                 )}
               >
-                <Link
-                  {...buttonLink}
-                  className={cn(
-                    "collaboration-intro-button !inline-flex !cursor-pointer !items-center !justify-center",
-                    "!border !border-brand-white !bg-transparent !px-8 !py-3",
-                    "!text-base !font-bold !uppercase !tracking-wide !text-brand-white !no-underline",
-                    "!transition-colors",
-                    "hover:!bg-brand-white hover:!text-brand-navy",
-                    "md:!px-10 md:!py-3.5",
-                    buttonLink.className,
-                  )}
-                >
-                  {buttonLabel}
-                </Link>
+                {renderCta()}
               </div>
             ) : null}
           </div>

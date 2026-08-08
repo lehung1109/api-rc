@@ -687,7 +687,7 @@ export interface DevelopmentPartnersModel {
 
 ## Quick reference — collaboration intro (server + scroll reveal island)
 
-Section giới thiệu hợp tác: nền ảnh optional → fallback `bg-brand-navy`, top 2 cột (subtitle + titleHtml / ảnh) + border-bottom, bottom title + lưới item 3+2 (icon + label, border trắng) + note + CTA ghost. **Server-only** + island scroll reveal slide từ dưới. Style Tailwind + prefix `!` chống Porto/Bootstrap.
+Section giới thiệu hợp tác: nền ảnh optional → fallback `bg-brand-navy`, top 2 cột (subtitle + titleHtml / ảnh) + border-bottom, bottom title + lưới item 3+2 (icon + label, border trắng) + note + CTA ghost. Khi `popupTarget` set, CTA mở ContactPopup (khớp `popupKey`) thay vì điều hướng link. **Server-only** + island scroll reveal slide từ dưới. Style Tailwind + prefix `!` chống Porto/Bootstrap.
 
 | File                                                  | Vai trò                                                         |
 | ----------------------------------------------------- | --------------------------------------------------------------- |
@@ -715,12 +715,13 @@ export interface CollaborationIntroModel {
   items: CollaborationIntroItemModel[];
   note: string; // text-brand-white/70 text-base
   buttonLabel: string;
-  buttonLink: LinkModel; // ghost trắng → hover bg white + text navy
+  buttonLink: LinkModel; // ghost trắng → hover bg white + text navy; bỏ qua khi popupTarget set
+  popupTarget?: string; // khớp ContactPopup.popupKey → CTA thành <button data-contact-popup-open>
   scrollReveal?: { targetId?: string }; // default "collaboration-intro"
 }
 ```
 
-**Render guards:** lọc item thiếu `image.url` hoặc `title` trim; CTA chỉ khi `buttonLabel` + `buttonLink.url` trim; rỗng hoàn toàn → `return null`.
+**Render guards:** lọc item thiếu `image.url` hoặc `title` trim; CTA khi `buttonLabel` + (`buttonLink.url` hoặc `popupTarget`); `popupTarget` non-empty → render `<button type="button" data-contact-popup-open="{key}">` (key qua `normalizeContactPopupKey`) thay vì `<a>` — popup key rỗng sau normalize → bỏ qua popup, giữ Link; rỗng hoàn toàn → `return null`.
 
 **UI:** section `!px-6 !py-20 md:!px-10`; inner `max-w-7xl`; top `md:grid-cols-2`; ảnh top `rounded-tr-[40px]` → `md:rounded-tr-[60px]`; top `border-b border-brand-white/20`; items `flex flex-wrap justify-center` width `md:w-[calc((100%-32px)/3)]` (hàng 2 căn giữa); item border trắng, title `text-base`; note centered `text-brand-white/70`; CTA giống `news-events-button`. Semantic: `collaboration-intro`, `collaboration-intro-inner`, `collaboration-intro-background`, `collaboration-intro-top`, `collaboration-intro-subtitle`, `collaboration-intro-title`, `collaboration-intro-media`, `collaboration-intro-bottom`, `collaboration-intro-bottom-title`, `collaboration-intro-items`, `collaboration-intro-item`, `collaboration-intro-item-image`, `collaboration-intro-item-title`, `collaboration-intro-note`, `collaboration-intro-button`.
 

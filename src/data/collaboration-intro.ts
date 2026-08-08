@@ -60,11 +60,7 @@ const collaborationIntro: CollaborationIntroModel = {
   ],
   note: "Trước khi gửi hồ sơ, vui lòng tham khảo các tiêu chí và quy trình hợp tác dưới đây để đảm bảo sự phù hợp, hiệu quả trong quá trình làm việc.",
   buttonLabel: "TRỞ THÀNH ĐỐI TÁC ICHOUSE!",
-  buttonLink: {
-    url: "/hop-tac",
-    is_external: false,
-    nofollow: false,
-  },
+  popupTarget: "tu-van",
 };
 
 export default collaborationIntro;

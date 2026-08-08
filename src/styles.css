@@ -654,6 +654,14 @@ button.contact-popup-close {
   color: inherit;
 }
 
+.elementor-widget-text-editor ul {
+  list-style: disc;
+}
+
+.elementor-widget-text-editor ol {
+  list-style: decimal;
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
