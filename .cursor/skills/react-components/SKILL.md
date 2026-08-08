@@ -1574,22 +1574,29 @@ Nút mở contact popup độc lập, dùng lại được ở bất kỳ đâu.
 
 | File                                        | Vai trò                                                          |
 | ------------------------------------------- | ---------------------------------------------------------------- |
-| `ContactPopupButton.tsx`                    | Server: button ghost-white + `data-contact-popup-open`; guard popup-only |
+| `ContactPopupButton.tsx`                    | Server: button ghost-white/navy + `data-contact-popup-open`; guard popup-only |
 | `src/data/contact-popup-button.ts`          | Mock / CMS (`ContactPopupButton` registry)                       |
 
 **Model:**
 
 ```ts
+export type ContactPopupButtonVariant = "white" | "navy";
+
 export interface ContactPopupButtonModel {
   className?: string;
   buttonLabel: string;
   popupTarget: string; // khớp ContactPopup.popupKey; rỗng → không render
+  variant?: ContactPopupButtonVariant; // mặc định "white"
 }
 ```
 
-**UI:** ghost-white giống `collaboration-intro-button` (`!border !border-brand-white !bg-transparent !px-8 !py-3`, uppercase, hover `bg-brand-white` + `text-brand-navy`, `md:!px-10 md:!py-3.5`), `cn(..., className)` override. Semantic: `contact-popup-button`.
+**UI:** chung (`!border !bg-transparent !px-8 !py-3`, uppercase, `md:!px-10 md:!py-3.5`); `variant` đổi cặp màu border/text + hover:
+- `white` (mặc định, nền tối): `!border-brand-white !text-brand-white`, hover `bg-brand-white` + `text-brand-navy`.
+- `navy` (nền sáng): `!border-brand-navy !text-brand-navy`, hover `bg-brand-navy` + `text-brand-white`.
 
-**WordPress:** `EAI-contact-popup-button` → `ContactPopupButton` + `popup_target` (khớp `popup_key` ContactPopup) + `button_label` + `class_name`.
+`cn(..., className)` override. Semantic: `contact-popup-button`.
+
+**WordPress:** `EAI-contact-popup-button` → `ContactPopupButton` + `popup_target` (khớp `popup_key` ContactPopup) + `button_label` + `class_name` + `button_variant` (SELECT white/navy, default white → helper chỉ gửi `variant` khi `navy`).
 
 ## Quick reference — floating contact (server)
 

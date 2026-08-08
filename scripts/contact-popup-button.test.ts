@@ -46,4 +46,23 @@ describe("ContactPopupButton", () => {
     assert.ok(markup.includes(BUTTON_CLASS));
     assert.ok(markup.includes("my-custom-class"));
   });
+
+  test("defaults to white variant with ghost classes", () => {
+    const markup = render({ buttonLabel: "Liên hệ ngay", popupTarget: "tu-van" });
+    assert.ok(markup.includes("!border-brand-white"));
+    assert.ok(markup.includes("!text-brand-white"));
+    assert.ok(markup.includes("hover:!bg-brand-white hover:!text-brand-navy"));
+  });
+
+  test("renders navy variant with navy border and text, white on hover", () => {
+    const markup = render({
+      buttonLabel: "Liên hệ ngay",
+      popupTarget: "tu-van",
+      variant: "navy",
+    });
+    assert.ok(markup.includes("!border-brand-navy"));
+    assert.ok(markup.includes("!text-brand-navy"));
+    assert.ok(markup.includes("hover:!bg-brand-navy hover:!text-brand-white"));
+    assert.ok(!markup.includes("!border-brand-white"));
+  });
 });
