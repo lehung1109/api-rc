@@ -40,7 +40,7 @@ const JobListingListCard = (model: JobListingListCardModel) => {
           <Media
             {...image}
             className={cn(
-              "job-listing-list-item-image !h-full !w-full !object-cover",
+              "job-listing-list-item-image !h-full !w-full !object-contain md:!object-cover",
               image.className,
             )}
           />
