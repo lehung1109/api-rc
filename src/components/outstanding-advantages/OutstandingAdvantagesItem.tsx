@@ -36,8 +36,7 @@ const OutstandingAdvantagesItem = (
     ? backgroundMobileImage
     : backgroundDesktopImage;
   const backgroundFallbackUrl = backgroundFallback.url.trim();
-  const desktopBgSrcSet =
-    backgroundDesktopImage.srcSet?.trim() || desktopBgUrl;
+  const desktopBgSrcSet = backgroundDesktopImage.srcSet?.trim() || desktopBgUrl;
 
   if (!titleText || !hasBackground) {
     return null;
@@ -127,7 +126,7 @@ const OutstandingAdvantagesItem = (
             <p
               className={cn(
                 "outstanding-advantages-item-subtitle !mb-0 !text-base !font-medium !uppercase !tracking-[0.12em]",
-                "!text-brand-white/70",
+                "!text-brand-gold",
               )}
             >
               {subtitleText}
