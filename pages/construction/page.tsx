@@ -34,6 +34,8 @@ import ProjectCategoryGalleryWrapper from "../../src/components/project-category
 import projectCategoryGalleryWrapper from "@/data/project-category-gallery-wrapper";
 import NewsEvents from "../../src/components/news-events/NewsEvents";
 import newsEvents from "@/data/news-events";
+import NewsListWrapper from "../../src/components/news-list/NewsListWrapper";
+import newsListWrapper from "@/data/news-list-wrapper";
 import JobListingListWrapper from "../../src/components/job-listing-list/JobListingListWrapper";
 import jobListingListWrapper from "@/data/job-listing-list-wrapper";
 import ContactCta from "../../src/components/contact-cta/ContactCta";
@@ -86,6 +88,8 @@ export default function ConstructionPage() {
       <ProjectCategoryGalleryWrapper {...projectCategoryGalleryWrapper} />
 
       <NewsEvents {...newsEvents} />
+
+      <NewsListWrapper {...newsListWrapper} />
 
       <JobListingListWrapper {...jobListingListWrapper} />
 

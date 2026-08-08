@@ -3,10 +3,13 @@ import { http, HttpResponse } from "msw";
 import {
   jobListingListCatalog,
 } from "@/data/job-listing-list-wrapper";
+import { newsListCatalog } from "@/data/news-list-wrapper";
 import { projectCategoryGalleryCatalog } from "@/data/project-category-gallery-wrapper";
 import { projectShowcase } from "@/data/project-showcase";
 import { paginateJobListingList } from "@/lib/job-listing-list/paginate";
 import type { JobListingListRequest } from "@/lib/job-listing-list/types";
+import { paginateNewsList } from "@/lib/news-list/paginate";
+import type { NewsListRequest } from "@/lib/news-list/types";
 import { filterPage } from "@/lib/project-category-gallery/filter-page";
 import type { ProjectCategoryGalleryRequest } from "@/lib/project-category-gallery/types";
 import { filterProjects } from "@/lib/project-showcase/filter-projects";
@@ -32,6 +35,18 @@ export const handlers = [
     return HttpResponse.json(
       paginateJobListingList(jobListingListCatalog, page, pageSize),
     );
+  }),
+
+  http.post("/api/news-list", async ({ request }) => {
+    await delay(3000);
+    const body = (await request.json()) as NewsListRequest;
+    const page = typeof body.page === "number" && body.page >= 1 ? body.page : 1;
+    const pageSize =
+      typeof body.pageSize === "number" && body.pageSize >= 1
+        ? Math.min(body.pageSize, 24)
+        : 5;
+
+    return HttpResponse.json(paginateNewsList(newsListCatalog, page, pageSize));
   }),
 
   http.post("/api/project-category-gallery", async ({ request }) => {
