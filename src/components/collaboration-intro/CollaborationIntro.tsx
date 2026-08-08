@@ -194,7 +194,7 @@ const CollaborationIntro = (model: CollaborationIntroModel) => {
             {noteText ? (
               <p
                 className={cn(
-                  "collaboration-intro-note !m-0 !text-center !text-base !leading-relaxed !text-brand-white/70",
+                  "collaboration-intro-note !m-0 !text-center !text-base !leading-relaxed !text-brand-gold",
                   (bottomTitleText || validItems.length > 0) &&
                     "!mt-8 md:!mt-10",
                 )}
