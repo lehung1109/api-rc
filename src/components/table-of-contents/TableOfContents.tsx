@@ -135,7 +135,7 @@ const TableOfContents = (model: TableOfContentsModel) => {
       : "!relative !max-w-full !border !border-brand-navy !p-0",
     isStickyCompact && "table-of-contents--sticky-compact",
     isStickyExpanded &&
-      "table-of-contents--sticky-expanded !w-[300px] !h-[100dvh] !z-1000 !border-brand-navy !p-0",
+      "table-of-contents--sticky-expanded !w-[300px] !h-[100dvh] !z-10000 !border-brand-navy !p-0",
   );
 
   const listHeightClass = isStickyExpanded
