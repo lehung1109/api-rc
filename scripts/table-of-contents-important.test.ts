@@ -104,6 +104,37 @@ describe("Table of Contents Tailwind important contract", () => {
     });
   }
 
+  test("adds one rem horizontal padding to ol and li", async () => {
+    const source = await readFile(
+      new URL("TableOfContentsList.tsx", featureDir),
+      "utf8",
+    );
+    const horizontalPaddingMatches = source.match(/!px-4/g) ?? [];
+
+    assert.ok(
+      horizontalPaddingMatches.length >= 2,
+      "TableOfContentsList.tsx must apply !px-4 to both ol and li",
+    );
+  });
+
+  test("hides branch chevrons and adds one rem list bottom margin", async () => {
+    const source = await readFile(
+      new URL("TableOfContentsList.tsx", featureDir),
+      "utf8",
+    );
+
+    assert.ok(
+      source.includes("table-of-contents-list !mb-4"),
+      "TableOfContentsList.tsx must apply !mb-4 to ol",
+    );
+    assert.ok(
+      source.includes(
+        "table-of-contents-branch-chevron !hidden",
+      ),
+      "TableOfContentsList.tsx must hide branch chevrons",
+    );
+  });
+
   test("moves pseudo-element and responsive sticky styles into styles.css", async () => {
     const styles = await readFile(stylesUrl, "utf8");
 

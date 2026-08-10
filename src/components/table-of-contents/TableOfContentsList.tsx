@@ -41,10 +41,10 @@ const TableOfContentsList = (model: TableOfContentsList) => {
     <ol
       id={listId}
       className={cn(
-        "table-of-contents-list",
+        "table-of-contents-list !mb-4",
         nested
-          ? "table-of-contents-list--nested !hidden !w-full !p-0 peer-checked/branch:!block"
-          : cn("!mt-3 !overflow-y-auto !p-0", listHeightClass),
+          ? "table-of-contents-list--nested !hidden !w-full !py-0 !px-4 peer-checked/branch:!block"
+          : cn("!mt-3 !overflow-y-auto !py-0 !px-4", listHeightClass),
       )}
     >
       {items.map((item, index) => {
@@ -61,7 +61,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
           <li
             key={item.targetId}
             className={cn(
-              "table-of-contents-item !relative !z-10 !block !p-0 !transition-[color] !duration-500",
+              "table-of-contents-item !relative !z-10 !block !py-0 !px-4 !transition-[color] !duration-500",
               hasChildren &&
                 "table-of-contents-item--has-children group/branch",
               hasChildren &&
@@ -84,14 +84,14 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                     aria-label={`Thu gọn hoặc mở rộng ${item.label}`}
                   >
                     <ChevronRight
-                      className="table-of-contents-branch-chevron !h-auto !w-6 !transition-transform"
+                      className="table-of-contents-branch-chevron !hidden !h-auto !w-6 !transition-transform"
                       aria-hidden
                     />
                   </label>
                   <a
                     href={`#${item.targetId}`}
                     className={cn(
-                      "table-of-contents-link !relative !block !w-full !py-2.5 !pr-2.5 !pl-[50px] !font-bold",
+                      "table-of-contents-link !relative !block !w-full !py-2.5 !pr-2.5 pl-[50px] !font-bold",
                       isLinkActive && "table-of-contents-link--active",
                     )}
                     aria-current={isLinkActive ? "location" : undefined}
@@ -112,7 +112,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                 <a
                   href={`#${item.targetId}`}
                   className={cn(
-                    "table-of-contents-link !relative !block !w-full !py-2.5 !pr-2.5 !pl-[50px] !font-bold",
+                    "table-of-contents-link !relative !block !w-full !py-2.5 !pr-2.5 pl-[50px] !font-bold",
                     isLinkActive && "table-of-contents-link--active",
                   )}
                   aria-current={isLinkActive ? "location" : undefined}
