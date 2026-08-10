@@ -745,6 +745,10 @@ button.contact-popup-close {
   background: var(--e-global-color-tertiary);
 }
 
+#banner-navy {
+  background-color: var(--e-global-color-primary);
+}
+
 @media only screen and (min-width: 48rem) {
   .construction-header-menu-dropdown-body {
     width: max-content;
