@@ -43,8 +43,8 @@ const TableOfContentsList = (model: TableOfContentsList) => {
       className={cn(
         "table-of-contents-list",
         nested
-          ? "table-of-contents-list--nested hidden w-full peer-checked/branch:block"
-          : cn("mt-3 overflow-y-auto", listHeightClass),
+          ? "table-of-contents-list--nested !hidden !w-full peer-checked/branch:!block"
+          : cn("!mt-3 !overflow-y-auto", listHeightClass),
       )}
     >
       {items.map((item, index) => {
@@ -61,11 +61,11 @@ const TableOfContentsList = (model: TableOfContentsList) => {
           <li
             key={item.targetId}
             className={cn(
-              "table-of-contents-item py-1 pl-5",
+              "table-of-contents-item !py-1 !pl-5",
               hasChildren &&
                 "table-of-contents-item--has-children group/branch",
               hasChildren &&
-                "has-[:checked]:[&_.table-of-contents-branch-chevron]:rotate-90",
+                "has-[:checked]:[&_.table-of-contents-branch-chevron]:!rotate-90",
               isItemActive && "table-of-contents-item--active",
             )}
           >
@@ -74,24 +74,24 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                 <input
                   id={branchId}
                   type="checkbox"
-                  className="table-of-contents-branch-input peer/branch sr-only"
+                  className="table-of-contents-branch-input peer/branch !sr-only"
                   defaultChecked
                 />
-                <div className="flex min-w-0 flex-1 items-start gap-1 table-of-contents-link-wrap">
+                <div className="!flex !min-w-0 !flex-1 !items-start !gap-1 table-of-contents-link-wrap">
                   <label
                     htmlFor={branchId}
-                    className="table-of-contents-branch-toggle shrink-0 p-0.5 absolute top-1/2 -translate-y-1/2 left-2.5"
+                    className="table-of-contents-branch-toggle !shrink-0 !p-0.5 !absolute !top-1/2 !-translate-y-1/2 !left-2.5"
                     aria-label={`Thu gọn hoặc mở rộng ${item.label}`}
                   >
                     <ChevronRight
-                      className="table-of-contents-branch-chevron h-auto w-6 transition-transform"
+                      className="table-of-contents-branch-chevron !h-auto !w-6 !transition-transform"
                       aria-hidden
                     />
                   </label>
                   <a
                     href={`#${item.targetId}`}
                     className={cn(
-                      "table-of-contents-link flex-1",
+                      "table-of-contents-link !flex-1",
                       isLinkActive && "table-of-contents-link--active",
                     )}
                     aria-current={isLinkActive ? "location" : undefined}
@@ -108,11 +108,11 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                 />
               </>
             ) : (
-              <div className="table-of-contents-link-wrap flex flex-1 items-start gap-1">
+              <div className="table-of-contents-link-wrap !flex !flex-1 !items-start !gap-1">
                 <a
                   href={`#${item.targetId}`}
                   className={cn(
-                    "table-of-contents-link flex-1",
+                    "table-of-contents-link !flex-1",
                     isLinkActive && "table-of-contents-link--active",
                   )}
                   aria-current={isLinkActive ? "location" : undefined}
