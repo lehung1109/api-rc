@@ -139,7 +139,18 @@ test('tsx page files are listed and render as independent page urls', async ({ p
   // Assert page content in a fresh context: Firefox + MSW can leave shared-context
   // iframe documents blank after the parent preview already started the worker.
   await expectPageRender(browser, 'http://127.0.0.1:5173/pages/table-of-contents/', async (previewPage) => {
-    await expect(previewPage.getByRole('navigation', { name: /mục lục/i })).toBeVisible();
+    const navigation = previewPage.getByRole('navigation', { name: /mục lục/i });
+    const panel = navigation.locator('.table-of-contents-panel');
+    const title = navigation.locator('.table-of-contents-title');
+    const firstTopLevelLink = navigation.locator(
+      '.table-of-contents-panel > .table-of-contents-list > .table-of-contents-item > .table-of-contents-link-wrap > .table-of-contents-link',
+    ).first();
+
+    await expect(navigation).toBeVisible();
+    await expect(panel).toHaveCSS('max-width', '100%');
+    await expect(title).toHaveCSS('font-size', '22px');
+    await expect(firstTopLevelLink).toHaveCSS('font-weight', '700');
+    await expect(firstTopLevelLink).toHaveCSS('padding-left', '50px');
   });
 });
 

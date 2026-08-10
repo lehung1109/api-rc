@@ -43,8 +43,8 @@ const TableOfContentsList = (model: TableOfContentsList) => {
       className={cn(
         "table-of-contents-list",
         nested
-          ? "table-of-contents-list--nested !hidden !w-full peer-checked/branch:!block"
-          : cn("!mt-3 !overflow-y-auto", listHeightClass),
+          ? "table-of-contents-list--nested !hidden !w-full !p-0 peer-checked/branch:!block"
+          : cn("!mt-3 !overflow-y-auto !p-0", listHeightClass),
       )}
     >
       {items.map((item, index) => {
@@ -61,7 +61,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
           <li
             key={item.targetId}
             className={cn(
-              "table-of-contents-item !py-1 !pl-5",
+              "table-of-contents-item !relative !z-10 !block !p-0 !transition-[color] !duration-500",
               hasChildren &&
                 "table-of-contents-item--has-children group/branch",
               hasChildren &&
@@ -77,10 +77,10 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                   className="table-of-contents-branch-input peer/branch !sr-only"
                   defaultChecked
                 />
-                <div className="!flex !min-w-0 !flex-1 !items-start !gap-1 table-of-contents-link-wrap">
+                <div className="table-of-contents-link-wrap !relative !block !min-w-0 !w-full">
                   <label
                     htmlFor={branchId}
-                    className="table-of-contents-branch-toggle !shrink-0 !p-0.5 !absolute !top-1/2 !-translate-y-1/2 !left-2.5"
+                    className="table-of-contents-branch-toggle !absolute !top-2.5 !right-[calc(100%-30px)] !left-auto !shrink-0 !translate-y-0 !cursor-pointer !p-0.5 opacity-30 hover:!opacity-100"
                     aria-label={`Thu gọn hoặc mở rộng ${item.label}`}
                   >
                     <ChevronRight
@@ -91,7 +91,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                   <a
                     href={`#${item.targetId}`}
                     className={cn(
-                      "table-of-contents-link !flex-1",
+                      "table-of-contents-link !relative !block !w-full !py-2.5 !pr-2.5 !pl-[50px] !font-bold",
                       isLinkActive && "table-of-contents-link--active",
                     )}
                     aria-current={isLinkActive ? "location" : undefined}
@@ -108,11 +108,11 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                 />
               </>
             ) : (
-              <div className="table-of-contents-link-wrap !flex !flex-1 !items-start !gap-1">
+              <div className="table-of-contents-link-wrap !relative !block !w-full">
                 <a
                   href={`#${item.targetId}`}
                   className={cn(
-                    "table-of-contents-link !flex-1",
+                    "table-of-contents-link !relative !block !w-full !py-2.5 !pr-2.5 !pl-[50px] !font-bold",
                     isLinkActive && "table-of-contents-link--active",
                   )}
                   aria-current={isLinkActive ? "location" : undefined}

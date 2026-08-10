@@ -131,11 +131,11 @@ const TableOfContents = (model: TableOfContentsModel) => {
   const panelClasses = cn(
     "table-of-contents-panel",
     isPast
-      ? "!fixed !right-4 md:!right-6 !top-1/2 !z-40 !-translate-y-1/2 !rounded-lg !border !border-brand-white-hover !bg-brand-white !p-0 !shadow-md"
-      : "!relative",
+      ? "!fixed !right-0 !top-1/2 !z-40 !-translate-y-1/2 !rounded-lg !border !border-brand-navy !bg-brand-white !p-0 !shadow-md"
+      : "!relative !max-w-full !border !border-brand-navy !p-0",
     isStickyCompact && "table-of-contents--sticky-compact",
     isStickyExpanded &&
-      "table-of-contents--sticky-expanded !p-4 !w-[250px] !h-[100dvh] !z-1000",
+      "table-of-contents--sticky-expanded !w-[300px] !h-[100dvh] !z-1000 !border-brand-navy !p-0",
   );
 
   const listHeightClass = isStickyExpanded
@@ -160,8 +160,8 @@ const TableOfContents = (model: TableOfContentsModel) => {
   };
 
   const titleGroupClassName =
-    "table-of-contents-title-group !flex !min-w-0 !flex-1 !items-center !gap-2 !text-left" +
-    (isStickyCompact ? " !p-4" : "") +
+    "table-of-contents-title-group !flex !min-w-0 !flex-1 !items-center !justify-between !gap-2 !border-0 !p-2.5 !text-left" +
+    (isStickyCompact ? " !rounded-lg !border !border-brand-navy !p-3" : "") +
     (isStickyExpanded ? " !justify-between" : "");
 
   return (
@@ -193,11 +193,14 @@ const TableOfContents = (model: TableOfContentsModel) => {
             >
               <div className="!flex !items-center !gap-2">
                 <ListOrdered
-                  className="!h-5 !w-5 !shrink-0 !text-brand-gold"
+                  className={cn(
+                    "!size-7 !shrink-0 !text-brand-navy",
+                    isStickyCompact && "!size-[35px]",
+                  )}
                   aria-hidden
                 />
                 <span
-                  className={`table-of-contents-title !truncate !font-bold ${isStickyCompact ? "!hidden" : ""}`}
+                  className={`table-of-contents-title !truncate !text-[22px] !font-bold ${isStickyCompact ? "!hidden" : ""}`}
                 >
                   {title}
                 </span>

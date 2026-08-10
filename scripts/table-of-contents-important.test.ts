@@ -6,24 +6,23 @@ const featureDir = new URL(
   "../src/components/table-of-contents/",
   import.meta.url,
 );
+const stylesUrl = new URL("../src/styles.css", import.meta.url);
 
 const expectedImportantUtilities: Record<string, string[]> = {
   "TableOfContents.tsx": [
     "!fixed",
-    "!right-4",
-    "md:!right-6",
+    "!right-0",
     "!top-1/2",
     "!z-40",
     "!-translate-y-1/2",
     "!rounded-lg",
     "!border",
-    "!border-brand-white-hover",
     "!bg-brand-white",
     "!p-0",
     "!shadow-md",
     "!relative",
-    "!p-4",
-    "!w-[250px]",
+    "!p-3",
+    "!w-[300px]",
     "!h-[100dvh]",
     "!z-1000",
     "!max-h-[100dvh]",
@@ -43,12 +42,19 @@ const expectedImportantUtilities: Record<string, string[]> = {
     "!h-5",
     "!w-5",
     "!shrink-0",
-    "!text-brand-gold",
     "!truncate",
     "!font-bold",
     "!hidden",
     "!transition-transform",
     "!rotate-180",
+    "!max-w-full",
+    "!border-brand-navy",
+    "!border-0",
+    "!p-2.5",
+    "!text-[22px]",
+    "!size-7",
+    "!text-brand-navy",
+    "!w-[300px]",
   ],
   "TableOfContentsList.tsx": [
     "!hidden",
@@ -56,24 +62,29 @@ const expectedImportantUtilities: Record<string, string[]> = {
     "peer-checked/branch:!block",
     "!mt-3",
     "!overflow-y-auto",
-    "!py-1",
-    "!pl-5",
     "has-[:checked]:[&_.table-of-contents-branch-chevron]:!rotate-90",
     "!sr-only",
-    "!flex",
     "!min-w-0",
-    "!flex-1",
-    "!items-start",
-    "!gap-1",
     "!shrink-0",
     "!p-0.5",
     "!absolute",
-    "!top-1/2",
-    "!-translate-y-1/2",
-    "!left-2.5",
+    "!right-[calc(100%-30px)]",
+    "!left-auto",
     "!h-auto",
     "!w-6",
     "!transition-transform",
+    "!block",
+    "!relative",
+    "!p-0",
+    "!font-bold",
+    "!py-2.5",
+    "!pr-2.5",
+    "!pl-[50px]",
+    "opacity-30",
+    "hover:!opacity-100",
+    "!translate-y-0",
+    "!top-2.5",
+    "!cursor-pointer",
   ],
 };
 
@@ -92,6 +103,30 @@ describe("Table of Contents Tailwind important contract", () => {
       }
     });
   }
+
+  test("moves pseudo-element and responsive sticky styles into styles.css", async () => {
+    const styles = await readFile(stylesUrl, "utf8");
+
+    const normalizedStyles = styles.replace(/\s+/g, " ");
+
+    for (const contract of [
+      ".table-of-contents-link::before",
+      "transform: scaleX(0)",
+      ".table-of-contents-link--active::before",
+      "transform: scaleX(1)",
+      ".table-of-contents-item .table-of-contents-item::before",
+      ".table-of-contents-item .table-of-contents-item .table-of-contents-item::before",
+      "calc(50% - 278px)",
+      "calc(50% - 520px)",
+      "calc(50% - 330px)",
+      "calc(50% - 570px)",
+    ]) {
+      assert.ok(
+        normalizedStyles.includes(contract),
+        `styles.css is missing ${contract}`,
+      );
+    }
+  });
 
   test("keeps opacity-0 as the only non-important exception", async () => {
     const sources = await Promise.all(
