@@ -36,6 +36,7 @@ const TableOfContentsList = (model: TableOfContentsList) => {
     onAnchorClick,
   } = model;
   const instanceId = useId();
+  const boldDirectLinks = items.some((item) => Boolean(item.items?.length));
 
   return (
     <ol
@@ -91,7 +92,8 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                   <a
                     href={`#${item.targetId}`}
                     className={cn(
-                      "table-of-contents-link !relative !block !w-full !py-2.5 !pr-2.5 pl-[50px] !font-bold",
+                      "table-of-contents-link !relative !block !w-full !py-2.5 !pr-2.5 pl-[50px]",
+                      boldDirectLinks && "!font-bold",
                       isLinkActive && "table-of-contents-link--active",
                     )}
                     aria-current={isLinkActive ? "location" : undefined}
@@ -112,7 +114,8 @@ const TableOfContentsList = (model: TableOfContentsList) => {
                 <a
                   href={`#${item.targetId}`}
                   className={cn(
-                    "table-of-contents-link !relative !block !w-full !py-2.5 !pr-2.5 pl-[50px] !font-bold",
+                    "table-of-contents-link !relative !block !w-full !py-2.5 !pr-2.5 pl-[50px]",
+                    boldDirectLinks && "!font-bold",
                     isLinkActive && "table-of-contents-link--active",
                   )}
                   aria-current={isLinkActive ? "location" : undefined}

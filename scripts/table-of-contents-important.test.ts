@@ -79,7 +79,6 @@ const expectedImportantUtilities: Record<string, string[]> = {
     "!font-bold",
     "!py-2.5",
     "!pr-2.5",
-    "!pl-[50px]",
     "opacity-30",
     "hover:!opacity-100",
     "!translate-y-0",
@@ -114,6 +113,24 @@ describe("Table of Contents Tailwind important contract", () => {
     assert.ok(
       horizontalPaddingMatches.length >= 2,
       "TableOfContentsList.tsx must apply !px-4 to both ol and li",
+    );
+  });
+
+  test("bolds every direct sibling when one item in the list has children", async () => {
+    const source = await readFile(
+      new URL("TableOfContentsList.tsx", featureDir),
+      "utf8",
+    );
+
+    assert.ok(
+      source.includes(
+        "const boldDirectLinks = items.some((item) => Boolean(item.items?.length));",
+      ),
+      "Each recursive list must derive whether its direct links are bold",
+    );
+    assert.ok(
+      source.includes('boldDirectLinks && "!font-bold"'),
+      "All direct sibling links must share the derived bold state",
     );
   });
 
