@@ -751,6 +751,10 @@ button.contact-popup-close {
 }
 
 @media only screen and (min-width: 48rem) {
+  .custom-container {
+    max-width: 1140px;
+  }
+
   .construction-header-menu-dropdown-body {
     width: max-content;
     max-width: 70vw;
