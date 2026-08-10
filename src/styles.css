@@ -741,7 +741,8 @@ button.contact-popup-close {
   border-width: 1px;
 }
 
-.single-tin-tuc .main-content {
+.single-tin-tuc .main-content,
+.single-post .main-content {
   background: var(--e-global-color-tertiary);
 }
 
