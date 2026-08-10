@@ -1,9 +1,11 @@
 import ConstructionHeader from "../../src/components/construction-header/ConstructionHeader";
 import PageBackground from "../../src/components/page-background/PageBackground";
 import VideoHeroBannerWrapper from "../../src/components/video-hero-banner/VideoHeroBannerWrapper";
+import JobDetail from "../../src/components/job-detail/JobDetail";
 import { constructionHeader } from "../../src/data/construction-header";
 import pageBackground from "../../src/data/page-background";
 import videoHeroBannerWrapper from "../../src/data/video-hero-banner-wrapper";
+import jobDetail from "../../src/data/job-detail";
 import AboutIntro from "../../src/components/about-intro/AboutIntro";
 import aboutIntro from "@/data/about-intro";
 import DirectorIntro from "../../src/components/director-intro/DirectorIntro";
@@ -60,6 +62,8 @@ export default function ConstructionPage() {
       <ConstructionHeader {...constructionHeader} />
 
       <VideoHeroBannerWrapper {...videoHeroBannerWrapper} />
+
+      <JobDetail {...jobDetail} />
 
       <AboutIntro {...aboutIntro} />
 
