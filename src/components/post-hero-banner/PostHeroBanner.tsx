@@ -13,8 +13,8 @@ export interface PostHeroBannerBreadcrumbItemModel {
 export interface PostHeroBannerModel {
   className?: string;
   backgroundImage: MediaModel;
-  breadcrumbItems: PostHeroBannerBreadcrumbItemModel[];
-  title: string;
+  breadcrumbItems?: PostHeroBannerBreadcrumbItemModel[];
+  title?: string;
   titleHeading?: PostHeroBannerTitleHeading;
 }
 
@@ -26,17 +26,14 @@ const PostHeroBanner = (model: PostHeroBannerModel) => {
     title,
     titleHeading = "h1",
   } = model;
-  const titleText = title.trim();
-  const validBreadcrumbItems = breadcrumbItems
+  const titleText = title?.trim() ?? "";
+  const validBreadcrumbItems = (breadcrumbItems ?? [])
     .filter((item) => item.label.trim() && item.link.url.trim())
     .slice(0, 2);
+  const hasContent = titleText.length > 0 || validBreadcrumbItems.length > 0;
   const TitleTag = titleHeading === "h2" ? "h2" : "h1";
 
-  if (
-    !backgroundImage.url.trim() ||
-    !titleText ||
-    validBreadcrumbItems.length !== 2
-  ) {
+  if (!backgroundImage.url.trim()) {
     return null;
   }
 
@@ -58,42 +55,48 @@ const PostHeroBanner = (model: PostHeroBannerModel) => {
         className="post-hero-banner-overlay !pointer-events-none !absolute !inset-0 !bg-brand-navy/55"
         aria-hidden
       />
-      <div className="post-hero-banner-inner !relative !z-10 !mx-auto !flex !h-full !w-full !max-w-7xl !items-end !justify-center !px-6 !pb-20 md:!px-10">
-        <div className="post-hero-banner-content !w-full !text-center">
-          <nav
-            className="post-hero-banner-breadcrumb !mb-4 !text-base !font-normal !uppercase !text-brand-gold"
-            aria-label="Breadcrumb"
-          >
-            {validBreadcrumbItems.map((item, index) => (
-              <span
-                className="post-hero-banner-breadcrumb-item"
-                key={`${item.link.url}-${item.label}-${index}`}
+      {hasContent ? (
+        <div className="post-hero-banner-inner !relative !z-10 !mx-auto !flex !h-full !w-full !max-w-7xl !items-end !justify-center !px-6 !pb-20 md:!px-10">
+          <div className="post-hero-banner-content !w-full !text-center">
+            {validBreadcrumbItems.length > 0 ? (
+              <nav
+                className="post-hero-banner-breadcrumb !mb-4 !text-base !font-normal !uppercase !text-brand-gold"
+                aria-label="Breadcrumb"
               >
-                {index > 0 ? (
+                {validBreadcrumbItems.map((item, index) => (
                   <span
-                    className="post-hero-banner-breadcrumb-separator !px-2"
-                    aria-hidden
+                    className="post-hero-banner-breadcrumb-item"
+                    key={`${item.link.url}-${item.label}-${index}`}
                   >
-                    /
+                    {index > 0 ? (
+                      <span
+                        className="post-hero-banner-breadcrumb-separator !px-2"
+                        aria-hidden
+                      >
+                        /
+                      </span>
+                    ) : null}
+                    <Link
+                      {...item.link}
+                      className={cn(
+                        "post-hero-banner-breadcrumb-link !text-brand-gold !no-underline hover:!text-brand-gold-hover hover:!underline",
+                        item.link.className,
+                      )}
+                    >
+                      {item.label.trim()}
+                    </Link>
                   </span>
-                ) : null}
-                <Link
-                  {...item.link}
-                  className={cn(
-                    "post-hero-banner-breadcrumb-link !text-brand-gold !no-underline hover:!text-brand-gold-hover hover:!underline",
-                    item.link.className,
-                  )}
-                >
-                  {item.label.trim()}
-                </Link>
-              </span>
-            ))}
-          </nav>
-          <TitleTag className="post-hero-banner-title !mx-auto !mb-0 !max-w-5xl !text-2xl !font-bold !uppercase !leading-tight !text-brand-white md:!text-4xl lg:!text-5xl">
-            {titleText}
-          </TitleTag>
+                ))}
+              </nav>
+            ) : null}
+            {titleText ? (
+              <TitleTag className="post-hero-banner-title !mx-auto !mb-0 !max-w-5xl !text-2xl !font-bold !uppercase !leading-tight !text-brand-white md:!text-4xl lg:!text-5xl">
+                {titleText}
+              </TitleTag>
+            ) : null}
+          </div>
         </div>
-      </div>
+      ) : null}
     </section>
   );
 };
