@@ -1,8 +1,19 @@
 import type { JobDetailModel } from "@/components/job-detail/JobDetail";
 
 const jobDetail: JobDetailModel = {
-  title: "Architecto tuyển dụng Content Creator - HCM",
-  metadata: ["Toàn thời gian", "Hồ Chí Minh"],
+  title: "ICHOUSE tuyển dụng Content Creator - HCM",
+  metadata: {
+    vacancies: "1",
+    salary: "10.000.000 - 12.000.000",
+    employmentType: "Toàn thời gian",
+    applicationDeadline: "31/03/2026",
+  },
+  applyLabel: "Ứng tuyển",
+  applyLink: {
+    url: "/ung-tuyen/content-creator",
+    is_external: false,
+    nofollow: false,
+  },
   sections: [
     {
       title: "Mô tả công việc",
@@ -39,7 +50,7 @@ const jobDetail: JobDetailModel = {
   sidebarTitle: "Ứng tuyển khác",
   relatedJobs: [
     {
-      categoryLabel: "Architecto tuyển dụng",
+      categoryLabel: "ICHOUSE tuyển dụng",
       title: "Content Creator - HCM",
       link: {
         url: "/tuyen-dung/content-creator-hcm",
@@ -49,7 +60,7 @@ const jobDetail: JobDetailModel = {
       metadata: ["Toàn thời gian", "Hồ Chí Minh"],
     },
     {
-      categoryLabel: "Architecto tuyển dụng",
+      categoryLabel: "ICHOUSE tuyển dụng",
       title: "Kiến trúc sư triển khai",
       link: {
         url: "/tuyen-dung/kien-truc-su-trien-khai",
@@ -59,7 +70,7 @@ const jobDetail: JobDetailModel = {
       metadata: ["Toàn thời gian", "Hà Nội"],
     },
     {
-      categoryLabel: "Architecto tuyển dụng",
+      categoryLabel: "ICHOUSE tuyển dụng",
       title: "Nhân viên kinh doanh",
       link: {
         url: "/tuyen-dung/nhan-vien-kinh-doanh",
@@ -69,7 +80,7 @@ const jobDetail: JobDetailModel = {
       metadata: ["Toàn thời gian", "Hà Nội"],
     },
     {
-      categoryLabel: "Architecto tuyển dụng",
+      categoryLabel: "ICHOUSE tuyển dụng",
       title: "Chuyên viên Marketing",
       link: {
         url: "/tuyen-dung/chuyen-vien-marketing",

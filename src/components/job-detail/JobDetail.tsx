@@ -1,16 +1,32 @@
-import { BriefcaseBusiness, MapPin } from "lucide-react";
+import {
+  CalendarDays,
+  Clock,
+  HandCoins,
+  UserRound,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
+import type { LinkModel } from "../link/Link";
+import Link from "../link/Link";
 import JobDetailSection from "./JobDetailSection";
 import type { JobDetailSectionModel } from "./JobDetailSection";
 import JobDetailSidebarItem from "./JobDetailSidebarItem";
 import type { JobDetailSidebarItemModel } from "./JobDetailSidebarItem";
 
+export interface JobDetailMetadataModel {
+  vacancies: string;
+  salary: string;
+  employmentType: string;
+  applicationDeadline: string;
+}
+
 export interface JobDetailModel {
   className?: string;
   title: string;
-  metadata: string[];
+  metadata: JobDetailMetadataModel;
+  applyLabel: string;
+  applyLink: LinkModel;
   sections: JobDetailSectionModel[];
   sidebarTitle: string;
   relatedJobs: JobDetailSidebarItemModel[];
@@ -18,7 +34,14 @@ export interface JobDetailModel {
 
 const JobDetail = (model: JobDetailModel) => {
   const title = model.title.trim();
-  const metadata = model.metadata.map((item) => item.trim()).filter(Boolean);
+  const metadataItems = [
+    { label: "Số lượng cần tuyển:", value: model.metadata.vacancies.trim(), Icon: UserRound },
+    { label: "Mức lương:", value: model.metadata.salary.trim(), Icon: HandCoins },
+    { label: "Tính chất công việc:", value: model.metadata.employmentType.trim(), Icon: Clock },
+    { label: "Hạn ứng tuyển:", value: model.metadata.applicationDeadline.trim(), Icon: CalendarDays },
+  ].filter((item) => item.value);
+  const applyLabel = model.applyLabel.trim();
+  const hasApplyLink = Boolean(applyLabel && model.applyLink.url.trim());
   const sections = model.sections.filter(
     (section) => section.title.trim() && section.items.some((item) => item.trim()),
   );
@@ -29,7 +52,8 @@ const JobDetail = (model: JobDetailModel) => {
 
   if (
     !title &&
-    metadata.length === 0 &&
+    metadataItems.length === 0 &&
+    !hasApplyLink &&
     sections.length === 0 &&
     relatedJobs.length === 0
   ) {
@@ -50,18 +74,33 @@ const JobDetail = (model: JobDetailModel) => {
               {title}
             </h1>
           ) : null}
-          {metadata.length > 0 ? (
-            <ul className="job-detail-metadata !m-0 !mt-5 !mb-8 !flex !list-none !flex-wrap !gap-x-6 !gap-y-3 !p-0 !text-base !text-brand-navy/70">
-              {metadata.map((item, index) => {
-                const Icon = index === 0 ? BriefcaseBusiness : MapPin;
-                return (
-                  <li key={item} className="!flex !items-center !gap-2">
-                    <Icon className="!h-4 !w-4 !shrink-0 !text-brand-gold" aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                );
-              })}
-            </ul>
+          {metadataItems.length > 0 || hasApplyLink ? (
+            <div className="job-detail-metadata !mt-5 !mb-8 !grid !grid-cols-1 !items-center !gap-6 !text-base !text-brand-navy md:!grid-cols-[minmax(0,1fr)_auto]">
+              {metadataItems.length > 0 ? (
+                <ul className="job-detail-metadata-list !m-0 !grid !list-none !grid-cols-1 !gap-x-8 !gap-y-4 !p-0 sm:!grid-cols-2">
+                  {metadataItems.map(({ label, value, Icon }) => (
+                    <li key={label} className="job-detail-metadata-item !flex !items-start !gap-2">
+                      <Icon className="job-detail-metadata-icon !mt-0.5 !h-5 !w-5 !shrink-0 !text-brand-navy" aria-hidden="true" />
+                      <span>
+                        {label} <strong className="!font-bold">{value}</strong>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              {hasApplyLink ? (
+                <Link
+                  {...model.applyLink}
+                  className={cn(
+                    "job-detail-apply-button !border !border-brand-navy !bg-transparent !px-8 !py-3 !text-center !text-base !uppercase !text-brand-navy !no-underline !transition-colors",
+                    "hover:!bg-brand-navy hover:!text-brand-white",
+                    model.applyLink.className,
+                  )}
+                >
+                  {applyLabel}
+                </Link>
+              ) : null}
+            </div>
           ) : null}
           {sections.map((section) => (
             <JobDetailSection key={section.title} {...section} />

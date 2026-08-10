@@ -10,7 +10,18 @@ import JobDetail, {
 
 const validModel: JobDetailModel = {
   title: "Tuyển dụng Content Creator",
-  metadata: ["Toàn thời gian", "Hồ Chí Minh"],
+  metadata: {
+    vacancies: "1",
+    salary: "10.000.000 - 12.000.000",
+    employmentType: "Toàn thời gian",
+    applicationDeadline: "31/03/2026",
+  },
+  applyLabel: "Ứng tuyển",
+  applyLink: {
+    url: "/ung-tuyen/content-creator",
+    is_external: false,
+    nofollow: false,
+  },
   sections: [
     {
       title: "Mô tả công việc",
@@ -65,13 +76,83 @@ describe("JobDetail render contract", () => {
   test("returns no markup when all meaningful content is empty", () => {
     const emptyModel: JobDetailModel = {
       title: "",
-      metadata: [""],
+      metadata: {
+        vacancies: "",
+        salary: "",
+        employmentType: "",
+        applicationDeadline: "",
+      },
+      applyLabel: "",
+      applyLink: { url: "", is_external: false, nofollow: false },
       sections: [{ title: "", items: [""] }],
       sidebarTitle: "",
       relatedJobs: [],
     };
 
     assert.equal(renderToStaticMarkup(createElement(JobDetail, emptyModel)), "");
+  });
+
+  test("renders four navy metadata values and the gallery-style apply link", () => {
+    const html = renderToStaticMarkup(createElement(JobDetail, validModel));
+
+    for (const content of [
+      "Số lượng cần tuyển:",
+      "1",
+      "Mức lương:",
+      "10.000.000 - 12.000.000",
+      "Tính chất công việc:",
+      "Toàn thời gian",
+      "Hạn ứng tuyển:",
+      "31/03/2026",
+    ]) {
+      assert.ok(html.includes(content), `Missing metadata content ${content}`);
+    }
+
+    assert.match(html, /job-detail-metadata[^\"]*![^\"]*text-brand-navy/);
+    assert.doesNotMatch(html, /job-detail-metadata[^\"]*!text-brand-gold/);
+    assert.doesNotMatch(html, /job-detail-metadata-icon[^\"]*!text-brand-gold/);
+    assert.match(
+      html,
+      /<a[^>]*href="\/ung-tuyen\/content-creator"[^>]*class="[^"]*job-detail-apply-button[^"]*"[^>]*>Ứng tuyển<\/a>/,
+    );
+
+    for (const className of [
+      "!border",
+      "!border-brand-navy",
+      "!bg-transparent",
+      "!px-8",
+      "!py-3",
+      "!text-base",
+      "!uppercase",
+      "!text-brand-navy",
+      "!transition-colors",
+      "hover:!bg-brand-navy",
+      "hover:!text-brand-white",
+    ]) {
+      assert.ok(html.includes(className), `Missing apply button class ${className}`);
+    }
+  });
+
+  test("omits empty metadata fields and an invalid apply link", () => {
+    const html = renderToStaticMarkup(
+      createElement(JobDetail, {
+        ...validModel,
+        metadata: {
+          vacancies: "1",
+          salary: "",
+          employmentType: "",
+          applicationDeadline: "",
+        },
+        applyLabel: "Ứng tuyển",
+        applyLink: { url: "", is_external: false, nofollow: false },
+      }),
+    );
+
+    assert.match(html, /Số lượng cần tuyển:/);
+    assert.doesNotMatch(html, /Mức lương:/);
+    assert.doesNotMatch(html, /Tính chất công việc:/);
+    assert.doesNotMatch(html, /Hạn ứng tuyển:/);
+    assert.doesNotMatch(html, /job-detail-apply-button/);
   });
 
   test("uses the white container layout and sticky desktop sidebar", () => {
