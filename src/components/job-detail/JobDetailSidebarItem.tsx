@@ -13,7 +13,6 @@ export interface JobDetailSidebarItemModel {
 }
 
 const JobDetailSidebarItem = (model: JobDetailSidebarItemModel) => {
-  const categoryLabel = model.categoryLabel.trim();
   const title = model.title.trim();
   const metadata = model.metadata.map((item) => item.trim()).filter(Boolean);
 
@@ -23,11 +22,6 @@ const JobDetailSidebarItem = (model: JobDetailSidebarItemModel) => {
 
   return (
     <article className="job-detail-sidebar-item !border-b !border-brand-navy/15 !py-5 first:!pt-0 last:!border-b-0 last:!pb-0">
-      {categoryLabel ? (
-        <p className="job-detail-sidebar-item-category !m-0 !mb-2 !text-xs !font-bold !uppercase !tracking-wide !text-brand-navy/70">
-          {categoryLabel}
-        </p>
-      ) : null}
       <h3 className="job-detail-sidebar-item-title !m-0 !text-base !font-bold !uppercase !leading-snug !text-brand-navy">
         <Link
           {...model.link}
@@ -40,12 +34,12 @@ const JobDetailSidebarItem = (model: JobDetailSidebarItemModel) => {
         </Link>
       </h3>
       {metadata.length > 0 ? (
-        <ul className="job-detail-sidebar-item-metadata !m-0 !mt-3 !flex !list-none !flex-col !gap-2 !p-0 !text-xs !text-brand-navy/70">
+        <ul className="job-detail-sidebar-item-metadata !m-0 !mt-3 !flex !list-none !flex-col !gap-2 !p-0 !text-xs !text-brand-navy">
           {metadata.map((item, index) => {
             const Icon = index === 0 ? BriefcaseBusiness : MapPin;
             return (
               <li key={item} className="!flex !items-start !gap-2">
-                <Icon className="!mt-0.5 !h-3.5 !w-3.5 !shrink-0 !text-brand-gold" aria-hidden="true" />
+                <Icon className="!mt-0.5 !h-3.5 !w-3.5 !shrink-0 !text-brand-navy" aria-hidden="true" />
                 <span>{item}</span>
               </li>
             );
