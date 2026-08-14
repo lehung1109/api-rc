@@ -21,6 +21,8 @@
     "dev:server": "bun run generate:server-registry && bun run --watch src/server.ts",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test:unit": "bun test scripts/",
     "test": "playwright test"
   },
   "dependencies": {
@@ -49,11 +51,9 @@
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.59.4",
     "@typescript-eslint/parser": "^8.59.4",
-    "concurrently": "^10.0.4",
     "dotenv": "^17.4.2",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
-    "fastify": "^5.8.5",
     "js-yaml": "^4.3.0",
     "msw": "^2.15.0",
     "pino": "^10.3.1",
@@ -61,7 +61,6 @@
     "postcss-url": "^10.1.4",
     "prettier": "^3.8.3",
     "tailwindcss": "^4.3.0",
-    "tsup": "^8.5.1",
     "tsx": "^4.22.3",
     "typescript": "^6.0.3",
     "vite": "^8.2.0",

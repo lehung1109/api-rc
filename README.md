@@ -152,6 +152,8 @@ Trong `bun run dev`, client fetch tới `/api/projects/filter` và `/api/project
 | `bun run dev:server` | Chạy render API bằng Bun watch. |
 | `bun run start` | Chạy `dist/server.js` bằng Node. |
 | `bun run typecheck` | Kiểm tra TypeScript. |
+| `bun run lint` | Kiểm tra code quality với ESLint. |
+| `bun run test:unit` | Chạy nhanh các bài unit tests bằng Bun test. |
 | `npx playwright test` | Chạy Playwright tests. |
 
 ## Quy ước component

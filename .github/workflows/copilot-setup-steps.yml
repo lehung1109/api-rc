@@ -29,6 +29,5 @@ jobs:
     - name: Install Playwright Browsers
       run: bunx playwright install --with-deps
 
-    # Customize this step as needed
     - name: Build application
-      run: bunx run build
+      run: bun run build
