@@ -4,9 +4,11 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import OceanParkIntro from "../src/components/ocean-park-intro/OceanParkIntro";
+import OceanParkPricing from "../src/components/ocean-park-pricing/OceanParkPricing";
 import OceanParkProjectSamples from "../src/components/ocean-park-project-samples/OceanParkProjectSamples";
 import OceanParkProjectSamplesWrapper from "../src/components/ocean-park-project-samples/OceanParkProjectSamplesWrapper";
 import { oceanParkIntro } from "../src/data/ocean-park-intro";
+import { oceanParkPricing } from "../src/data/ocean-park-pricing";
 import oceanParkProjectSamples from "../src/data/ocean-park-project-samples";
 
 describe("OceanParkIntro", () => {
@@ -92,5 +94,61 @@ describe("OceanParkProjectSamples", () => {
       }),
     );
     assert.equal(emptyHtml, "");
+  });
+});
+
+describe("OceanParkPricing", () => {
+  test("renders luxury package pricing, unit & room estimates, and 3 commitment columns", () => {
+    const html = renderToStaticMarkup(
+      createElement(OceanParkPricing, oceanParkPricing),
+    );
+
+    assert.ok(html.includes("ocean-park-pricing"));
+    assert.ok(html.includes("180 – 260 triệu"));
+    assert.ok(html.includes("35 – 60 triệu"));
+    assert.ok(html.includes("Vicostone"));
+    assert.ok(html.includes("An Cường"));
+    assert.ok(html.includes("Blum"));
+    assert.ok(html.includes("The Beverly"));
+    assert.ok(html.includes("The London"));
+    assert.ok(html.includes("LUMIÈRE SpringBay"));
+  });
+
+  test("returns empty string when all pricing fields are empty", () => {
+    const html = renderToStaticMarkup(
+      createElement(OceanParkPricing, {
+        eyebrow: "",
+        title: "   ",
+        description: "",
+        featuredPackage: {
+          badge: "",
+          title: "",
+          price: "",
+          unit: "",
+          note: "",
+          handoverSavingNote: "",
+        },
+        primaryCta: {
+          label: "",
+          link: { url: "", is_external: false, nofollow: false },
+        },
+        secondaryCta: {
+          label: "",
+          link: { url: "", is_external: false, nofollow: false },
+        },
+        unitEstimatesTitle: "",
+        unitEstimatesSubtitle: "",
+        unitEstimates: [],
+        roomEstimates: [],
+        commitments: [],
+        bottomPrompt: {
+          title: "",
+          description: "",
+          buttonLabel: "",
+          buttonLink: { url: "", is_external: false, nofollow: false },
+        },
+      }),
+    );
+    assert.equal(html, "");
   });
 });
