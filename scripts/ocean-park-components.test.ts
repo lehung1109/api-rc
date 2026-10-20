@@ -3,10 +3,12 @@ import { describe, test } from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
+import OceanParkAdvantages from "../src/components/ocean-park-advantages/OceanParkAdvantages";
 import OceanParkIntro from "../src/components/ocean-park-intro/OceanParkIntro";
 import OceanParkPricing from "../src/components/ocean-park-pricing/OceanParkPricing";
 import OceanParkProjectSamples from "../src/components/ocean-park-project-samples/OceanParkProjectSamples";
 import OceanParkProjectSamplesWrapper from "../src/components/ocean-park-project-samples/OceanParkProjectSamplesWrapper";
+import { oceanParkAdvantages } from "../src/data/ocean-park-advantages";
 import { oceanParkIntro } from "../src/data/ocean-park-intro";
 import { oceanParkPricing } from "../src/data/ocean-park-pricing";
 import oceanParkProjectSamples from "../src/data/ocean-park-project-samples";
@@ -142,6 +144,38 @@ describe("OceanParkPricing", () => {
         roomEstimates: [],
         commitments: [],
         bottomPrompt: {
+          title: "",
+          description: "",
+          buttonLabel: "",
+          buttonLink: { url: "", is_external: false, nofollow: false },
+        },
+      }),
+    );
+    assert.equal(html, "");
+  });
+});
+
+describe("OceanParkAdvantages", () => {
+  test("highlights IC HOUSE model home inside Ocean Park, nearby office, and nearby factory", () => {
+    const html = renderToStaticMarkup(
+      createElement(OceanParkAdvantages, oceanParkAdvantages),
+    );
+
+    assert.ok(html.includes("ocean-park-advantages"));
+    assert.ok(html.includes("Sao Biển 23, KĐT Vinhomes Ocean Park, Gia Lâm, Hà Nội"));
+    assert.ok(html.includes("Số 01 Voi Phục, Gia Lâm, Hà Nội"));
+    assert.ok(html.includes("Thôn Ngọc Trai, Xã Như Quỳnh, Tỉnh Hưng Yên"));
+  });
+
+  test("returns empty string when all advantages fields are empty", () => {
+    const html = renderToStaticMarkup(
+      createElement(OceanParkAdvantages, {
+        eyebrow: "",
+        title: "   ",
+        description: "",
+        localStrengths: [],
+        capabilityPillars: [],
+        proofBanner: {
           title: "",
           description: "",
           buttonLabel: "",
