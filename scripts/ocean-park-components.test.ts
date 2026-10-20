@@ -6,12 +6,14 @@ import { renderToStaticMarkup } from "react-dom/server";
 import OceanParkAdvantages from "../src/components/ocean-park-advantages/OceanParkAdvantages";
 import OceanParkContactForm from "../src/components/ocean-park-contact-form/OceanParkContactForm";
 import OceanParkContactFormWrapper from "../src/components/ocean-park-contact-form/OceanParkContactFormWrapper";
+import OceanParkFaq from "../src/components/ocean-park-faq/OceanParkFaq";
 import OceanParkIntro from "../src/components/ocean-park-intro/OceanParkIntro";
 import OceanParkPricing from "../src/components/ocean-park-pricing/OceanParkPricing";
 import OceanParkProjectSamples from "../src/components/ocean-park-project-samples/OceanParkProjectSamples";
 import OceanParkProjectSamplesWrapper from "../src/components/ocean-park-project-samples/OceanParkProjectSamplesWrapper";
 import { oceanParkAdvantages } from "../src/data/ocean-park-advantages";
 import oceanParkContactForm from "../src/data/ocean-park-contact-form";
+import { oceanParkFaq } from "../src/data/ocean-park-faq";
 import { oceanParkIntro } from "../src/data/ocean-park-intro";
 import { oceanParkPricing } from "../src/data/ocean-park-pricing";
 import oceanParkProjectSamples from "../src/data/ocean-park-project-samples";
@@ -228,6 +230,80 @@ describe("OceanParkContactForm", () => {
         zoneOptions: [],
         submitLabel: "",
         successMessage: "",
+      }),
+    );
+    assert.equal(emptyHtml, "");
+  });
+});
+
+const REQUIRED_KEYWORDS = [
+  "Ocean Park 1",
+  "The Paris",
+  "The Paris Ocean Park 1",
+  "The London",
+  "The London Ocean Park 1",
+  "Tòa LD1",
+  "Tòa LD2",
+  "Tòa LD3",
+  "The Beverly",
+  "The Beverly Ocean Park 1",
+  "Tòa BE1",
+  "Tòa BE2",
+  "Tòa BE3",
+  "Tòa BE4",
+  "Ocean Park 2",
+  "LUMIÈRE SpringBay",
+  "LUMIÈRE SpringBay Ocean Park 2",
+  "Masteri Trinity Square",
+  "Masteri Trinity Square Ocean Park 2",
+  "Ocean Park 3",
+  "Căn hộ cao tầng Ocean Park 3",
+  "Dự án căn hộ Ocean Park 3",
+  "Chung cư Ocean Park 1",
+  "Căn hộ The Beverly",
+  "Căn hộ The London",
+  "Dự án Masteri Trinity Square",
+  "Căn hộ LUMIÈRE SpringBay",
+];
+
+describe("OceanParkFaq & Full Keyword Coverage", () => {
+  test("renders FAQ accordion items with exclusive sync and all 27 Google Ads keywords across the suite", () => {
+    const faqHtml = renderToStaticMarkup(createElement(OceanParkFaq, oceanParkFaq));
+    assert.ok(faqHtml.includes("ocean-park-faq"));
+    assert.ok(faqHtml.includes("ocean-park-faq-item-input"));
+
+    const combinedHtml = [
+      renderToStaticMarkup(createElement(OceanParkIntro, oceanParkIntro)),
+      renderToStaticMarkup(
+        createElement(OceanParkProjectSamples, oceanParkProjectSamples),
+      ),
+      renderToStaticMarkup(createElement(OceanParkPricing, oceanParkPricing)),
+      renderToStaticMarkup(
+        createElement(OceanParkAdvantages, oceanParkAdvantages),
+      ),
+      renderToStaticMarkup(
+        createElement(OceanParkContactForm, oceanParkContactForm),
+      ),
+      faqHtml,
+    ].join("\n");
+
+    for (const keyword of REQUIRED_KEYWORDS) {
+      assert.ok(
+        combinedHtml.includes(keyword),
+        `Missing required Google Ads keyword: "${keyword}"`,
+      );
+    }
+  });
+
+  test("returns empty string when all FAQ fields are empty", () => {
+    const emptyHtml = renderToStaticMarkup(
+      createElement(OceanParkFaq, {
+        eyebrow: "",
+        title: "   ",
+        description: "",
+        items: [],
+        keywordGroupTitle: "",
+        keywordPills: [],
       }),
     );
     assert.equal(emptyHtml, "");
