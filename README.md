@@ -37,6 +37,7 @@ Các preview page nằm trong `pages/<slug>/page.tsx`. Trang root sẽ liệt k�
 - `pages/home/page.tsx` -> `http://localhost:5173/pages/home/`
 - `pages/carousel/page.tsx` -> `http://localhost:5173/pages/carousel/`
 - `pages/table-of-contents/page.tsx` -> `http://localhost:5173/pages/table-of-contents/`
+- `pages/ocean-park/page.tsx` -> `http://localhost:5173/pages/ocean-park/`
 
 Một preview page có thể khai báo nhiều variant bằng `pageVariants`. Variant được chọn bằng query string `variant`; nếu không khai báo hoặc query string không hợp lệ, preview sẽ dùng `default`:
 

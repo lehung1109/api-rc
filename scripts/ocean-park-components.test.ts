@@ -84,14 +84,19 @@ describe("OceanParkProjectSamples", () => {
     );
     assert.ok(wrapperHtml.includes('data-rct="oceanParkProjectSamples"'));
 
-    const emptyHtml = renderToStaticMarkup(
-      createElement(OceanParkProjectSamples, {
+    const emptyWrapperHtml = renderToStaticMarkup(
+      createElement(OceanParkProjectSamplesWrapper, {
         eyebrow: "",
         title: "   ",
         description: "",
         zoneTabs: [],
         unitTypeTabs: [],
-        featuredProjects: [],
+        featuredProjects: [
+          {
+            ...oceanParkProjectSamples.featuredProjects[0],
+            title: "   ",
+          },
+        ],
         ctaBanner: {
           title: "",
           description: "",
@@ -100,7 +105,7 @@ describe("OceanParkProjectSamples", () => {
         },
       }),
     );
-    assert.equal(emptyHtml, "");
+    assert.equal(emptyWrapperHtml, "");
   });
 });
 
@@ -213,26 +218,26 @@ describe("OceanParkContactForm", () => {
     );
     assert.ok(wrapperHtml.includes('data-rct="oceanParkContactForm"'));
 
-    const emptyHtml = renderToStaticMarkup(
-      createElement(OceanParkContactForm, {
+    const emptyWrapperHtml = renderToStaticMarkup(
+      createElement(OceanParkContactFormWrapper, {
         formKey: "",
-        eyebrow: "",
+        eyebrow: "  ",
         title: "   ",
         description: "",
-        hotline: "",
+        hotline: "  ",
         zaloPhone: "",
         email: "",
         website: "",
-        locations: [],
+        locations: [{ label: " ", address: " " }],
         referenceLinks: [],
         formTitle: "",
         formSubtitle: "",
-        zoneOptions: [],
+        zoneOptions: ["   "],
         submitLabel: "",
         successMessage: "",
       }),
     );
-    assert.equal(emptyHtml, "");
+    assert.equal(emptyWrapperHtml, "");
   });
 });
 

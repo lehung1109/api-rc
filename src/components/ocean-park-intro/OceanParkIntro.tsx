@@ -69,6 +69,7 @@ const OceanParkIntro = (model: OceanParkIntroModel) => {
     !titleText &&
     !leadContent &&
     validHighlights.length === 0 &&
+    validBadges.length === 0 &&
     validSteps.length === 0 &&
     !hasPrimaryCta &&
     !hasSecondaryCta
