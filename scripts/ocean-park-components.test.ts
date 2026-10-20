@@ -93,7 +93,7 @@ describe("OceanParkProjectSamples", () => {
         unitTypeTabs: [],
         featuredProjects: [
           {
-            ...oceanParkProjectSamples.featuredProjects[0],
+            ...oceanParkProjectSamples.featuredProjects[0]!,
             title: "   ",
           },
         ],
