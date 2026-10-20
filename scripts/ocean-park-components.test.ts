@@ -4,11 +4,14 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import OceanParkAdvantages from "../src/components/ocean-park-advantages/OceanParkAdvantages";
+import OceanParkContactForm from "../src/components/ocean-park-contact-form/OceanParkContactForm";
+import OceanParkContactFormWrapper from "../src/components/ocean-park-contact-form/OceanParkContactFormWrapper";
 import OceanParkIntro from "../src/components/ocean-park-intro/OceanParkIntro";
 import OceanParkPricing from "../src/components/ocean-park-pricing/OceanParkPricing";
 import OceanParkProjectSamples from "../src/components/ocean-park-project-samples/OceanParkProjectSamples";
 import OceanParkProjectSamplesWrapper from "../src/components/ocean-park-project-samples/OceanParkProjectSamplesWrapper";
 import { oceanParkAdvantages } from "../src/data/ocean-park-advantages";
+import oceanParkContactForm from "../src/data/ocean-park-contact-form";
 import { oceanParkIntro } from "../src/data/ocean-park-intro";
 import { oceanParkPricing } from "../src/data/ocean-park-pricing";
 import oceanParkProjectSamples from "../src/data/ocean-park-project-samples";
@@ -184,5 +187,49 @@ describe("OceanParkAdvantages", () => {
       }),
     );
     assert.equal(html, "");
+  });
+});
+
+describe("OceanParkContactForm", () => {
+  test("renders inline consultation form with Ocean Park tower selector and 3 IC HOUSE addresses", () => {
+    const html = renderToStaticMarkup(
+      createElement(OceanParkContactForm, oceanParkContactForm),
+    );
+
+    assert.ok(html.includes("ocean-park-contact-form"));
+    assert.ok(html.includes('id="dang-ky-tu-van"'));
+    assert.ok(html.includes("0869 855 885"));
+    assert.ok(html.includes("Sao Biển 23"));
+    assert.ok(html.includes("The London Ocean Park 1"));
+    assert.ok(html.includes("LUMIÈRE SpringBay Ocean Park 2"));
+    assert.ok(html.includes("Masteri Trinity Square Ocean Park 2"));
+  });
+
+  test("renders wrapper with client island script and returns empty string when empty", () => {
+    const wrapperHtml = renderToStaticMarkup(
+      createElement(OceanParkContactFormWrapper, oceanParkContactForm),
+    );
+    assert.ok(wrapperHtml.includes('data-rct="oceanParkContactForm"'));
+
+    const emptyHtml = renderToStaticMarkup(
+      createElement(OceanParkContactForm, {
+        formKey: "",
+        eyebrow: "",
+        title: "   ",
+        description: "",
+        hotline: "",
+        zaloPhone: "",
+        email: "",
+        website: "",
+        locations: [],
+        referenceLinks: [],
+        formTitle: "",
+        formSubtitle: "",
+        zoneOptions: [],
+        submitLabel: "",
+        successMessage: "",
+      }),
+    );
+    assert.equal(emptyHtml, "");
   });
 });
