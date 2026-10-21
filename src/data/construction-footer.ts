@@ -66,16 +66,17 @@ const constructionFooter: ConstructionFooterModel = {
     },
   ],
   phone: {
-    text: "0000 000 000",
-    link: link("tel:0899984988"),
+    text: "0869 855 885",
+    link: link("tel:0869855885"),
   },
   addresses: [
-    "Số 07 ngõ 71, phố Hoàng Văn Thái, phường Phương Liệt, Hà Nội",
-    "Số 506/15/24, đường 3/2, phường Diễn Hồng, TP. Hồ Chí Minh",
+    "Trụ sở Văn phòng: Số 01 Voi Phục, Gia Lâm, Hà Nội",
+    "Nhà mẫu nội thất: Sao Biển 23, KĐT Vinhomes Ocean Park, Gia Lâm, Hà Nội",
+    "Nhà máy sản xuất: Thôn Ngọc Trai, Xã Như Quỳnh, Tỉnh Hưng Yên",
   ],
   email: {
-    text: "contact@ICHOUSE.vn",
-    link: link("mailto:contact@ICHOUSE.vn"),
+    text: "noithatichouse@gmail.com",
+    link: link("mailto:noithatichouse@gmail.com"),
   },
   copyright: "Copyright © 2026 ICHOUSE Vietnam. All rights reserved.",
   badge: {

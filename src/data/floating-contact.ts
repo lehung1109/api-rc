@@ -26,11 +26,11 @@ const floatingContact: FloatingContactModel = {
       alt: "Zalo",
       display_dimensions: iconDimensions,
     },
-    link: link("https://zalo.me/", true),
+    link: link("https://zalo.me/0978305740", true),
   },
   phone: {
-    label: "0000 000 000",
-    link: link("tel:0000000000", false),
+    label: "0869 855 885",
+    link: link("tel:0869855885", false),
   },
 };
 

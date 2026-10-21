@@ -1,7 +1,7 @@
 import type { PageTitleBarModel } from "@/components/page-title-bar/PageTitleBar";
 
 const pageTitleBar: PageTitleBarModel = {
-  title: "THIẾT KẾ NỘI THẤT CHUNG CƯ TONE ĐEN TRẮNG – HM18",
+  title: "THIẾT KẾ NỘI THẤT CĂN HỘ CAO CẤP VINHOMES OCEAN PARK – IC HOUSE",
   breadcrumbLevels: [
     {
       items: [

@@ -13,7 +13,7 @@ const iconDimensions = { width: 24, height: 24 };
 
 const constructionHeader: ConstructionHeaderModel = {
   headerTop: {
-    hotlineText: "Hotline: 0000 000 000",
+    hotlineText: "Hotline: 0869 855 885",
   },
   logo: {
     url: "https://noithat.ichouse.vn/wp-content/uploads/2024/02/logo.jpg",
@@ -79,7 +79,7 @@ const constructionHeader: ConstructionHeaderModel = {
         alt: "Zalo",
         display_dimensions: iconDimensions,
       },
-      link: link("https://zalo.me", true),
+      link: link("https://zalo.me/0978305740", true),
     },
   ],
   background: {

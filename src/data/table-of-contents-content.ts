@@ -8,7 +8,7 @@ export const tableOfContentsContent = `
 <p>Tổng quan các dự án nội thất tiêu biểu đã thi công bởi ICHouse.</p>
 
 <h3 id="project-1">Dự án 1</h3>
-<p>Chi tiết dự án chung cư cao cấp tại Quận 2.</p>
+<p>Chi tiết dự án chung cư cao cấp tại Vinhomes Ocean Park.</p>
 
 <h4 id="project-1-1">Dự án 1.1</h4>
 <p>Phòng khách và bếp mở — phong cách hiện đại tối giản.</p>
@@ -37,7 +37,7 @@ export const tableOfContentsContent = `
 
 <h2 id="section-consultation">Liên hệ tư vấn</h2>
 <p>Để lại thông tin để được tư vấn thiết kế và báo giá miễn phí.</p>
-<p>Hotline: 1900 xxxx — Email: info@ichouse.vn</p>
+<p>Hotline: 0869 855 885 — Email: noithatichouse@gmail.com</p>
 <div class="min-h-[40vh]"></div>
 `.trim();
 

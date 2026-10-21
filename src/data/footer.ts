@@ -18,27 +18,27 @@ const footer: FooterModel = {
   top: {
     menuColumns: [
       {
-        title: "VỀ CHÚNG TÔI",
+        title: "VỀ NỘI THẤT IC HOUSE",
         links: [
-          { label: "Giới thiệu công ty", link: link("/gioi-thieu-cong-ty") },
-          { label: "Tiêu chí bán hàng", link: link("/tieu-chi-ban-hang") },
+          { label: "Giới thiệu IC HOUSE", link: link("/gioi-thieu") },
+          { label: "Nhà mẫu Sao Biển 23 Ocean Park", link: link("/nha-mau-ocean-park") },
+          { label: "Nhà máy sản xuất 2.000m²", link: link("/nha-may-san-xuat") },
           { label: "Đối tác chiến lược", link: link("/doi-tac-chien-luoc") },
-          { label: "Hệ thống Showroom", link: link("/he-thong-showroom") },
           { label: "Thông tin tuyển dụng", link: link("/tuyen-dung") },
         ],
       },
       {
-        title: "CHÍNH SÁCH",
+        title: "CHÍNH SÁCH & CAM KẾT",
         links: [
           {
-            label: "Chính sách vận chuyển",
-            link: link("/chinh-sach-van-chuyen"),
-          },
-          {
-            label: "Chính sách bảo hành",
+            label: "Chính sách bảo hành 2 năm & bảo trì 5 năm",
             link: link("/chinh-sach-bao-hanh"),
           },
-          { label: "Hình thức thanh toán", link: link("/hinh-thuc-thanh-toan") },
+          {
+            label: "Cam kết vật liệu chính hãng",
+            link: link("/cam-ket-vat-lieu"),
+          },
+          { label: "Quy trình thiết kế & thi công", link: link("/quy-trinh-lam-viec") },
           {
             label: "Chính sách bảo mật thông tin",
             link: link("/chinh-sach-bao-mat-thong-tin"),
@@ -46,16 +46,16 @@ const footer: FooterModel = {
         ],
       },
       {
-        title: "HỖ TRỢ KHÁCH HÀNG",
+        title: "DỊCH VỤ NỘI THẤT CAO CẤP",
         links: [
-          { label: "Câu hỏi thường gặp", link: link("/cau-hoi-thuong-gap") },
-          { label: "Quy định đổi trả", link: link("/quy-dinh-doi-tra") },
-          { label: "Tư vấn vật liệu", link: link("/tu-van-vat-lieu") },
+          { label: "Nội thất Vinhomes Ocean Park 1 • 2 • 3", link: link("/noi-that-vinhomes-ocean-park") },
+          { label: "Thiết kế nội thất chung cư Luxury", link: link("/tk/chung-cu") },
+          { label: "Thiết kế & Thi công biệt thự", link: link("/tk/biet-thu") },
           {
-            label: "Giải đáp cùng chuyên gia",
-            link: link("/giai-dap-cung-chuyen-gia"),
+            label: "Báo giá thiết kế & thi công trọn gói",
+            link: link("/bao-gia"),
           },
-          { label: "Quy trình làm việc", link: link("/quy-trinh-lam-viec") },
+          { label: "Câu hỏi thường gặp", link: link("/cau-hoi-thuong-gap") },
         ],
       },
     ],
@@ -121,30 +121,6 @@ const footer: FooterModel = {
         },
         {
           icon: {
-            url: "https://placehold.co/24x24/png?text=X",
-            alt: "Twitter",
-            display_dimensions: iconDimensions,
-          },
-          link: link("https://twitter.com/", true),
-        },
-        {
-          icon: {
-            url: "https://placehold.co/24x24/png?text=P",
-            alt: "Pinterest",
-            display_dimensions: iconDimensions,
-          },
-          link: link("https://www.pinterest.com/", true),
-        },
-        {
-          icon: {
-            url: "https://placehold.co/24x24/png?text=IN",
-            alt: "LinkedIn",
-            display_dimensions: iconDimensions,
-          },
-          link: link("https://www.linkedin.com/", true),
-        },
-        {
-          icon: {
             url: "https://placehold.co/24x24/png?text=YT",
             alt: "YouTube",
             display_dimensions: iconDimensions,
@@ -157,13 +133,13 @@ const footer: FooterModel = {
   bottom: {
     brand: {
       logo: {
-        url: "https://placehold.co/220x80/png?text=HOAN+MY+DECOR",
-        alt: "Hoàn Mỹ Decor",
+        url: "https://placehold.co/220x80/png?text=IC+HOUSE",
+        alt: "Nội thất IC HOUSE",
         display_dimensions: { width: 220, height: 80 },
         link: link("/"),
       },
       descriptionHtml:
-        "<p>Công ty TNHH Nội thất Hoàn Mỹ chuyên thiết kế, thi công và sản xuất nội thất trọn gói cho chung cư, biệt thự, nhà phố và văn phòng với chất lượng cao và giá tốt.</p>",
+        "<p>Nội thất IC HOUSE chuyên tư vấn thiết kế 3D Bespoke, sản xuất và thi công nội thất trọn gói cao cấp cho căn hộ chung cư, biệt thự, liền kề và văn phòng với nhà máy sản xuất trực tiếp 2.000m².</p>",
       badges: [
         {
           url: "https://placehold.co/120x48/png?text=NCA",
@@ -176,40 +152,36 @@ const footer: FooterModel = {
           display_dimensions: badgeDimensions,
         },
       ],
-      hotlineText: "939084328",
-      hotline: link("tel:939084328"),
+      hotlineText: "0869 855 885",
+      hotline: link("tel:0869855885"),
     },
     contact: {
       blocks: [
         {
-          title: "TRỤ SỞ CHÍNH & SHOWROOM NỘI THẤT",
-          contentHtml: `<p>Địa chỉ: Số 15, ngõ 102 Phúc Diễn, Phúc Diễn, Hà Đông, Hà Nội</p>
-<p>Hotline: <a href="tel:0968886516">0968886516</a></p>
-<p>Email: <a href="mailto:Hoanmydecor.vn@gmail.com">Hoanmydecor.vn@gmail.com</a></p>`,
+          title: "TRỤ SỞ VĂN PHÒNG THIẾT KẾ IC HOUSE",
+          contentHtml: `<p>Địa chỉ: Số 01 Voi Phục, Gia Lâm, Hà Nội</p>
+<p>Hotline: <a href="tel:0869855885">0869 855 885</a></p>
+<p>Email: <a href="mailto:noithatichouse@gmail.com">noithatichouse@gmail.com</a></p>
+<p>Website: <a href="https://noithat.ichouse.vn">noithat.ichouse.vn</a></p>`,
         },
         {
-          title: "CHI NHÁNH VINHOME GREEN BAY",
-          contentHtml: `<p>Địa chỉ: Tòa G2, Vinhome Green Bay, Mễ Trì, Nam Từ Liêm, Hà Nội</p>
-<p>Hotline: <a href="tel:0968886516">0968886516</a></p>`,
+          title: "NHÀ MẪU NỘI THẤT VINHOMES OCEAN PARK",
+          contentHtml: `<p>Địa chỉ: Sao Biển 23, KĐT Vinhomes Ocean Park, Gia Lâm, Hà Nội</p>
+<p>Hotline KTS Trưởng: <a href="tel:0869855885">0869 855 885</a></p>
+<p>Zalo Nhận Bản Vẽ 3D: <a href="https://zalo.me/0978305740">0978 305 740</a></p>`,
         },
         {
-          title: "CHI NHÁNH NAM TỪ LIÊM",
-          contentHtml: `<p>Vinhome Smart City — Tòa S1.05, S1.06, S1.10, S1.11, S2.05, S2.06</p>
-<p>HD Mon Hàm Nghi — Số 1 Hàm Nghi, Nam Từ Liêm, Hà Nội</p>
-<p>Hotline: <a href="tel:0968886516">0968886516</a></p>`,
-        },
-        {
-          title: "CHI NHÁNH TẠI TP. HẢI PHÒNG",
-          contentHtml: `<p>Địa chỉ: Số 15 Lê Hồng Phong, Kiến An, Hải Phòng</p>
-<p>Hotline: <a href="tel:0968886516">0968886516</a></p>`,
+          title: "PHẠM VI DỰ ÁN TRỌNG ĐIỂM TẠI OCEAN PARK 1 • 2 • 3",
+          contentHtml: `<p>Vinhomes Ocean Park 1 — The London (LD1–LD3), The Beverly (BE1–BE4), The Paris</p>
+<p>Vinhomes Ocean Park 2 & 3 — LUMIÈRE SpringBay, Masteri Trinity Square, Căn hộ cao tầng Ocean Park 3</p>
+<p>Hotline: <a href="tel:0869855885">0869 855 885</a></p>`,
         },
       ],
     },
     fanpages: {
       factories: {
-        title: "Nhà máy – Xưởng sản xuất nội thất",
-        contentHtml: `<p>Xưởng Phúc Thọ — Thị trấn Phúc Thọ, Phúc Thọ, Hà Nội</p>
-<p>Xưởng Láng Hòa Lạc — Khu công nghiệp Láng Hòa Lạc, Hà Nội</p>`,
+        title: "Nhà máy – Xưởng sản xuất nội thất IC HOUSE",
+        contentHtml: `<p>Nhà máy sản xuất trực tiếp 2.000m² — Thôn Ngọc Trai, Xã Như Quỳnh, Tỉnh Hưng Yên (Kế cận KĐT Vinhomes Ocean Park 1 • 2 • 3)</p>`,
       },
       embeds: [
         {

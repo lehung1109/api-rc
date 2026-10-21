@@ -4,27 +4,27 @@ const inlineList: InlineListModel = {
   items: [
     {
       link: {
-        url: "https://www.google.com",
+        url: "https://noithat.ichouse.vn",
         is_external: true,
         nofollow: false,
       },
-      text: "Google 1",
+      text: "Nội thất IC HOUSE",
     },
     {
       link: {
-        url: "https://www.google.com",
+        url: "https://noithat.ichouse.vn/?page_id=6865",
         is_external: true,
         nofollow: false,
       },
-      text: "Google 2",
+      text: "Nội thất Vinhomes Ocean Park",
     },
     {
       link: {
-        url: "https://www.google.com",
+        url: "https://zalo.me/0978305740",
         is_external: true,
         nofollow: false,
       },
-      text: "Google 3",
+      text: "Tư vấn KTS IC HOUSE",
     },
   ],
 };
