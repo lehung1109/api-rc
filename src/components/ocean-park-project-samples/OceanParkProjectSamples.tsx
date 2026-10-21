@@ -273,10 +273,13 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
               </div>
 
               <div className="ocean-park-project-card-body !flex !flex-1 !flex-col !p-4 md:!p-5">
-                <div className="!flex !items-center !justify-between !gap-2 !text-xs !font-semibold !text-brand-gold">
-                  <span>{project.unitTypeLabel}</span>
-                  <span>{project.style}</span>
-                </div>
+                {(project.unitTypeLabel ?? "").trim() ||
+                (project.style ?? "").trim() ? (
+                  <div className="!flex !items-center !justify-between !gap-2 !text-xs !font-semibold !text-brand-gold">
+                    <span>{project.unitTypeLabel}</span>
+                    <span>{project.style}</span>
+                  </div>
+                ) : null}
 
                 <h3 className="ocean-park-project-card-title !mt-1.5 !mb-0 !text-base !font-bold !leading-snug !text-brand-navy md:!text-lg">
                   {project.title}
@@ -292,7 +295,7 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
                       Mức đầu tư tham khảo
                     </span>
                     <strong className="!text-sm !font-bold !text-brand-navy">
-                      {project.budget}
+                      {(project.budget ?? "").trim() || "Liên hệ báo giá"}
                     </strong>
                   </div>
 

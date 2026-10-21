@@ -1630,3 +1630,17 @@ export interface FloatingContactModel {
 
 **WordPress:** widget `EAI-floating-contact` — Messenger/Zalo (label + MEDIA icon + URL), Phone (label + URL `tel:`), `icon_resolution`, `class_name` → `eai_rc_render_html('FloatingContact', …)`. Helper: `floating-contact.php`.
 
+## Quick reference — Vinhomes Ocean Park 1-2-3 landing suite (`pages/ocean-park/page.tsx`)
+
+Bộ 6 component chuyên biệt cho landing page Thiết kế & Thi công Nội thất Vinhomes Ocean Park 1, 2, 3:
+
+| Component / Wrapper | Loại | File dữ liệu canonical | WordPress Widget |
+|---|---|---|---|
+| `OceanParkIntro` | Server | `src/data/ocean-park-intro.ts` | `EAI-ocean-park-intro` (`ocean-park-intro.php`) |
+| `OceanParkProjectSamplesWrapper` (`OceanParkProjectSamples`) | Client (`oceanParkProjectSamples`) | `src/data/ocean-park-project-samples-wrapper.ts` | `EAI-ocean-park-project-samples` (`ocean-park-project-samples.php` — chọn bài post + map Taxonomy/ACF) |
+| `OceanParkPricing` | Server | `src/data/ocean-park-pricing.ts` | `EAI-ocean-park-pricing` (`ocean-park-pricing.php`) |
+| `OceanParkAdvantages` | Server | `src/data/ocean-park-advantages.ts` | `EAI-ocean-park-advantages` (`ocean-park-advantages.php`) |
+| `OceanParkContactFormWrapper` (`OceanParkContactForm`) | Client (`oceanParkContactForm`) | `src/data/ocean-park-contact-form-wrapper.ts` | `EAI-ocean-park-contact-form` (`ocean-park-contact-form.php` — hỗ trợ nhúng CF7 `#eai-ocean-park-cf7-source-{formKey}` hoặc form mặc định) |
+| `OceanParkFaq` | Server (CSS-only radio accordion + `AccordionExclusiveSync`) | `src/data/ocean-park-faq.ts` | `EAI-ocean-park-faq` (`ocean-park-faq.php` — `checkboxIdPrefix` theo widget ID) |
+
+
