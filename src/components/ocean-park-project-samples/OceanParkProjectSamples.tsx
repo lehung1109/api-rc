@@ -61,14 +61,42 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
     ctaBanner,
   } = model;
 
+  const eyebrowText = (eyebrow ?? "").trim();
+  const titleText = (title ?? "").trim();
+  const descText = (description ?? "").trim();
+
   const [activeZone, setActiveZone] = useState<string>("all");
   const [activeUnitType, setActiveUnitType] = useState<string>("all");
 
+  const validZoneTabs = useMemo(
+    () =>
+      (zoneTabs ?? []).filter(
+        (tab) =>
+          Boolean(tab) &&
+          (tab.id ?? "").trim().length > 0 &&
+          (tab.label ?? "").trim().length > 0,
+      ),
+    [zoneTabs],
+  );
+
+  const validUnitTypeTabs = useMemo(
+    () =>
+      (unitTypeTabs ?? []).filter(
+        (tab) =>
+          Boolean(tab) &&
+          (tab.id ?? "").trim().length > 0 &&
+          (tab.label ?? "").trim().length > 0,
+      ),
+    [unitTypeTabs],
+  );
+
   const validProjects = useMemo(
     () =>
-      featuredProjects.filter(
+      (featuredProjects ?? []).filter(
         (item) =>
-          item.title.trim().length > 0 && item.image.url.trim().length > 0,
+          Boolean(item) &&
+          (item.title ?? "").trim().length > 0 &&
+          (item.image?.url ?? "").trim().length > 0,
       ),
     [featuredProjects],
   );
@@ -82,12 +110,18 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
     });
   }, [validProjects, activeZone, activeUnitType]);
 
+  const isFallbackList =
+    filteredProjects.length === 0 && validProjects.length > 0;
   const displayProjects =
     filteredProjects.length > 0 ? filteredProjects : validProjects;
 
-  if (validProjects.length === 0 && !title.trim()) {
+  if (validProjects.length === 0 && !titleText) {
     return null;
   }
+
+  const ctaTitle = (ctaBanner?.title ?? "").trim();
+  const ctaButtonLabel = (ctaBanner?.buttonLabel ?? "").trim();
+  const ctaButtonUrl = (ctaBanner?.buttonLink?.url ?? "").trim();
 
   return (
     <section
@@ -99,30 +133,30 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
     >
       <div className="ocean-park-project-samples-inner !mx-auto !w-full !max-w-7xl">
         <div className="ocean-park-project-samples-header !mx-auto !max-w-3xl !text-center">
-          {eyebrow.trim() ? (
+          {eyebrowText ? (
             <p className="ocean-park-project-samples-eyebrow !mb-2 !text-xs !font-bold !uppercase !tracking-widest !text-brand-gold md:!text-sm">
-              {eyebrow}
+              {eyebrowText}
             </p>
           ) : null}
-          {title.trim() ? (
-            <h2 className="ocean-park-project-samples-title !text-2xl !font-bold !leading-snug !text-brand-navy md:!text-3xl lg:!text-4xl">
-              {title}
+          {titleText ? (
+            <h2 className="ocean-park-project-samples-title !mb-0 !text-2xl !font-bold !leading-snug !text-brand-navy md:!text-3xl lg:!text-4xl">
+              {titleText}
             </h2>
           ) : null}
-          {description.trim() ? (
-            <p className="ocean-park-project-samples-desc !mt-3 !text-sm !leading-relaxed !text-brand-navy/75 md:!text-base">
-              {description}
+          {descText ? (
+            <p className="ocean-park-project-samples-desc !mt-3 !mb-0 !text-sm !leading-relaxed !text-brand-navy/75 md:!text-base">
+              {descText}
             </p>
           ) : null}
         </div>
 
-        {zoneTabs.length > 0 ? (
+        {validZoneTabs.length > 0 ? (
           <div
             className="ocean-park-zone-tabs !mt-6 !flex !flex-nowrap !items-center !gap-2 !overflow-x-auto !pb-2 md:!justify-center md:!flex-wrap"
             role="tablist"
             aria-label="Lọc theo phân khu và tòa căn hộ"
           >
-            {zoneTabs.map((tab) => {
+            {validZoneTabs.map((tab) => {
               const isActive = activeZone === tab.id;
               return (
                 <button
@@ -150,13 +184,13 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
           </div>
         ) : null}
 
-        {unitTypeTabs.length > 0 ? (
+        {validUnitTypeTabs.length > 0 ? (
           <div
             className="ocean-park-unit-tabs !mt-2 !flex !flex-nowrap !items-center !gap-2 !overflow-x-auto !pb-2 md:!justify-center md:!flex-wrap"
             role="tablist"
             aria-label="Lọc theo loại căn hộ"
           >
-            {unitTypeTabs.map((tab) => {
+            {validUnitTypeTabs.map((tab) => {
               const isActive = activeUnitType === tab.id;
               return (
                 <button
@@ -181,10 +215,31 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
           </div>
         ) : null}
 
+        {isFallbackList ? (
+          <div
+            role="status"
+            className="ocean-park-project-filter-empty-notice !mt-5 !flex !flex-wrap !items-center !justify-between !gap-3 !rounded-xl !border !border-brand-gold/50 !bg-brand-gold/10 !px-4 !py-3 !text-xs !font-medium !text-brand-navy md:!text-sm"
+          >
+            <span>
+              Hiện chưa có mẫu thiết kế khớp đồng thời cả 2 bộ lọc đang chọn — dưới đây là toàn bộ mẫu căn hộ tham khảo của IC HOUSE.
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveZone("all");
+                setActiveUnitType("all");
+              }}
+              className="ocean-park-project-filter-reset-btn !shrink-0 !cursor-pointer !rounded-full !bg-brand-navy !px-3.5 !py-1.5 !text-xs !font-bold !text-brand-gold !transition-colors hover:!bg-brand-gold hover:!text-brand-white"
+            >
+              Xem tất cả mẫu
+            </button>
+          </div>
+        ) : null}
+
         <div className="ocean-park-project-cards !mt-6 !flex !flex-nowrap !gap-4 !overflow-x-auto !pb-4 !snap-x !snap-mandatory md:!grid md:!grid-cols-2 md:!gap-6 md:!overflow-visible lg:!grid-cols-3">
           {displayProjects.map((project, index) => (
             <article
-              key={`${project.apartmentCode}-${index}`}
+              key={`${project.apartmentCode ?? index}-${index}`}
               data-zone-id={project.zoneId}
               data-unit-type-id={project.unitTypeId}
               className="ocean-park-project-card !flex !w-[85%] !shrink-0 !snap-start !flex-col !overflow-hidden !rounded-2xl !border !border-brand-navy/10 !bg-brand-white !shadow-md !transition-shadow hover:!shadow-xl md:!w-auto"
@@ -195,18 +250,26 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
                   className="!h-full !w-full !object-cover !transition-transform !duration-500 hover:!scale-105"
                 />
                 <div className="!absolute !top-3 !left-3 !flex !flex-wrap !gap-1.5">
-                  <span className="!rounded-full !bg-brand-navy/90 !px-3 !py-1 !text-xs !font-bold !text-brand-gold">
-                    {project.zoneLabel}
-                  </span>
-                  {project.towerLabel.trim() ? (
+                  {(project.zoneLabel ?? "").trim() ? (
+                    <span className="!rounded-full !bg-brand-navy/90 !px-3 !py-1 !text-xs !font-bold !text-brand-gold">
+                      {project.zoneLabel}
+                    </span>
+                  ) : null}
+                  {(project.towerLabel ?? "").trim() ? (
                     <span className="!rounded-full !bg-brand-gold !px-2.5 !py-1 !text-xs !font-bold !text-brand-white">
                       {project.towerLabel}
                     </span>
                   ) : null}
                 </div>
-                <div className="!absolute !right-3 !bottom-3 !rounded-lg !bg-brand-navy/85 !px-2.5 !py-1 !text-xs !font-semibold !text-brand-white">
-                  {project.area} • {project.apartmentCode}
-                </div>
+                {(project.area ?? "").trim() ||
+                (project.apartmentCode ?? "").trim() ? (
+                  <div className="!absolute !right-3 !bottom-3 !rounded-lg !bg-brand-navy/85 !px-2.5 !py-1 !text-xs !font-semibold !text-brand-white">
+                    {[project.area, project.apartmentCode]
+                      .map((part) => (part ?? "").trim())
+                      .filter(Boolean)
+                      .join(" • ")}
+                  </div>
+                ) : null}
               </div>
 
               <div className="ocean-park-project-card-body !flex !flex-1 !flex-col !p-4 md:!p-5">
@@ -215,11 +278,11 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
                   <span>{project.style}</span>
                 </div>
 
-                <h3 className="ocean-park-project-card-title !mt-1.5 !text-base !font-bold !leading-snug !text-brand-navy md:!text-lg">
+                <h3 className="ocean-park-project-card-title !mt-1.5 !mb-0 !text-base !font-bold !leading-snug !text-brand-navy md:!text-lg">
                   {project.title}
                 </h3>
 
-                <p className="ocean-park-project-card-summary !mt-2 !flex-1 !text-xs !leading-relaxed !text-brand-navy/75 md:!text-sm">
+                <p className="ocean-park-project-card-summary !mt-2 !mb-0 !flex-1 !text-xs !leading-relaxed !text-brand-navy/75 md:!text-sm">
                   {project.summary}
                 </p>
 
@@ -233,35 +296,40 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
                     </strong>
                   </div>
 
-                  <Link
-                    {...project.detailLink}
-                    className="!inline-flex !items-center !gap-1 !rounded-full !bg-brand-navy !px-3.5 !py-1.5 !text-xs !font-semibold !text-brand-gold !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white"
-                  >
-                    <span>Nhận bản vẽ 3D</span>
-                    <ArrowRight className="!h-3.5 !w-3.5" aria-hidden="true" />
-                  </Link>
+                  {project.detailLink?.url?.trim() ? (
+                    <Link
+                      {...project.detailLink}
+                      className="!inline-flex !items-center !gap-1 !rounded-full !bg-brand-navy !px-3.5 !py-1.5 !text-xs !font-semibold !text-brand-gold !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white"
+                    >
+                      <span>Nhận bản vẽ 3D</span>
+                      <ArrowRight
+                        className="!h-3.5 !w-3.5"
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  ) : null}
                 </div>
               </div>
             </article>
           ))}
         </div>
 
-        {ctaBanner.title.trim() ? (
+        {ctaTitle ? (
           <div className="ocean-park-project-cta-banner !mt-6 !flex !flex-col !items-center !justify-between !gap-4 !rounded-2xl !bg-brand-navy !p-5 !text-brand-white md:!flex-row md:!p-7">
             <div>
-              <h3 className="!text-lg !font-bold !text-brand-gold md:!text-xl">
-                {ctaBanner.title}
+              <h3 className="!mb-0 !text-lg !font-bold !text-brand-gold md:!text-xl">
+                {ctaTitle}
               </h3>
               <p className="!mt-1 !mb-0 !text-xs !text-brand-white-hover md:!text-sm">
-                {ctaBanner.description}
+                {ctaBanner?.description}
               </p>
             </div>
-            {ctaBanner.buttonLabel.trim() && ctaBanner.buttonLink.url.trim() ? (
+            {ctaButtonLabel && ctaButtonUrl && ctaBanner?.buttonLink ? (
               <Link
                 {...ctaBanner.buttonLink}
                 className="!inline-flex !shrink-0 !items-center !justify-center !rounded-full !bg-brand-gold !px-6 !py-2.5 !text-sm !font-bold !uppercase !text-brand-white !no-underline !transition-colors hover:!bg-brand-gold-hover"
               >
-                {ctaBanner.buttonLabel}
+                {ctaButtonLabel}
               </Link>
             ) : null}
           </div>

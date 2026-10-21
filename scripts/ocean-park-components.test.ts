@@ -313,4 +313,102 @@ describe("OceanParkFaq & Full Keyword Coverage", () => {
     );
     assert.equal(emptyHtml, "");
   });
+
+  test("defaults to opening the first FAQ item when no item has defaultOpen set", () => {
+    const html = renderToStaticMarkup(
+      createElement(OceanParkFaq, {
+        ...oceanParkFaq,
+        items: oceanParkFaq.items.map((item) => ({
+          ...item,
+          defaultOpen: false,
+        })),
+      }),
+    );
+
+    assert.match(
+      html,
+      /<input[^>]*id="ocean-park-faq-item-0"[^>]*checked=""/,
+    );
+  });
+
+  test("applies WordPress Porto specificity guards on rich HTML lead and FAQ answer blocks", () => {
+    const introHtml = renderToStaticMarkup(
+      createElement(OceanParkIntro, oceanParkIntro),
+    );
+    const faqHtml = renderToStaticMarkup(
+      createElement(OceanParkFaq, oceanParkFaq),
+    );
+
+    assert.ok(
+      introHtml.includes("[&amp;_p]:!text-brand-white-hover"),
+      "OceanParkIntro leadHtml must enforce [&_p]:!text-brand-white-hover against Porto p color rules",
+    );
+    assert.ok(
+      faqHtml.includes("[&amp;_li]:!list-disc"),
+      "OceanParkFaq answerHtml must enforce [&_li]:!list-disc against Porto li resets",
+    );
+  });
+});
+
+describe("Defensive Rendering & Edge Cases (API {} / Partial Props)", () => {
+  test("all 6 Ocean Park components and wrappers return empty string without throwing on {} or partial props", () => {
+    const components = [
+      OceanParkIntro,
+      OceanParkProjectSamples,
+      OceanParkProjectSamplesWrapper,
+      OceanParkPricing,
+      OceanParkAdvantages,
+      OceanParkContactForm,
+      OceanParkContactFormWrapper,
+      OceanParkFaq,
+    ];
+
+    for (const Comp of components) {
+      assert.doesNotThrow(() => {
+        const html = renderToStaticMarkup(createElement(Comp as any, {}));
+        assert.equal(html, "");
+      }, `${Comp.name} threw on empty {} props`);
+
+      assert.doesNotThrow(() => {
+        renderToStaticMarkup(
+          createElement(Comp as any, {
+            highlights: [{}],
+            steps: [{}],
+            featuredProjects: [{}],
+            zoneTabs: [{}],
+            unitTypeTabs: [{}],
+            unitEstimates: [{}],
+            roomEstimates: [{}],
+            commitments: [{ title: "Test", items: [{}] }],
+            localStrengths: [{}],
+            capabilityPillars: [{}],
+            locations: [{}],
+            referenceLinks: [{}],
+            zoneOptions: [null as any, "  "],
+            items: [{}],
+            keywordPills: [{}],
+          }),
+        );
+      }, `${Comp.name} threw on partial array items`);
+    }
+  });
+
+  test("OceanParkContactForm sanitizes tel: and zalo.me links when phone numbers contain dots, dashes, or parentheses", () => {
+    const html = renderToStaticMarkup(
+      createElement(OceanParkContactForm, {
+        ...oceanParkContactForm,
+        hotline: "0869.855.885",
+        zaloPhone: "(0978) 305-740",
+      }),
+    );
+
+    assert.ok(
+      html.includes('href="tel:0869855885"'),
+      "tel: link must strip dots and non-digit characters",
+    );
+    assert.ok(
+      html.includes('href="https://zalo.me/0978305740"'),
+      "zalo.me link must strip parentheses, spaces, and dashes",
+    );
+  });
 });

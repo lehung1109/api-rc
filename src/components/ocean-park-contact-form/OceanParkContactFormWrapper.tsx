@@ -7,18 +7,21 @@ import OceanParkContactForm, {
 export type { OceanParkContactFormModel };
 
 const OceanParkContactFormWrapper = (model: OceanParkContactFormModel) => {
-  const validLocations = model.locations.filter(
-    (loc) => loc.label.trim().length > 0 && loc.address.trim().length > 0,
+  const validLocations = (model.locations ?? []).filter(
+    (loc) =>
+      Boolean(loc) &&
+      (loc.label ?? "").trim().length > 0 &&
+      (loc.address ?? "").trim().length > 0,
   );
-  const validZoneOptions = model.zoneOptions.filter(
-    (opt) => opt.trim().length > 0,
+  const validZoneOptions = (model.zoneOptions ?? []).filter(
+    (opt) => typeof opt === "string" && opt.trim().length > 0,
   );
 
   if (
-    !model.eyebrow.trim() &&
-    !model.title.trim() &&
-    !model.formTitle.trim() &&
-    !model.hotline.trim() &&
+    !(model.eyebrow ?? "").trim() &&
+    !(model.title ?? "").trim() &&
+    !(model.formTitle ?? "").trim() &&
+    !(model.hotline ?? "").trim() &&
     validLocations.length === 0 &&
     validZoneOptions.length === 0
   ) {

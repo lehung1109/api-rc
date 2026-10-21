@@ -82,37 +82,59 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
     bottomPrompt,
   } = model;
 
-  const eyebrowText = eyebrow.trim();
-  const titleText = title.trim();
-  const descText = description.trim();
+  const eyebrowText = (eyebrow ?? "").trim();
+  const titleText = (title ?? "").trim();
+  const descText = (description ?? "").trim();
+  const featuredBadge = (featuredPackage?.badge ?? "").trim();
+  const featuredTitle = (featuredPackage?.title ?? "").trim();
+  const featuredPrice = (featuredPackage?.price ?? "").trim();
+  const featuredUnit = (featuredPackage?.unit ?? "").trim();
+  const featuredNote = (featuredPackage?.note ?? "").trim();
+  const featuredSavingNote = (featuredPackage?.handoverSavingNote ?? "").trim();
   const hasFeaturedPackage =
-    featuredPackage.title.trim().length > 0 ||
-    featuredPackage.price.trim().length > 0;
-  const hasPrimaryCta =
-    primaryCta.label.trim().length > 0 && primaryCta.link.url.trim().length > 0;
-  const hasSecondaryCta =
-    secondaryCta.label.trim().length > 0 &&
-    secondaryCta.link.url.trim().length > 0;
+    featuredTitle.length > 0 || featuredPrice.length > 0;
+  const primaryLabel = (primaryCta?.label ?? "").trim();
+  const primaryUrl = (primaryCta?.link?.url ?? "").trim();
+  const hasPrimaryCta = primaryLabel.length > 0 && primaryUrl.length > 0;
+  const secondaryLabel = (secondaryCta?.label ?? "").trim();
+  const secondaryUrl = (secondaryCta?.link?.url ?? "").trim();
+  const hasSecondaryCta = secondaryLabel.length > 0 && secondaryUrl.length > 0;
 
-  const validUnitEstimates = unitEstimates.filter(
+  const unitEstimatesTitleText = (unitEstimatesTitle ?? "").trim();
+  const unitEstimatesSubtitleText = (unitEstimatesSubtitle ?? "").trim();
+
+  const validUnitEstimates = (unitEstimates ?? []).filter(
     (item) =>
-      item.unitType.trim().length > 0 && item.priceRange.trim().length > 0,
+      Boolean(item) &&
+      (item.unitType ?? "").trim().length > 0 &&
+      (item.priceRange ?? "").trim().length > 0,
   );
-  const validRoomEstimates = roomEstimates.filter(
+  const validRoomEstimates = (roomEstimates ?? []).filter(
     (item) =>
-      item.roomName.trim().length > 0 && item.priceRange.trim().length > 0,
+      Boolean(item) &&
+      (item.roomName ?? "").trim().length > 0 &&
+      (item.priceRange ?? "").trim().length > 0,
   );
-  const validCommitments = commitments
+  const validCommitments = (commitments ?? [])
+    .filter(Boolean)
     .map((group) => ({
       ...group,
-      items: group.items.filter(
+      items: (group.items ?? []).filter(
         (item) =>
-          item.label.trim().length > 0 || item.detail.trim().length > 0,
+          Boolean(item) &&
+          ((item.label ?? "").trim().length > 0 ||
+            (item.detail ?? "").trim().length > 0),
       ),
     }))
     .filter(
-      (group) => group.title.trim().length > 0 && group.items.length > 0,
+      (group) =>
+        (group.title ?? "").trim().length > 0 && group.items.length > 0,
     );
+
+  const bottomPromptTitle = (bottomPrompt?.title ?? "").trim();
+  const bottomPromptDesc = (bottomPrompt?.description ?? "").trim();
+  const bottomPromptBtnLabel = (bottomPrompt?.buttonLabel ?? "").trim();
+  const bottomPromptBtnUrl = (bottomPrompt?.buttonLink?.url ?? "").trim();
 
   if (
     !eyebrowText &&
@@ -120,7 +142,8 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
     !hasFeaturedPackage &&
     validUnitEstimates.length === 0 &&
     validRoomEstimates.length === 0 &&
-    validCommitments.length === 0
+    validCommitments.length === 0 &&
+    !bottomPromptTitle
   ) {
     return null;
   }
@@ -142,12 +165,12 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
             </p>
           ) : null}
           {titleText ? (
-            <h2 className="ocean-park-pricing-title !text-2xl !font-bold !leading-snug !text-brand-navy md:!text-3xl lg:!text-4xl">
+            <h2 className="ocean-park-pricing-title !mb-0 !text-2xl !font-bold !leading-snug !text-brand-navy md:!text-3xl lg:!text-4xl">
               {titleText}
             </h2>
           ) : null}
           {descText ? (
-            <p className="ocean-park-pricing-desc !mt-3 !text-sm !leading-relaxed !text-brand-navy/75 md:!text-base">
+            <p className="ocean-park-pricing-desc !mt-3 !mb-0 !text-sm !leading-relaxed !text-brand-navy/75 md:!text-base">
               {descText}
             </p>
           ) : null}
@@ -157,45 +180,45 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
           <div className="ocean-park-pricing-featured !mt-8 !overflow-hidden !rounded-2xl !border !border-brand-gold/50 !bg-brand-navy !p-5 !text-brand-white !shadow-xl md:!p-8">
             <div className="!grid !grid-cols-1 !gap-6 lg:!grid-cols-12 lg:!items-center">
               <div className="lg:!col-span-7">
-                {featuredPackage.badge.trim() ? (
+                {featuredBadge ? (
                   <span className="ocean-park-pricing-featured-badge !inline-flex !items-center !gap-1.5 !rounded-full !bg-brand-gold/20 !px-3.5 !py-1 !text-xs !font-bold !uppercase !tracking-wider !text-brand-gold">
                     <Sparkles className="!h-3.5 !w-3.5" aria-hidden="true" />
-                    <span>{featuredPackage.badge}</span>
+                    <span>{featuredBadge}</span>
                   </span>
                 ) : null}
 
-                <h3 className="ocean-park-pricing-featured-title !mt-2.5 !text-xl !font-bold !leading-snug !text-brand-white md:!text-2xl">
-                  {featuredPackage.title}
+                <h3 className="ocean-park-pricing-featured-title !mt-2.5 !mb-0 !text-xl !font-bold !leading-snug !text-brand-white md:!text-2xl">
+                  {featuredTitle}
                 </h3>
 
                 <div className="ocean-park-pricing-featured-price-row !mt-3 !flex !flex-wrap !items-baseline !gap-2">
                   <strong className="!text-3xl !font-extrabold !text-brand-gold md:!text-4xl">
-                    {featuredPackage.price}
+                    {featuredPrice}
                   </strong>
-                  {featuredPackage.unit.trim() ? (
+                  {featuredUnit ? (
                     <span className="!text-sm !font-medium !text-brand-white-hover md:!text-base">
-                      {featuredPackage.unit}
+                      {featuredUnit}
                     </span>
                   ) : null}
                 </div>
 
-                {featuredPackage.note.trim() ? (
-                  <p className="ocean-park-pricing-featured-note !mt-2.5 !text-xs !leading-relaxed !text-brand-white-hover md:!text-sm">
-                    {featuredPackage.note}
+                {featuredNote ? (
+                  <p className="ocean-park-pricing-featured-note !mt-2.5 !mb-0 !text-xs !leading-relaxed !text-brand-white-hover md:!text-sm">
+                    {featuredNote}
                   </p>
                 ) : null}
               </div>
 
               <div className="!flex !flex-col !justify-between !gap-4 !rounded-xl !border !border-brand-gold/35 !bg-brand-white/10 !p-4 lg:!col-span-5 md:!p-5">
-                {featuredPackage.handoverSavingNote.trim() ? (
+                {featuredSavingNote ? (
                   <p className="ocean-park-pricing-saving-note !mb-0 !text-xs !leading-relaxed !text-brand-white-hover md:!text-sm">
-                    {featuredPackage.handoverSavingNote}
+                    {featuredSavingNote}
                   </p>
                 ) : null}
 
                 {hasPrimaryCta || hasSecondaryCta ? (
                   <div className="!flex !flex-wrap !items-center !gap-3">
-                    {hasPrimaryCta ? (
+                    {hasPrimaryCta && primaryCta ? (
                       <Link
                         {...primaryCta.link}
                         className="!inline-flex !flex-1 !items-center !justify-center !gap-2 !rounded-full !bg-brand-gold !px-5 !py-2.5 !text-xs !font-bold !uppercase !text-brand-white !no-underline !transition-colors hover:!bg-brand-gold-hover md:!text-sm"
@@ -204,16 +227,16 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
                           className="!h-3.5 !w-3.5 !shrink-0"
                           aria-hidden="true"
                         />
-                        <span>{primaryCta.label}</span>
+                        <span>{primaryLabel}</span>
                       </Link>
                     ) : null}
 
-                    {hasSecondaryCta ? (
+                    {hasSecondaryCta && secondaryCta ? (
                       <Link
                         {...secondaryCta.link}
                         className="!inline-flex !flex-1 !items-center !justify-center !rounded-full !border !border-brand-gold !px-5 !py-2.5 !text-xs !font-bold !uppercase !text-brand-gold !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white md:!text-sm"
                       >
-                        {secondaryCta.label}
+                        {secondaryLabel}
                       </Link>
                     ) : null}
                   </div>
@@ -226,14 +249,14 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
         {validUnitEstimates.length > 0 ? (
           <div className="ocean-park-pricing-units !mt-8 md:!mt-10">
             <div className="!mb-4 !flex !flex-col !justify-between !gap-1 md:!flex-row md:!items-end">
-              {unitEstimatesTitle.trim() ? (
-                <h3 className="!text-lg !font-bold !text-brand-navy md:!text-2xl">
-                  {unitEstimatesTitle}
+              {unitEstimatesTitleText ? (
+                <h3 className="!mb-0 !text-lg !font-bold !text-brand-navy md:!text-2xl">
+                  {unitEstimatesTitleText}
                 </h3>
               ) : null}
-              {unitEstimatesSubtitle.trim() ? (
+              {unitEstimatesSubtitleText ? (
                 <p className="!mb-0 !text-xs !text-brand-navy/70 md:!text-sm">
-                  {unitEstimatesSubtitle}
+                  {unitEstimatesSubtitleText}
                 </p>
               ) : null}
             </div>
@@ -319,7 +342,7 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
                 <span className="!block !text-[11px] !font-semibold !uppercase !tracking-wider !text-brand-gold">
                   {room.englishName}
                 </span>
-                <h4 className="!mt-0.5 !text-sm !font-bold !text-brand-navy md:!text-base">
+                <h4 className="!mt-0.5 !mb-0 !text-sm !font-bold !text-brand-navy md:!text-base">
                   {room.roomName}
                 </h4>
                 <strong className="!mt-2 !block !text-sm !font-extrabold !text-brand-navy md:!text-base">
@@ -337,13 +360,13 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
                 key={`${group.title}-${groupIndex}`}
                 className="ocean-park-pricing-commitment-col !w-[85%] !shrink-0 !snap-start !rounded-2xl !border !border-brand-navy/12 !bg-brand-white !p-5 !shadow-sm md:!w-auto md:!p-6"
               >
-                <h3 className="!border-b !border-brand-gold/30 !pb-3 !text-base !font-bold !text-brand-navy md:!text-lg">
+                <h3 className="!mb-0 !border-b !border-brand-gold/30 !pb-3 !text-base !font-bold !text-brand-navy md:!text-lg">
                   {group.title}
                 </h3>
                 <ul className="!mt-4 !mb-0 !list-none !space-y-3 !p-0">
                   {group.items.map((item, itemIndex) => (
                     <li
-                      key={`${item.label}-${itemIndex}`}
+                      key={`${item.label ?? itemIndex}-${itemIndex}`}
                       className="!flex !items-start !gap-2.5 !text-xs !leading-relaxed md:!text-sm"
                     >
                       <CheckCircle2
@@ -351,9 +374,11 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
                         aria-hidden="true"
                       />
                       <div>
-                        <strong className="!font-bold !text-brand-navy">
-                          {item.label}:{" "}
-                        </strong>
+                        {(item.label ?? "").trim() ? (
+                          <strong className="!font-bold !text-brand-navy">
+                            {item.label}:{" "}
+                          </strong>
+                        ) : null}
                         <span className="!text-brand-navy/80">
                           {item.detail}
                         </span>
@@ -366,23 +391,24 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
           </div>
         ) : null}
 
-        {bottomPrompt.title.trim() ? (
+        {bottomPromptTitle ? (
           <div className="ocean-park-pricing-bottom-prompt !mt-8 !flex !flex-col !items-center !justify-between !gap-4 !rounded-2xl !border !border-brand-gold/40 !bg-brand-white-hover/50 !p-5 md:!flex-row md:!p-6">
             <div>
-              <h3 className="!text-base !font-bold !text-brand-navy md:!text-lg">
-                {bottomPrompt.title}
+              <h3 className="!mb-0 !text-base !font-bold !text-brand-navy md:!text-lg">
+                {bottomPromptTitle}
               </h3>
               <p className="!mt-1 !mb-0 !text-xs !text-brand-navy/75 md:!text-sm">
-                {bottomPrompt.description}
+                {bottomPromptDesc}
               </p>
             </div>
-            {bottomPrompt.buttonLabel.trim() &&
-            bottomPrompt.buttonLink.url.trim() ? (
+            {bottomPromptBtnLabel &&
+            bottomPromptBtnUrl &&
+            bottomPrompt?.buttonLink ? (
               <Link
                 {...bottomPrompt.buttonLink}
                 className="!inline-flex !shrink-0 !items-center !justify-center !rounded-full !bg-brand-navy !px-6 !py-2.5 !text-xs !font-bold !uppercase !text-brand-gold !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white md:!text-sm"
               >
-                {bottomPrompt.buttonLabel}
+                {bottomPromptBtnLabel}
               </Link>
             ) : null}
           </div>

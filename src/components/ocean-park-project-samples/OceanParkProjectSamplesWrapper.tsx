@@ -9,11 +9,14 @@ export type { OceanParkProjectSamplesModel };
 const OceanParkProjectSamplesWrapper = (
   model: OceanParkProjectSamplesModel,
 ) => {
-  const validProjects = model.featuredProjects.filter(
-    (item) => item.title.trim().length > 0 && item.image.url.trim().length > 0,
+  const validProjects = (model.featuredProjects ?? []).filter(
+    (item) =>
+      Boolean(item) &&
+      (item.title ?? "").trim().length > 0 &&
+      (item.image?.url ?? "").trim().length > 0,
   );
 
-  if (validProjects.length === 0 && !model.title.trim()) {
+  if (validProjects.length === 0 && !(model.title ?? "").trim()) {
     return null;
   }
 

@@ -46,23 +46,30 @@ const OceanParkIntro = (model: OceanParkIntroModel) => {
     secondaryCta,
   } = model;
 
-  const eyebrowText = eyebrow.trim();
-  const titleText = title.trim();
-  const leadContent = leadHtml.trim();
-  const validHighlights = highlights.filter(
-    (item) => item.label.trim().length > 0 && item.value.trim().length > 0,
+  const eyebrowText = (eyebrow ?? "").trim();
+  const titleText = (title ?? "").trim();
+  const leadContent = (leadHtml ?? "").trim();
+  const validHighlights = (highlights ?? []).filter(
+    (item) =>
+      Boolean(item) &&
+      (item.label ?? "").trim().length > 0 &&
+      (item.value ?? "").trim().length > 0,
   );
-  const validBadges = subdivisionBadges
-    .map((badge) => badge.trim())
+  const validBadges = (subdivisionBadges ?? [])
+    .map((badge) => (typeof badge === "string" ? badge.trim() : ""))
     .filter((badge) => badge.length > 0);
-  const validSteps = steps.filter(
-    (step) => step.title.trim().length > 0 && step.description.trim().length > 0,
+  const validSteps = (steps ?? []).filter(
+    (step) =>
+      Boolean(step) &&
+      (step.title ?? "").trim().length > 0 &&
+      (step.description ?? "").trim().length > 0,
   );
-  const hasPrimaryCta =
-    primaryCta.label.trim().length > 0 && primaryCta.link.url.trim().length > 0;
-  const hasSecondaryCta =
-    secondaryCta.label.trim().length > 0 &&
-    secondaryCta.link.url.trim().length > 0;
+  const primaryLabel = (primaryCta?.label ?? "").trim();
+  const primaryUrl = (primaryCta?.link?.url ?? "").trim();
+  const hasPrimaryCta = primaryLabel.length > 0 && primaryUrl.length > 0;
+  const secondaryLabel = (secondaryCta?.label ?? "").trim();
+  const secondaryUrl = (secondaryCta?.link?.url ?? "").trim();
+  const hasSecondaryCta = secondaryLabel.length > 0 && secondaryUrl.length > 0;
 
   if (
     !eyebrowText &&
@@ -95,14 +102,14 @@ const OceanParkIntro = (model: OceanParkIntroModel) => {
             ) : null}
 
             {titleText ? (
-              <h2 className="ocean-park-intro-title !mt-1 !text-2xl !font-bold !leading-snug !text-brand-white md:!text-3xl lg:!text-4xl">
+              <h2 className="ocean-park-intro-title !mt-1 !mb-0 !text-2xl !font-bold !leading-snug !text-brand-white md:!text-3xl lg:!text-4xl">
                 {titleText}
               </h2>
             ) : null}
 
             {leadContent ? (
               <div
-                className="ocean-park-intro-lead !mt-3 !space-y-2.5 !text-sm !leading-relaxed !text-brand-white-hover md:!text-base [&_strong]:!font-semibold [&_strong]:!text-brand-gold"
+                className="ocean-park-intro-lead !mt-3 !space-y-2.5 !text-sm !leading-relaxed !text-brand-white-hover md:!text-base [&_p]:!mb-2.5 [&_p:last-child]:!mb-0 [&_p]:!text-brand-white-hover [&_strong]:!font-semibold [&_strong]:!text-brand-gold"
                 dangerouslySetInnerHTML={{ __html: leadContent }}
               />
             ) : null}
@@ -122,28 +129,28 @@ const OceanParkIntro = (model: OceanParkIntroModel) => {
 
             {hasPrimaryCta || hasSecondaryCta ? (
               <div className="ocean-park-intro-actions !mt-5 !flex !flex-wrap !items-center !gap-3 md:!mt-6">
-                {hasPrimaryCta ? (
+                {hasPrimaryCta && primaryCta ? (
                   <Link
                     {...primaryCta.link}
                     className={cn(
                       "ocean-park-intro-primary-cta !inline-flex !items-center !justify-center !gap-2 !rounded-full !bg-brand-gold !px-6 !py-2.5 !text-sm !font-bold !uppercase !tracking-wide !text-brand-white !no-underline !shadow-md !transition-colors hover:!bg-brand-gold-hover md:!px-7 md:!py-3 md:!text-base",
-                      primaryCta.link.className,
+                      primaryCta.link?.className,
                     )}
                   >
                     <PhoneCall className="!h-4 !w-4 !shrink-0" aria-hidden="true" />
-                    <span>{primaryCta.label}</span>
+                    <span>{primaryLabel}</span>
                   </Link>
                 ) : null}
 
-                {hasSecondaryCta ? (
+                {hasSecondaryCta && secondaryCta ? (
                   <Link
                     {...secondaryCta.link}
                     className={cn(
                       "ocean-park-intro-secondary-cta !inline-flex !items-center !justify-center !rounded-full !border !border-brand-gold !bg-transparent !px-6 !py-2.5 !text-sm !font-semibold !uppercase !tracking-wide !text-brand-gold !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white md:!px-7 md:!py-3 md:!text-base",
-                      secondaryCta.link.className,
+                      secondaryCta.link?.className,
                     )}
                   >
-                    {secondaryCta.label}
+                    {secondaryLabel}
                   </Link>
                 ) : null}
               </div>
@@ -178,14 +185,14 @@ const OceanParkIntro = (model: OceanParkIntroModel) => {
           <div className="ocean-park-intro-steps !flex !flex-nowrap !gap-3 !overflow-x-auto !bg-brand-white-hover/50 !p-4 !snap-x !snap-mandatory md:!grid md:!grid-cols-3 md:!gap-5 md:!overflow-visible md:!p-6">
             {validSteps.map((step, index) => (
               <article
-                key={`${step.number}-${step.title}-${index}`}
+                key={`${step.number ?? index}-${step.title}-${index}`}
                 className="ocean-park-intro-step !w-[82%] !shrink-0 !snap-start !rounded-xl !border !border-brand-navy/10 !bg-brand-white !p-4 !shadow-sm md:!w-auto"
               >
                 <div className="!flex !items-center !gap-3">
                   <span className="ocean-park-intro-step-number !inline-flex !h-9 !w-9 !shrink-0 !items-center !justify-center !rounded-full !bg-brand-navy !text-sm !font-bold !text-brand-gold">
-                    {step.number.trim() || `0${index + 1}`}
+                    {(step.number ?? "").trim() || `0${index + 1}`}
                   </span>
-                  <h3 className="ocean-park-intro-step-title !text-base !font-bold !text-brand-navy md:!text-lg">
+                  <h3 className="ocean-park-intro-step-title !mb-0 !text-base !font-bold !text-brand-navy md:!text-lg">
                     {step.title}
                   </h3>
                 </div>

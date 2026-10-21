@@ -58,13 +58,13 @@ declare global {
 
 export const OCEAN_PARK_CF7_SOURCE_ID_PREFIX = "eai-ocean-park-cf7-source-";
 
-export const normalizeOceanParkFormKey = (raw: string): string =>
-  raw
+export const normalizeOceanParkFormKey = (raw = ""): string =>
+  (raw ?? "")
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9_-]/g, "");
 
-export const oceanParkCf7SourceId = (formKey: string): string => {
+export const oceanParkCf7SourceId = (formKey = ""): string => {
   const normalized = normalizeOceanParkFormKey(formKey);
   return normalized ? `${OCEAN_PARK_CF7_SOURCE_ID_PREFIX}${normalized}` : "";
 };
@@ -117,24 +117,33 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
     successMessage,
   } = model;
 
-  const eyebrowText = eyebrow.trim();
-  const titleText = title.trim();
-  const descText = description.trim();
-  const hotlineText = hotline.trim();
-  const zaloText = zaloPhone.trim();
-  const emailText = email.trim();
-  const websiteText = website.trim();
-  const formTitleText = formTitle.trim();
-  const formSubtitleText = formSubtitle.trim();
+  const eyebrowText = (eyebrow ?? "").trim();
+  const titleText = (title ?? "").trim();
+  const descText = (description ?? "").trim();
+  const hotlineText = (hotline ?? "").trim();
+  const zaloText = (zaloPhone ?? "").trim();
+  const emailText = (email ?? "").trim();
+  const websiteText = (website ?? "").trim();
+  const formTitleText = (formTitle ?? "").trim();
+  const formSubtitleText = (formSubtitle ?? "").trim();
 
-  const validLocations = locations.filter(
-    (loc) => loc.label.trim().length > 0 && loc.address.trim().length > 0,
+  const validLocations = (locations ?? []).filter(
+    (loc) =>
+      Boolean(loc) &&
+      (loc.label ?? "").trim().length > 0 &&
+      (loc.address ?? "").trim().length > 0,
   );
-  const validReferenceLinks = referenceLinks.filter(
-    (item) => item.label.trim().length > 0 && item.url.trim().length > 0,
+  const validReferenceLinks = (referenceLinks ?? []).filter(
+    (item) =>
+      Boolean(item) &&
+      (item.label ?? "").trim().length > 0 &&
+      (item.url ?? "").trim().length > 0,
   );
-  const validZoneOptions = zoneOptions.filter((opt) => opt.trim().length > 0);
+  const validZoneOptions = (zoneOptions ?? [])
+    .map((opt) => (typeof opt === "string" ? opt.trim() : ""))
+    .filter((opt) => opt.length > 0);
 
+  const normalizedKey = normalizeOceanParkFormKey(formKey);
   const sourceId = oceanParkCf7SourceId(formKey);
   const cf7SlotRef = useRef<HTMLDivElement>(null);
   const [hasCf7Source, setHasCf7Source] = useState(false);
@@ -153,7 +162,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
       return;
     }
     const source = document.getElementById(sourceId);
-    if (source && source.childNodes.length > 0) {
+    if (source && source.children.length > 0) {
       setHasCf7Source(true);
       return;
     }
@@ -189,15 +198,31 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
     return null;
   }
 
-  const resolvedSectionId = sectionId?.trim() || "dang-ky-tu-van";
-  const hotlineDigits = hotlineText.replace(/\s+/g, "");
-  const zaloDigits = zaloText.replace(/\s+/g, "");
+  const resolvedSectionId = (sectionId ?? "").trim() || "dang-ky-tu-van";
+  const inputIdPrefix =
+    (sectionId ?? "").trim() ||
+    (normalizedKey && normalizedKey !== "ocean-park-consultation"
+      ? `dang-ky-tu-van-${normalizedKey}`
+      : "dang-ky-tu-van");
+  const hotlineDigits = hotlineText.replace(/[^\d+]/g, "");
+  const zaloDigits = zaloText.replace(/\D/g, "");
+  const resolvedSuccessMessage =
+    (successMessage ?? "").trim() ||
+    "Cảm ơn Quý cư dân! Kiến trúc sư trưởng IC HOUSE tại Sao Biển 23 Vinhomes Ocean Park đã tiếp nhận yêu cầu và sẽ liên hệ gửi mặt bằng 2D + báo giá chi tiết trong vòng 15 phút.";
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!fullName.trim() || !phone.trim()) {
       setErrorMessage(
         "Vui lòng nhập đầy đủ Họ tên và Số điện thoại để KTS IC HOUSE gửi bản vẽ & báo giá.",
+      );
+      setSubmitted(false);
+      return;
+    }
+    const normalizedPhone = phone.replace(/[\s.()-]/g, "");
+    if (!/^\+?\d{8,15}$/.test(normalizedPhone)) {
+      setErrorMessage(
+        "Số điện thoại không hợp lệ (cần từ 8–15 chữ số). Vui lòng kiểm tra lại.",
       );
       setSubmitted(false);
       return;
@@ -209,7 +234,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
   return (
     <section
       id={resolvedSectionId}
-      data-ocean-park-form-key={normalizeOceanParkFormKey(formKey) || undefined}
+      data-ocean-park-form-key={normalizedKey || undefined}
       className={cn(
         "ocean-park-contact-form !w-full !bg-brand-white-hover/50 !px-4 !py-10 !text-brand-navy md:!px-6 md:!py-16",
         className,
@@ -226,20 +251,20 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
             ) : null}
 
             {titleText ? (
-              <h2 className="ocean-park-contact-title !mt-1 !text-2xl !font-bold !leading-snug !text-brand-white md:!text-3xl">
+              <h2 className="ocean-park-contact-title !mt-1 !mb-0 !text-2xl !font-bold !leading-snug !text-brand-white md:!text-3xl">
                 {titleText}
               </h2>
             ) : null}
 
             {descText ? (
-              <p className="ocean-park-contact-desc !mt-3 !text-xs !leading-relaxed !text-brand-white-hover/85 md:!text-sm">
+              <p className="ocean-park-contact-desc !mt-3 !mb-0 !text-xs !leading-relaxed !text-brand-white-hover/85 md:!text-sm">
                 {descText}
               </p>
             ) : null}
 
             {/* Direct Hotline & Zalo Cards */}
             <div className="!mt-5 !grid !grid-cols-1 !gap-3 sm:!grid-cols-2">
-              {hotlineText ? (
+              {hotlineText && hotlineDigits ? (
                 <a
                   href={`tel:${hotlineDigits}`}
                   className="!flex !items-center !gap-3 !rounded-xl !border !border-brand-gold/40 !bg-brand-white/10 !p-3.5 !text-brand-white !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white"
@@ -258,7 +283,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                 </a>
               ) : null}
 
-              {zaloText ? (
+              {zaloText && zaloDigits ? (
                 <a
                   href={`https://zalo.me/${zaloDigits}`}
                   target="_blank"
@@ -281,7 +306,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
             </div>
 
             {/* Email & Website */}
-            {(emailText || websiteText) ? (
+            {emailText || websiteText ? (
               <div className="!mt-3 !flex !flex-wrap !items-center !gap-4 !text-xs !text-brand-white-hover/80">
                 {emailText ? (
                   <span className="!inline-flex !items-center !gap-1.5">
@@ -307,7 +332,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
             {/* 3 Strategic Locations */}
             {validLocations.length > 0 ? (
               <div className="ocean-park-contact-locations !mt-6 !space-y-3 !border-t !border-brand-white/15 !pt-5">
-                <h3 className="!text-xs !font-bold !uppercase !tracking-wider !text-brand-gold md:!text-sm">
+                <h3 className="!mb-0 !text-xs !font-bold !uppercase !tracking-wider !text-brand-gold md:!text-sm">
                   Hệ Thống Nhà Mẫu • Văn Phòng • Nhà Máy IC HOUSE Kế Cận Ocean Park
                 </h3>
                 {validLocations.map((loc, idx) => (
@@ -363,12 +388,12 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
         {/* Right Column: CF7 Slot or Built-in Interactive Consultation Form */}
         <div className="ocean-park-contact-form-card !flex !flex-col !justify-center !rounded-2xl !border !border-brand-navy/15 !bg-brand-white !p-6 !shadow-xl md:!p-8 lg:!col-span-6">
           {formTitleText ? (
-            <h3 className="ocean-park-form-title !text-xl !font-bold !text-brand-navy md:!text-2xl">
+            <h3 className="ocean-park-form-title !mb-0 !text-xl !font-bold !text-brand-navy md:!text-2xl">
               {formTitleText}
             </h3>
           ) : null}
           {formSubtitleText ? (
-            <p className="ocean-park-form-subtitle !mt-1.5 !text-xs !leading-relaxed !text-brand-navy/75 md:!text-sm">
+            <p className="ocean-park-form-subtitle !mt-1.5 !mb-0 !text-xs !leading-relaxed !text-brand-navy/75 md:!text-sm">
               {formSubtitleText}
             </p>
           ) : null}
@@ -387,18 +412,21 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
               <div className="!grid !grid-cols-1 !gap-4 sm:!grid-cols-2">
                 <div>
                   <label
-                    htmlFor={`${resolvedSectionId}-fullname`}
+                    htmlFor={`${inputIdPrefix}-fullname`}
                     className="!mb-1.5 !block !text-xs !font-bold !uppercase !tracking-wide !text-brand-navy"
                   >
                     Họ và tên quý khách <span className="!text-brand-gold">*</span>
                   </label>
                   <input
-                    id={`${resolvedSectionId}-fullname`}
+                    id={`${inputIdPrefix}-fullname`}
                     name="fullName"
                     type="text"
                     required
                     value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
+                    onChange={(e) => {
+                      setFullName(e.target.value);
+                      if (errorMessage) setErrorMessage("");
+                    }}
                     placeholder="VD: Anh Minh — Tòa LD1"
                     className="ocean-park-input-name !w-full !rounded-xl !border !border-brand-navy/20 !bg-brand-white !px-3.5 !py-2.5 !text-sm !text-brand-navy !outline-none focus:!border-brand-gold"
                   />
@@ -406,18 +434,21 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
 
                 <div>
                   <label
-                    htmlFor={`${resolvedSectionId}-phone`}
+                    htmlFor={`${inputIdPrefix}-phone`}
                     className="!mb-1.5 !block !text-xs !font-bold !uppercase !tracking-wide !text-brand-navy"
                   >
                     Số điện thoại / Zalo <span className="!text-brand-gold">*</span>
                   </label>
                   <input
-                    id={`${resolvedSectionId}-phone`}
+                    id={`${inputIdPrefix}-phone`}
                     name="phone"
                     type="tel"
                     required
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                      if (errorMessage) setErrorMessage("");
+                    }}
                     placeholder="VD: 0988 xxx xxx"
                     className="ocean-park-input-phone !w-full !rounded-xl !border !border-brand-navy/20 !bg-brand-white !px-3.5 !py-2.5 !text-sm !text-brand-navy !outline-none focus:!border-brand-gold"
                   />
@@ -427,7 +458,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
               <div className="!grid !grid-cols-1 !gap-4 sm:!grid-cols-2">
                 <div>
                   <label
-                    htmlFor={`${resolvedSectionId}-zone`}
+                    htmlFor={`${inputIdPrefix}-zone`}
                     className="!mb-1.5 !flex !items-center !gap-1.5 !text-xs !font-bold !uppercase !tracking-wide !text-brand-navy"
                   >
                     <Building2
@@ -437,7 +468,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                     <span>Phân khu / Tòa căn hộ</span>
                   </label>
                   <select
-                    id={`${resolvedSectionId}-zone`}
+                    id={`${inputIdPrefix}-zone`}
                     name="zone"
                     value={selectedZone}
                     onChange={(e) => setSelectedZone(e.target.value)}
@@ -453,13 +484,13 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
 
                 <div>
                   <label
-                    htmlFor={`${resolvedSectionId}-apartment`}
+                    htmlFor={`${inputIdPrefix}-apartment`}
                     className="!mb-1.5 !block !text-xs !font-bold !uppercase !tracking-wide !text-brand-navy"
                   >
                     Loại căn / Diện tích / Mã căn
                   </label>
                   <input
-                    id={`${resolvedSectionId}-apartment`}
+                    id={`${inputIdPrefix}-apartment`}
                     name="apartmentInfo"
                     type="text"
                     value={apartmentInfo}
@@ -472,13 +503,13 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
 
               <div>
                 <label
-                  htmlFor={`${resolvedSectionId}-notes`}
+                  htmlFor={`${inputIdPrefix}-notes`}
                   className="!mb-1.5 !block !text-xs !font-bold !uppercase !tracking-wide !text-brand-navy"
                 >
                   Nhu cầu hoàn thiện & Phong cách yêu thích
                 </label>
                 <textarea
-                  id={`${resolvedSectionId}-notes`}
+                  id={`${inputIdPrefix}-notes`}
                   name="notes"
                   rows={3}
                   value={notes}
@@ -491,13 +522,13 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
               {errorMessage ? (
                 <p
                   role="alert"
-                  className="ocean-park-form-error !rounded-xl !border !border-red-500/30 !bg-red-50 !px-3.5 !py-2.5 !text-xs !font-medium !text-red-700"
+                  className="ocean-park-form-error !mb-0 !rounded-xl !border !border-red-500/30 !bg-red-50 !px-3.5 !py-2.5 !text-xs !font-medium !text-red-700"
                 >
                   {errorMessage}
                 </p>
               ) : null}
 
-              {submitted && successMessage.trim() ? (
+              {submitted ? (
                 <div
                   role="status"
                   className="ocean-park-contact-form-success !flex !items-start !gap-2.5 !rounded-xl !border !border-brand-gold !bg-brand-gold/15 !p-4 !text-xs !font-medium !text-brand-navy md:!text-sm"
@@ -506,7 +537,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                     className="!mt-0.5 !h-4 !w-4 !shrink-0 !text-brand-gold"
                     aria-hidden="true"
                   />
-                  <span>{successMessage}</span>
+                  <span>{resolvedSuccessMessage}</span>
                 </div>
               ) : null}
 
@@ -516,7 +547,8 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
               >
                 <Send className="!h-4 !w-4" aria-hidden="true" />
                 <span>
-                  {submitLabel.trim() || "Đăng Ký Nhận Bản Vẽ 3D & Báo Giá Chi Tiết"}
+                  {(submitLabel ?? "").trim() ||
+                    "Đăng Ký Nhận Bản Vẽ 3D & Báo Giá Chi Tiết"}
                 </span>
               </button>
             </form>

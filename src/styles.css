@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
@@ -725,7 +725,9 @@ button.contact-popup-close {
 .construction-highlights-title p,
 .construction-highlights-item-content p,
 .director-profile-description p,
-.collaboration-intro-title p {
+.collaboration-intro-title p,
+.ocean-park-intro-lead p,
+.ocean-park-faq-answer p {
   color: inherit;
 }
 

@@ -118,9 +118,19 @@ test.describe("Ocean Park Luxury Interior Preview Page", () => {
     await allUnitsTab.click();
     await expect(cards).toHaveCount(1);
     await expect(cards.first()).toContainText("LSB-09");
+
+    // 0-match combined filter (e.g. LUMIÈRE SpringBay + Studio) shows notice and reset button
+    const studioTab = page.locator('button[data-unit-tab="studio"]');
+    await studioTab.click();
+    const emptyNotice = page.locator(".ocean-park-project-filter-empty-notice");
+    await expect(emptyNotice).toBeVisible();
+    const resetBtn = page.locator(".ocean-park-project-filter-reset-btn");
+    await resetBtn.click();
+    await expect(emptyNotice).toHaveCount(0);
+    await expect(cards).toHaveCount(7);
   });
 
-  test("OceanParkContactForm: validates required phone field and shows success message on valid submit", async ({
+  test("OceanParkContactForm: validates required and phone format fields and shows success message on valid submit", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
@@ -141,6 +151,15 @@ test.describe("Ocean Park Luxury Interior Preview Page", () => {
     await expect(errorAlert).toContainText(
       "Vui lòng nhập đầy đủ Họ tên và Số điện thoại",
     );
+    await expect(
+      formSection.locator(".ocean-park-contact-form-success"),
+    ).toHaveCount(0);
+
+    // Invalid phone format (non-digits / too short)
+    await phoneInput.fill("abc-123");
+    await submitBtn.click();
+    await expect(errorAlert).toBeVisible();
+    await expect(errorAlert).toContainText("Số điện thoại không hợp lệ");
     await expect(
       formSection.locator(".ocean-park-contact-form-success"),
     ).toHaveCount(0);

@@ -20,6 +20,7 @@ export interface OceanParkKeywordPillModel {
 export interface OceanParkFaqModel {
   className?: string;
   sectionId?: string;
+  checkboxIdPrefix?: string;
   eyebrow: string;
   title: string;
   description: string;
@@ -34,6 +35,7 @@ const OceanParkFaq = (model: OceanParkFaqModel) => {
   const {
     className,
     sectionId,
+    checkboxIdPrefix,
     eyebrow,
     title,
     description,
@@ -42,17 +44,22 @@ const OceanParkFaq = (model: OceanParkFaqModel) => {
     keywordPills,
   } = model;
 
-  const eyebrowText = eyebrow.trim();
-  const titleText = title.trim();
-  const descText = description.trim();
-  const keywordTitleText = keywordGroupTitle.trim();
+  const eyebrowText = (eyebrow ?? "").trim();
+  const titleText = (title ?? "").trim();
+  const descText = (description ?? "").trim();
+  const keywordTitleText = (keywordGroupTitle ?? "").trim();
 
-  const validItems = items.filter(
+  const validItems = (items ?? []).filter(
     (item) =>
-      item.question.trim().length > 0 && item.answerHtml.trim().length > 0,
+      Boolean(item) &&
+      (item.question ?? "").trim().length > 0 &&
+      (item.answerHtml ?? "").trim().length > 0,
   );
-  const validPills = keywordPills.filter(
-    (pill) => pill.label.trim().length > 0 && pill.url.trim().length > 0,
+  const validPills = (keywordPills ?? []).filter(
+    (pill) =>
+      Boolean(pill) &&
+      (pill.label ?? "").trim().length > 0 &&
+      (pill.url ?? "").trim().length > 0,
   );
 
   if (
@@ -64,8 +71,11 @@ const OceanParkFaq = (model: OceanParkFaqModel) => {
     return null;
   }
 
-  const resolvedSectionId = sectionId?.trim() || DEFAULT_SECTION_ID;
+  const resolvedSectionId = (sectionId ?? "").trim() || DEFAULT_SECTION_ID;
+  const resolvedCheckboxPrefix =
+    (checkboxIdPrefix ?? "").trim() || `${resolvedSectionId}-item`;
   const firstOpenIndex = validItems.findIndex((item) => item.defaultOpen);
+  const resolvedOpenIndex = firstOpenIndex >= 0 ? firstOpenIndex : 0;
   const exclusiveSyncModel: AccordionExclusiveSyncModel = {
     rootSelector: ".ocean-park-faq-accordion",
     inputSelector: ".ocean-park-faq-item-input",
@@ -93,13 +103,13 @@ const OceanParkFaq = (model: OceanParkFaqModel) => {
           ) : null}
 
           {titleText ? (
-            <h2 className="ocean-park-faq-title !mt-1 !text-2xl !font-bold !leading-snug !text-brand-navy md:!text-3xl lg:!text-4xl">
+            <h2 className="ocean-park-faq-title !mt-1 !mb-0 !text-2xl !font-bold !leading-snug !text-brand-navy md:!text-3xl lg:!text-4xl">
               {titleText}
             </h2>
           ) : null}
 
           {descText ? (
-            <p className="ocean-park-faq-desc !mt-3 !text-sm !leading-relaxed !text-brand-navy/75 md:!text-base">
+            <p className="ocean-park-faq-desc !mt-3 !mb-0 !text-sm !leading-relaxed !text-brand-navy/75 md:!text-base">
               {descText}
             </p>
           ) : null}
@@ -108,8 +118,8 @@ const OceanParkFaq = (model: OceanParkFaqModel) => {
         {validItems.length > 0 ? (
           <div className="ocean-park-faq-accordion !mt-8 !space-y-3.5 md:!mt-10">
             {validItems.map((item, index) => {
-              const checkboxId = `${resolvedSectionId}-item-${index}`;
-              const isDefaultOpen = index === firstOpenIndex;
+              const checkboxId = `${resolvedCheckboxPrefix}-${index}`;
+              const isDefaultOpen = index === resolvedOpenIndex;
               const numberBadge = String(index + 1).padStart(2, "0");
 
               return (
@@ -150,8 +160,8 @@ const OceanParkFaq = (model: OceanParkFaqModel) => {
                   <div
                     className={cn(
                       "ocean-park-faq-answer !hidden !bg-brand-white-hover/35 !p-4 !text-xs !leading-relaxed !text-brand-navy/85 md:!p-6 md:!text-sm",
-                      "[&_p]:!mb-2.5 [&_p:last-child]:!mb-0 [&_strong]:!font-bold [&_strong]:!text-brand-navy",
-                      "[&_ul]:!mt-2 [&_ul]:!list-disc [&_ul]:!space-y-1 [&_ul]:!pl-5",
+                      "[&_p]:!mb-2.5 [&_p:last-child]:!mb-0 [&_p]:!text-brand-navy/85 [&_strong]:!font-bold [&_strong]:!text-brand-navy",
+                      "[&_ul]:!mt-2 [&_ul]:!list-disc [&_ul]:!space-y-1 [&_ul]:!pl-5 [&_li]:!list-disc [&_li]:!text-brand-navy/85",
                       "peer-checked/faq:!block",
                     )}
                     dangerouslySetInnerHTML={{ __html: item.answerHtml.trim() }}
