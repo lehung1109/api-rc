@@ -236,47 +236,47 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
       id={resolvedSectionId}
       data-ocean-park-form-key={normalizedKey || undefined}
       className={cn(
-        "ocean-park-contact-form !w-full !bg-brand-white-hover/50 !px-4 !py-10 !text-brand-navy md:!px-6 md:!py-16",
+        "ocean-park-contact-form !w-full !bg-brand-white-hover/50 !px-4 !py-12 !text-brand-navy md:!px-6 md:!py-16 lg:!py-20",
         className,
       )}
     >
       <div className="ocean-park-contact-form-inner !mx-auto !grid !w-full !max-w-7xl !grid-cols-1 !gap-8 lg:!grid-cols-12 lg:!gap-10">
         {/* Left Column: Brand Contact Info, 3 Locations & Reference Links */}
-        <div className="ocean-park-contact-info !flex !flex-col !justify-between !rounded-2xl !bg-brand-navy !p-6 !text-brand-white !shadow-xl md:!p-8 lg:!col-span-6">
+        <div className="ocean-park-contact-info !flex !flex-col !justify-between !rounded-3xl !bg-brand-navy !p-6 !text-brand-white !shadow-xl md:!p-8 lg:!col-span-6 lg:!p-10">
           <div>
             {eyebrowText ? (
-              <p className="ocean-park-contact-eyebrow !mb-2 !inline-block !rounded-full !border !border-brand-gold/40 !bg-brand-gold/15 !px-3.5 !py-1 !text-xs !font-bold !uppercase !tracking-widest !text-brand-gold">
+              <p className="ocean-park-contact-eyebrow !mb-3 !inline-block !rounded-full !border !border-brand-gold/45 !bg-brand-gold/15 !px-4 !py-1.5 !text-sm !font-bold !uppercase !tracking-widest !text-brand-gold">
                 {eyebrowText}
               </p>
             ) : null}
 
             {titleText ? (
-              <h2 className="ocean-park-contact-title !mt-1 !mb-0 !text-2xl !font-bold !leading-snug !text-brand-white md:!text-3xl">
+              <h2 className="ocean-park-contact-title !mt-1 !mb-0 !text-2xl !font-bold !leading-tight !text-brand-white md:!text-3xl">
                 {titleText}
               </h2>
             ) : null}
 
             {descText ? (
-              <p className="ocean-park-contact-desc !mt-3 !mb-0 !text-xs !leading-relaxed !text-brand-white-hover/85 md:!text-sm">
+              <p className="ocean-park-contact-desc !mt-3.5 !mb-0 !text-base !leading-relaxed !text-brand-white-hover/90">
                 {descText}
               </p>
             ) : null}
 
             {/* Direct Hotline & Zalo Cards */}
-            <div className="!mt-5 !grid !grid-cols-1 !gap-3 sm:!grid-cols-2">
+            <div className="!mt-6 !grid !grid-cols-1 !gap-4 sm:!grid-cols-2">
               {hotlineText && hotlineDigits ? (
                 <a
                   href={`tel:${hotlineDigits}`}
-                  className="!flex !items-center !gap-3 !rounded-xl !border !border-brand-gold/40 !bg-brand-white/10 !p-3.5 !text-brand-white !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white"
+                  className="!flex !items-center !gap-3.5 !rounded-2xl !border !border-brand-gold/45 !bg-brand-white/10 !p-4 !text-brand-white !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white"
                 >
-                  <span className="!flex !h-10 !w-10 !shrink-0 !items-center !justify-center !rounded-full !bg-brand-gold !text-brand-white">
-                    <Phone className="!h-4 !w-4" aria-hidden="true" />
+                  <span className="!flex !h-11 !w-11 !shrink-0 !items-center !justify-center !rounded-full !bg-brand-gold !text-brand-white">
+                    <Phone className="!h-5 !w-5" aria-hidden="true" />
                   </span>
                   <div>
-                    <span className="!block !text-[11px] !uppercase !tracking-wider !text-brand-white-hover/75">
+                    <span className="!block !text-xs !font-semibold !uppercase !tracking-wider !text-brand-white-hover/85">
                       Hotline KTS Trưởng
                     </span>
-                    <strong className="!text-base !font-extrabold !text-brand-gold">
+                    <strong className="!text-lg !font-extrabold !text-brand-gold md:!text-xl">
                       {hotlineText}
                     </strong>
                   </div>
@@ -288,16 +288,16 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                   href={`https://zalo.me/${zaloDigits}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="!flex !items-center !gap-3 !rounded-xl !border !border-brand-white/20 !bg-brand-white/10 !p-3.5 !text-brand-white !no-underline !transition-colors hover:!border-brand-gold"
+                  className="!flex !items-center !gap-3.5 !rounded-2xl !border !border-brand-white/25 !bg-brand-white/10 !p-4 !text-brand-white !no-underline !transition-colors hover:!border-brand-gold"
                 >
-                  <span className="!flex !h-10 !w-10 !shrink-0 !items-center !justify-center !rounded-full !bg-brand-white/15 !text-brand-gold">
-                    <MessageCircle className="!h-4 !w-4" aria-hidden="true" />
+                  <span className="!flex !h-11 !w-11 !shrink-0 !items-center !justify-center !rounded-full !bg-brand-white/15 !text-brand-gold">
+                    <MessageCircle className="!h-5 !w-5" aria-hidden="true" />
                   </span>
                   <div>
-                    <span className="!block !text-[11px] !uppercase !tracking-wider !text-brand-white-hover/75">
+                    <span className="!block !text-xs !font-semibold !uppercase !tracking-wider !text-brand-white-hover/85">
                       Zalo Nhận Bản Vẽ 3D
                     </span>
-                    <strong className="!text-base !font-bold !text-brand-white">
+                    <strong className="!text-lg !font-bold !text-brand-white md:!text-xl">
                       {zaloText}
                     </strong>
                   </div>
@@ -307,20 +307,20 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
 
             {/* Email & Website */}
             {emailText || websiteText ? (
-              <div className="!mt-3 !flex !flex-wrap !items-center !gap-4 !text-xs !text-brand-white-hover/80">
+              <div className="!mt-4 !flex !flex-wrap !items-center !gap-5 !text-sm !text-brand-white-hover/90 md:!text-base">
                 {emailText ? (
-                  <span className="!inline-flex !items-center !gap-1.5">
+                  <span className="!inline-flex !items-center !gap-2">
                     <Mail
-                      className="!h-3.5 !w-3.5 !text-brand-gold"
+                      className="!h-4 !w-4 !text-brand-gold"
                       aria-hidden="true"
                     />
                     <span>{emailText}</span>
                   </span>
                 ) : null}
                 {websiteText ? (
-                  <span className="!inline-flex !items-center !gap-1.5">
+                  <span className="!inline-flex !items-center !gap-2">
                     <Globe
-                      className="!h-3.5 !w-3.5 !text-brand-gold"
+                      className="!h-4 !w-4 !text-brand-gold"
                       aria-hidden="true"
                     />
                     <span>{websiteText}</span>
@@ -331,20 +331,20 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
 
             {/* 3 Strategic Locations */}
             {validLocations.length > 0 ? (
-              <div className="ocean-park-contact-locations !mt-6 !space-y-3 !border-t !border-brand-white/15 !pt-5">
-                <h3 className="!mb-0 !text-xs !font-bold !uppercase !tracking-wider !text-brand-gold md:!text-sm">
-                  Hệ Thống Nhà Mẫu • Văn Phòng • Nhà Máy IC HOUSE Kế Cận Ocean Park
+              <div className="ocean-park-contact-locations !mt-7 !space-y-3.5 !border-t !border-brand-white/20 !pt-6">
+                <h3 className="!mb-0 !text-sm !font-bold !uppercase !tracking-wider !text-brand-gold md:!text-base">
+                  Hệ Thống Nhà Mẫu • Văn Phòng • Nhà Xưởng IC HOUSE Kế Cận Ocean Park
                 </h3>
                 {validLocations.map((loc, idx) => (
                   <div
                     key={`${loc.label}-${idx}`}
-                    className="!flex !items-start !gap-2.5 !rounded-xl !bg-brand-white/5 !p-3"
+                    className="!flex !items-start !gap-3 !rounded-2xl !border !border-brand-white/10 !bg-brand-white/10 !p-4"
                   >
                     <MapPin
-                      className="!mt-0.5 !h-4 !w-4 !shrink-0 !text-brand-gold"
+                      className="!mt-1 !h-5 !w-5 !shrink-0 !text-brand-gold"
                       aria-hidden="true"
                     />
-                    <div className="!text-xs !leading-relaxed md:!text-sm">
+                    <div className="!text-base !leading-relaxed">
                       <strong className="!block !font-bold !text-brand-gold">
                         {loc.label}
                       </strong>
@@ -360,22 +360,22 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
 
           {/* Collapsible Reference Links for SEO & Quick Navigation */}
           {validReferenceLinks.length > 0 ? (
-            <details className="ocean-park-reference-links group !mt-6 !rounded-xl !border !border-brand-white/15 !bg-brand-white/5 !p-3.5">
-              <summary className="!flex !cursor-pointer !list-none !items-center !justify-between !text-xs !font-bold !uppercase !tracking-wider !text-brand-gold">
+            <details className="ocean-park-reference-links group !mt-6 !rounded-2xl !border !border-brand-white/20 !bg-brand-white/5 !p-4">
+              <summary className="!flex !cursor-pointer !list-none !items-center !justify-between !text-sm !font-bold !uppercase !tracking-wider !text-brand-gold md:!text-base">
                 <span>
                   Danh mục thiết kế theo Phân khu & Tòa ({validReferenceLinks.length})
                 </span>
                 <ChevronDown
-                  className="!h-4 !w-4 !transition-transform group-open:!rotate-180"
+                  className="!h-5 !w-5 !transition-transform group-open:!rotate-180"
                   aria-hidden="true"
                 />
               </summary>
-              <div className="!mt-3 !flex !flex-wrap !gap-1.5">
+              <div className="!mt-3.5 !flex !flex-wrap !gap-2">
                 {validReferenceLinks.map((refLink, idx) => (
                   <a
                     key={`${refLink.label}-${idx}`}
                     href={refLink.url}
-                    className="!rounded-full !border !border-brand-white/20 !bg-brand-white/10 !px-3 !py-1 !text-xs !text-brand-white-hover !no-underline !transition-colors hover:!border-brand-gold hover:!text-brand-gold"
+                    className="!rounded-full !border !border-brand-white/25 !bg-brand-white/10 !px-3.5 !py-1.5 !text-sm !text-brand-white-hover !no-underline !transition-colors hover:!border-brand-gold hover:!text-brand-gold"
                   >
                     {refLink.label}
                   </a>
@@ -386,14 +386,14 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
         </div>
 
         {/* Right Column: CF7 Slot or Built-in Interactive Consultation Form */}
-        <div className="ocean-park-contact-form-card !flex !flex-col !justify-center !rounded-2xl !border !border-brand-navy/15 !bg-brand-white !p-6 !shadow-xl md:!p-8 lg:!col-span-6">
+        <div className="ocean-park-contact-form-card !flex !flex-col !justify-center !rounded-3xl !border !border-brand-navy/15 !bg-brand-white !p-6 !shadow-xl md:!p-8 lg:!col-span-6 lg:!p-10">
           {formTitleText ? (
-            <h3 className="ocean-park-form-title !mb-0 !text-xl !font-bold !text-brand-navy md:!text-2xl">
+            <h3 className="ocean-park-form-title !mb-0 !text-2xl !font-bold !leading-snug !text-brand-navy md:!text-3xl">
               {formTitleText}
             </h3>
           ) : null}
           {formSubtitleText ? (
-            <p className="ocean-park-form-subtitle !mt-1.5 !mb-0 !text-xs !leading-relaxed !text-brand-navy/75 md:!text-sm">
+            <p className="ocean-park-form-subtitle !mt-2 !mb-0 !text-base !leading-relaxed !text-brand-navy/80">
               {formSubtitleText}
             </p>
           ) : null}
@@ -401,11 +401,11 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
           {hasCf7Source ? (
             <div
               ref={cf7SlotRef}
-              className="ocean-park-cf7-slot !mt-5 !text-brand-navy"
+              className="ocean-park-cf7-slot !mt-6 !text-brand-navy"
             />
           ) : (
             <form
-              className="ocean-park-builtin-form !mt-5 !space-y-4"
+              className="ocean-park-builtin-form !mt-6 !space-y-5"
               onSubmit={handleSubmit}
               noValidate
             >
@@ -413,7 +413,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                 <div>
                   <label
                     htmlFor={`${inputIdPrefix}-fullname`}
-                    className="!mb-1.5 !block !text-xs !font-bold !uppercase !tracking-wide !text-brand-navy"
+                    className="!mb-2 !block !text-sm !font-bold !uppercase !tracking-wide !text-brand-navy"
                   >
                     Họ và tên quý khách <span className="!text-brand-gold">*</span>
                   </label>
@@ -428,14 +428,14 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                       if (errorMessage) setErrorMessage("");
                     }}
                     placeholder="VD: Anh Minh — Tòa LD1"
-                    className="ocean-park-input-name !w-full !rounded-xl !border !border-brand-navy/20 !bg-brand-white !px-3.5 !py-2.5 !text-sm !text-brand-navy !outline-none focus:!border-brand-gold"
+                    className="ocean-park-input-name !w-full !rounded-xl !border !border-brand-navy/25 !bg-brand-white !px-4 !py-3 !text-base !text-brand-navy !outline-none focus:!border-brand-gold"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor={`${inputIdPrefix}-phone`}
-                    className="!mb-1.5 !block !text-xs !font-bold !uppercase !tracking-wide !text-brand-navy"
+                    className="!mb-2 !block !text-sm !font-bold !uppercase !tracking-wide !text-brand-navy"
                   >
                     Số điện thoại / Zalo <span className="!text-brand-gold">*</span>
                   </label>
@@ -450,7 +450,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                       if (errorMessage) setErrorMessage("");
                     }}
                     placeholder="VD: 0988 xxx xxx"
-                    className="ocean-park-input-phone !w-full !rounded-xl !border !border-brand-navy/20 !bg-brand-white !px-3.5 !py-2.5 !text-sm !text-brand-navy !outline-none focus:!border-brand-gold"
+                    className="ocean-park-input-phone !w-full !rounded-xl !border !border-brand-navy/25 !bg-brand-white !px-4 !py-3 !text-base !text-brand-navy !outline-none focus:!border-brand-gold"
                   />
                 </div>
               </div>
@@ -459,10 +459,10 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                 <div>
                   <label
                     htmlFor={`${inputIdPrefix}-zone`}
-                    className="!mb-1.5 !flex !items-center !gap-1.5 !text-xs !font-bold !uppercase !tracking-wide !text-brand-navy"
+                    className="!mb-2 !flex !items-center !gap-1.5 !text-sm !font-bold !uppercase !tracking-wide !text-brand-navy"
                   >
                     <Building2
-                      className="!h-3.5 !w-3.5 !text-brand-gold"
+                      className="!h-4 !w-4 !text-brand-gold"
                       aria-hidden="true"
                     />
                     <span>Phân khu / Tòa căn hộ</span>
@@ -472,7 +472,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                     name="zone"
                     value={selectedZone}
                     onChange={(e) => setSelectedZone(e.target.value)}
-                    className="ocean-park-select-zone !w-full !rounded-xl !border !border-brand-navy/20 !bg-brand-white !px-3.5 !py-2.5 !text-sm !text-brand-navy !outline-none focus:!border-brand-gold"
+                    className="ocean-park-select-zone !w-full !rounded-xl !border !border-brand-navy/25 !bg-brand-white !px-4 !py-3 !text-base !text-brand-navy !outline-none focus:!border-brand-gold"
                   >
                     {validZoneOptions.map((zone, idx) => (
                       <option key={`${zone}-${idx}`} value={zone}>
@@ -485,7 +485,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                 <div>
                   <label
                     htmlFor={`${inputIdPrefix}-apartment`}
-                    className="!mb-1.5 !block !text-xs !font-bold !uppercase !tracking-wide !text-brand-navy"
+                    className="!mb-2 !block !text-sm !font-bold !uppercase !tracking-wide !text-brand-navy"
                   >
                     Loại căn / Diện tích / Mã căn
                   </label>
@@ -496,7 +496,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                     value={apartmentInfo}
                     onChange={(e) => setApartmentInfo(e.target.value)}
                     placeholder="VD: Căn 2PN+1 - 74.5m² - BE1-12A"
-                    className="ocean-park-input-apartment !w-full !rounded-xl !border !border-brand-navy/20 !bg-brand-white !px-3.5 !py-2.5 !text-sm !text-brand-navy !outline-none focus:!border-brand-gold"
+                    className="ocean-park-input-apartment !w-full !rounded-xl !border !border-brand-navy/25 !bg-brand-white !px-4 !py-3 !text-base !text-brand-navy !outline-none focus:!border-brand-gold"
                   />
                 </div>
               </div>
@@ -504,7 +504,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
               <div>
                 <label
                   htmlFor={`${inputIdPrefix}-notes`}
-                  className="!mb-1.5 !block !text-xs !font-bold !uppercase !tracking-wide !text-brand-navy"
+                  className="!mb-2 !block !text-sm !font-bold !uppercase !tracking-wide !text-brand-navy"
                 >
                   Nhu cầu hoàn thiện & Phong cách yêu thích
                 </label>
@@ -515,14 +515,14 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="VD: Cần nhận layout 2D, báo giá gói Luxury gỗ An Cường & đặt lịch xem nhà mẫu Sao Biển 23..."
-                  className="ocean-park-textarea-notes !w-full !rounded-xl !border !border-brand-navy/20 !bg-brand-white !px-3.5 !py-2.5 !text-sm !text-brand-navy !outline-none focus:!border-brand-gold"
+                  className="ocean-park-textarea-notes !w-full !rounded-xl !border !border-brand-navy/25 !bg-brand-white !px-4 !py-3 !text-base !text-brand-navy !outline-none focus:!border-brand-gold"
                 />
               </div>
 
               {errorMessage ? (
                 <p
                   role="alert"
-                  className="ocean-park-form-error !mb-0 !rounded-xl !border !border-red-500/30 !bg-red-50 !px-3.5 !py-2.5 !text-xs !font-medium !text-red-700"
+                  className="ocean-park-form-error !mb-0 !rounded-xl !border !border-red-500/30 !bg-red-50 !px-4 !py-3 !text-sm !font-medium !text-red-700 md:!text-base"
                 >
                   {errorMessage}
                 </p>
@@ -531,10 +531,10 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
               {submitted ? (
                 <div
                   role="status"
-                  className="ocean-park-contact-form-success !flex !items-start !gap-2.5 !rounded-xl !border !border-brand-gold !bg-brand-gold/15 !p-4 !text-xs !font-medium !text-brand-navy md:!text-sm"
+                  className="ocean-park-contact-form-success !flex !items-start !gap-3 !rounded-xl !border !border-brand-gold !bg-brand-gold/15 !p-4 !text-sm !font-medium !text-brand-navy md:!text-base"
                 >
                   <CheckCircle2
-                    className="!mt-0.5 !h-4 !w-4 !shrink-0 !text-brand-gold"
+                    className="!mt-0.5 !h-5 !w-5 !shrink-0 !text-brand-gold"
                     aria-hidden="true"
                   />
                   <span>{resolvedSuccessMessage}</span>
@@ -543,9 +543,9 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
 
               <button
                 type="submit"
-                className="ocean-park-submit-btn !inline-flex !w-full !cursor-pointer !items-center !justify-center !gap-2 !rounded-full !bg-brand-navy !px-6 !py-3.5 !text-sm !font-bold !uppercase !tracking-wide !text-brand-gold !shadow-md !transition-colors hover:!bg-brand-gold hover:!text-brand-white"
+                className="ocean-park-submit-btn !inline-flex !w-full !cursor-pointer !items-center !justify-center !gap-2.5 !rounded-full !bg-brand-navy !px-7 !py-4 !text-base !font-bold !uppercase !tracking-wide !text-brand-gold !shadow-lg !transition-colors hover:!bg-brand-gold hover:!text-brand-white md:!text-lg"
               >
-                <Send className="!h-4 !w-4" aria-hidden="true" />
+                <Send className="!h-5 !w-5" aria-hidden="true" />
                 <span>
                   {(submitLabel ?? "").trim() ||
                     "Đăng Ký Nhận Bản Vẽ 3D & Báo Giá Chi Tiết"}

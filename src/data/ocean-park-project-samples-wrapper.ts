@@ -1,11 +1,12 @@
 import type { OceanParkProjectSamplesModel } from "@/components/ocean-park-project-samples/OceanParkProjectSamples";
 
 export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
-  eyebrow: "THƯ VIỆN MẪU THIẾT KẾ & DỰ ÁN THỰC TẾ",
+  eyebrow:
+    "THƯ VIỆN MẪU THIẾT KẾ & CÔNG TRÌNH THI CÔNG THỰC TẾ TẠI VINHOMES OCEAN PARK",
   title:
-    "Mẫu Thiết Kế Nội Thất Cao Cấp Theo Từng Phân Khu & Tòa Căn Hộ Ocean Park 1 • 2 • 3",
+    "Mẫu Thiết Kế & Thi Công Nội Thất Chung Cư Vinhomes Ocean Park 1 • 2 • 3 Theo Từng Phân Khu",
   description:
-    "Khám phá bộ sưu tập mặt bằng công năng và phối cảnh 3D Bespoke được KTS IC HOUSE nghiên cứu riêng cho từng mã căn hộ tại Chung cư Ocean Park 1 (The London, The Beverly, The Paris), Ocean Park 2 (LUMIÈRE SpringBay, Masteri Trinity Square) và Dự án căn hộ Ocean Park 3.",
+    "Khám phá bộ sưu tập mặt bằng bố trí nội thất 2D, phối cảnh 3D Bespoke và công trình thực tế do đội ngũ KTS IC HOUSE (Văn phòng Số 01 Voi Phục – Nhà mẫu Sao Biển 23 – Nhà xưởng 2.000m² Như Quỳnh) thiết kế thi công trọn gói cho từng mã căn hộ tại Chung cư Ocean Park 1 (The London, The Beverly, The Paris), Ocean Park 2 (LUMIÈRE SpringBay, Masteri Trinity Square) và Dự án căn hộ Ocean Park 3.",
   zoneTabs: [
     { id: "all", label: "Tất cả phân khu" },
     { id: "the-london", label: "The London (LD1 • LD2 • LD3)" },
@@ -27,7 +28,7 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
   featuredProjects: [
     {
       title:
-        "Thiết kế nội thất Căn hộ The London Ocean Park 1 — Tòa LD1 • Tòa LD2 • Tòa LD3",
+        "Thiết kế & Thi công nội thất Căn hộ The London Ocean Park 1 — Tòa LD1 • Tòa LD2 • Tòa LD3",
       zoneId: "the-london",
       zoneLabel: "The London Ocean Park 1",
       towerLabel: "Tòa LD1 • Tòa LD2 • Tòa LD3",
@@ -38,10 +39,10 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
       style: "Modern British Luxury",
       budget: "185 – 230 triệu",
       summary:
-        "Giải pháp bố trí nội thất may đo cho Căn hộ The London tại Tòa LD1, Tòa LD2, Tòa LD3 sử dụng cốt gỗ MDF lõi xanh An Cường kết hợp cánh kính khung nhôm Anode và đá thạch anh Vicostone.",
+        "Phương án thiết kế thi công nội thất trọn gói Căn hộ The London tại Tòa LD1, Tòa LD2, Tòa LD3 sản xuất trực tiếp tại nhà xưởng IC HOUSE Như Quỳnh: hệ tủ bếp kịch trần MDF lõi xanh An Cường, tủ áo cánh kính khung nhôm Anode và bàn đảo đá thạch anh Vicostone.",
       image: {
-        url: "https://placehold.co/800x500/152243/f5a623/png?text=The+London+LD1+LD2+LD3",
-        alt: "Thiết kế nội thất Căn hộ The London Ocean Park 1 Tòa LD1 Tòa LD2 Tòa LD3",
+        url: "https://noithat.ichouse.vn/wp-content/uploads/2026/05/Du-an-noi-that-can-ho-toa-H2-masteri-OCP-2.jpg",
+        alt: "Thiết kế thi công nội thất Căn hộ The London Ocean Park 1 Tòa LD1 Tòa LD2 Tòa LD3",
         display_dimensions: { width: 800, height: 500 },
       },
       detailLink: {
@@ -64,10 +65,10 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
       style: "American Bespoke Luxury",
       budget: "210 – 260 triệu",
       summary:
-        "Thiết kế thi công trọn gói Căn hộ The Beverly tại Tòa BE1 và Tòa BE2 tận dụng tối đa hệ tủ bếp bàn giao sẵn của chủ đầu tư, nâng cấp không gian +1 thành phòng làm việc & bar rượu sang trọng.",
+        "Thiết kế thi công nội thất Căn hộ The Beverly tại Tòa BE1 và Tòa BE2 giữ nguyên hệ bếp bàn giao cao cấp của chủ đầu tư (tiết kiệm 45 triệu), nâng cấp phòng khách liền bếp, tủ rượu cánh kính LED và không gian +1 làm việc sang trọng như tại Nhà mẫu Sao Biển 23.",
       image: {
-        url: "https://placehold.co/800x500/152243/f5a623/png?text=The+Beverly+BE1+BE2",
-        alt: "Nội thất Căn hộ The Beverly Ocean Park 1 Tòa BE1 Tòa BE2",
+        url: "https://noithat.ichouse.vn/wp-content/uploads/2026/05/DSC08300-3-HDR-scaled.jpg",
+        alt: "Thi công nội thất Căn hộ The Beverly Ocean Park 1 Tòa BE1 Tòa BE2",
         display_dimensions: { width: 800, height: 500 },
       },
       detailLink: {
@@ -79,7 +80,7 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
     },
     {
       title:
-        "Nội thất Căn hộ góc 3PN The Beverly Ocean Park 1 — Tòa BE3 • Tòa BE4",
+        "Thi công nội thất Căn hộ góc 3PN The Beverly Ocean Park 1 — Tòa BE3 • Tòa BE4",
       zoneId: "the-beverly",
       zoneLabel: "The Beverly Ocean Park 1",
       towerLabel: "Tòa BE3 • Tòa BE4",
@@ -90,10 +91,10 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
       style: "Neoclassic Contemporary",
       budget: "260 – 340 triệu",
       summary:
-        "Phương án hoàn thiện cao cấp cho căn góc 3PN tại Tòa BE3 và Tòa BE4 phân khu The Beverly với bề mặt sơn Inchem 5 lớp, vách ốp Veneer óc chó tự nhiên và hệ phụ kiện giảm chấn Blum đồng bộ.",
+        "Hoàn thiện nội thất cao cấp căn góc 3PN tại Tòa BE3 và Tòa BE4 phân khu The Beverly Ocean Park 1 với bề mặt sơn Inchem 5 lớp gia công tại xưởng 2.000m² Như Quỳnh, vách ốp Veneer óc chó tự nhiên, đá Vicostone và phụ kiện giảm chấn Blum đồng bộ.",
       image: {
-        url: "https://placehold.co/800x500/152243/f5a623/png?text=The+Beverly+BE3+BE4",
-        alt: "Nội thất Căn hộ The Beverly Ocean Park 1 Tòa BE3 Tòa BE4",
+        url: "https://noithat.ichouse.vn/wp-content/uploads/2026/05/du-an-noi-that-nha-pho-100m2-nha-a-chi-gia-lam-ha-noi-4.jpg",
+        alt: "Nội thất Căn hộ góc 3PN The Beverly Ocean Park 1 Tòa BE3 Tòa BE4",
         display_dimensions: { width: 800, height: 500 },
       },
       detailLink: {
@@ -105,7 +106,7 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
     },
     {
       title:
-        "Thiết kế nội thất The Paris Ocean Park 1 — Chung cư Ocean Park 1",
+        "Thiết kế & Thi công nội thất The Paris Ocean Park 1 — Chung cư Ocean Park 1",
       zoneId: "the-paris",
       zoneLabel: "The Paris Ocean Park 1",
       towerLabel: "PR1 • PR2 • PR3 • PR5",
@@ -116,10 +117,10 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
       style: "Parisian Chic & Japandi",
       budget: "135 – 175 triệu",
       summary:
-        "Tinh thần Pháp thanh lịch kết hợp đường nét tối giản hiện đại cho căn hộ 1PN+1 tại phân khu The Paris Ocean Park 1, tối ưu lưu trữ thông minh và ánh sáng tự nhiên hướng hồ San Hô.",
+        "Tinh thần Pháp thanh lịch kết hợp đường nét Japandi tối giản cho căn hộ 1PN+1 tại phân khu The Paris Ocean Park 1 (Chung cư Ocean Park 1), tối ưu hệ tủ âm tường kịch trần, bàn ăn thông minh và ánh sáng tự nhiên hướng hồ San Hô.",
       image: {
-        url: "https://placehold.co/800x500/152243/f5a623/png?text=The+Paris+Ocean+Park+1",
-        alt: "Thiết kế nội thất The Paris Ocean Park 1",
+        url: "https://noithat.ichouse.vn/wp-content/uploads/2026/05/du-an-thiet-ke-noi-that-nha-pho-80m2-tai-lac-dao-hung-yen-15.jpg",
+        alt: "Thiết kế nội thất The Paris Ocean Park 1 Chung cư Ocean Park 1",
         display_dimensions: { width: 800, height: 500 },
       },
       detailLink: {
@@ -131,7 +132,7 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
     },
     {
       title:
-        "Thiết kế nội thất Căn hộ LUMIÈRE SpringBay Ocean Park 2 — Chuẩn Masterise",
+        "Thiết kế thi công nội thất Căn hộ LUMIÈRE SpringBay Ocean Park 2 — Chuẩn Masterise",
       zoneId: "lumiere-springbay",
       zoneLabel: "LUMIÈRE SpringBay Ocean Park 2",
       towerLabel: "Vida • Feliz • Fira • Amor",
@@ -142,9 +143,9 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
       style: "Organic Modern Luxury",
       budget: "190 – 250 triệu",
       summary:
-        "May đo nội thất rời & hệ tủ âm tường khớp nối hoàn hảo với tiêu chuẩn bàn giao kính Low-E kịch trần của Căn hộ LUMIÈRE SpringBay tại đại đô thị Ocean Park 2.",
+        "May đo nội thất rời & hệ tủ âm tường chuẩn xác từng milimet từ nhà máy IC HOUSE Như Quỳnh (chỉ 10 phút vận chuyển sang Ocean Park 2), khớp nối hoàn hảo với hệ kính Low-E kịch trần cong của Căn hộ LUMIÈRE SpringBay.",
       image: {
-        url: "https://placehold.co/800x500/152243/f5a623/png?text=LUMIERE+SpringBay+OCP2",
+        url: "https://noithat.ichouse.vn/wp-content/uploads/2026/05/thiet-ke-noi-that-chung-cu-tone-den-trang-hm18_1.jpg",
         alt: "Thiết kế nội thất Căn hộ LUMIÈRE SpringBay Ocean Park 2",
         display_dimensions: { width: 800, height: 500 },
       },
@@ -157,7 +158,7 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
     },
     {
       title:
-        "Thiết kế & Thi công Dự án Masteri Trinity Square Ocean Park 2",
+        "Thiết kế & Thi công nội thất Dự án Masteri Trinity Square Ocean Park 2",
       zoneId: "masteri-trinity-square",
       zoneLabel: "Masteri Trinity Square Ocean Park 2",
       towerLabel: "Southern • Central • Northern",
@@ -168,9 +169,9 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
       style: "Bespoke Penthouse Luxury",
       budget: "320 – 450 triệu",
       summary:
-        "Không gian thông tầng đẳng cấp tại Dự án Masteri Trinity Square (Masteri Trinity Square Ocean Park 2) với đảo bếp đá thạch anh nguyên khối, sofa da bò Ý và hệ đèn chiếu sáng kiến trúc.",
+        "Không gian thông tầng & ghép căn đẳng cấp tại Dự án Masteri Trinity Square (Masteri Trinity Square Ocean Park 2) với đảo bếp đá thạch anh Vicostone nguyên khối, vách tivi ốp đá Porcelain khổ lớn, sofa da bò Ý và hệ đèn ray nam châm CRI>90.",
       image: {
-        url: "https://placehold.co/800x500/152243/f5a623/png?text=Masteri+Trinity+Square+OCP2",
+        url: "https://noithat.ichouse.vn/wp-content/uploads/2026/06/Phong-khach-su-dung-gach-Porcelain-kho-lon.png",
         alt: "Thiết kế nội thất Dự án Masteri Trinity Square Ocean Park 2",
         display_dimensions: { width: 800, height: 500 },
       },
@@ -183,7 +184,7 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
     },
     {
       title:
-        "Mẫu nội thất Căn hộ cao tầng Ocean Park 3 — Dự án căn hộ Ocean Park 3",
+        "Mẫu thiết kế thi công nội thất Căn hộ cao tầng Ocean Park 3 — Dự án căn hộ Ocean Park 3",
       zoneId: "ocean-park-3",
       zoneLabel: "Ocean Park 3",
       towerLabel: "Phân khu Cao tầng OCP3",
@@ -194,10 +195,10 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
       style: "Modern Resort & Wabi Sabi",
       budget: "120 – 150 triệu",
       summary:
-        "Giải pháp nội thất nghỉ dưỡng thông minh cho Căn hộ cao tầng Ocean Park 3 thuộc Dự án căn hộ Ocean Park 3, tối ưu công năng ở thực lẫn khai thác Homestay cao cấp.",
+        "Giải pháp thiết kế nội thất nghỉ dưỡng thông minh cho Căn hộ cao tầng Ocean Park 3 thuộc Dự án căn hộ Ocean Park 3, sản xuất trực tiếp tại xưởng IC HOUSE giáp ranh dự án, tối ưu công năng ở thực lẫn cho thuê Homestay cao cấp.",
       image: {
-        url: "https://placehold.co/800x500/152243/f5a623/png?text=Can+Ho+Cao+Tang+Ocean+Park+3",
-        alt: "Mẫu nội thất Căn hộ cao tầng Ocean Park 3",
+        url: "https://noithat.ichouse.vn/wp-content/uploads/2026/05/du-an-noi-that-nha-pho-45m2-Gia-Lam-10.jpg",
+        alt: "Mẫu nội thất Căn hộ cao tầng Ocean Park 3 Dự án căn hộ Ocean Park 3",
         display_dimensions: { width: 800, height: 500 },
       },
       detailLink: {
@@ -209,10 +210,11 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
     },
   ],
   ctaBanner: {
-    title: "Bạn cần mặt bằng bố trí 2D & phối cảnh 3D đúng mã căn hộ của mình?",
+    title:
+      "Bạn muốn xem mặt bằng 2D, phối cảnh 3D đúng mã căn & tham quan trực tiếp Nhà mẫu tại Sao Biển 23?",
     description:
-      "IC HOUSE đã lưu trữ sẵn mặt bằng kỹ thuật toàn bộ các tòa LD1, LD2, LD3 (The London), BE1–BE4 (The Beverly), The Paris, LUMIÈRE SpringBay, Masteri Trinity Square và Ocean Park 3. Đăng ký để nhận phương án miễn phí ngay hôm nay.",
-    buttonLabel: "Nhận bản vẽ theo mã căn",
+      "Văn phòng KTS IC HOUSE tại Số 01 Voi Phục Gia Lâm đã lưu trữ sẵn mặt bằng kỹ thuật toàn bộ các tòa LD1, LD2, LD3 (The London), BE1–BE4 (The Beverly), The Paris, LUMIÈRE SpringBay, Masteri Trinity Square và Ocean Park 3. Đăng ký nhận bản vẽ miễn phí và đặt lịch xem Nhà mẫu ngay trong KĐT!",
+    buttonLabel: "Nhận bản vẽ theo mã căn & Xem nhà mẫu",
     buttonLink: {
       url: "#dang-ky-tu-van",
       is_external: false,
