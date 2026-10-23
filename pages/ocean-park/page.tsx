@@ -27,11 +27,13 @@ export const pageMeta = {
 
 const oceanParkHero: HeroSectionModel = {
   backgroundImage: heroSection.backgroundImage,
-  subtitle: heroSection.subtitle,
-  title: heroSection.title,
-  htmlText: heroSection.htmlText,
-  buttonLabel: heroSection.buttonLabel,
-  buttonLink: heroSection.buttonLink,
+  subtitle: "Làm việc cùng nội thất IC HOUSE",
+  title:
+    "Thi công nội thất căn hộ tại Vinhomes Ocean Park - Gia Lâm - Hà Nội.",
+  htmlText:
+    "<ul><li><strong>30+ Kiến trúc sư</strong> sáng tạo, làm chủ nhiều phong cách thiết kế từ hiện đại, tối giản đến tân cổ điển.</li><li><strong>Kinh nghiệm 3 – 15 năm</strong> thực chiến, đảm bảo giải pháp thẩm mỹ và tối ưu công năng.</li><li><strong>Hơn 1500+ dự án căn hộ</strong> từ trung đến cao cấp – khẳng định uy tín và khả năng đáp ứng mọi nhu cầu.</li></ul>",
+  buttonLabel: "Tư vấn miễn phí",
+  buttonLink: { url: "#dang-ky-tu-van", is_external: false, nofollow: false },
 };
 
 export default function OceanParkPage() {

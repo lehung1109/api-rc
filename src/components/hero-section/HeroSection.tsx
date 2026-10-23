@@ -62,37 +62,37 @@ const HeroSection = (model: HeroSectionModel) => {
             backgroundImage.className,
           )}
         />
-        <div className="hero-section-overlay absolute inset-0 bg-brand-navy/65" />
+        <div className="hero-section-overlay absolute inset-0 bg-brand-navy/60" />
 
         <div
           className={cn(
-            "hero-section-inner relative z-10 mx-auto flex min-h-[280px] max-w-7xl items-center px-5 py-12 md:min-h-[400px] md:px-8 md:py-16 lg:py-20",
+            "hero-section-inner relative z-10 mx-auto flex min-h-[240px] max-w-7xl items-center px-4 py-10 md:min-h-[360px] md:px-6 md:py-14 lg:py-16",
             contentCentered && "justify-center",
           )}
         >
           <div
             className={cn(
               "hero-section-content",
-              !contentFullWidth && "max-w-2xl lg:max-w-3xl",
+              !contentFullWidth && "max-w-xl",
               contentFullWidth && "hero-section-content--full-width w-full",
               contentCentered && "mx-auto text-center",
             )}
           >
             {subtitleText ? (
-              <p className="hero-section-subtitle text-base font-semibold tracking-wide text-brand-gold md:text-lg">
+              <p className="hero-section-subtitle text-base text-brand-white-hover">
                 {subtitleText}
               </p>
             ) : null}
 
             {titleText ? (
-              <TitleTag className="hero-section-title mt-2.5 text-2xl font-bold leading-tight text-brand-white md:text-4xl lg:text-5xl">
+              <TitleTag className="hero-section-title mt-2 text-2xl font-bold leading-tight text-brand-white md:text-4xl lg:text-5xl">
                 {titleText}
               </TitleTag>
             ) : null}
 
             {htmlTextContent ? (
               <div
-                className="hero-section-text mt-4 text-base leading-relaxed text-brand-white-hover md:text-lg [&_ul]:space-y-2 [&_ul]:pl-5 [&_li]:leading-relaxed [&_strong]:text-brand-gold"
+                className="hero-section-text mt-3 text-base leading-relaxed text-brand-white-hover"
                 dangerouslySetInnerHTML={{ __html: htmlTextContent }}
               />
             ) : null}
@@ -100,14 +100,14 @@ const HeroSection = (model: HeroSectionModel) => {
             {hasButton ? (
               <div
                 className={cn(
-                  "hero-section-button-wrapper mt-6 md:mt-8",
+                  "hero-section-button-wrapper mt-5 md:mt-7",
                   contentCentered && "flex justify-center",
                 )}
               >
                 <Link
                   {...buttonLink}
                   className={cn(
-                    "hero-section-button animate-hero-section-stretch motion-reduce:animate-none inline-flex items-center justify-center rounded-full px-7 py-3 text-base font-bold uppercase shadow-lg no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-white/70 md:px-8 md:py-3.5 md:text-lg",
+                    "hero-section-button animate-hero-section-stretch motion-reduce:animate-none inline-flex items-center justify-center rounded-full px-6 py-2 text-base font-semibold uppercase shadow no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-white/70 md:px-7 md:py-2.5",
                     HERO_SECTION_BUTTON_VARIANT_CLASSES[buttonVariant],
                     buttonLink.className,
                   )}
