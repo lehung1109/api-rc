@@ -90,7 +90,7 @@ const OceanParkFaq = (model: OceanParkFaqModel) => {
         className,
       )}
     >
-      <div className="ocean-park-faq-inner !mx-auto !w-full !max-w-5xl">
+      <div className="ocean-park-faq-inner !mx-auto !w-full !max-w-5xl !mb-5 lg:!mb-20">
         <div className="ocean-park-faq-header !mx-auto !max-w-4xl !text-center">
           {eyebrowText ? (
             <p className="ocean-park-faq-eyebrow !mb-3 !inline-flex !items-center !gap-2 !rounded-full !border !border-brand-gold/45 !bg-brand-gold/10 !px-4 !py-1.5 !text-sm !font-bold !uppercase !tracking-widest !text-brand-gold md:!text-base">

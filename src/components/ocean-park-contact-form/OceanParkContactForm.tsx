@@ -236,7 +236,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
       id={resolvedSectionId}
       data-ocean-park-form-key={normalizedKey || undefined}
       className={cn(
-        "ocean-park-contact-form !w-full !bg-brand-white-hover/50 !text-brand-navy",
+        "ocean-park-contact-form !w-full !bg-brand-white-hover/50 !text-brand-navy !mb-5 lg:!mb-20",
         className,
       )}
     >
