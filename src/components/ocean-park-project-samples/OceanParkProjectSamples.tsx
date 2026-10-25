@@ -127,7 +127,7 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
     <section
       id="du-an-mau-ocean-park"
       className={cn(
-        "ocean-park-project-samples !w-full !bg-brand-white-hover/40 !text-brand-navy !mb-5 lg:!mb-10",
+        "ocean-park-project-samples !w-full !bg-brand-white-hover/40 !text-brand-navy !mb-5 lg:!mb-20",
         className,
       )}
     >
