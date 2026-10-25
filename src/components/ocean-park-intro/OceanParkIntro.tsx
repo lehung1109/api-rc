@@ -87,7 +87,7 @@ const OceanParkIntro = (model: OceanParkIntroModel) => {
   return (
     <section
       className={cn(
-        "ocean-park-intro !w-full !bg-brand-white !text-brand-navy",
+        "ocean-park-intro !w-full !bg-brand-white !text-brand-navy !mb-5 lg:!mb-10",
         className,
       )}
     >
