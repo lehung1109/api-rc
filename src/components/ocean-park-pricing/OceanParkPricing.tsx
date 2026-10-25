@@ -152,7 +152,7 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
     <section
       id="bang-gia-noi-that-ocean-park"
       className={cn(
-        "ocean-park-pricing !w-full !bg-brand-white !px-4 !py-12 !text-brand-navy md:!px-6 md:!py-16 lg:!py-20",
+        "ocean-park-pricing !w-full !bg-brand-white !text-brand-navy",
         className,
       )}
     >

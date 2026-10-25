@@ -83,7 +83,7 @@ const OceanParkAdvantages = (model: OceanParkAdvantagesModel) => {
     <section
       id="the-manh-ic-house-ocean-park"
       className={cn(
-        "ocean-park-advantages !w-full !bg-brand-navy !px-4 !py-12 !text-brand-white md:!px-6 md:!py-16 lg:!py-20",
+        "ocean-park-advantages !w-full !bg-brand-navy !text-brand-white",
         className,
       )}
     >
