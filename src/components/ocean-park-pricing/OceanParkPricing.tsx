@@ -152,7 +152,7 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
     <section
       id="bang-gia-noi-that-ocean-park"
       className={cn(
-        "ocean-park-pricing !w-full !bg-brand-white !text-brand-navy",
+        "ocean-park-pricing !w-full !bg-brand-white !text-brand-navy !mb-5 lg:!mb-10",
         className,
       )}
     >
@@ -211,7 +211,7 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
 
               <div className="!flex !flex-col !justify-between !gap-5 !rounded-2xl !border !border-brand-gold/40 !bg-brand-white/10 !p-5 lg:!col-span-5 md:!p-6">
                 {featuredSavingNote ? (
-                  <p className="ocean-park-pricing-saving-note !mb-0 !text-base !leading-relaxed !text-brand-white-hover">
+                  <p className="ocean-park-pricing-saving-note !mb-0 !text-[13px] !leading-relaxed !text-brand-white-hover">
                     {featuredSavingNote}
                   </p>
                 ) : null}
