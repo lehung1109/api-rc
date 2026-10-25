@@ -217,11 +217,11 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
                 ) : null}
 
                 {hasPrimaryCta || hasSecondaryCta ? (
-                  <div className="!flex !flex-wrap !items-center !gap-3.5">
+                  <div className="!flex !flex-col !items-center !gap-3.5">
                     {hasPrimaryCta && primaryCta ? (
                       <Link
                         {...primaryCta.link}
-                        className="ocean-park-pricing-cta !inline-flex !flex-1 !items-center !justify-center !gap-2 !rounded-full !bg-brand-gold !px-6 !py-3.5 !font-bold !uppercase !text-brand-white !no-underline !transition-colors hover:!bg-brand-gold-hover !text-[13px]"
+                        className="ocean-park-pricing-cta !inline-flex !w-full !items-center !justify-center !gap-2 !rounded-full !bg-brand-gold !px-6 !py-3.5 !font-bold !uppercase !text-brand-white !no-underline !transition-colors hover:!bg-brand-gold-hover !text-[13px]"
                       >
                         <PhoneCall
                           className="!h-4 !w-4 !shrink-0"
@@ -234,7 +234,7 @@ const OceanParkPricing = (model: OceanParkPricingModel) => {
                     {hasSecondaryCta && secondaryCta ? (
                       <Link
                         {...secondaryCta.link}
-                        className="ocean-park-pricing-cta !inline-flex !flex-1 !items-center !justify-center !rounded-full !border-2 !border-brand-gold !px-6 !py-3.5 !font-bold !uppercase !text-brand-gold !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white !text-[13px]"
+                        className="ocean-park-pricing-cta !inline-flex !w-full !items-center !justify-center !rounded-full !border-2 !border-brand-gold !px-6 !py-3.5 !font-bold !uppercase !text-brand-gold !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white !text-[13px]"
                       >
                         {secondaryLabel}
                       </Link>
