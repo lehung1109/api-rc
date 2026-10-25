@@ -86,7 +86,7 @@ const OceanParkFaq = (model: OceanParkFaqModel) => {
     <section
       id={resolvedSectionId}
       className={cn(
-        "ocean-park-faq !w-full !bg-brand-white !text-brand-navy",
+        "ocean-park-faq !w-full !bg-brand-white !text-brand-navy !mb-5 lg:!mb-20",
         className,
       )}
     >

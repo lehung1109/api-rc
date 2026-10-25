@@ -240,7 +240,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
         className,
       )}
     >
-      <div className="ocean-park-contact-form-inner !mx-auto !grid !w-full !max-w-7xl !grid-cols-1 !gap-8 lg:!grid-cols-12 lg:!gap-10">
+      <div className="ocean-park-contact-form-inner !mx-auto !grid !w-full !max-w-7xl !grid-cols-1 !gap-8 lg:!grid-cols-12 lg:!gap-10 !mb-5 lg:!mb-20">
         {/* Left Column: Brand Contact Info, 3 Locations & Reference Links */}
         <div className="ocean-park-contact-info !flex !flex-col !justify-between !rounded-3xl !bg-brand-navy !p-6 !text-brand-white !shadow-xl md:!p-8 lg:!col-span-6 lg:!p-10">
           <div>
