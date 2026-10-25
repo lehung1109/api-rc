@@ -831,6 +831,77 @@ button.contact-popup-close {
 }
 
 
+/* ── Ocean Park Contact Form: inputs, selects, textarea, button ── */
+
+.ocean-park-builtin-form .ocean-park-input-name,
+.ocean-park-builtin-form .ocean-park-input-phone,
+.ocean-park-builtin-form .ocean-park-input-apartment,
+.ocean-park-builtin-form .ocean-park-select-zone,
+.ocean-park-builtin-form .ocean-park-textarea-notes {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--e-global-color-primary);
+  background-color: #ffffff;
+  border: 1px solid rgba(2, 43, 99, 0.25);
+  border-radius: 0.75rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+  appearance: auto;
+}
+
+.ocean-park-builtin-form .ocean-park-input-name:focus,
+.ocean-park-builtin-form .ocean-park-input-phone:focus,
+.ocean-park-builtin-form .ocean-park-input-apartment:focus,
+.ocean-park-builtin-form .ocean-park-select-zone:focus,
+.ocean-park-builtin-form .ocean-park-textarea-notes:focus {
+  border-color: var(--e-global-color-secondary);
+  outline: none;
+}
+
+.ocean-park-builtin-form .ocean-park-textarea-notes {
+  resize: vertical;
+  min-height: 5rem;
+}
+
+.ocean-park-builtin-form .ocean-park-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  width: 100%;
+  padding: 1rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--e-global-color-secondary);
+  background-color: var(--e-global-color-primary);
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(2, 43, 99, 0.25);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.ocean-park-builtin-form .ocean-park-submit-btn:hover,
+.ocean-park-builtin-form .ocean-park-submit-btn:focus-visible {
+  background-color: var(--e-global-color-secondary);
+  color: #ffffff;
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .ocean-park-builtin-form .ocean-park-submit-btn {
+    font-size: 1.125rem;
+  }
+}
+
 /* ── Vinhomes Ocean Park Landing Page: Prevent Porto mobile font-scale shrink ── */
 :root:has(
     .ocean-park-intro,

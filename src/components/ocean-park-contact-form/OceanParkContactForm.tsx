@@ -428,7 +428,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                       if (errorMessage) setErrorMessage("");
                     }}
                     placeholder="VD: Anh Minh — Tòa LD1"
-                    className="ocean-park-input-name !w-full !rounded-xl !border !border-brand-navy/25 !bg-brand-white !px-4 !py-3 !text-base !text-brand-navy !outline-none focus:!border-brand-gold"
+                    className="ocean-park-input-name"
                   />
                 </div>
 
@@ -450,7 +450,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                       if (errorMessage) setErrorMessage("");
                     }}
                     placeholder="VD: 0988 xxx xxx"
-                    className="ocean-park-input-phone !w-full !rounded-xl !border !border-brand-navy/25 !bg-brand-white !px-4 !py-3 !text-base !text-brand-navy !outline-none focus:!border-brand-gold"
+                    className="ocean-park-input-phone"
                   />
                 </div>
               </div>
@@ -472,7 +472,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                     name="zone"
                     value={selectedZone}
                     onChange={(e) => setSelectedZone(e.target.value)}
-                    className="ocean-park-select-zone !w-full !rounded-xl !border !border-brand-navy/25 !bg-brand-white !px-4 !py-3 !text-base !text-brand-navy !outline-none focus:!border-brand-gold"
+                    className="ocean-park-select-zone"
                   >
                     {validZoneOptions.map((zone, idx) => (
                       <option key={`${zone}-${idx}`} value={zone}>
@@ -496,7 +496,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                     value={apartmentInfo}
                     onChange={(e) => setApartmentInfo(e.target.value)}
                     placeholder="VD: Căn 2PN+1 - 74.5m² - BE1-12A"
-                    className="ocean-park-input-apartment !w-full !rounded-xl !border !border-brand-navy/25 !bg-brand-white !px-4 !py-3 !text-base !text-brand-navy !outline-none focus:!border-brand-gold"
+                    className="ocean-park-input-apartment"
                   />
                 </div>
               </div>
@@ -515,7 +515,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="VD: Cần nhận layout 2D, báo giá gói Luxury gỗ An Cường & đặt lịch xem nhà mẫu Sao Biển 23..."
-                  className="ocean-park-textarea-notes !w-full !rounded-xl !border !border-brand-navy/25 !bg-brand-white !px-4 !py-3 !text-base !text-brand-navy !outline-none focus:!border-brand-gold"
+                  className="ocean-park-textarea-notes"
                 />
               </div>
 
@@ -543,7 +543,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
 
               <button
                 type="submit"
-                className="ocean-park-submit-btn !inline-flex !w-full !cursor-pointer !items-center !justify-center !gap-2.5 !rounded-full !bg-brand-navy !px-7 !py-4 !text-base !font-bold !uppercase !tracking-wide !text-brand-gold !shadow-lg !transition-colors hover:!bg-brand-gold hover:!text-brand-white md:!text-lg"
+                className="ocean-park-submit-btn"
               >
                 <Send className="!h-5 !w-5" aria-hidden="true" />
                 <span>
