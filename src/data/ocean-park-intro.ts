@@ -63,9 +63,9 @@ export const oceanParkIntro: OceanParkIntroModel = {
     },
   ],
   primaryCta: {
-    label: "Gọi KTS Trưởng: 0869 855 885",
+    label: "Gọi KTS Trưởng: 0978 305 740",
     link: {
-      url: "tel:0869855885",
+      url: "tel:0978305740",
       is_external: false,
       nofollow: false,
     },

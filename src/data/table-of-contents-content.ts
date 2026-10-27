@@ -37,7 +37,7 @@ export const tableOfContentsContent = `
 
 <h2 id="section-consultation">Liên hệ tư vấn</h2>
 <p>Để lại thông tin để được tư vấn thiết kế và báo giá miễn phí.</p>
-<p>Hotline: 0869 855 885 — Email: noithatichouse@gmail.com</p>
+<p>Hotline: 0978 305 740 — Email: noithatichouse@gmail.com</p>
 <div class="min-h-[40vh]"></div>
 `.trim();
 

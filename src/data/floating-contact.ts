@@ -29,8 +29,8 @@ const floatingContact: FloatingContactModel = {
     link: link("https://zalo.me/0978305740", true),
   },
   phone: {
-    label: "0869 855 885",
-    link: link("tel:0869855885", false),
+    label: "0978 305 740",
+    link: link("tel:0978305740", false),
   },
 };
 

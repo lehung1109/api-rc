@@ -84,20 +84,27 @@ test.describe("Ocean Park Luxury Interior Preview Page", () => {
     await expect(page.locator("footer").first()).toBeVisible();
   });
 
-  test("OceanParkProjectSamples: filters apartment cards by zone and unit type tabs", async ({
+  test("OceanParkProjectSamples: filters apartment cards by zone and unit type tabs and renders 2 locked cards", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto(PREVIEW_URL);
 
     const cards = page.locator(".ocean-park-project-card");
-    await expect(cards).toHaveCount(7);
+    await expect(cards).toHaveCount(9);
+
+    const lockedCards = page.locator('.ocean-park-project-card[data-locked="true"]');
+    await expect(lockedCards).toHaveCount(2);
+    await expect(lockedCards.first().locator(".ocean-park-project-card-lock-overlay")).toContainText(
+      "Đăng ký để mở khóa",
+    );
 
     const londonTab = page.locator('button[data-zone-tab="the-london"]');
     await londonTab.click();
     await expect(londonTab).toHaveAttribute("aria-selected", "true");
-    await expect(cards).toHaveCount(1);
+    await expect(cards).toHaveCount(2);
     await expect(cards.first()).toContainText("LD1-08");
+    await expect(cards.nth(1)).toContainText("LD2-15");
 
     const beverlyTab = page.locator('button[data-zone-tab="the-beverly"]');
     await beverlyTab.click();
@@ -116,8 +123,9 @@ test.describe("Ocean Park Luxury Interior Preview Page", () => {
     const allUnitsTab = page.locator('button[data-unit-tab="all"]');
     await springBayTab.click();
     await allUnitsTab.click();
-    await expect(cards).toHaveCount(1);
+    await expect(cards).toHaveCount(2);
     await expect(cards.first()).toContainText("LSB-09");
+    await expect(cards.nth(1)).toContainText("LSB-18");
 
     // 0-match combined filter (e.g. LUMIÈRE SpringBay + Studio) shows notice and reset button
     const studioTab = page.locator('button[data-unit-tab="studio"]');
@@ -127,7 +135,39 @@ test.describe("Ocean Park Luxury Interior Preview Page", () => {
     const resetBtn = page.locator(".ocean-park-project-filter-reset-btn");
     await resetBtn.click();
     await expect(emptyNotice).toHaveCount(0);
-    await expect(cards).toHaveCount(7);
+    await expect(cards).toHaveCount(9);
+  });
+
+  test("mobile: clicking ocean-park-intro-secondary-cta scrolls consultation form card into viewport even on repeated taps, and uses hotline 0978 305 740", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(PREVIEW_URL);
+
+    await expect(page.locator(".ocean-park-intro-primary-cta")).toContainText("0978 305 740");
+    await expect(page.locator(".ocean-park-intro-primary-cta")).toHaveAttribute("href", "tel:0978305740");
+
+    const secondaryCta = page.locator(".ocean-park-intro-secondary-cta");
+    await secondaryCta.scrollIntoViewIfNeeded();
+    await secondaryCta.click();
+
+    const formCard = page.locator(".ocean-park-contact-form-card");
+    await expect
+      .poll(async () => {
+        const box = await formCard.boundingBox();
+        return box !== null && box.y >= -50 && box.y < 400;
+      })
+      .toBe(true);
+
+    // Scroll back up to intro while #dang-ky-tu-van hash is already set, then click again
+    await secondaryCta.scrollIntoViewIfNeeded();
+    await secondaryCta.click();
+    await expect
+      .poll(async () => {
+        const box = await formCard.boundingBox();
+        return box !== null && box.y >= -50 && box.y < 400;
+      })
+      .toBe(true);
   });
 
   test("OceanParkContactForm: validates required and phone format fields and shows success message on valid submit", async ({

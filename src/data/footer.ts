@@ -152,29 +152,29 @@ const footer: FooterModel = {
           display_dimensions: badgeDimensions,
         },
       ],
-      hotlineText: "0869 855 885",
-      hotline: link("tel:0869855885"),
+      hotlineText: "0978 305 740",
+      hotline: link("tel:0978305740"),
     },
     contact: {
       blocks: [
         {
           title: "TRỤ SỞ VĂN PHÒNG THIẾT KẾ IC HOUSE",
           contentHtml: `<p>Địa chỉ: Số 01 Voi Phục, Gia Lâm, Hà Nội</p>
-<p>Hotline: <a href="tel:0869855885">0869 855 885</a></p>
+<p>Hotline: <a href="tel:0978305740">0978 305 740</a></p>
 <p>Email: <a href="mailto:noithatichouse@gmail.com">noithatichouse@gmail.com</a></p>
 <p>Website: <a href="https://noithat.ichouse.vn">noithat.ichouse.vn</a></p>`,
         },
         {
           title: "NHÀ MẪU NỘI THẤT VINHOMES OCEAN PARK",
           contentHtml: `<p>Địa chỉ: Sao Biển 23, KĐT Vinhomes Ocean Park, Gia Lâm, Hà Nội</p>
-<p>Hotline KTS Trưởng: <a href="tel:0869855885">0869 855 885</a></p>
+<p>Hotline KTS Trưởng: <a href="tel:0978305740">0978 305 740</a></p>
 <p>Zalo Nhận Bản Vẽ 3D: <a href="https://zalo.me/0978305740">0978 305 740</a></p>`,
         },
         {
           title: "PHẠM VI DỰ ÁN TRỌNG ĐIỂM TẠI OCEAN PARK 1 • 2 • 3",
           contentHtml: `<p>Vinhomes Ocean Park 1 — The London (LD1–LD3), The Beverly (BE1–BE4), The Paris</p>
 <p>Vinhomes Ocean Park 2 & 3 — LUMIÈRE SpringBay, Masteri Trinity Square, Căn hộ cao tầng Ocean Park 3</p>
-<p>Hotline: <a href="tel:0869855885">0869 855 885</a></p>`,
+<p>Hotline: <a href="tel:0978305740">0978 305 740</a></p>`,
         },
       ],
     },

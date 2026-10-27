@@ -19,9 +19,9 @@ export const oceanParkPricing: OceanParkPricingModel = {
       "Đặc quyền tối ưu ngân sách theo tiêu chuẩn bàn giao: Khấu trừ & tiết kiệm ngay 35 – 60 triệu/căn cho các tòa đã có sẵn hệ tủ bếp, điều hòa âm trần & thiết bị cao cấp như Căn hộ The Beverly (BE1–BE4), Căn hộ The London (LD1–LD3), The Paris (Ocean Park 1), Căn hộ LUMIÈRE SpringBay và Dự án Masteri Trinity Square (Ocean Park 2).",
   },
   primaryCta: {
-    label: "Gọi nhận báo giá xưởng: 0869 855 885",
+    label: "Gọi nhận báo giá xưởng: 0978 305 740",
     link: {
-      url: "tel:0869855885",
+      url: "tel:0978305740",
       is_external: false,
       nofollow: false,
     },

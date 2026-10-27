@@ -66,8 +66,8 @@ const constructionFooter: ConstructionFooterModel = {
     },
   ],
   phone: {
-    text: "0869 855 885",
-    link: link("tel:0869855885"),
+    text: "0978 305 740",
+    link: link("tel:0978305740"),
   },
   addresses: [
     "Trụ sở Văn phòng: Số 01 Voi Phục, Gia Lâm, Hà Nội",

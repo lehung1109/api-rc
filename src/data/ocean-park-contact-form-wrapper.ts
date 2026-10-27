@@ -9,7 +9,7 @@ export const oceanParkContactFormWrapper: OceanParkContactFormModel = {
     "Nhận Bản Vẽ Mặt Bằng 2D, Phối Cảnh 3D & Báo Giá Gốc Tại Xưởng Theo Mã Căn Hộ Ocean Park",
   description:
     "Đội ngũ Kiến trúc sư trưởng IC HOUSE từ Văn phòng Số 01 Voi Phục (gần khu đô thị) và Nhà mẫu Sao Biển 23 (trong Vinhomes Ocean Park) trực tiếp khảo sát đo đạc tại các tòa The London (LD1, LD2, LD3), The Beverly (BE1, BE2, BE3, BE4), The Paris Ocean Park 1, LUMIÈRE SpringBay Ocean Park 2, Masteri Trinity Square Ocean Park 2 và Căn hộ cao tầng Ocean Park 3.",
-  hotline: "0869 855 885",
+  hotline: "0978 305 740",
   zaloPhone: "0978 305 740",
   email: "noithatichouse@gmail.com",
   website: "noithat.ichouse.vn",

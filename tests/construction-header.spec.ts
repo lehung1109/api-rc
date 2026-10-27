@@ -94,7 +94,7 @@ test.describe("ConstructionHeader", () => {
     await expect(page.locator(".construction-header-top")).toBeVisible();
     await expect(
       page.locator(".construction-header-top-hotline"),
-    ).toHaveText("Hotline: 0869 855 885");
+    ).toHaveText("Hotline: 0978 305 740");
     await expect(
       page.locator(".construction-header-search-open"),
     ).toBeHidden();

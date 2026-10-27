@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Building2, Layers } from "lucide-react";
+import { ArrowRight, Building2, Layers, Lock } from "lucide-react";
 import { useMemo, useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -29,6 +29,7 @@ export interface OceanParkProjectCardModel {
   image: MediaModel;
   detailLink: LinkModel;
   isRealProject?: boolean;
+  isLocked?: boolean;
 }
 
 export interface OceanParkProjectCtaBannerModel {
@@ -237,84 +238,125 @@ const OceanParkProjectSamples = (model: OceanParkProjectSamplesModel) => {
         ) : null}
 
         <div className="ocean-park-project-cards !mt-8 !flex !flex-nowrap !gap-5 !overflow-x-auto !pb-4 !snap-x !snap-mandatory md:!grid md:!grid-cols-2 md:!gap-7 md:!overflow-visible lg:!grid-cols-3">
-          {displayProjects.map((project, index) => (
-            <article
-              key={`${project.apartmentCode ?? index}-${index}`}
-              data-zone-id={project.zoneId}
-              data-unit-type-id={project.unitTypeId}
-              className="ocean-park-project-card !flex !w-[86%] !shrink-0 !snap-start !flex-col !overflow-hidden !rounded-2xl !border !border-brand-navy/15 !bg-brand-white !shadow-lg !transition-shadow hover:!shadow-xl md:!w-auto"
-            >
-              <div className="ocean-park-project-card-media !relative !aspect-[16/10] !w-full !overflow-hidden !bg-brand-navy/10">
-                <Media
-                  {...project.image}
-                  className="!h-full !w-full !object-cover !transition-transform !duration-500 hover:!scale-105"
-                />
-                <div className="!absolute !top-3.5 !left-3.5 !flex !flex-wrap !gap-2">
-                  {(project.zoneLabel ?? "").trim() ? (
-                    <span className="!rounded-full !bg-brand-navy/90 !px-3.5 !py-1 !text-xs !font-bold !text-brand-gold md:!text-sm">
-                      {project.zoneLabel}
-                    </span>
-                  ) : null}
-                  {(project.towerLabel ?? "").trim() ? (
-                    <span className="!rounded-full !bg-brand-gold !px-3 !py-1 !text-xs !font-bold !text-brand-white md:!text-sm">
-                      {project.towerLabel}
-                    </span>
-                  ) : null}
+          {displayProjects.map((project, index) => {
+            const isLocked = Boolean(project.isLocked);
+            const targetUrl =
+              (project.detailLink?.url ?? "").trim() || "#dang-ky-tu-van";
+
+            return (
+              <article
+                key={`${project.apartmentCode ?? index}-${index}`}
+                data-zone-id={project.zoneId}
+                data-unit-type-id={project.unitTypeId}
+                data-locked={isLocked ? "true" : undefined}
+                className="ocean-park-project-card !relative !flex !w-[86%] !shrink-0 !snap-start !flex-col !overflow-hidden !rounded-2xl !border !border-brand-navy/15 !bg-brand-white !shadow-lg !transition-shadow hover:!shadow-xl md:!w-auto"
+              >
+                <div
+                  aria-hidden={isLocked ? "true" : undefined}
+                  className={cn(
+                    "ocean-park-project-card-content !flex !flex-1 !flex-col",
+                    isLocked &&
+                      "!blur-[3.5px] !opacity-60 !select-none !pointer-events-none",
+                  )}
+                >
+                  <div className="ocean-park-project-card-media !relative !aspect-[16/10] !w-full !overflow-hidden !bg-brand-navy/10">
+                    <Media
+                      {...project.image}
+                      className="!h-full !w-full !object-cover !transition-transform !duration-500 hover:!scale-105"
+                    />
+                    <div className="!absolute !top-3.5 !left-3.5 !flex !flex-wrap !gap-2">
+                      {(project.zoneLabel ?? "").trim() ? (
+                        <span className="!rounded-full !bg-brand-navy/90 !px-3.5 !py-1 !text-xs !font-bold !text-brand-gold md:!text-sm">
+                          {project.zoneLabel}
+                        </span>
+                      ) : null}
+                      {(project.towerLabel ?? "").trim() ? (
+                        <span className="!rounded-full !bg-brand-gold !px-3 !py-1 !text-xs !font-bold !text-brand-white md:!text-sm">
+                          {project.towerLabel}
+                        </span>
+                      ) : null}
+                    </div>
+                    {(project.area ?? "").trim() ||
+                    (project.apartmentCode ?? "").trim() ? (
+                      <div className="!absolute !right-3.5 !bottom-3.5 !rounded-lg !bg-brand-navy/90 !px-3 !py-1.5 !text-xs !font-semibold !text-brand-white md:!text-sm">
+                        {[project.area, project.apartmentCode]
+                          .map((part) => (part ?? "").trim())
+                          .filter(Boolean)
+                          .join(" • ")}
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <div className="ocean-park-project-card-body !flex !flex-1 !flex-col !p-5 md:!p-6">
+                    {(project.unitTypeLabel ?? "").trim() ||
+                    (project.style ?? "").trim() ? (
+                      <div className="!flex !items-center !justify-between !gap-2 !text-sm !font-semibold !text-brand-gold">
+                        <span>{project.unitTypeLabel}</span>
+                        <span>{project.style}</span>
+                      </div>
+                    ) : null}
+
+                    <h3 className="ocean-park-project-card-title !mt-2 !mb-0 !text-lg !font-bold !leading-snug !text-brand-navy md:!text-xl">
+                      {project.title}
+                    </h3>
+
+                    <p className="ocean-park-project-card-summary !mt-2.5 !mb-0 !flex-1 !text-base !leading-relaxed !text-brand-navy/80">
+                      {project.summary}
+                    </p>
+
+                    <div className="!mt-5 !flex !items-center !justify-between !border-t !border-brand-navy/10 !pt-4">
+                      <div>
+                        <span className="!block !text-xs !font-medium !uppercase !text-brand-navy/65 md:!text-[13px]">
+                          Mức đầu tư tham khảo
+                        </span>
+                        <strong className="!text-base !font-extrabold !text-brand-navy md:!text-lg">
+                          {(project.budget ?? "").trim() || "Liên hệ báo giá"}
+                        </strong>
+                      </div>
+
+                      {project.detailLink?.url?.trim() ? (
+                        <Link
+                          {...project.detailLink}
+                          className="!inline-flex !items-center !gap-1.5 !rounded-full !bg-brand-navy !px-4 !py-2 !text-sm !font-semibold !text-brand-gold !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white"
+                        >
+                          <span>Nhận bản vẽ 3D</span>
+                          <ArrowRight
+                            className="!h-4 !w-4"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      ) : null}
+                    </div>
+                  </div>
                 </div>
-                {(project.area ?? "").trim() ||
-                (project.apartmentCode ?? "").trim() ? (
-                  <div className="!absolute !right-3.5 !bottom-3.5 !rounded-lg !bg-brand-navy/90 !px-3 !py-1.5 !text-xs !font-semibold !text-brand-white md:!text-sm">
-                    {[project.area, project.apartmentCode]
-                      .map((part) => (part ?? "").trim())
-                      .filter(Boolean)
-                      .join(" • ")}
-                  </div>
+
+                {isLocked ? (
+                  <Link
+                    url={targetUrl}
+                    is_external={Boolean(project.detailLink?.is_external)}
+                    nofollow={Boolean(project.detailLink?.nofollow)}
+                    className="ocean-park-project-card-lock-overlay !absolute !inset-0 !z-10 !flex !flex-col !items-center !justify-center !bg-brand-navy/35 !p-5 !text-center !no-underline !backdrop-blur-[2px] !transition-colors hover:!bg-brand-navy/45"
+                  >
+                    <div className="ocean-park-project-card-lock-box !flex !max-w-[270px] !flex-col !items-center !rounded-2xl !border !border-brand-gold/70 !bg-brand-navy/95 !p-5 !text-brand-white !shadow-2xl">
+                      <span className="ocean-park-project-card-lock-badge !mb-2.5 !inline-flex !h-12 !w-12 !items-center !justify-center !rounded-full !border-2 !border-brand-gold !bg-brand-navy !text-brand-gold !shadow-md">
+                        <Lock className="!h-5 !w-5" aria-hidden="true" />
+                      </span>
+                      <span className="!text-xs !font-bold !uppercase !tracking-wider !text-brand-gold md:!text-sm">
+                        Hồ sơ mẫu độc quyền
+                      </span>
+                      <span className="!mt-1.5 !text-xs !leading-relaxed !text-brand-white-hover md:!text-sm">
+                        Đăng ký để mở khóa trọn bộ mặt bằng 2D, phối cảnh 3D &amp; dự toán chi tiết
+                      </span>
+                      <span className="!mt-3.5 !inline-flex !items-center !gap-1.5 !rounded-full !bg-brand-gold !px-4 !py-2 !text-xs !font-bold !text-brand-white !transition-colors hover:!bg-brand-gold-hover md:!text-sm">
+                        <span>Đăng ký nhận thông tin</span>
+                        <ArrowRight className="!h-4 !w-4" aria-hidden="true" />
+                      </span>
+                    </div>
+                  </Link>
                 ) : null}
-              </div>
-
-              <div className="ocean-park-project-card-body !flex !flex-1 !flex-col !p-5 md:!p-6">
-                {(project.unitTypeLabel ?? "").trim() ||
-                (project.style ?? "").trim() ? (
-                  <div className="!flex !items-center !justify-between !gap-2 !text-sm !font-semibold !text-brand-gold">
-                    <span>{project.unitTypeLabel}</span>
-                    <span>{project.style}</span>
-                  </div>
-                ) : null}
-
-                <h3 className="ocean-park-project-card-title !mt-2 !mb-0 !text-lg !font-bold !leading-snug !text-brand-navy md:!text-xl">
-                  {project.title}
-                </h3>
-
-                <p className="ocean-park-project-card-summary !mt-2.5 !mb-0 !flex-1 !text-base !leading-relaxed !text-brand-navy/80">
-                  {project.summary}
-                </p>
-
-                <div className="!mt-5 !flex !items-center !justify-between !border-t !border-brand-navy/10 !pt-4">
-                  <div>
-                    <span className="!block !text-xs !font-medium !uppercase !text-brand-navy/65 md:!text-[13px]">
-                      Mức đầu tư tham khảo
-                    </span>
-                    <strong className="!text-base !font-extrabold !text-brand-navy md:!text-lg">
-                      {(project.budget ?? "").trim() || "Liên hệ báo giá"}
-                    </strong>
-                  </div>
-
-                  {project.detailLink?.url?.trim() ? (
-                    <Link
-                      {...project.detailLink}
-                      className="!inline-flex !items-center !gap-1.5 !rounded-full !bg-brand-navy !px-4 !py-2 !text-sm !font-semibold !text-brand-gold !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white"
-                    >
-                      <span>Nhận bản vẽ 3D</span>
-                      <ArrowRight
-                        className="!h-4 !w-4"
-                        aria-hidden="true"
-                      />
-                    </Link>
-                  ) : null}
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         {ctaTitle ? (

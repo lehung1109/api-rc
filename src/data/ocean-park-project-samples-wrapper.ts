@@ -208,6 +208,60 @@ export const oceanParkProjectSamplesWrapper: OceanParkProjectSamplesModel = {
       },
       isRealProject: false,
     },
+    {
+      title:
+        "Thiết kế & Thi công nội thất Căn góc 3PN The London Ocean Park 1 — Tòa LD2",
+      zoneId: "the-london",
+      zoneLabel: "The London Ocean Park 1",
+      towerLabel: "Tòa LD2",
+      unitTypeId: "3pn",
+      unitTypeLabel: "Căn góc 3PN",
+      area: "84.2m²",
+      apartmentCode: "LD2-15",
+      style: "Modern British Bespoke",
+      budget: "245 – 310 triệu",
+      summary:
+        "Hồ sơ mặt bằng bố trí nội thất 2D, phối cảnh 3D Bespoke và bảng dự toán BOQ chi tiết căn góc 3PN Tòa LD2 phân khu The London Ocean Park 1 gia công tại xưởng IC HOUSE Như Quỳnh.",
+      image: {
+        url: "https://noithat.ichouse.vn/wp-content/uploads/2026/05/Du-an-noi-that-can-ho-toa-H2-masteri-OCP-2.jpg",
+        alt: "Thiết kế nội thất Căn góc 3PN The London Ocean Park 1 Tòa LD2",
+        display_dimensions: { width: 800, height: 500 },
+      },
+      detailLink: {
+        url: "#dang-ky-tu-van",
+        is_external: false,
+        nofollow: false,
+      },
+      isRealProject: true,
+      isLocked: true,
+    },
+    {
+      title:
+        "Thiết kế & Thi công nội thất Căn hộ 3PN VIP LUMIÈRE SpringBay Ocean Park 2",
+      zoneId: "lumiere-springbay",
+      zoneLabel: "LUMIÈRE SpringBay Ocean Park 2",
+      towerLabel: "Tòa Feliz • Tòa Vida",
+      unitTypeId: "3pn",
+      unitTypeLabel: "Căn góc 3PN Panorama",
+      area: "96.8m²",
+      apartmentCode: "LSB-18",
+      style: "Quiet Luxury & Bespoke",
+      budget: "280 – 360 triệu",
+      summary:
+        "Trọn bộ hồ sơ phối cảnh 3D, bản vẽ kỹ thuật hệ tủ cong kịch trần Low-E và bảng bóc tách khối lượng thi công thực tế căn hộ 3PN VIP LUMIÈRE SpringBay Ocean Park 2.",
+      image: {
+        url: "https://noithat.ichouse.vn/wp-content/uploads/2026/05/thiet-ke-noi-that-chung-cu-tone-den-trang-hm18_1.jpg",
+        alt: "Thiết kế nội thất Căn hộ 3PN VIP LUMIÈRE SpringBay Ocean Park 2",
+        display_dimensions: { width: 800, height: 500 },
+      },
+      detailLink: {
+        url: "#dang-ky-tu-van",
+        is_external: false,
+        nofollow: false,
+      },
+      isRealProject: true,
+      isLocked: true,
+    },
   ],
   ctaBanner: {
     title:

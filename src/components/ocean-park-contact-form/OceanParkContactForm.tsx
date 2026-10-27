@@ -145,6 +145,8 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
 
   const normalizedKey = normalizeOceanParkFormKey(formKey);
   const sourceId = oceanParkCf7SourceId(formKey);
+  const sectionRef = useRef<HTMLElement>(null);
+  const formCardRef = useRef<HTMLDivElement>(null);
   const cf7SlotRef = useRef<HTMLDivElement>(null);
   const [hasCf7Source, setHasCf7Source] = useState(false);
 
@@ -155,6 +157,50 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
   const [notes, setNotes] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  const resolvedSectionId = (sectionId ?? "").trim() || "dang-ky-tu-van";
+
+  useEffect(() => {
+    const targetHash = `#${resolvedSectionId}`;
+    const handleAnchorClick = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+      const target = event.target;
+      if (!(target instanceof Element)) {
+        return;
+      }
+      const anchor = target.closest("a");
+      if (!anchor) {
+        return;
+      }
+      const href = (anchor.getAttribute("href") ?? "").trim();
+      if (href !== targetHash) {
+        return;
+      }
+      const scrollTarget = formCardRef.current ?? sectionRef.current;
+      if (!scrollTarget) {
+        return;
+      }
+      event.preventDefault();
+      if (window.location.hash !== targetHash) {
+        window.history.pushState(null, "", targetHash);
+      }
+      scrollTarget.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+    return () => {
+      document.removeEventListener("click", handleAnchorClick);
+    };
+  }, [resolvedSectionId]);
 
   useEffect(() => {
     if (!sourceId) {
@@ -198,7 +244,6 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
     return null;
   }
 
-  const resolvedSectionId = (sectionId ?? "").trim() || "dang-ky-tu-van";
   const inputIdPrefix =
     (sectionId ?? "").trim() ||
     (normalizedKey && normalizedKey !== "ocean-park-consultation"
@@ -233,6 +278,7 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
 
   return (
     <section
+      ref={sectionRef}
       id={resolvedSectionId}
       data-ocean-park-form-key={normalizedKey || undefined}
       className={cn(
@@ -386,7 +432,10 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
         </div>
 
         {/* Right Column: CF7 Slot or Built-in Interactive Consultation Form */}
-        <div className="ocean-park-contact-form-card !flex !flex-col !justify-center !rounded-3xl !border !border-brand-navy/15 !bg-brand-white !p-6 !shadow-xl md:!p-8 lg:!col-span-6 lg:!p-10">
+        <div
+          ref={formCardRef}
+          className="ocean-park-contact-form-card !order-first lg:!order-none !flex !flex-col !justify-center !rounded-3xl !border !border-brand-navy/15 !bg-brand-white !p-6 !shadow-xl md:!p-8 lg:!col-span-6 lg:!p-10"
+        >
           {formTitleText ? (
             <h3 className="ocean-park-form-title !mb-0 !text-2xl !font-bold !leading-snug !text-brand-navy md:!text-3xl">
               {formTitleText}

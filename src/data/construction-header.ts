@@ -13,7 +13,7 @@ const iconDimensions = { width: 24, height: 24 };
 
 const constructionHeader: ConstructionHeaderModel = {
   headerTop: {
-    hotlineText: "Hotline: 0869 855 885",
+    hotlineText: "Hotline: 0978 305 740",
   },
   logo: {
     url: "https://noithat.ichouse.vn/wp-content/uploads/2024/02/logo.jpg",
