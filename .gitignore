@@ -154,3 +154,5 @@ src/generated/
 /playwright/.cache/
 /playwright/.auth/
 tests/fixtures/
+
+/.superpowers/
