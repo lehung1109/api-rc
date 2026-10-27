@@ -29,7 +29,7 @@ describe("OceanParkIntro", () => {
     assert.ok(html.includes("LUMIÈRE SpringBay"));
     assert.ok(html.includes("Masteri Trinity Square"));
     assert.ok(html.includes("120 triệu"));
-    assert.ok(html.includes("0869 855 885"));
+    assert.ok(html.includes("0978 305 740"));
   });
 
   test("returns empty string when all fields are empty", () => {
@@ -205,7 +205,7 @@ describe("OceanParkContactForm", () => {
 
     assert.ok(html.includes("ocean-park-contact-form"));
     assert.ok(html.includes('id="dang-ky-tu-van"'));
-    assert.ok(html.includes("0869 855 885"));
+    assert.ok(html.includes("0978 305 740"));
     assert.ok(html.includes("Sao Biển 23"));
     assert.ok(html.includes("The London Ocean Park 1"));
     assert.ok(html.includes("LUMIÈRE SpringBay Ocean Park 2"));
@@ -397,13 +397,13 @@ describe("Defensive Rendering & Edge Cases (API {} / Partial Props)", () => {
     const html = renderToStaticMarkup(
       createElement(OceanParkContactForm, {
         ...oceanParkContactForm,
-        hotline: "0869.855.885",
+        hotline: "0978.305.740",
         zaloPhone: "(0978) 305-740",
       }),
     );
 
     assert.ok(
-      html.includes('href="tel:0869855885"'),
+      html.includes('href="tel:0978305740"'),
       "tel: link must strip dots and non-digit characters",
     );
     assert.ok(

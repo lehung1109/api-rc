@@ -182,7 +182,12 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
         return;
       }
       const href = (anchor.getAttribute("href") ?? "").trim();
-      if (href !== targetHash) {
+      const isSamePageHash =
+        href === targetHash ||
+        (anchor.hash === targetHash &&
+          anchor.origin === window.location.origin &&
+          anchor.pathname === window.location.pathname);
+      if (!isSamePageHash) {
         return;
       }
       const scrollTarget = formCardRef.current ?? sectionRef.current;
