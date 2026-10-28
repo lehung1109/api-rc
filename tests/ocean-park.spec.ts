@@ -218,6 +218,27 @@ test.describe("Ocean Park Luxury Interior Preview Page", () => {
     );
   });
 
+  test("OceanParkContactForm: hovering first contact link (.ocean-park-contact-desc + div > a) keeps text contrasting against gold background", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(PREVIEW_URL);
+
+    const firstContactLink = page
+      .locator(".ocean-park-contact-desc + div > a")
+      .first();
+    const strongPhone = firstContactLink.locator("strong");
+
+    await firstContactLink.scrollIntoViewIfNeeded();
+    await firstContactLink.hover();
+
+    await expect(firstContactLink).toHaveCSS(
+      "background-color",
+      "rgb(217, 164, 65)",
+    );
+    await expect(strongPhone).toHaveCSS("color", "rgb(255, 255, 255)");
+  });
+
   test("OceanParkFaq: exclusive accordion sync opens clicked question and closes previous question", async ({
     page,
   }) => {

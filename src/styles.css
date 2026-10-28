@@ -833,6 +833,10 @@ button.contact-popup-close {
 
 /* ── Ocean Park Contact Form: inputs, selects, textarea, button ── */
 
+.ocean-park-contact-desc + div > a:first-child:hover strong {
+  color: var(--e-global-color-tertiary) !important;
+}
+
 .ocean-park-builtin-form .ocean-park-input-name,
 .ocean-park-builtin-form .ocean-park-input-phone,
 .ocean-park-builtin-form .ocean-park-input-apartment,

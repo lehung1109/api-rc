@@ -318,16 +318,16 @@ const OceanParkContactForm = (model: OceanParkContactFormModel) => {
               {hotlineText && hotlineDigits ? (
                 <a
                   href={`tel:${hotlineDigits}`}
-                  className="!flex !items-center !gap-3.5 !rounded-2xl !border !border-brand-gold/45 !bg-brand-white/10 !p-4 !text-brand-white !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white"
+                  className="group !flex !items-center !gap-3.5 !rounded-2xl !border !border-brand-gold/45 !bg-brand-white/10 !p-4 !text-brand-white !no-underline !transition-colors hover:!bg-brand-gold hover:!text-brand-white"
                 >
-                  <span className="!flex !h-11 !w-11 !shrink-0 !items-center !justify-center !rounded-full !bg-brand-gold !text-brand-white">
+                  <span className="!flex !h-11 !w-11 !shrink-0 !items-center !justify-center !rounded-full !bg-brand-gold !text-brand-white !transition-colors group-hover:!bg-brand-white group-hover:!text-brand-gold">
                     <Phone className="!h-5 !w-5" aria-hidden="true" />
                   </span>
                   <div>
-                    <span className="!block !text-xs !font-semibold !uppercase !tracking-wider !text-brand-white-hover/85">
+                    <span className="!block !text-xs !font-semibold !uppercase !tracking-wider !text-brand-white-hover/85 !transition-colors group-hover:!text-brand-white">
                       Hotline KTS Trưởng
                     </span>
-                    <strong className="!text-lg !font-extrabold !text-brand-gold md:!text-xl">
+                    <strong className="!text-lg !font-extrabold !text-brand-gold !transition-colors group-hover:!text-brand-white md:!text-xl">
                       {hotlineText}
                     </strong>
                   </div>

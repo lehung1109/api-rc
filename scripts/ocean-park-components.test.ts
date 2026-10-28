@@ -212,6 +212,21 @@ describe("OceanParkContactForm", () => {
     assert.ok(html.includes("Masteri Trinity Square Ocean Park 2"));
   });
 
+  test("hotline card uses group hover classes so strong phone text and icon badge contrast with gold hover background", () => {
+    const html = renderToStaticMarkup(
+      createElement(OceanParkContactForm, oceanParkContactForm),
+    );
+
+    assert.match(
+      html,
+      /<a[^>]*href="tel:0978305740"[^>]*class="[^"]*\bgroup\b[^"]*hover:!bg-brand-gold[^"]*"/,
+    );
+    assert.match(
+      html,
+      /<strong[^>]*class="[^"]*!text-brand-gold[^"]*group-hover:!text-brand-white[^"]*">0978 305 740<\/strong>/,
+    );
+  });
+
   test("renders wrapper with client island script and returns empty string when empty", () => {
     const wrapperHtml = renderToStaticMarkup(
       createElement(OceanParkContactFormWrapper, oceanParkContactForm),
